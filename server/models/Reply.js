@@ -21,6 +21,8 @@ const ReplySchema=new mongoose.Schema({
         deafult:Date.now()
     }
 
+},{
+    timestamps:true
 });
 
 

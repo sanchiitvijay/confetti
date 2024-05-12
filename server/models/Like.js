@@ -12,4 +12,6 @@ const LikeSchema=new mongoose.Schema({
         required:true,
         ref:'user',
     }
+},{
+    timestamps:true
 })
