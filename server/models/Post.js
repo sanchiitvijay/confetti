@@ -30,7 +30,11 @@ const PostSchema=new mongoose.Schema({
     },
     reports:{
         type:Number,
+        default: 0,
     }
+},
+{
+    timestamps:true
 });
 
 
