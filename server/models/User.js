@@ -1,14 +1,16 @@
 const mongoose=require("mongoose");
 
-
 const UserSchema=new mongoose.Schema({
     name:{
         type:String,
         required:true,
     },
-    usn:{
+    username:{
         type:String,
         required:true,
+    },
+    usn:{
+        type:String,
     },
    
     password:{
@@ -26,21 +28,17 @@ const UserSchema=new mongoose.Schema({
     },
     branch:{
         type:String,
-        required:true,
         enum:['CSE','ISE','ECE','EEE','']
     },
     year:{
         type:Number,
-        required:true,
         enum:[1,2,3,4],
         },
     email:{
         type:String,
-        required:true,
     },
     instagram:{
         type:String,
-        required:true,
     },
     displayPicture:{
         type:String,
@@ -60,6 +58,8 @@ const UserSchema=new mongoose.Schema({
     lastPostAt:{
         type:Date
     }
+    },{
+        timestamps: true
     }
 );
 
