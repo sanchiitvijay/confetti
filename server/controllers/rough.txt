@@ -1,0 +1,12 @@
+remove Comment:
+
+get comment _id
+get post _id
+validate both
+find comment
+find post
+check if any missing
+also pull the comment from the post
+then before deleting comment delete all replies of comments one by one
+then at last remove comment 
+return a successful response including the deleted comment
