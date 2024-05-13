@@ -1,4 +1,5 @@
 const Post = require("../models/Post")
+const User=require("../models/User");
 
 exports.createPost = async(req, res)=>{
     try{
@@ -113,3 +114,34 @@ exports.getPosts = async(req, res) => {
     }
 }
 
+
+//Get posts function for the admin to get the posts by a user's id
+exports.getUserPosts=async(req,res)=>{
+    try{
+        const {userId}=req.body;
+        if(!userId){
+            return res.status(404).json({
+                success:false,
+                message:"Provide the user id"
+            })
+        }
+
+        const posts=await Posts.findById({author:userId});
+
+        const user=await User.findById(userId);
+        return res.status(200).json({
+            success:true,
+            message:`Posts fetched for the user ${user?.name}`,
+            posts
+        })
+    }
+    catch(error){
+        console.log(error);
+        console.log(error.message);
+        console.error(error);
+        return res.status(500).json({
+            success:false,
+            message:`Couldnt get the posts for the user ${user?.name}`
+        })
+    }
+}
