@@ -145,3 +145,27 @@ exports.getUserPosts=async(req,res)=>{
         })
     }
 }
+
+exports.reportPost = async(req, res)=> {
+    const postId = req.body;
+    const userId = req.user._id;
+
+    const post = await Post.findById(postId)
+    post.reports += 1;
+
+    if(post.reports === 3) {
+        this.deletePost(postId);
+        const user = await User.findById(userId)
+        user.reports += 1;
+
+        if(user.reports === 5) {
+            const deletedUser = await User.findByIdAndDelete(userId)
+            if(!deletedUser) {
+                return res.status(500).json({
+                    success:false,
+                    message:`Couldnt delete the reported the user ${user?.name}`
+                })
+            }
+        }
+    }
+}
