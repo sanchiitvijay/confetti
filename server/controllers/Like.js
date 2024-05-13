@@ -5,7 +5,7 @@ exports.getLikes = async(req, res)=> {
     try {
         const postId = req.body.postId;
     
-        const likes = await Like.find({author: postId})
+        const likes = await Like.find({post: postId})
     
         return res.status(200).json({
             success: true,
@@ -33,7 +33,7 @@ exports.liked = async(req, res) => {
             { new: true }
         )
         
-        const deletedLike = await Like.findByIdAndDelete({_id:like._id});
+        const deletedLike = await Like.findByIdAndDelete(like._id);
 
         if(!updatedPost || !deletedLike) {
             return res.status(400).json({
