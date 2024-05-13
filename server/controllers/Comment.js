@@ -1,6 +1,7 @@
 const Comment=require("../models/Comment");
 const Post=require("../models/Post");
 const Reply=require("../models/Reply");
+
 exports.createComment=async(req,res)=>{
     try{
         const {
@@ -193,40 +194,6 @@ exports.getAllComments=async(req,res)=>{
     }
 }
 
-exports.getAllComments=async(req,res)=>{
-    
-
-    try{
-        //get the post id for which you want to fetch the comments for 
-        const {postId}=req.body;
-
-        //validate
-        if(!postId){
-            return res.status(404).json({
-                success:false,
-                message:"All fields are required,Please provide the post id"
-            })
-        }
-
-        //db call to find the comments by post id
-        const comments=await Comment.findById({post:postId});
-
-        //return response
-        return res.status(200).json({
-            success:true,
-            message:"Comments fetched successfully for the post",
-            comments
-        })
-    }
-    catch(error){
-        console.log(error);
-        console.log(error.message);
-        return res.status(500).json({
-            sucess:true,
-            message:"Some error while fetching comments for the post"
-        })
-    }
-}
 
 //function written for admin only to watch over comments of some user 
 //possibly will be removed or commented out 
