@@ -57,8 +57,16 @@ const UserSchema=new mongoose.Schema({
     ],
     lastPostAt:{
         type:Date
-    }
-    },{
+    },
+    reports:{
+        type:Number,
+        default:0,
+    },
+    token:{
+        type:String
+    },
+    },
+    {
         timestamps: true
     }
 );
