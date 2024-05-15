@@ -10,4 +10,4 @@ router.route("edit-post").post(auth, editPost);
 router.route("delete-post").delete(auth, deletePost);
 router.route("get-post").get(auth, isAdmin, getPost);
 router.route("get-user-post").get(auth, getUserPosts);
-router.route("report-post").patch(auth, reportPost);
+router.route("report-post").post(auth, reportPost);

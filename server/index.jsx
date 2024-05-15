@@ -1,12 +1,12 @@
 const express=require("express");
 const app=express();
 
-
-
-
-
-//import routes here later
-
+//importing routes here
+const userRoutes=require("./routes/User");
+const postRoutes=require("./routes/post");
+const likeRoutes=require("./routes/Like");
+const commentRoutes=require("./routes/Comment");
+const replyRoutes=require("./routes/Reply");
 
 //connection for databse
 const database=require("./configs/database");
@@ -44,7 +44,23 @@ app.use(
     })
 );
 
+
+//for file uploads
+app.use(
+    fileUpload({
+      useTempFiles:true,
+      tempFileDir:"/tmp",
+    })
+  );
+  
+
+  
 //mount routes here
+app.use('/api/v1/auth',userRoutes);
+app.use('/api/v1/post',postRoutes);
+app.use('/api/v1/like',likeRoutes);
+app.use('/api/v1/comment',commentRoutes);
+app.use('/api/v1/reply',replyRoutes);
 
 
 
