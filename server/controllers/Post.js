@@ -169,3 +169,39 @@ exports.reportPost = async(req, res)=> {
         }
     }
 }
+
+
+
+exports.deleteAllPosts=async(req,res)=>{
+    try{
+     
+        const userId=req.user.id;
+        
+
+        if(!userId){
+            return res.status(200).json({
+                success:false,
+                message:"please provide user id"
+            })
+        }
+
+
+        //find all posts for user and delete them
+        const deletedPosts=await Post.findByIdAndDelete({author:userId});
+
+        //return res
+        return res.status(200).json({
+            success:true,
+            message:"Posts deleted successfully for the user",
+            deletedPosts
+        })
+
+
+    }catch(error){
+        console.log(error);
+        return res.status(500).json({
+            success:false,
+            message:"Some error occured while deleting all the posts for this user"
+        })
+    }
+}
