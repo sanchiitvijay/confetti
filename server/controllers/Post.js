@@ -1,5 +1,6 @@
 const Post = require("../models/Post")
 const User=require("../models/User");
+const Notification=require("../models/Notification");
 
 exports.createPost = async(req, res)=>{
     try{
@@ -7,10 +8,12 @@ exports.createPost = async(req, res)=>{
             userId,
             description,
             caption,
+            name,
+            year
             
         } = req.body;
 
-        if(!description || !caption) {
+        if(!userId || !description || !caption) {
             return res.status(403).json({
                 success: false,
                 message: "All fields are required",
@@ -24,6 +27,25 @@ exports.createPost = async(req, res)=>{
             likes:[],
             comments:[],
         });
+        if(name && year) {
+            const confessedTo = await User.findOne({name, year})
+
+            if(confessedTo) {
+                const notification = await Notification.create({
+                    sender: userId,
+                    receiver: confessedTo._id,
+                    post: post._id,
+                    message: "Seems Like you got a confession!!"
+                })
+
+                if(!notification) {
+                    return res.status(500).json({
+                        success: false,
+                        message: "Error while creating the notification"
+                    })
+                }
+            }
+        }
 
         return res.status(200).json({
             success: true,
@@ -81,7 +103,24 @@ exports.editPost = async(req, res) => {
 exports.deletePost = async(req, res) => {
     
     try {
-        const result =await Post.deleteOne({ _id: req.body.postId })
+        const { postId, userId }  = req.body;
+
+        if(!postId || !userId) {
+            return res.status(500).json({
+                success: false,
+                message: "Both field are required"
+            })
+        }
+
+        const post = await Post.findById(postId)
+
+        if(post.author !== userId) {
+            return res.status(500).json({
+                success: false,
+                message: "User is not the post owner"
+            })
+        }
+        const result =await Post.deleteOne({ _id: postId })
         
         return res.status(200).json({
             success: true,
