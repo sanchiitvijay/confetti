@@ -11,6 +11,11 @@ const NotificationSchema=new mongoose.Schema({
         ref:"user",
         required:true,
     },
+    post:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"post",
+        required:true,
+    },
     message:{
         type:String,
         required:true,
@@ -20,7 +25,8 @@ const NotificationSchema=new mongoose.Schema({
         default:Date.now(),
     },
     isAccepted:{
-        type:Boolean
+        type:Boolean,
+        default: false
     }
 });
 
