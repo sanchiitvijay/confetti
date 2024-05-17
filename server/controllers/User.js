@@ -76,3 +76,58 @@ exports.removeUser=async(req,res)=>{
     }
 }
 
+exports.deleteGraduates= async(req, res) => {
+    try {
+        const graduates = await User.find({year: 4})
+    
+        for (const grad of graduates){
+            await User.findByIdAndDelete(grad._id);
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Graduates have been deleted succesfully"
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: "Error while deleting the graduates"
+        })
+    }
+}
+
+exports.promoteStudents = async(req, res) => {
+    try {
+        const { year } = req.body;
+        if(!year) {
+            return res.status(500).json({
+                success: false,
+                message: "Error while fetching the year"
+            })
+        }
+        const students = await User.find({year: year})
+        
+    
+        for (const student of students){
+            await User.findByIdAndUpdate(
+                student._id,
+                { $inc: {year: 1}},
+                { new: true }
+            );
+        }
+    
+        return res.status(200).json({
+            success: true,
+            message: "Students year has been increased by 1 deleted succesfully",
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: "Error while increasing the year of the students"
+        })
+    }
+
+
+}
