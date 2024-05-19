@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { auth } = require("../middlewares/auth");
-const { createComment, removeComment, getAllComments, getUserComments } = require("../controllers/Reply");
+const { createComment, removeComment, getAllComments, getUserComments } = require("../controllers/Comment");
 
 const router = Router();
 
