@@ -32,6 +32,8 @@ exports.sendotp=async(req,res)=>{
 
         let result=await OTP.findOne({otp:otp});
 
+        console.log("DB INTERACTION HO GYI H");
+        
         while(result){
             otp=otpGenerator.generate(6,{
                 upperCaseAlphabets:false,
@@ -39,6 +41,7 @@ exports.sendotp=async(req,res)=>{
                 specialChars:false,
             })
             result=await OTP.findOne({otp:otp});
+            console.log("LOOP KE ANDAR HU MAI:")
         }
 
         const otpPayload={email,otp};

@@ -5,7 +5,7 @@ require('events').EventEmitter.defaultMaxListeners = 0
 
 //importing routes here
 const userRoutes=require("./routes/User");
-const postRoutes=require("./routes/post");
+const postRoutes=require("./routes/Post");
 const likeRoutes=require("./routes/Like");
 const commentRoutes=require("./routes/Comment");
 const replyRoutes=require("./routes/Reply");
