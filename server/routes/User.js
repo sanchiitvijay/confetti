@@ -14,4 +14,4 @@ router.route("/edit-user").post(auth, editUser);
 router.route("/delete-graduates").delete(auth, isAdmin, deleteGraduates);
 router.route("/promote-students").post(auth, isAdmin, promoteStudents);
 
-export default router
+module.exports = router;
