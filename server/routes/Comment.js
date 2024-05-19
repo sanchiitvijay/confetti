@@ -1,14 +1,12 @@
-const { Router } = require("express")
-const { auth } = require("../middlewares/auth")
-const { createComment, removeComment, getAllComments, getUserComments } = require("../controllers/Reply")
-
+const { Router } = require("express");
+const { auth } = require("../middlewares/auth");
+const { createComment, removeComment, getAllComments, getUserComments } = require("../controllers/Reply");
 
 const router = Router();
 
+router.post("/create-comment", auth, createComment);
+router.delete("/remove-comment", auth, removeComment);
+router.get("/get-all-comments", auth, getAllComments);
+router.get("/get-user-comments", auth, getUserComments);
 
-router.route("/create-comment").post(auth, createComment);
-router.route("/remove-comment").delete(auth, removeComment);
-router.route("/get-all-comments").get(auth, getAllComments);
-router.route("/get-user-comments").get(auth, getUserComments);
-
-export default router;
+module.exports = router;
