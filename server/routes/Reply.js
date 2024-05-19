@@ -5,6 +5,8 @@ const { createReply, deleteReply, getAllReplies } = require("../controllers/Repl
 
 const router = Router();
 
-router.route("create-reply").post(auth, createReply);
-router.route("delete-reply").delete(auth, deleteReply);
-router.route("get-all-replies").get(auth, getAllReplies);
+router.route("/create-reply").post(auth, createReply);
+router.route("/delete-reply").delete(auth, deleteReply);
+router.route("/get-all-replies").get(auth, getAllReplies);
+
+module.exports = router;
