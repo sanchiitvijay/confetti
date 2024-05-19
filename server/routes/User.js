@@ -6,7 +6,8 @@ const { getAllUsers, removeUser, editUser, deleteGraduates, promoteStudents } = 
 const router = Router();
 
 router.route("/login").post(login);
-router.route("/signup").post(sendotp, signup);
+router.route("/send-otp").post(sendotp);
+router.route("/signup").post(signup);
 router.route("/change-password").post(auth, changePassword);
 router.route("/get-all-user").get(auth, isAdmin, getAllUsers);
 router.route("/remove-user").delete(auth, isAdmin, removeUser);
