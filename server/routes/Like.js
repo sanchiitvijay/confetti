@@ -6,5 +6,7 @@ const { getLikes, liked } = require("../controllers/Like")
 const router = Router();
 
 
-router.route("liked").post(auth, liked);
-router.route("get-all-likes").get(auth, getLikes);
+router.route("/liked").post(auth, liked);
+router.route("/get-all-likes").get(auth, getLikes);
+
+export default router;

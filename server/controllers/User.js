@@ -32,6 +32,51 @@ exports.getAllUsers=async(req,res)=>{
     }
 }
 
+exports.editUser = async(req, res) => {
+    try {
+        const {
+            userId, 
+            name,
+            usn,
+            year,
+            instagram
+        } = req.body;
+        const user = await User.findById(userId)
+        
+        if (!user) {
+            return res.status(500).json({
+                success: false,
+                message: "Could not find the user"
+              })
+        }
+    
+        user.name = name;
+        user.usn = usn;
+        user.year = year;
+        user.instagram = instagram;
+    
+        const updatedUser = await user.save();
+
+        if(!updatedUser) {
+            return res.status(500).json({
+                success: false,
+                message: "Error while saving the User"
+              })
+        }
+
+        return res.status(200).json({
+          success: true,
+          message: "User has been updated succesfully",
+          updatedUser
+        })
+    } catch(error) {
+        return res.status(500).json({
+            success: false,
+            message: "Error while updating the user"
+          })
+    }
+}
+
 
 exports.removeUser=async(req,res)=>{
     try{
@@ -128,6 +173,4 @@ exports.promoteStudents = async(req, res) => {
             message: "Error while increasing the year of the students"
         })
     }
-
-
 }
