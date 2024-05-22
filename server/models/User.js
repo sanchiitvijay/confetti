@@ -17,10 +17,6 @@ const UserSchema=new mongoose.Schema({
         type:String,
         required:true,
     },
-    confirmPassword:{
-        type:String,
-        required:true,
-    },
     gender:{
         type:String,
         required:true,
@@ -51,7 +47,7 @@ const UserSchema=new mongoose.Schema({
     notifications:[
         {
             type:mongoose.Schema.Types.ObjectId,
-            required:true,
+            // required:true,
             ref:"notification"
         }
     ],

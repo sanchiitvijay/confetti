@@ -35,12 +35,12 @@ exports.getAllUsers=async(req,res)=>{
 exports.editUser = async(req, res) => {
     try {
         const {
-            userId, 
             name,
             usn,
             year,
             instagram
         } = req.body;
+        const userId = req.user.id || req.body.userId
         const user = await User.findById(userId)
         
         if (!user) {
