@@ -69,6 +69,7 @@ exports.signup=async(req,res)=>{
         const {
             name,
             usn,
+            username,
             password,
             confirmPassword,
             gender,
@@ -80,12 +81,13 @@ exports.signup=async(req,res)=>{
             otp,
         }=req.body;
 
+        console.log(req.body)
 
-        if(!name || !password || !confirmPassword || !email || !accountType || gender
-        ){
+
+        if(!name || !password || !confirmPassword || !email || !gender){
             return res.status(403).json({
                 success:false,
-                message:"Some fields are required"
+                message:"Some fields are required!!"
             })
         }
 
@@ -129,6 +131,7 @@ exports.signup=async(req,res)=>{
         const user=await User.create({
             name,
             usn,
+            username,
             email,
             instagram,
             password: hashedPassword,

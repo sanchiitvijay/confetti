@@ -5,20 +5,21 @@ const Notification=require("../models/Notification");
 exports.createPost = async(req, res)=>{
     try{
         const {
-            userId,
             description,
             caption,
-            name,
             year
-            
         } = req.body;
 
+        const userId = req.body.userId || req.user.id
+        const name = req.body || req.user
+        
         if(!userId || !description || !caption) {
             return res.status(403).json({
                 success: false,
                 message: "All fields are required",
             })
         }
+        
 
         const post = await Post.create({
             author: userId,
@@ -103,7 +104,8 @@ exports.editPost = async(req, res) => {
 exports.deletePost = async(req, res) => {
     
     try {
-        const { postId, userId }  = req.body;
+        const postId  = req.body.postId;
+        const userId = req.user.id || req.body;
 
         if(!postId || !userId) {
             return res.status(500).json({
@@ -111,16 +113,25 @@ exports.deletePost = async(req, res) => {
                 message: "Both field are required"
             })
         }
-
-        const post = await Post.findById(postId)
-
-        if(post.author !== userId) {
+        const post = await Post.findById(postId);
+        console.log(userId);
+        console.log(post);
+        
+        if(!post) {
+            return res.status(500).json({
+                success: false,
+                message: "Error while fetching the post"
+            })
+        }
+        
+        if(post.author != userId) {
             return res.status(500).json({
                 success: false,
                 message: "User is not the post owner"
             })
         }
         const result =await Post.deleteOne({ _id: postId })
+        console.log(3);
         
         return res.status(200).json({
             success: true,
@@ -129,7 +140,7 @@ exports.deletePost = async(req, res) => {
         })
         
     } catch (error) {
-        return res.success(500).json({
+        return res.status(500).json({
             success: false,
             message: "Error while deleting the post"
         })
@@ -157,7 +168,7 @@ exports.getPosts = async(req, res) => {
 //Get posts function for the admin to get the posts by a user's id
 exports.getUserPosts=async(req,res)=>{
     try{
-        const {userId}=req.body;
+        const userId=req.body.userId || req.user.id;
         if(!userId){
             return res.status(404).json({
                 success:false,
@@ -165,7 +176,7 @@ exports.getUserPosts=async(req,res)=>{
             })
         }
 
-        const posts=await Posts.findById({author:userId});
+        const posts=await Post.find({author:userId});
 
         const user=await User.findById(userId);
         return res.status(200).json({
@@ -186,18 +197,42 @@ exports.getUserPosts=async(req,res)=>{
 }
 
 exports.reportPost = async(req, res)=> {
-    const postId = req.body;
-    const userId = req.user._id;
+    const postId = req.body.postId;
+
+    if (!postId) {
+        return res.status(404).json({
+            success: false,
+            message: 'PostId not found'
+        });
+    }
 
     const post = await Post.findById(postId)
+    if (!post) {
+        return res.status(404).json({
+            success: false,
+            message: 'Post not found'
+        });
+    }
+
     post.reports += 1;
+    await post.save();
+    const userId = post.author;
 
-    if(post.reports === 3) {
-        this.deletePost(postId);
+    if(post.reports >= 3) {
+
+        await Post.findByIdAndDelete(postId);
+
         const user = await User.findById(userId)
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not found'
+            });
+        }
         user.reports += 1;
+        await user.save()
 
-        if(user.reports === 5) {
+        if(user.reports >= 5) {
             const deletedUser = await User.findByIdAndDelete(userId)
             if(!deletedUser) {
                 return res.status(500).json({
@@ -207,6 +242,10 @@ exports.reportPost = async(req, res)=> {
             }
         }
     }
+    return res.status(200).json({
+        success:true,
+        message:"Post has been reported succesfully"
+    })
 }
 
 

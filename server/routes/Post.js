@@ -7,8 +7,8 @@ const router = Router();
 router.route("/create-post").post(auth, createPost);
 router.route("/edit-post").post(auth, editPost);
 router.route("/delete-post").delete(auth, deletePost);
-router.route("/get-post").get(auth, isAdmin, getPosts);
-router.route("/get-user-post").get(auth, getUserPosts);
+router.route("/get-post").get(auth, getPosts);
+router.route("/get-user-post").get(auth, isAdmin, getUserPosts);
 router.route("/report-post").post(auth, reportPost);
 
 module.exports = router;
