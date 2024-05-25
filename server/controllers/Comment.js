@@ -166,6 +166,7 @@ exports.getAllComments=async(req,res)=>{
         //get the post id for which you want to fetch the comments for 
         const {postId}=req.body;
 
+
         //validate
         if(!postId){
             return res.status(404).json({
@@ -175,7 +176,7 @@ exports.getAllComments=async(req,res)=>{
         }
 
         //db call to find the comments by post id
-        const comments=await Comment.findById({post:postId});
+        const comments=await Comment.find({post:postId});
 
         //return response
         return res.status(200).json({
@@ -213,7 +214,7 @@ exports.getUserComments=async(req,res)=>{
         }
 
         //db call to find the comments by user id
-        const comments=await Comment.findById({author:userId});
+        const comments=await Comment.find({author:userId});
 
         //return response
         return res.status(200).json({

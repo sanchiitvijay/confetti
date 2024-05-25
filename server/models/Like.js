@@ -15,3 +15,5 @@ const LikeSchema=new mongoose.Schema({
 },{
     timestamps:true
 })
+
+module.exports=mongoose.model("like",LikeSchema);

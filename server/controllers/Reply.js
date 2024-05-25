@@ -4,11 +4,12 @@ const Comment=require("../models/Comment");
 
 exports.createReply=async(req,res)=>{
     try{
-        const {userId}=req.user.id;
+        const userId=req.user.id;
         const {
             commentId,
             description,
         }=req.body;
+
 
         //validate
         if(!userId || !commentId || !description ){
@@ -153,7 +154,7 @@ exports.getAllReplies=async(req,res)=>{
         }
 
         //now move ahead and fetch the replies
-        const replies=await Reply.findById({
+        const replies=await Reply.find({
             comment:commentId,
         }).sort({createdAt:-1});
 
