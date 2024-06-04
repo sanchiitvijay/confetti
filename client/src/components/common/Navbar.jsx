@@ -1,12 +1,16 @@
+import { Button } from '@mui/material'
 import React from 'react'
 
-const Navbar = () => {
+const Nav = () => {
   return (
-    <div>
-      Navbar
+    
+     <div >
+      <Button  >Ashu </Button>
+
+     </div>
         
-    </div>
+
   )
 }
 
-export default Navbar
+export default Nav
