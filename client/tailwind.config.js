@@ -3,11 +3,20 @@ const flowbite = require("flowbite-react/tailwind");
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}",
   'node_modules/flowbite-react/lib/esm/**/*.js',
+  "./node_modules/flowbite/**/*.js",
   flowbite.content(),
 ],
   theme: {
     extend: {
       
+        "colors":{
+          "confettiYellow1":"#FCFC5C",
+          "confettiYellow2":"#FBFB00",
+          "confettiYellow3":"#FFEE00",
+          "confettiYellow4":"#FFD900",
+          "confettiYellow5":"#FFBF00",
+          "cFont":"#111111",
+        }  ,
         "root": {
           "base": "bg-white px-2 py-2.5 dark:border-gray-700 dark:bg-gray-800 sm:px-4",
           "rounded": {
