@@ -2,18 +2,21 @@ import React from 'react'
 import heroImage from "../assets/touch.jpg"
 import { TypeAnimation } from 'react-type-animation';
 import Button from '../components/common/Button';
+/* Wherever Possible make components */
+
 const Home = () => { 
   return (
     <div className='w-11/12 mt-10 mx-auto  text-cFont'>
         
         {/* Hero Section */}
         <div className='flex flex-row justify-between w-full '>
+            
 
             {/* Text of Hero */}
             <div>
             <TypeAnimation
             sequence={[
-                // Same substring at the start will only be typed once, initially
+                
                 'Open up to a world of Confessions',
                 1000,
                 'Open up to a world of Feelings',
