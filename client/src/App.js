@@ -2,6 +2,7 @@ import "./App.css";
 import {Route,Routes} from "react-router-dom"
 import { useSelector } from "react-redux";
 import Nav from "./components/common/Navbar";
+import Home from "./pages/Home";
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -14,7 +15,7 @@ function App() {
       <Nav/>
 
       <Routes>
-       
+        <Route path="/" element={<Home/>}/>   
 
 
       </Routes>
