@@ -1,32 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from "../../assets/confetti.png"
 import { useSelector } from 'react-redux'
-import {Link, Navigate, useNavigate} from 'react-router-dom'
+import {Link, Navigate, matchPath, useLocation, useNavigate} from 'react-router-dom'
 import { GiHamburgerMenu } from "react-icons/gi";
 import Button from './Button';
+import heart from "../../assets/heartwing.png"
 
-
-const links=[
-  {
-    index:0,
-    title:"Home",
-    url:"/"
-  },
-  {
-    index:1,
-    title:"About Us",
-    url:"/aboutus"
-  },
-  { 
-    index:2,
-    title:"Explore",
-    url:"/explore"
-  }
-]
+// const links=[
+//   {
+//     index:0,
+//     title:"Home",
+//     url:"/"
+//   },
+//   {
+//     index:1,
+//     title:"About Us",
+//     url:"/aboutus"
+//   },
+//   { 
+//     index:2,
+//     title:"Explore",
+//     url:"/explore"
+//   }
+// ]
 
 const Nav = () => {
   const {token}=useSelector((state)=>state.auth);
   const navigate=useNavigate();
+  const location=useLocation();
+  const matchRoute=()=>{
+    if(location.pathname==="/"){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  console.log("INFO:",matchRoute());
+  console.log("LOCATION:",location.pathname)
 
   return (
     
@@ -38,12 +49,13 @@ const Nav = () => {
             </div>  
 
             {/* Links */}
-            <div className='lg:ml-14 hidden font-roboto items-center text-lg flex-row gap-16 text-cFont justify-evenly md:flex '>
-              {
+            <div className='w-[100px]'>
+              {/* {
                 links.map((link)=>(
                   <Link key={link.index} className="hover:text-yellow-300 duration-100 transition-all" to={link.url}>{link.title}</Link>
                 ))
-              }
+              } */}
+              {/* <img src={heart} alt="heartwings" /> */}
             </div>
 
               {/* Buttons and Menu */}
@@ -55,9 +67,16 @@ const Nav = () => {
                   <div >
                       {/* Buttons Here */}
                       <div className='hidden  md:flex flex-row gap-3 items-center '>
-                        <Button text={"Log In"} nav={"/login"}/>
-                        <Button text={"Sign Up"} nav={"/signup"}/>
+                        {
+                          matchRoute()?(
+                            <Button text={"Sign Up"} nav={"/signup"}/>
+                          ):(
+                           
+                            <Button text={"Log In"} nav={"/"}/>
+                          )
+                        }
                         
+                       
                       </div>
                   </div>
                 )
