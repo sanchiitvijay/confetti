@@ -84,7 +84,7 @@ exports.signup=async(req,res)=>{
         console.log(req.body)
 
 
-        if(!name || !password || !confirmPassword || !email || !gender){
+        if(!name || !password || !confirmPassword || !email || !gender || !username){
             return res.status(403).json({
                 success:false,
                 message:"Some fields are required!!"
@@ -108,6 +108,14 @@ exports.signup=async(req,res)=>{
             })
         }
 
+        
+        const existingUsername=await User.findOne({username});
+        if(existingUsername){
+            return res.status(400).json({
+                success:false,
+                message:"Username is already registered"
+            })
+        }
         const recentOtp=await OTP.find({email}).sort({createdAt:-1}).limit(1);
         console.log(recentOtp[0].otp);
         console.log(otp);
