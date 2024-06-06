@@ -113,7 +113,7 @@ const Home = () => {
 
 
             {/* Login form here */}
-            <div className='py-12 h-[478px] px-12 w-fit bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-400 '>
+            <div className='py-12 lg:h-[478px] px-12 w-fit bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-400 '>
             <img src={logo} className='mx-auto w-[160px] h-[160px]' alt="" />
             {/* <h2 className='text-white text-center font-semibold text-2xl'>About Us</h2> */}
             <p className='mt-4 max-w-[600px] leading-4 '>
