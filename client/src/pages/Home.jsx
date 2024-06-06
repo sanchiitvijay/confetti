@@ -41,7 +41,7 @@ const Home = () => {
         
 
         {/* Login */}
-        <div  className='flex flex-col md:flex-row  min-h-screen p-8 bg-cover bg-ring bg-center gap-4 items-center justify-between w-full '>
+        <div  className='flex flex-col lg:flex-row  min-h-screen p-8 bg-cover bg-ring bg-center gap-4 items-center justify-between w-full '>
             
 
             {/* Login form here */}
