@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
-import heroImage from "../assets/touch.jpg"
-import { TypeAnimation } from 'react-type-animation';
 import logo from "../assets/confetti.png" 
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import {AiOutlineEye} from "react-icons/ai"
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
-import {Button} from "../components/common/Button"
 import SubmitButton from '../components/common/SubmitButton';
+
 
 /* Wherever Possible make components */
 
