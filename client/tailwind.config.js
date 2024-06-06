@@ -8,6 +8,12 @@ module.exports = {
 ],
   theme: {
     extend: {
+      backgroundImage: {
+        'confess': "url('/src/assets/confess.jpg')",
+        'propose': "url('/src/assets/propose.jpg')",
+        'propose1': "url('/src/assets/propose1.jpg')",
+        'ring': "url('/src/assets/hands.jpg')"
+      },
       
         "colors":{
           "confettiYellow1":"#FCFC5C",
@@ -15,6 +21,7 @@ module.exports = {
           "confettiYellow3":"#FFEE00",
           "confettiYellow4":"#FFD900",
           "confettiYellow5":"#FFBF00",
+          
           "cFont":"#111111",
         }  ,
         "root": {
