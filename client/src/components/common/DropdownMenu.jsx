@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { forwardRef, useState } from 'react'
 import { RiArrowDropDownLine, RiArrowDropUpLine  } from 'react-icons/ri'
 
-const DropdownMenu = (props) => {
+const DropdownMenu = forwardRef((props, ref) => {
 
     const [isDropdown, setDropdown] = useState(false)
     const [dropdownValue, setDropdownValue] = useState(props.name)
@@ -16,9 +16,10 @@ const DropdownMenu = (props) => {
                   
     <input
       required
-      name={props.name}
-      value={dropdownValue ? dropdownValue: props.name}
+      name={props.value}
+      value={dropdownValue ?dropdownValue: props.name}
       placeholder={props.name}
+      {...props.register(props.value,{required:props.required})}
   
       className="w-full bg-transparent border-transparent focus:border-transparent focus:ring-0 placeholder-white rounded-[0.5rem]  p-[12px]"
     />
@@ -43,6 +44,6 @@ const DropdownMenu = (props) => {
     </div>
   </label>
   )
-}
+})
 
 export default DropdownMenu
