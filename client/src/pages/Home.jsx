@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import {AiOutlineEye} from "react-icons/ai"
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
 import SubmitButton from '../components/common/SubmitButton';
+import Marquee from "react-fast-marquee";
 
 
 /* Wherever Possible make components */
@@ -35,7 +36,7 @@ const Home = () => {
   }
   
   return (
-    <div className='w-full h-screen  mx-auto   text-cFont'>
+    <div className='w-full h-screen mx-auto text-cFont'>
         
 
         {/* Login */}
@@ -43,7 +44,7 @@ const Home = () => {
             
 
             {/* Login form here */}
-            <div className='py-12 px-12 xs:w-[90%] md:w-[420px] h-[478px]  bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-400 '>
+            <div className='py-12 px-12 lg:w-[90%] xl:w-[420px] h-[478px]  bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-400 '>
             
             <h2 className='text-white text-4xl font-semibold text-center '>Login</h2>
             <form
@@ -111,10 +112,18 @@ const Home = () => {
 
 
             {/* Login form here */}
-            <div className='py-12 lg:h-[478px] px-12 w-fit bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-400 '>
-            <img src={logo} className='mx-auto w-[160px] h-[160px]' alt="" />
+            <div className='py-12 lg:h-[478px] px-12 md:w-[80%] xl:w-[600px] bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-400 '>
+              <div className='z-0 mt-4'>
+                  <Marquee autoFill="true" delay="2" className='[word-spacing:95px]'>
+
+                    <div className="mr-[95px] text-lg text-gray-800" >
+                      CONFESS PROPOSE LIKE FIGHT<br/>
+                    </div>
+                </Marquee>
+              </div>
+            <img src={logo} className='relative mt-[-90px] mx-auto w-[160px] h-[160px] z-50' alt="" />
             {/* <h2 className='text-white text-center font-semibold text-2xl'>About Us</h2> */}
-            <p className='mt-4 max-w-[600px] leading-4 '>
+            <p className='mt-5 leading-6 text-lg text-justify'>
               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been 
               the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of 
               type and scrambled it to make a type specimen book. It has survived not only five centuries, but 
@@ -124,11 +133,6 @@ const Home = () => {
             </p>
 
             </div>
-
-
-
-
-
         </div>
     </div>
   )

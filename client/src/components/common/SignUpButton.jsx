@@ -9,7 +9,7 @@ const SignUpButton = forwardRef((props, ref) => {
           name={props.value}
           {...props.register(props.value,{required:props.required})}
           placeholder={`Enter ${props.name}`}
-          
+          {...props.error && <p>{props.error.message}</p>}
           className="w-full text-white bg-transparent border-transparent focus:border-transparent focus:ring-0 placeholder-white rounded-[0.5rem]  p-[12px] "
         />
         

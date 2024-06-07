@@ -20,6 +20,7 @@ const DropdownMenu = forwardRef((props, ref) => {
       value={dropdownValue ?dropdownValue: props.name}
       placeholder={props.name}
       {...props.register(props.value,{required:props.required})}
+      {...props.error && <p>{props.error.message}</p>}
   
       className="w-full bg-transparent border-transparent focus:border-transparent focus:ring-0 placeholder-white rounded-[0.5rem]  p-[12px]"
     />

@@ -88,12 +88,14 @@ const handleAvatar = async (e) => {
              name="name" 
              value="name"
              type="text"
+             error={errors.name}
              required={true}
              register={register}/>
             <SignUpButton 
             name="email" 
             value="email"
             type="email"
+            error={errors.email}
             required={true}
             register={register}/>
           </div>
@@ -118,6 +120,7 @@ const handleAvatar = async (e) => {
             value="username" 
             required={true}
             type="text"
+            error={errors.username}
             register={register}/>
 
             <SignUpButton 
@@ -125,6 +128,7 @@ const handleAvatar = async (e) => {
             value="usn" 
             type="text"
             required={true}
+            error={errors.usn}
             register={register}/>
           </div>
           
@@ -135,12 +139,14 @@ const handleAvatar = async (e) => {
           value="password" 
           type="password"
           required={true}
+          error={errors.password}
           register={register}/>
 
          <PasswordInput 
          name="Confirm password" 
          value="confirmPassword" 
          type="password"
+         error={errors.confirmPassword}
           required={true}
          register={register}/>
             
@@ -150,7 +156,8 @@ const handleAvatar = async (e) => {
             <DropdownMenu 
             data={gender} 
             name="Gender" 
-            value="gender" 
+            value="gender"
+            error={errors.gender} 
             register={register}
             required={false}
             />
@@ -158,6 +165,7 @@ const handleAvatar = async (e) => {
             data={branches} 
             name="Branch" 
             value="branch" 
+            error={errors.branch}
             required={false}
             register={register}/>
           </div>
@@ -166,15 +174,17 @@ const handleAvatar = async (e) => {
             <DropdownMenu 
             data={year} 
             name="Year" 
-            value="year" 
+            value="year"
+            error={errors.year}
             register={register}
             required={true}
             />
             <SignUpButton 
             name="Instagram" 
             value="instagram" 
+            type="text" 
+            error={errors.instagram}
             register={register}
-            type="text"
             required={false}/>
           </div>
 
