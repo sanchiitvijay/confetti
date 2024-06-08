@@ -5,10 +5,12 @@ import PasswordInput from '../components/common/PasswordInput';
 import DropdownMenu from '../components/common/DropdownMenu';
 import { RxAvatar } from "react-icons/rx";
 import SubmitButton from '../components/common/SubmitButton';
+import { useNavigate } from 'react-router-dom';
 // import axios from 'axios';
 
 const Signup = () => {
   
+  const navigate=useNavigate();
   const [loading, ,setLoading] = useState(false)
   const {
     register,
@@ -64,8 +66,15 @@ useEffect(()=>{
 })
 
 const handleAvatar = async (e) => {
+
   if(e.target.files[0]){
-      setAvatar(e.target.files[0])
+    const fileUrl=URL.createObjectURL(e.target.files[0]);
+    console.log(fileUrl.split("blob:")[1]);
+    setAvatar(
+      {
+        file:e.target.files[0],
+        url:fileUrl
+      })
   }
 }
   
@@ -101,13 +110,14 @@ const handleAvatar = async (e) => {
           </div>
             <div className='flex flex-row mx-auto'>
               
-            <label htmlFor="file" >
+            <label className="text-white hover:underline hover:cursor-pointer" htmlFor="file" >
             {avatar.url ? (
-              <img src={avatar.url} alt="Avatar" />
+              <img src={avatar.url} className="rounded-full w-[100px] h-[100px]" alt="Avatar" />
             ) : (
               <RxAvatar  fontSize={100} color='ffffff'/>
-            )}
+            )}<span className='text-center mx-auto'>
             Upload avatar
+            </span>
                 </label>
             </div>
                 <input type="file" id="file" style={{display: "none"}} register={register} onChange={handleAvatar}/>
@@ -165,6 +175,7 @@ const handleAvatar = async (e) => {
             data={branches} 
             name="Branch" 
             value="branch" 
+            customClasses="overflow-y-auto h-[80px]"
             error={errors.branch}
             required={false}
             register={register}/>
@@ -194,6 +205,9 @@ const handleAvatar = async (e) => {
                   type="submit"
             />
 
+            <div className='text-white text-center'>
+              Already Have An Account, <span onClick={()=>navigate("/")} className='hover:underline hover:cursor-pointer'>Log In Here</span>
+            </div>
           </form>
 
         </div>

@@ -40,7 +40,7 @@ const Home = () => {
         
 
         {/* Login */}
-        <div  className='flex flex-col lg:flex-row  min-h-screen p-8 bg-cover bg-ring bg-center gap-4 items-center justify-between w-full '>
+        <div  className='flex flex-col lg:flex-row  min-h-screen p-8 bg-cover bg-ring bg-center gap-4 items-center lg:justify-around w-full '>
             
 
             {/* Login form here */}
@@ -100,7 +100,7 @@ const Home = () => {
                 />
 
                 <p className='text-white text-center'>
-                  Dont Have An Account ? <span onClick={()=>navigate("/signup")} className='hover:underline transition-all duration-150 '>Register Here</span>
+                  Dont Have An Account ? <span onClick={()=>navigate("/signup")} className='hover:cursor-pointer hover:underline transition-all duration-150 '>Register Here</span>
                 </p>
                 
               
@@ -112,18 +112,18 @@ const Home = () => {
 
 
             {/* Login form here */}
-            <div className='py-12 lg:h-[478px] px-12 md:w-[80%] xl:w-[600px] bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-400 '>
-              <div className='z-0 mt-4'>
+            <div className='py-12   lg:h-[478px] text-white px-8 lg:px-12 md:w-[80%] xl:w-[600px] bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-400 '>
+              {/* <div className='z-0 mt-4'>
                   <Marquee autoFill="true" delay="2" className='[word-spacing:95px]'>
 
                     <div className="mr-[95px] text-lg text-gray-800" >
                       CONFESS PROPOSE LIKE FIGHT<br/>
                     </div>
                 </Marquee>
-              </div>
-            <img src={logo} className='relative mt-[-90px] mx-auto w-[160px] h-[160px] z-50' alt="" />
+              </div> */}
+            <img src={logo} className=' mx-auto w-[120px] h-[120px]  alt=' />
             {/* <h2 className='text-white text-center font-semibold text-2xl'>About Us</h2> */}
-            <p className='mt-5 leading-6 text-lg text-justify'>
+            <p className='mt-5 leading-6 text-sm lg:text-[1rem] text-justify'>
               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been 
               the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of 
               type and scrambled it to make a type specimen book. It has survived not only five centuries, but 
