@@ -36,7 +36,7 @@ const DropdownMenu = forwardRef((props, ref) => {
         <RiArrowDropDownLine fontSize={24} fill="#FFFFFF" />
       )}
     </span>
-    <div className={`h-auto   w-full bg-transparent rounded-md p-[1rem] border z-2 ${props.customClasses}`} style={{display: isDropdown? "" : "none"}}>
+    <div className={`h-auto transition ease-in-out duration-500 w-full bg-transparent rounded-md p-[1rem] border z-2 ${props.customClasses}`} style={{display: isDropdown? "" : "none"}}>
     <ul className=''>
       {props.data.map((branch, index) => (
         <li key={branch} className='text-center' onClick={() =>handleDropdown(branch)}>{branch}</li>
