@@ -57,7 +57,7 @@ useEffect(()=>{
 
  const gender = ["Male", "Female", "Other"]
   const year = ["First", "Second", "Third", "Fourth"]
-  const branches = ["CSE", "ISE", "EEE"]
+  const branches = ['CS','IS','AD','AI','AT','BT','CH','CI','CY','EC','EE','EI','IM','BA','MC','MD','ME','CV']
   const [avatar, setAvatar] = useState({
     file: null,
     url:""
