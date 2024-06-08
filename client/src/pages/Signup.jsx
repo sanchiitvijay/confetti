@@ -175,7 +175,7 @@ const handleAvatar = async (e) => {
             data={branches} 
             name="Branch" 
             value="branch" 
-            customClasses="overflow-y-auto h-[80px]"
+            customClasses="overflow-y-auto h-[95px]"
             error={errors.branch}
             required={false}
             register={register}/>
