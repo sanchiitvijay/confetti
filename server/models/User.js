@@ -24,7 +24,7 @@ const UserSchema=new mongoose.Schema({
     },
     branch:{
         type:String,
-        enum:['CSE','ISE','ECE','EEE','']
+        enum:['CS','IS','AD','AI','AT','BT','CH','CI','CY','EC','EE','EI','IM','BA','MC','MD','ME','CV']
     },
     year:{
         type:Number,
