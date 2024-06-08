@@ -22,7 +22,7 @@ const DropdownMenu = forwardRef((props, ref) => {
       {...props.register(props.value,{required:props.required})}
       {...props.error && <p>{props.error.message}</p>}
   
-      className="w-full bg-transparent border-transparent focus:border-transparent focus:ring-0 placeholder-white rounded-[0.5rem]  p-[12px]"
+      className="w-full bg-transparent outline-none shadow-none border-transparent focus:border-transparent focus:ring-0 placeholder-white rounded-[0.5rem]  p-[12px]"
     />
     <div className='h-[1px] w-full bg-white'></div>
     <span
@@ -36,8 +36,8 @@ const DropdownMenu = forwardRef((props, ref) => {
         <RiArrowDropDownLine fontSize={24} fill="#FFFFFF" />
       )}
     </span>
-    <div className='h-auto w-full bg-transparent rounded-md p-[1rem] border z-2' style={{display: isDropdown? "" : "none"}}>
-    <ul>
+    <div className={`h-auto   w-full bg-transparent rounded-md p-[1rem] border z-2 ${props.customClasses}`} style={{display: isDropdown? "" : "none"}}>
+    <ul className=''>
       {props.data.map((branch, index) => (
         <li key={branch} className='text-center' onClick={() =>handleDropdown(branch)}>{branch}</li>
       ))}
