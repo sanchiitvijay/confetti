@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from "../assets/confetti.png" 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import {AiOutlineEye} from "react-icons/ai"
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
@@ -11,7 +11,7 @@ import Marquee from "react-fast-marquee";
 /* Wherever Possible make components */
 
 const Home = () => { 
-
+  const {setLoading}=useSelector((state)=>state.auth);
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({
@@ -20,7 +20,7 @@ const Home = () => {
   })
 
   const [showPassword, setShowPassword] = useState(false)
-
+ 
   const { email, password } = formData
 
   const handleOnChange = (e) => {
@@ -35,12 +35,13 @@ const Home = () => {
     // dispatch(login(email, password, navigate))
   }
   
+
   return (
-    <div className='w-full h-screen mx-auto text-cFont'>
+    <div className='w-full h-full mx-auto text-cFont'>
         
 
         {/* Login */}
-        <div  className='flex flex-col lg:flex-row  min-h-screen p-8 bg-cover bg-ring bg-center gap-4 items-center lg:justify-around w-full '>
+        <div  className='flex flex-col lg:flex-row  min-h-screen p-8  gap-4 items-center lg:justify-around w-full '>
             
 
             {/* Login form here */}
@@ -88,11 +89,12 @@ const Home = () => {
                       <AiOutlineEye fontSize={24} fill="#FFFFFF" />
                     )}
                   </span>
-                  <Link to="/forgot-password">
-                    <p className="mt-5 hover:underline  transition-all duration-150 ml-auto max-w-max text-sm text-white">
+                  <div onClick={()=>{
+                    navigate("/forgot-password")}}>
+                    <p className="mt-5 hover:underline  hover:cursor-pointer transition-all duration-150 ml-auto max-w-max text-sm text-white">
                       Forgot Password ?
                     </p>
-                  </Link>
+                  </div>
                 </label>
                 <SubmitButton
                   text="Sign In"

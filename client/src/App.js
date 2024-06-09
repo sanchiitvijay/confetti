@@ -8,11 +8,12 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import Signup from "./pages/Signup";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   const {token}=useSelector((state)=>state.auth);
   return (
-    <div className="w-screen min-h-screen flex flex-col ">
+    <div className="w-screen bg-cover bg-ring bg-center min-h-screen flex flex-col ">
 
       {
         token && <Nav/>
@@ -22,7 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>   
         <Route path="/signup" element={<Signup/>}/>
-
+        <Route path="/forgot-password" element={<ForgotPassword/>}/>
       </Routes>
 
 
