@@ -79,9 +79,9 @@ const handleAvatar = async (e) => {
 }
   
   return (
-    <div className='w-full h-screen mx-auto text-cFont'>
+    <div className='w-full h-full mx-auto text-cFont'>
 
-      <div className='min-h-screen p-8 bg-cover bg-ring bg-center item-center justify-between w-full'>
+      <div className='min-h-screen p-8  item-center justify-between w-full'>
 
         <div className='py-12 px-12 xs:w-[100%] md:w-fit bg-gray-400 rounded-md bg-clip-padding backdrop-filter mx-auto justify-center backdrop-blur-md bg-opacity-20 border border-gray-400'>
 
@@ -175,7 +175,7 @@ const handleAvatar = async (e) => {
             data={branches} 
             name="Branch" 
             value="branch" 
-            customClasses="overflow-y-auto h-[95px]"
+            customClasses="overflow-y-auto max-h-[95px]"
             error={errors.branch}
             required={false}
             register={register}/>
