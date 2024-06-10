@@ -9,6 +9,8 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
+import UpdatePassword from "./pages/UpdatePassword";
+
 
 function App() {
   const {token}=useSelector((state)=>state.auth);
@@ -24,6 +26,7 @@ function App() {
         <Route path="/" element={<Home/>}/>   
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/forgot-password" element={<ForgotPassword/>}/>
+        <Route path="/update-password/:uid" element={<UpdatePassword/>}/>
       </Routes>
 
 
