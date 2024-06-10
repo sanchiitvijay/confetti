@@ -5,7 +5,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import {AiOutlineEye} from "react-icons/ai"
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
 import SubmitButton from '../components/common/SubmitButton';
-import Marquee from "react-fast-marquee";
 
 
 /* Wherever Possible make components */

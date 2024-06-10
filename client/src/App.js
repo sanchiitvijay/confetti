@@ -10,6 +10,8 @@ import '@fontsource/roboto/700.css';
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
 import UpdatePassword from "./pages/UpdatePassword";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndConditions from "./pages/TermsAndConditions";
 
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/forgot-password" element={<ForgotPassword/>}/>
         <Route path="/update-password/:uid" element={<UpdatePassword/>}/>
+        <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
+        <Route path="/terms-and-conditions" element={<TermsAndConditions/>}/>
       </Routes>
 
 

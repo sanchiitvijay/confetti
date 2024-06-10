@@ -199,11 +199,22 @@ const handleAvatar = async (e) => {
             required={false}/>
           </div>
 
+            <div className='text-white'>
+            <input id="default-checkbox" type="checkbox" value="" className="w-4 h-4 mr-3 focus:ring-transparent text-white bg-transparent border-white rounded " />
+              Accept our
+              <span 
+              onClick={()=>navigate("/terms-and-conditions")} 
+              className='hover:underline hover:cursor-pointer mx-2'>
+              terms and conditions 
+              </span>
+              to proceed further. 
+            </div>
           <SubmitButton
                   disabled={loading}
                   text="Sign Up"
                   type="submit"
             />
+
 
             <div className='text-white text-center'>
               Already Have An Account, <span onClick={()=>navigate("/")} className='hover:underline hover:cursor-pointer'>Log In Here</span>
