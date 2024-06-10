@@ -22,7 +22,7 @@ const ForgotPassword = () => {
         loading?
         <Spinner/>
         :(
-          <div className=" py-12 flex-col flex gap-4 px-12 w-[90%] xl:w-[420px]   bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-400 ">
+          <div className=" py-12 flex-col flex gap-4 px-12 w-[90%] md:w-[420px]   bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-400 ">
             <h1 className="text-3xl font-semibold">
               {
                 !emailSent?
