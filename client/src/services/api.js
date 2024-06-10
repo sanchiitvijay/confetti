@@ -6,6 +6,7 @@ export const authEndpoints = {
     SENDOTP_API: BASE_URL + "/auth/sendotp",
     SIGNUP_API: BASE_URL + "/auth/signup",
     CHANGEPASSWORD_API: BASE_URL + "/auth/changePassword",
+    RESETPASSTOKEN_API: BASE_URL + "/auth/resetPasswordToken"
 }
 
 export const userEndpoints = {
