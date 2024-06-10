@@ -203,7 +203,7 @@ const handleAvatar = async (e) => {
             <input id="default-checkbox" type="checkbox" value="" className="w-4 h-4 mr-3 focus:ring-transparent text-white bg-transparent border-white rounded " />
               Accept our
               <span 
-              // onClick={()=>navigate("/terms-and-condition")} 
+              onClick={()=>navigate("/terms-and-conditions")} 
               className='hover:underline hover:cursor-pointer mx-2'>
               terms and conditions 
               </span>
