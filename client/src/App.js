@@ -12,6 +12,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import UpdatePassword from "./pages/UpdatePassword";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
+import OTP from "./pages/OTP";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path="/update-password/:uid" element={<UpdatePassword/>}/>
         <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
         <Route path="/terms-and-conditions" element={<TermsAndConditions/>}/>
+        <Route path="/otp" element={<OTP/>}/>
       </Routes>
 
 
