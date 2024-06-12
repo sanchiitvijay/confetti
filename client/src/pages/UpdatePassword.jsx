@@ -63,12 +63,12 @@ const UpdatePassword = () => {
                 type={showPassword?"text":"password"}
                 name='password'
                 value={password}
-                 className="w-full text-white bg-transparent border-transparent focus:border-transparent focus:ring-0 placeholder-white rounded-[0.5rem]  p-[12px] "
+                 className="w-full text-sm newsmall:text-base text-white bg-transparent border-transparent focus:border-transparent focus:ring-0 placeholder-white rounded-[0.5rem]  p-[12px] "
                 onChange={handleOnChange}
                 placeholder="Enter your new Password"
                 />
                 <div className='h-[1px] w-full bg-white'></div>
-                <span className="absolute top-4 right-3" onClick={()=>{setShowPassword((prev)=>!prev)}}>
+                <span className="absolute top-3  right-3 newsmall:top-4 newsmall:right-3" onClick={()=>{setShowPassword((prev)=>!prev)}}>
                   {
                     showPassword?(<AiFillEyeInvisible fontSize={24} />):(<AiFillEye  fontSize={24}/>)
                   }
@@ -81,7 +81,7 @@ const UpdatePassword = () => {
                 <input
                 required
                
-                className="w-full text-white bg-transparent border-transparent focus:border-transparent focus:ring-0 placeholder-white rounded-[0.5rem]  p-[12px] "
+                className="w-full text-sm newsmall:text-base text-white bg-transparent border-transparent focus:border-transparent focus:ring-0 placeholder-white rounded-[0.5rem]  p-[12px] "
                 type={showConfirmPassword?"text":"password"}
                 name='confirmPassword'
                 value={confirmPassword}
@@ -89,7 +89,7 @@ const UpdatePassword = () => {
                 placeholder="Confirm New Password"
                 />
                 <div className='h-[1px] w-full bg-white'></div>
-                <span className="absolute top-4 right-3" onClick={()=>{setShowConfirmPassword((prev)=>!prev)}}>
+                <span className="absolute top-3  right-3 newsmall:top-4 newsmall:right-3" onClick={()=>{setShowConfirmPassword((prev)=>!prev)}}>
                   {
                     showConfirmPassword?(<AiFillEyeInvisible  fontSize={24} />):(<AiFillEye  fontSize={24}/>)
                   }

@@ -8,6 +8,9 @@ module.exports = {
 ],
   theme: {
     extend: {
+      screens:{
+        'newsmall':'400px'
+      },
       backgroundImage: {
         'confess': "url('/src/assets/confess.jpg')",
         'propose': "url('/src/assets/propose.jpg')",
