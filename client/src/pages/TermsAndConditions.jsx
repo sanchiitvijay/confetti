@@ -36,10 +36,10 @@ const TermsAndConditions = () => {
     ]
   return (
     <div className='w-full h-full mx-auto text-cFont p-5 md:p-10'>
-        <div className='lg:w-[90%] mx-auto bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-400 text-white p-5'>
+        <div className='lg:w-[90%] mx-auto bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-400 text-white p-5 md:p-16'>
             <div className='flex flex-col-reverse md:flex-row'>
 
-            <div className='text-2xl md:text-4xl w-full text-normal text-center'>Terms and Conditions for Confetti</div>
+            <div className='text-2xl md:text-4xl w-full text-normal  text-center'>Terms and Conditions for Confetti</div>
             <img src={logo} className='relative mt-0.5 h-[100px] w-[100px] md:h-[60px] md:w-[60px] mx-auto' alt=""/>
             </div>
             <div className='text-xl md:text-2xl my-6  text-justify'>Welcome to Confetti! This platform allows you to anonymously share confessions related to your college experience. By using our service, you agree to these terms and conditions.</div>
