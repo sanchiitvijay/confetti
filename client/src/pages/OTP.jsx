@@ -66,15 +66,15 @@ const OTP = () => {
               <p className="mb-4 text-base leading-1 text-[#ffffff]">A verification code has been sent to you. Enter the code below.</p>
               <form  >
                 <OTPInput
-                 className=" w-full p-6  text-black"
+                 className=" w-full p-6  text-white"
                 value={otp}
                 onChange={setOtp}
                 numInputs={6}
-                
+
                 renderSeparator={<span className="text-white">-</span>}
-                renderInput={(props) => <span className="rounded-xl  text-black mx-auto px-[4px] newsmall:px-[10px] py-[8px] border border-gray-100 "><input   {...props} className="bg-transparent text-white outline-none border-none"/></span>}
+                renderInput={(props) => <span className="rounded-xl  text-white mx-auto px-[1px] newsmall:px-[1px] sm:px-[5px] py-[8px] border border-gray-100 "><input   {...props} className="bg-transparent box-content text-white outline-none border-none"/></span>}
                 />
-              <Submitbutton text={"Verify Email"} customClasses='w-full mx-auto mt-10 '/>
+              <Submitbutton text={"Verify Email"} customClasses='w-full mx-auto  mt-10 '/>
               </form>
   
               <div  className="flex mt-2 justify-between items-center ">
