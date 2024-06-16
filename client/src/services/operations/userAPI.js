@@ -55,7 +55,8 @@ export function removeUser(data, token) {
 
         try{
             const response = await (apiConnector("DELETE", DELETE_USER_API, data, {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "multipart/form-data",
             }))
 
             console.log("REMOVED USER....", response)
