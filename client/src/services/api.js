@@ -33,8 +33,8 @@ export const likeEndpoints = {
 }
 
 export const commentEndpoints = {
-    CREATE_COMMENTS_API: BASE_URL + "/comment/createComment",
-    REMOVE_COMMENTS_API: BASE_URL + "/comment/removeComment",
+    CREATE_COMMENT_API: BASE_URL + "/comment/createComment",
+    DELETE_COMMENT_API: BASE_URL + "/comment/removeComment",
     GET_ALL_COMMENTS_API: BASE_URL + "/comment/getAllComments",
     GET_USER_COMMENTS_API: BASE_URL + "/comment/getUserComments",
 }
