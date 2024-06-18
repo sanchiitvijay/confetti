@@ -1,6 +1,6 @@
 import { toast } from "react-hot-toast"
 
-import { setLoading, setToken } from "../../slices/commentSlice"
+import { setLoading, setComments } from "../../slices/commentSlice"
 import { apiConnector } from "..apiconnector"
 import { commentEndpoints } from "../api";
 
@@ -28,7 +28,7 @@ export function createComments (token, data) {
                 throw new Error(response.data.message)
             }
 
-            dispatch(setPost({...response.data.data}))
+            dispatch(setComments({...response.data.data}))
             toast.success("comment is created successfully")
             result = response?.data?.data
         } catch (err) {
@@ -60,7 +60,7 @@ export function getAllComments (token, data) {
                 throw new Error(response.data.message)
             }
 
-            dispatch(setPost(response.data.data))
+            dispatch(setComments(response.data.data))
             toast.success("comments has been fetched succesfully")
             result = response?.data?.data
 
@@ -93,7 +93,7 @@ export function getUserComments (token, data) {
                 throw new Error(response.data.message)
             }
 
-            dispatch(setPost(response.data.data))
+            dispatch(setComments(response.data.data))
             toast.success("user comments has been fetched succesfully")
             result = response?.data?.data
 
@@ -128,7 +128,7 @@ export function deleteComment (token, data) {
                 throw new Error(response.data.message)
             }
 
-            dispatch(setPost({...response.data.data}))
+            dispatch(setComments({...response.data.data}))
             toast.success("comment has been deleted succesfully")
             result = response?.data?.data
             
