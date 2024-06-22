@@ -1,31 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import logo from "../../assets/confetti.png"
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {Link, Navigate, matchPath, useLocation, useNavigate} from 'react-router-dom'
 import { GiHamburgerMenu } from "react-icons/gi";
 import Button from './Button';
 import heart from "../../assets/heartwing.png"
+import { logout } from '../../services/operations/authAPI';
 
-// const links=[
-//   {
-//     index:0,
-//     title:"Home",
-//     url:"/"
-//   },
-//   {
-//     index:1,
-//     title:"About Us",
-//     url:"/aboutus"
-//   },
-//   { 
-//     index:2,
-//     title:"Explore",
-//     url:"/explore"
-//   }
-// ]
+ 
 
 const Nav = () => {
   const {token}=useSelector((state)=>state.auth);
+  const dispatch=useDispatch();
   const navigate=useNavigate();
   const location=useLocation();
   const matchRoute=()=>{
@@ -44,7 +30,7 @@ const Nav = () => {
      <div  className='w-11/12 mx-auto flex justify-between'>
            
            {/* Logo */}
-           <div onClick={()=>navigate("/")} className='w-[100px] h-[100px] hover:cursor-pointer'>
+           <div onClick={()=>navigate("/feed")} className='w-[100px] h-[100px] hover:cursor-pointer'>
             <img src={logo} className='w-fit object-cover ' alt="" />                    
             </div>  
 
@@ -86,6 +72,9 @@ const Nav = () => {
                 )
               }
 
+            <div className="text-white  hover:underline" onClick={()=>dispatch(logout(navigate))}>
+              Logout
+            </div>
             </div>
             
 
@@ -93,6 +82,8 @@ const Nav = () => {
             <div className='flex flex-row items-center justify-center md:hidden'>
             <GiHamburgerMenu  fontSize={26} className='hover:cursor-pointer text-cFont'/>
             </div>
+
+            
      </div>
         
 

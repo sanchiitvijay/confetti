@@ -17,13 +17,13 @@ const DropdownMenu = forwardRef((props, ref) => {
     <input
       required
       name={props.value}
-      value={dropdownValue ?dropdownValue: props.name}
+      value={dropdownValue}
       placeholder={props.name}
       {...props.register(props.value,{required:props.required})}
-      {...props.error && <p>{props.error.message}</p>}
-  
       className="w-full bg-transparent outline-none shadow-none border-transparent focus:border-transparent focus:ring-0 placeholder-white rounded-[0.5rem]  p-[12px]"
     />
+     {props?.error && <p className="text-red mt-1">{props?.value.charAt(0).toUpperCase() + props?.value.slice(1)} is required
+     <sup className="text-yellow-400">{" "}*</sup></p>}
     <div className='h-[1px] w-full bg-white'></div>
     <span
       onClick={() => setDropdown((prev) => !prev)}

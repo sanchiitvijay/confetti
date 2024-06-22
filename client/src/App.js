@@ -13,7 +13,8 @@ import UpdatePassword from "./pages/UpdatePassword";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import OTP from "./pages/OTP";
-
+import PrivateRoute from "./components/core/Auth/OpenRoute"
+import Feed from "./pages/Feed";
 
 function App() {
   const {token}=useSelector((state)=>state.auth);
@@ -33,6 +34,7 @@ function App() {
         <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
         <Route path="/terms-and-conditions" element={<TermsAndConditions/>}/>
         <Route path="/otp" element={<OTP/>}/>
+        <Route path="/feed" element={<PrivateRoute><Feed/></PrivateRoute>} />
       </Routes>
 
 

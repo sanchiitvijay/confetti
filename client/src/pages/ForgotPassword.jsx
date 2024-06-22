@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-// import { getPasswordResetToken } from "../services/operations/authAPI";
+import { getPasswordResetToken } from "../services/operations/authAPI";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import Spinner from "../components/common/Spinner";
 import SubmitButton from "../components/common/SubmitButton";
@@ -11,10 +11,10 @@ const ForgotPassword = () => {
   const [emailSent,setEmailSent]=useState(false);
   const {loading}=useSelector((state)=>state.auth);
   const dispatch=useDispatch();
-  // const handleOnSubmit=(e)=>{
-  //   e.preventDefault();
-  //   dispatch(getPasswordResetToken(email,setEmailSent));
-  // }
+  const handleOnSubmit=(e)=>{
+    e.preventDefault();
+    dispatch(getPasswordResetToken(email,setEmailSent));
+  }
   return (
     <div className="text-white  flex justify-center items-center w-screen h-screen  
     ">
@@ -45,7 +45,7 @@ const ForgotPassword = () => {
               }
             </p>
 
-            <form  className="flex flex-col gap-10">
+            <form onSubmit={handleOnSubmit} className="flex flex-col gap-10">
               {
                 !emailSent && (
                   <label> 
