@@ -1,8 +1,10 @@
 import React from 'react'
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import { MdArrowBack } from 'react-icons/md';
 import logo from "../assets/confetti.png"
 import downArrow from "../assets/arrowDown.svg"
-
+import {useNavigate} from "react-router-dom"
+import Button from "../components/common/Button"
 const TermsAndConditions = () => {
     const tnc= [
         {
@@ -34,6 +36,7 @@ const TermsAndConditions = () => {
         description:"We may have additional terms and conditions specific to your college.These may include restrictions on content related to specific departments, organizations, or events. Please check with your college administration for any additional guidelines. Please be responsible and respectful when using this platform. We encourage you to use your voice for positive change, not to spread negativity or harm others.",
         }
     ]
+    const navigate=useNavigate();
   return (
     <div className='w-full h-full mx-auto text-cFont p-5 md:p-10'>
         <div className='lg:w-[90%] mx-auto bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-400 text-white p-5 md:p-16'>
@@ -67,7 +70,8 @@ const TermsAndConditions = () => {
                      confetti.site01@gmail.com
                     </span>
                 </p>
-            <p className='m-3 font-light text-justify'>We appreciate your cooperation! By using Confetti, you agree to these terms and conditions.</p>
+            <p className='m-3 font-light text-justify '>We appreciate your cooperation! By using Confetti, you agree to these terms and conditions.</p>
+            <Button nav={-1} child={<MdArrowBack/>} cc1='m-3 ' px={8} cc2='flex gap-1 pl-6 justify-between items-center' text={"Back"}/>
         </div>
     </div>
   )

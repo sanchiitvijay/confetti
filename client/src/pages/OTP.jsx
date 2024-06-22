@@ -6,53 +6,53 @@ import { FaClockRotateLeft } from "react-icons/fa6";
 import { Spinner } from 'flowbite-react';
 import { IoIosArrowRoundBack } from "react-icons/io";
 import OTPInput from 'react-otp-input';
+import { signUp } from '../services/operations/authAPI';
 
 const OTP = () => {
+   
     const {loading,signupData}=useSelector((state)=>state.auth);
     const dispatch=useDispatch();
     const [otp,setOtp]=useState("");
     const navigate=useNavigate();
+    
   
+    useEffect(()=>{
+      if(!signupData){
+        navigate("/signup");
+      }
+    });
   
-    // useEffect(()=>{
-    //   if(!signupData){
-    //     navigate("/signup");
-    //   }
-    // });
-  
-    // const handleOnSubmit=(e)=>{
-    //   e.preventDefault();
-    //   const {
-    //     accountType,
-    //     name,
-    //     username,
-    //     usn,
-    //     email,
-    //     password,
-    //     confirmPassword,
-    //     gender,
-    //     branch,
-    //     year,
-    //     instagram,
-    //     avatar,
-    //     otp,
-       
-    //   } = signupData;
-    //   dispatch(signUp( accountType,
-    //     name,
-    //     username,
-    //     usn,
-    //     email,
-    //     password,
-    //     confirmPassword,
-    //     gender,
-    //     branch,
-    //     year,
-    //     instagram,
-    //     avatar,
-    //     otp,
-    //     navigate));
-    // }
+    const handleOnSubmit=(e)=>{
+      e.preventDefault();
+      const {
+        accountType,
+        name,
+        username,
+        usn,
+        email,
+        password,
+        confirmPassword,
+        gender,
+        branch,
+        year,
+        instagram,
+        avatar,      
+      } = signupData;
+      dispatch(signUp( accountType,
+        name,
+        username,
+        usn,
+        email,
+        password,
+        confirmPassword,
+        gender,
+        branch,
+        year,
+        instagram,
+        avatar,
+        otp,
+        navigate));
+    }
     return (
       <div class="text-white flex items-center justify-center flex-col h-[calc(100vh-56px)]">
         {
@@ -64,7 +64,7 @@ const OTP = () => {
             <div className="py-12  flex-col flex gap-4 px-12 w-[90%] md:w-[420px]   bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-400">
               <h1 className="text-2xl font-bold">Verify Email</h1>
               <p className="mb-4 text-base leading-1 text-[#ffffff]">A verification code has been sent to you. Enter the code below.</p>
-              <form  >
+              <form  onSubmit={handleOnSubmit}>
                 <OTPInput
                  className=" w-full p-6  text-white"
                 value={otp}

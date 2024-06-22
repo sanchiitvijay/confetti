@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import {AiOutlineEye} from "react-icons/ai"
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
 import SubmitButton from '../components/common/SubmitButton';
+import { login } from '../services/operations/authAPI';
 
 
 /* Wherever Possible make components */
@@ -31,7 +32,7 @@ const Home = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    // dispatch(login(email, password, navigate))
+    dispatch(login(email, password, navigate))
   }
   
 

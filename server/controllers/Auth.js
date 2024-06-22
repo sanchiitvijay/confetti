@@ -2,12 +2,14 @@ const User=require("../models/User");
 const OTP=require("../models/OTP");
 const otpGenerator=require("otp-generator");
 const bcrypt=require('bcrypt');
-// const Profile=require("../models/Profile");
 const jwt=require('jsonwebtoken');
+const cloudinary=require('cloudinary').v2;
 const mailSender=require('../utils/mailSender');
 require("dotenv").config();
 
+
 const {passwordUpdated}=require("../mail/templates/passwordUpdate");
+const { cloudinaryConnect } = require("../configs/cloudinary");
 
 
 exports.sendotp=async(req,res)=>{
@@ -76,6 +78,7 @@ exports.signup=async(req,res)=>{
             branch,
             year,
             email,
+            avatar,
             instagram,
             accountType,
             otp,
@@ -136,6 +139,23 @@ exports.signup=async(req,res)=>{
 
         const hashedPassword=await bcrypt.hash(password,10);
 
+        //uploading file to cloudinary and generating url if they have provided
+        let avatarUrl=''
+        if(avatar){
+            try{
+            cloudinaryConnect()
+            const result=await cloudinary.uploader.upload(avatar.tempFilePath);
+            avatarUrl=result.secure_url;
+            console.log("Image Url of Cloudinary:",avatarUrl)
+            }
+            catch(error){
+                console.log("FILE COULD NOT BE UPLOADED",error)
+            }
+        }
+        else{
+            avatarUrl=`https://api.dicebear.com/7.x/initials/svg?seed=${name?.split(" ")[0]} ${name?.split(" ")[1]}`
+        }
+
         const user=await User.create({
             name,
             usn,
@@ -144,7 +164,7 @@ exports.signup=async(req,res)=>{
             instagram,
             password: hashedPassword,
             accountType,
-            displayPicture:`https://api.dicebear.com/7.x/initials/svg?seed=${name?.split(" ")[0]} ${name?.split(" ")[1]}`,
+            displayPicture:avatarUrl,
             branch,
             year,
             gender,
