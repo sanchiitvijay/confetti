@@ -27,8 +27,8 @@ const UserSchema=new mongoose.Schema({
         enum:['CS','IS','AD','AI','AT','BT','CH','CI','CY','EC','EE','EI','IM','BA','MC','MD','ME','CV']
     },
     year:{
-        type:Number,
-        enum:[1,2,3,4],
+        type:String,
+        enum:["First","Second","Third","Fourth"],
         },
     email:{
         type:String,
