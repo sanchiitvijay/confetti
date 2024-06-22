@@ -15,9 +15,11 @@ const PasswordInput = (props) => {
          //  value={password}
          //  onChange={handleOnChange}
           placeholder={(props.name === "password" ? "Enter " : "") + props.name}
-    
+          {...props?.register(props?.value,{required:props?.required})}
           className="w-full bg-transparent border-transparent focus:border-transparent focus:ring-0 placeholder-white rounded-[0.5rem]  p-[12px]"
         />
+         {props?.error && <p className="text-red mt-1">{props?.value.charAt(0).toUpperCase() + props?.value.slice(1)} is required
+         <sup className="text-yellow-400">{" "}*</sup></p>}
         <div className='h-[1px] w-full bg-white'></div>
         <span
           onClick={() => setShowPassword((prev) => !prev)}

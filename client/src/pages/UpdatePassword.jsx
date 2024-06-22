@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-// import { resetPassword } from "../services/operations/authAPI";
+ import { resetPassword } from "../services/operations/authAPI";
 import { AiFillEyeInvisible,AiFillEye } from "react-icons/ai";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -34,7 +34,7 @@ const UpdatePassword = () => {
       const handleOnSubmit=(e)=>{
         e.preventDefault();
         const token=location.pathname.split("/").at(-1);
-        // dispatch(resetPassword(password,confirmPassword,token,navigate));
+        dispatch(resetPassword(password,confirmPassword,token,navigate));
        
       }
   

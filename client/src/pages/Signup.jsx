@@ -1,44 +1,51 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from "react-hook-form";
-import SignUpButton from '../components/common/SignUpButton';
+import SignUpInput from '../components/common/SignUpInput';
 import PasswordInput from '../components/common/PasswordInput';
 import DropdownMenu from '../components/common/DropdownMenu';
 import { RxAvatar } from "react-icons/rx";
 import SubmitButton from '../components/common/SubmitButton';
 import { useNavigate } from 'react-router-dom';
-// import axios from 'axios';
+import {useSelector,useDispatch} from "react-redux"
+import { sendOtp } from '../services/operations/authAPI'
+import { setSignupData } from '../slices/authSlice';
 
 const Signup = () => {
-  
+  const {signupData}=useSelector((state)=>state.auth); 
   const navigate=useNavigate();
-  const [loading, ,setLoading] = useState(false)
+  const dispatch=useDispatch();
+  const [loading,setLoading] = useState(false)
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
+    getValues,
     formState: {errors, isSubmitSuccessful}
   } = useForm()
 
   const handleSignup = async(data) => {
+    setLoading(true);
     try{
-      setLoading(true);
-    //   try {
-    //     const response = await axios.post('http://localhost:4000/signup', data);
-    //     console.log('User created signed in:', response.data);
-    // } catch (error) {
-    //     console.error('There was an error sighning the user:', error.response.data);
-    // }
-      const response={status:"OK"};
-      console.log(response);
-      setLoading(false);
+      const obj=getValues();
+      dispatch(setSignupData(obj))
+  
+      // dispatch(setSignupData(obj))
+      dispatch(sendOtp(obj?.email,navigate));
+
     }
     catch(error){
       console.log("Error:",error.message);
-      setLoading(false);
+      console.log("Error object:",error);
+    
     }
+    setLoading(false)
 }
 
+
+ 
 useEffect(()=>{
+  
   if(isSubmitSuccessful){
     reset({
       email:"",
@@ -77,6 +84,11 @@ const handleAvatar = async (e) => {
       })
   }
 }
+
+useEffect(()=>{
+  setValue("avatar",avatar?.file)
+},[avatar])
+
   
   return (
     <div className='w-full h-full mx-auto text-cFont'>
@@ -93,18 +105,18 @@ const handleAvatar = async (e) => {
           {/* having 2 input fieldl in one row */}
           <div className='flex flex-col-reverse md:flex-row gap-10'>
           <div className='flex flex-col gap-y-8'>
-             <SignUpButton 
+             <SignUpInput 
              name="name" 
              value="name"
              type="text"
-             error={errors.name}
+             error={errors?.name}
              required={true}
              register={register}/>
-            <SignUpButton 
+            <SignUpInput 
             name="email" 
             value="email"
             type="email"
-            error={errors.email}
+            error={errors?.email}
             required={true}
             register={register}/>
           </div>
@@ -112,7 +124,7 @@ const handleAvatar = async (e) => {
               
             <label className="text-white hover:underline hover:cursor-pointer" htmlFor="file" >
             {avatar.url ? (
-              <img src={avatar.url} className="rounded-full w-[100px] h-[100px]" alt="Avatar" />
+              <img src={avatar.url}    className="rounded-full w-[100px] h-[100px]" alt="Avatar" />
             ) : (
               <RxAvatar  fontSize={100} color='ffffff'/>
             )}<span className='text-center mx-auto'>
@@ -125,20 +137,21 @@ const handleAvatar = async (e) => {
           </div>
           <div className='flex flex-col md:flex-row gap-10'>
 
-            <SignUpButton 
+            <SignUpInput 
             name="username" 
             value="username" 
             required={true}
             type="text"
-            error={errors.username}
-            register={register}/>
+            error={errors?.username}
+            register={register}
+            />
 
-            <SignUpButton 
+            <SignUpInput 
             name="USN" 
             value="usn" 
             type="text"
             required={true}
-            error={errors.usn}
+            error={errors?.usn}
             register={register}/>
           </div>
           
@@ -149,14 +162,14 @@ const handleAvatar = async (e) => {
           value="password" 
           type="password"
           required={true}
-          error={errors.password}
+          error={errors?.password}
           register={register}/>
 
          <PasswordInput 
          name="Confirm password" 
          value="confirmPassword" 
          type="password"
-         error={errors.confirmPassword}
+         error={errors?.confirmPassword}
           required={true}
          register={register}/>
             
@@ -167,7 +180,7 @@ const handleAvatar = async (e) => {
             data={gender} 
             name="Gender" 
             value="gender"
-            error={errors.gender} 
+            error={errors?.gender} 
             register={register}
             required={false}
             />
@@ -176,7 +189,7 @@ const handleAvatar = async (e) => {
             name="Branch" 
             value="branch" 
             customClasses="overflow-y-auto max-h-[95px]"
-            error={errors.branch}
+            error={errors?.branch}
             required={false}
             register={register}/>
           </div>
@@ -186,15 +199,15 @@ const handleAvatar = async (e) => {
             data={year} 
             name="Year" 
             value="year"
-            error={errors.year}
+            error={errors?.year}
             register={register}
             required={true}
             />
-            <SignUpButton 
+            <SignUpInput 
             name="Instagram" 
             value="instagram" 
             type="text" 
-            error={errors.instagram}
+            error={errors?.instagram}
             register={register}
             required={false}/>
           </div>
@@ -213,6 +226,7 @@ const handleAvatar = async (e) => {
                   disabled={loading}
                   text="Sign Up"
                   type="submit"
+                  
             />
 
 
