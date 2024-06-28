@@ -24,6 +24,12 @@ module.exports = {
           "confettiYellow3":"#FFEE00",
           "confettiYellow4":"#FFD900",
           "confettiYellow5":"#FFBF00",
+          "confettiGrey1":"#2a2a2a",
+          "confettiGrey2":"#3f3f3f",
+          "confettiGrey3":"#545454",
+          "confettiGrey4":"#6a6a6a",
+          "confettiGrey5":"#7f7f7f",
+
           
           "cFont":"#111111",
         }  ,

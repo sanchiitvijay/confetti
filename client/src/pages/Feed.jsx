@@ -1,8 +1,11 @@
 import React from 'react'
+import Navbar from '../components/core/Home/Navbar'
 
 const Feed = () => {
   return (
-    <div>Feed</div>
+    <div>
+      <Navbar/>
+    </div>
   )
 }
 
