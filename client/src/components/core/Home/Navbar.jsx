@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from "../../../assets/confetti.png"
+import logo from "../../../assets/confettiNoText.png"
 import { Link } from 'react-router-dom'
 import { MdDarkMode } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";
@@ -15,19 +15,19 @@ const Navbar = () => {
     
 
 <nav className=" border-gray-200 bg-confettiGrey1">
-  <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-2 md:px-5 px-3">
+  <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-1 md:px-5 px-3">
   <Link href="/feed" className="flex ml-4 items-center space-x-3 rtl:space-x-reverse">
-      <img src={logo} className="h-[50px]" alt="Confetti Logo" />
+      <img src={logo} className="h-[90px] mt-[-10px] mb-[-30px]" alt="Confetti Logo" />
       {/* <span className="self-center justify-center text-2xl font-semibold whitespace-nowrap text-white">Confetti</span> */}
   </Link>  
-  <div className='justify-between text-white md:text-2xl text-xl'>
+  <div className='justify-between text-white md:text-[25px] text-2xl'>
     Confetti
   </div>
   <div className="flex items-center  md:order-2 md:gap-4 gap-1 space-x-3 md:space-x-0 mr-3 rtl:space-x-reverse">
     
-      <FaHeart fontSize={34} color={'white'}/> 
+      <FaHeart fontSize={27} color={'white'}/> 
 
-       <MdDarkMode fontSize={36} color={'white'}/> 
+       <MdDarkMode fontSize={30} color={'white'}/> 
          {/* Dark Mode Icon have to make it functions when we re putting theme */}
 
 
@@ -40,9 +40,9 @@ const Navbar = () => {
           >
             <span className="sr-only">Open user menu</span>
             {user && user.avatar ? (
-          <img className="w-[50px] h-[50px] rounded-full" src={user.avatar} alt="user photo" />
+          <img className="w-[32px] h-[32px] rounded-full" src={user.avatar} alt="user photo" />
         ) : (
-          <RxAvatar className="rounded-full" fontSize={38} color={'white'} />
+          <RxAvatar className="rounded-full" fontSize={31} color={'white'} />
         )}
           </button>
         }
