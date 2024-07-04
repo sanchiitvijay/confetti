@@ -11,6 +11,7 @@ import { login } from '../services/operations/authAPI';
 /* Wherever Possible make components */
 
 const Home = () => { 
+  const {token}=useSelector((state)=>state.auth)
   const {setLoading}=useSelector((state)=>state.auth);
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -35,6 +36,14 @@ const Home = () => {
     dispatch(login(email, password, navigate))
   }
   
+  useEffect(()=>{
+   
+    
+    if(token){
+      navigate("/feed")
+    }
+  },[token,navigate])
+
 
   return (
     <div className='w-full h-full mx-auto text-cFont'>

@@ -1,7 +1,6 @@
 import "./App.css";
 import {Route,Routes} from "react-router-dom"
 import { useSelector } from "react-redux";
-import Nav from "./components/common/Navbar";
 import Home from "./pages/Home"
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -15,16 +14,13 @@ import TermsAndConditions from "./pages/TermsAndConditions";
 import OTP from "./pages/OTP";
 import PrivateRoute from "./components/core/Auth/OpenRoute"
 import Feed from "./pages/Feed";
-
+import "./App.css"
 function App() {
   const {token}=useSelector((state)=>state.auth);
+  console.log("TOKEN:",token);
   return (
-    <div className="w-screen bg-cover bg-ring bg-center min-h-screen flex flex-col ">
+    <div className={`w-screen ${token?("bg-white"):("bg-ring")} bg-cover  bg-center min-h-screen flex flex-col `}>
 
-      {
-        token && <Nav/>
-      }
-      
 
       <Routes>
         <Route path="/" element={<Home/>}/>   
@@ -34,8 +30,9 @@ function App() {
         <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
         <Route path="/terms-and-conditions" element={<TermsAndConditions/>}/>
         <Route path="/otp" element={<OTP/>}/>
-        <Route path="/feed" element={<PrivateRoute><Feed/></PrivateRoute>} />
-      </Routes>
+        <Route path="/feed" element={<Feed/>} />
+        <Route path="*" element={""}/>
+       </Routes>
 
 
 

@@ -1,16 +1,21 @@
 import React from 'react'
 import logo from "../../../assets/confettiNoText.png"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { MdDarkMode } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";
 import { Dropdown } from 'flowbite-react';
 import { RxAvatar } from "react-icons/rx";
 import { useSelector } from 'react-redux';
-
+import { logout } from '../../../services/operations/authAPI';
+import { useDispatch } from 'react-redux';
 
 const Navbar = () => {
   const user = useSelector((state) => state.profile.user);
-
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
+  const logoutHandler=()=>{
+    dispatch(logout(navigate));
+  }
   return (
     
 
@@ -61,9 +66,9 @@ const Navbar = () => {
           </Link>
         </div>
         <div className='p-3 text-center'>
-          <Link to={user ? "/logout" : "/"} className="block px-4 py-2 text-md hover:underline text-white">
-            {user ? 'Logout' : 'Login'}
-          </Link>
+          <div onClick={logoutHandler} className="block px-4 py-2 text-md hover:underline text-white">
+            {'Logout' }
+          </div>
         </div>
         <div className='p-3 text-center'>
           <Link to="/coffee" className="block px-4 py-2 text-md hover:underline text-white">
