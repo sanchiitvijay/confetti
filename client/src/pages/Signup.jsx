@@ -91,7 +91,7 @@ useEffect(()=>{
 
   
   return (
-    <div className='w-full h-full mx-auto text-cFont'>
+    <div className='w-full  h-full mx-auto text-cFont'>
 
       <div className='min-h-screen p-8  item-center justify-between w-full'>
 
