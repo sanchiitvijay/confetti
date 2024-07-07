@@ -1,8 +1,8 @@
 import React from 'react'
-import "../../App.css"
+import { SyncLoader } from 'react-spinners'
 const Spinner = () => {
   return (
-    <span class="loader"></span>
+    <SyncLoader className='m-auto justify-center' color={"#ffa726"}/>
   )
 }
 
