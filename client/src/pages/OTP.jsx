@@ -14,8 +14,16 @@ const OTP = () => {
     const dispatch=useDispatch();
     const [otp,setOtp]=useState("");
     const navigate=useNavigate();
+    const {token}=useSelector((state)=>state.auth)
     
-  
+    useEffect(()=>{
+   
+      if(token){
+        navigate("/feed")
+      }
+    },[token,navigate])
+    
+    
     useEffect(()=>{
       if(!signupData){
         navigate("/signup");

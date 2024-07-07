@@ -1,50 +1,50 @@
-import React, { forwardRef, useState } from 'react'
-import { RiArrowDropDownLine, RiArrowDropUpLine  } from 'react-icons/ri'
+import React, { forwardRef, useEffect, useState } from 'react';
 
 const DropdownMenu = forwardRef((props, ref) => {
+  const [selectedValue, setSelectedValue] = useState(" ");
 
-    const [isDropdown, setDropdown] = useState(false)
-    const [dropdownValue, setDropdownValue] = useState(props.name)
-    const handleDropdown = (value) => {
-      console.log(value)
-      setDropdownValue(value)
-      setDropdown(false)
+  const handleChange = (event) => {
+    const newValue = event.target.value;
+    console.log(newValue);
+    setSelectedValue(newValue);
+    if (props.onChange) {
+      props.onChange(newValue);
     }
+  };
+
+  useEffect(() => {
+    if (props.value) {
+      setSelectedValue(props.value);
+    }
+  }, [props.value]);
+
   return (
+    <div className="relative text-white border-b-1 border-b-white bg-transparent w-full">
+      <select
+        ref={ref}
+        name={selectedValue}
+        value={selectedValue}
+        // {...props.register(selectedValue, {required: props.required })}
+        onChange={handleChange}
+        className="w-full px-4 y-2 border-transparent border-b-1 border-b-white focus:shadow-none focus:ring-0 focus:border-none bg-transparent rounded-none appearance-none"
+      >
 
-    <label className="relative text-white outline-none" >
-                  
-    <input
-      required
-      name={props.value}
-      value={dropdownValue}
-      placeholder={props.name}
-      {...props.register(props.value,{required:props.required})}
-      className="w-full bg-transparent outline-none shadow-none border-transparent focus:border-transparent focus:ring-0 placeholder-white rounded-[0.5rem]  p-[12px]"
-    />
-     {props?.error && <p className="text-red mt-1">{props?.value.charAt(0).toUpperCase() + props?.value.slice(1)} is required
-     <sup className="text-yellow-400">{" "}*</sup></p>}
-    <div className='h-[1px] w-full bg-white'></div>
-    <span
-      onClick={() => setDropdown((prev) => !prev)}
-      className="absolute right-3 top-[16px] z-[10] cursor-pointer"
-    >
-
-      {isDropdown ? (
-        <RiArrowDropUpLine fontSize={24} fill="#FFFFFF" />
-      ) : (
-        <RiArrowDropDownLine fontSize={24} fill="#FFFFFF" />
+        <option value="" className='bg-transparent hidden'>
+          {props.placeholder || props.name}
+        </option>
+        {props.data.map((option, index) => (
+          <option key={index} className='bg-transparent' value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+      {props.error && (
+        <p className="text-red-500 text-sm mt-1">
+          {props.name.charAt(0).toUpperCase() + props.name.slice(1)} is required *
+        </p>
       )}
-    </span>
-    <div className={`h-auto transition ease-in-out duration-500 w-full bg-transparent rounded-md p-[1rem] border z-2 ${props.customClasses}`} style={{display: isDropdown? "" : "none"}}>
-    <ul className=''>
-      {props.data.map((branch, index) => (
-        <li key={branch} className='text-center' onClick={() =>handleDropdown(branch)}>{branch}</li>
-      ))}
-    </ul>
     </div>
-  </label>
-  )
-})
+  );
+});
 
-export default DropdownMenu
+export default DropdownMenu;

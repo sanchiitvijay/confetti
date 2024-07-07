@@ -11,10 +11,20 @@ import { sendOtp } from '../services/operations/authAPI'
 import { setSignupData } from '../slices/authSlice';
 
 const Signup = () => {
+  const {token}=useSelector((state)=>state.auth)
   const {signupData}=useSelector((state)=>state.auth); 
   const navigate=useNavigate();
   const dispatch=useDispatch();
   const [loading,setLoading] = useState(false)
+
+
+  const [isChecked, setIsChecked] = useState(false);
+  const handleCheckboxChange = (event) => {
+    setIsChecked(!isChecked);
+  };
+
+
+
   const {
     register,
     handleSubmit,
@@ -27,7 +37,11 @@ const Signup = () => {
   const handleSignup = async(data) => {
     setLoading(true);
     try{
-      const obj=getValues();
+      const obj={
+        ...getValues(),
+      avatar: avatar.file
+      }
+      
       dispatch(setSignupData(obj))
   
       // dispatch(setSignupData(obj))
@@ -85,6 +99,14 @@ const handleAvatar = async (e) => {
   }
 }
 
+useEffect(()=>{     
+  if(token){
+    navigate("/feed")
+  }
+},[token,navigate])
+
+
+
 useEffect(()=>{
   setValue("avatar",avatar?.file)
 },[avatar])
@@ -132,7 +154,7 @@ useEffect(()=>{
             </span>
                 </label>
             </div>
-                <input type="file" id="file" style={{display: "none"}} register={register} onChange={handleAvatar}/>
+                <input type="file" id="file" style={{display: "none"}} {...register("avatar")}  onChange={handleAvatar}/>
             
           </div>
           <div className='flex flex-col md:flex-row gap-10'>
@@ -213,7 +235,11 @@ useEffect(()=>{
           </div>
 
             <div className='text-white'>
-            <input id="default-checkbox" type="checkbox" value="" className="w-4 h-4 mr-3 focus:ring-transparent text-white bg-transparent border-white rounded " />
+            <input id="termsAndConditions" 
+            type="checkbox" 
+            checked={isChecked}
+            onChange={handleCheckboxChange}
+            className="w-4 h-4 mr-3 focus:ring-transparent text-white bg-transparent border-white rounded " />
               Accept our
               <span 
               onClick={()=>navigate("/terms-and-conditions")} 
@@ -223,7 +249,7 @@ useEffect(()=>{
               to proceed further. 
             </div>
           <SubmitButton
-                  disabled={loading}
+                  disabled={!isChecked || loading}
                   text="Sign Up"
                   type="submit"
                   
