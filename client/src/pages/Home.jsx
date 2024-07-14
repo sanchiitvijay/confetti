@@ -37,6 +37,7 @@ const Home = () => {
   }
   
   useEffect(()=>{
+   
     
     if(token){
       navigate("/feed")
@@ -131,7 +132,7 @@ const Home = () => {
                     </div>
                 </Marquee>
               </div> */}
-            <img src={logo} className=' mx-auto w-[120px] h-[120px]' alt=""/>
+            <img src={logo} className=' mx-auto w-[120px] h-[120px]  alt=' />
             {/* <h2 className='text-white text-center font-semibold text-2xl'>About Us</h2> */}
             <p className='mt-5 leading-6 text-sm lg:text-[1rem] text-justify'>
               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been 
