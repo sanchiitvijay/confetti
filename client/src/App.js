@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.css"
 import {Route,Routes} from "react-router-dom"
 import { useSelector } from "react-redux";
 import Home from "./pages/Home"
@@ -14,14 +14,21 @@ import TermsAndConditions from "./pages/TermsAndConditions";
 import OTP from "./pages/OTP";
 import PrivateRoute from "./components/core/Auth/OpenRoute"
 import Feed from "./pages/Feed";
-import "./App.css"
+import {  useLocation } from 'react-router-dom';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 function App() {
   const {token}=useSelector((state)=>state.auth);
   console.log("TOKEN:",token);
+  let location=useLocation();
   return (
     <div className={`w-screen ${token?("bg-white"):("bg-ring")} bg-cover  bg-center min-h-screen flex flex-col `}>
 
-
+    <TransitionGroup>
+      <CSSTransition
+        key={location.key}
+        timeout={500}
+        classNames="fade"
+      >
       <Routes>
         <Route path="/" element={<Home/>}/>   
         <Route path="/signup" element={<Signup/>}/>
@@ -34,7 +41,8 @@ function App() {
         <Route path="*" element={""}/>
        </Routes>
 
-
+       </CSSTransition>
+       </TransitionGroup>
 
 
     </div>
