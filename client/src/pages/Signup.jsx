@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import {useSelector,useDispatch} from "react-redux"
 import { sendOtp } from '../services/operations/authAPI'
 import { setSignupData } from '../slices/authSlice';
+import DropDownModal from '../components/common/DropDownModal';
+import Modal from '../components/common/Modal';
 
 const Signup = () => {
   const {token}=useSelector((state)=>state.auth)
@@ -16,7 +18,9 @@ const Signup = () => {
   const navigate=useNavigate();
   const dispatch=useDispatch();
   const [loading,setLoading] = useState(false)
-
+  const [genderModal,setGenderModal]=useState(false);
+  const [yearModal,setYearModal]=useState(false);
+  const [branchModal,setBranchModal]=useState(false);
 
   const [isChecked, setIsChecked] = useState(false);
   const handleCheckboxChange = (event) => {
@@ -113,9 +117,10 @@ useEffect(()=>{
 
   
   return (
-    <div className='w-full  h-full mx-auto text-cFont'>
 
-      <div className='min-h-screen p-8  item-center justify-between w-full'>
+    <div className='w-full relative h-full mx-auto text-cFont'>
+
+      <div className='min-h-screen relative p-8  item-center justify-between w-full'>
 
         <div className='py-12 px-12 xs:w-[100%] md:w-fit bg-gray-400 rounded-md bg-clip-padding backdrop-filter mx-auto justify-center backdrop-blur-md bg-opacity-20 border border-gray-400'>
 
@@ -185,7 +190,9 @@ useEffect(()=>{
           type="password"
           required={true}
           error={errors?.password}
-          register={register}/>
+          register={register}
+          
+          />
 
          <PasswordInput 
          name="Confirm password" 
@@ -197,33 +204,25 @@ useEffect(()=>{
             
           </div>
 
-          <div className='flex flex-col md:flex-row gap-10'>
-            <DropdownMenu 
-            data={gender} 
-            name="Gender" 
-            value="gender"
-            error={errors?.gender} 
-            register={register}
-            required={false}
+          <div className='flex flex-col  md:flex-row gap-10'>
+            <DropDownModal
+            setModal={setGenderModal}
+            name={"Gender"}
+            showModal={genderModal}
             />
-            <DropdownMenu 
-            data={branches} 
-            name="Branch" 
-            value="branch" 
-            customClasses="overflow-y-auto max-h-[95px]"
-            error={errors?.branch}
-            required={false}
-            register={register}/>
+            <DropDownModal 
+              setModal={setBranchModal}
+              name={"Branch"}
+              showModal={branchModal}
+          
+            />
           </div>
 
           <div className='flex flex-col md:flex-row gap-10'>
-            <DropdownMenu 
-            data={year} 
-            name="Year" 
-            value="year"
-            error={errors?.year}
-            register={register}
-            required={true}
+            <DropDownModal 
+              setModal={setYearModal}
+              name={"Year"}
+              showModal={yearModal}
             />
             <SignUpInput 
             name="Instagram" 
@@ -262,8 +261,46 @@ useEffect(()=>{
           </form>
 
         </div>
+           {genderModal && <Modal
+      data={gender} 
+      name="Gender" 
+      value="gender"
+      error={errors?.gender} 
+      register={register}
+      required={false}
+      setModal={setGenderModal} 
+      />}
+
+      {
+        branchModal && <Modal
+        data={branches} 
+        name="Branch" 
+        value="branch" 
+        setModal={setBranchModal} 
+        error={errors?.branch}
+        required={false}
+        register={register}
+      
+        />
+      }
+     
+     {
+      yearModal && <Modal
+      data={year} 
+      name="Year" 
+      value="year"
+      setModal={setYearModal} 
+      error={errors?.year}
+      register={register}
+      required={true}
+      />
+     }
       </div>
+ 
+   
+      
     </div>
+ 
   )
 }
 
