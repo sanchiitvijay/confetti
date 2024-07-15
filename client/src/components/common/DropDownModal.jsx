@@ -3,14 +3,15 @@ import "../../App.css";
 import { FaRegWindowMaximize } from "react-icons/fa";
 import Modal from './Modal';
 import Button from "../common/SubmitButton"
-const DropDownModal = ({ name, setModal, showModal }) => {
+const DropDownModal = ({ name, setModal, showModal,getValues}) => {
   const handleClick = () => {
     setModal(true);
   };
 
   useEffect(() => {
     console.log(showModal);
-  }, [showModal]);
+    console.log(getValues());
+  }, [showModal,getValues]);
 
   return (
     <div onClick={handleClick} className='
