@@ -61,7 +61,8 @@ const {
   ) {
     return async (dispatch) => {
       const toastId = toast.loading("Loading...")
-      dispatch(setLoading(true))
+      dispatch(setLoading(true));
+      console.log()
       try {
         const response = await apiConnector("POST", SIGNUP_API, {
             accountType,
@@ -78,7 +79,8 @@ const {
             avatar,
             otp,
         })
-  
+       
+        
         console.log("SIGNUP API RESPONSE............", response)
   
         if (!response.data.success) {
