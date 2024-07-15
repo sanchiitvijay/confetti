@@ -27,7 +27,7 @@ const Signup = () => {
     setIsChecked(!isChecked);
   };
 
-
+ 
 
   const {
     register,
@@ -37,6 +37,7 @@ const Signup = () => {
     getValues,
     formState: {errors, isSubmitSuccessful}
   } = useForm()
+
 
   const handleSignup = async(data) => {
     setLoading(true);
@@ -101,6 +102,7 @@ const handleAvatar = async (e) => {
         url:fileUrl
       })
   }
+  setValue("avatar",avatar)
 }
 
 useEffect(()=>{     
@@ -110,10 +112,12 @@ useEffect(()=>{
 },[token,navigate])
 
 
-
 useEffect(()=>{
-  setValue("avatar",avatar?.file)
+  console.log(getValues())
+
 },[avatar])
+
+
 
   
   return (
@@ -209,12 +213,13 @@ useEffect(()=>{
             setModal={setGenderModal}
             name={"Gender"}
             showModal={genderModal}
+            getValues={getValues}
             />
             <DropDownModal 
               setModal={setBranchModal}
               name={"Branch"}
               showModal={branchModal}
-          
+              getValues={getValues}
             />
           </div>
 
@@ -223,6 +228,7 @@ useEffect(()=>{
               setModal={setYearModal}
               name={"Year"}
               showModal={yearModal}
+              getValues={getValues}
             />
             <SignUpInput 
             name="Instagram" 

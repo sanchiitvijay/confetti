@@ -12,7 +12,7 @@ const Modal = ({ data, name, value, error, register, required,setModal}) => {
           {
           data.map((topic, index) => (
             <div className='flex flex-row items-center gap-2'>
-            <input onClick={()=>setChosen(true)} key={index} {...register(`${name}`)}  id={topic} value={topic} type="radio" className="py-1 px-2 hover:bg-gray-700 cursor-pointer"/>
+            <input onClick={()=>setChosen(true)} key={index} {...register(`${name.toLowerCase()}`)}  id={topic} value={topic} type="radio" className="py-1 px-2 hover:bg-gray-700 cursor-pointer"/>
             <label htmlFor={topic}>{topic}</label>
             </div>
           ))
