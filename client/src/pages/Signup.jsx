@@ -44,7 +44,7 @@ const Signup = () => {
     try{
       const obj={
         ...getValues(),
-      avatar: avatar.file
+      accountType:"Student"
       }
       
       dispatch(setSignupData(obj))
@@ -75,7 +75,7 @@ useEffect(()=>{
       branch:"",
       year:"",
       avatar:setAvatar({
-        file: null,
+        file: "",
         url: ""
       }),
       gender:""
@@ -87,22 +87,38 @@ useEffect(()=>{
   const year = ["First", "Second", "Third", "Fourth"]
   const branches = ['CS','IS','AD','AI','AT','BT','CH','CI','CY','EC','EE','EI','IM','BA','MC','MD','ME','CV']
   const [avatar, setAvatar] = useState({
-    file: null,
+    file: "",
     url:""
 })
+function getBase64(file) {
+  let base64="";
+  const ourPromise=new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  }).then((result)=>{
+    console.log(result)
+    base64=result
+  });
+
+  return base64;
+}
 
 const handleAvatar = async (e) => {
 
   if(e.target.files[0]){
     const fileUrl=URL.createObjectURL(e.target.files[0]);
     console.log(fileUrl.split("blob:")[1]);
+    const base64= getBase64(e.target.files[0])
     setAvatar(
       {
-        file:e.target.files[0],
+        file:base64,
         url:fileUrl
       })
+    setValue('avatar',base64)
   }
-  setValue("avatar",avatar)
+  
 }
 
 useEffect(()=>{     
@@ -113,8 +129,10 @@ useEffect(()=>{
 
 
 useEffect(()=>{
+  const data=getValues();
   console.log(getValues())
-
+  console.log(data?.avatar?.result)
+  console.log(data?.avatar?.data)
 },[avatar])
 
 
