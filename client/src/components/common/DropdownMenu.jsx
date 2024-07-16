@@ -1,5 +1,6 @@
-import React, { forwardRef, useEffect, useState } from 'react';
-
+import React, { forwardRef, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import "../../App.css"
 const DropdownMenu = forwardRef((props, ref) => {
   const [selectedValue, setSelectedValue] = useState(" ");
 
@@ -24,23 +25,23 @@ const DropdownMenu = forwardRef((props, ref) => {
         ref={ref}
         name={selectedValue}
         value={selectedValue}
-        // {...props.register(selectedValue, {required: props.required })}
+        {...props.register(selectedValue, { required: props.required })}
         onChange={handleChange}
         className="w-full px-4 y-2 border-transparent border-b-1 border-b-white focus:shadow-none focus:ring-0 focus:border-none bg-transparent rounded-none appearance-none"
       >
-
-        <option value="" className='bg-transparent hidden'>
+        <option value="" className="bg-transparent hidden">
           {props.placeholder || props.name}
         </option>
         {props.data.map((option, index) => (
-          <option key={index} className='bg-transparent' value={option}>
+          <option key={index} className="bg-transparent" value={option}>
             {option}
           </option>
         ))}
       </select>
       {props.error && (
         <p className="text-red-500 text-sm mt-1">
-          {props.name.charAt(0).toUpperCase() + props.name.slice(1)} is required *
+          {props.name.charAt(0).toUpperCase() + props.name.slice(1)} is required
+          *
         </p>
       )}
     </div>
