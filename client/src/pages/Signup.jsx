@@ -171,7 +171,7 @@ useEffect(()=>{
               
             <label className="text-white hover:underline hover:cursor-pointer" htmlFor="file" >
             {avatar.url ? (
-              <img src={avatar.url}    className="rounded-full w-[100px] h-[100px]" alt="Avatar" />
+              <img src={avatar.url}    className="rounded-full object-cover w-[100px] h-[100px]" alt="Avatar" />
             ) : (
               <RxAvatar  fontSize={100} color='ffffff'/>
             )}<span className='text-center mx-auto'>
