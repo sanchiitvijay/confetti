@@ -46,7 +46,14 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
             <Route path="/otp" element={<OTP />} />
-            <Route path="/feed" element={ <Feed /> } />
+
+            {/*DashBoard Paths Via Outlet*/}
+            <Route path="/feed" element={ <Feed /> } >
+              <Route path="/feed/settings" element=""/>
+              <Route path="/feed/my-profile" element=""/>
+              <Route path="" element=""/>
+            </Route>
+           
             <Route path="*" element={ <Page404 /> } />
           </Routes>
         

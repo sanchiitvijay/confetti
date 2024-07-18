@@ -31,20 +31,20 @@ module.exports = {
           "confettiGrey4":"#6a6a6a",
           "confettiGrey5":"#7f7f7f",
 
-          light: {
+          
             confettiColor1: '#fff4ce',
             confettiColor2: '#ffeeb6',
             confettiColor3: '#ffe89d',
             confettiColor4: '#ffe385',
             confettiColor5: '#ffdd6c',
-          },
-          dark: {
+          
+          
             confettiColor1: '#49332b',
             confettiColor2: '#3d2b24',
             confettiColor3: '#30221d',
             confettiColor4: '#241a16',
             confettiColor5: '#18110e',
-          },
+          
 
           
           "cFont":"#111111",
