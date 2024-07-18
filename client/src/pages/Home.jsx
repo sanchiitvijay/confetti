@@ -6,7 +6,7 @@ import {AiOutlineEye} from "react-icons/ai"
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
 import SubmitButton from '../components/common/SubmitButton';
 import { login } from '../services/operations/authAPI';
-
+import { motion } from "framer-motion"
 
 /* Wherever Possible make components */
 
@@ -46,6 +46,8 @@ const Home = () => {
 
 
   return (
+
+    <motion.div exit={{ opacity: 0 }}>
     <div className='w-full h-full mx-auto text-cFont'>
         
 
@@ -61,7 +63,7 @@ const Home = () => {
               onSubmit={handleOnSubmit}
               className="mt-8 flex w-full flex-col gap-y-8"
             >
-                <label className="w-full text-white">
+                <label className="w-full dark:text-red-700 text-white">
                 
                   <input
                     required
@@ -146,6 +148,7 @@ const Home = () => {
             </div>
         </div>
     </div>
+    </motion.div> 
   )
 }
 

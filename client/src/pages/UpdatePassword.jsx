@@ -20,6 +20,16 @@ const UpdatePassword = () => {
       const [showPassword,setShowPassword]=useState(false);
       const [showConfirmPassword,setShowConfirmPassword]=useState(false);
       const dispatch=useDispatch();
+      const {token}=useSelector((state)=>state.auth)
+      const navigate=useNavigate();
+      
+      useEffect(()=>{
+    
+        if(!token){
+          navigate("/login")
+        }
+      },[token,navigate])
+          
     
       const handleOnChange=(e)=>{
         setFormData((prevData)=>(
