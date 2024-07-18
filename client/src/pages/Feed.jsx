@@ -16,7 +16,6 @@ const Feed = () => {
   // },[token,navigate])
  
 
-  
   return (
     <div>
       <Navbar/>
