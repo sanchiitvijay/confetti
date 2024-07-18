@@ -8,12 +8,12 @@ const Feed = () => {
   const {token}=useSelector((state)=>state.auth)
   const navigate = useNavigate()
     
-  useEffect(()=>{
+  // useEffect(()=>{
  
-    if(!token){
-      navigate("/login")
-    }
-  },[token,navigate])
+  //   if(!token){
+  //     navigate("/")
+  //   }
+  // },[token,navigate])
  
   return (
     <div>
