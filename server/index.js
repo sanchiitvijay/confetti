@@ -22,8 +22,8 @@ dotenv.config();
 
 
 //port no
-// const PORT=process.env.PORT || 4000;
-const PORT=4001;
+const PORT=process.env.PORT || 4000;
+
 //connect
 database.connect();
 
