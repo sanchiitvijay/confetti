@@ -61,24 +61,32 @@ const {
   ) {
     return async (dispatch) => {
       const toastId = toast.loading("Loading...")
-      dispatch(setLoading(true))
+      dispatch(setLoading(true));
+      console.log()
       try {
-        const response = await apiConnector("POST", SIGNUP_API, {
-            accountType,
-            name,
-            username,
-            usn,
-            email,
-            password,
-            confirmPassword,
-            gender,
-            branch,
-            year,
-            instagram,
-            avatar,
-            otp,
+        const formData=new FormData();
+        formData.append('accountType',accountType);
+        formData.append('name',name);
+        formData.append('username',username);
+        formData.append('email',email);
+        formData.append('password',password);
+        formData.append('confirmPassword',confirmPassword);
+        formData.append('gender',gender);
+        formData.append('branch',branch);
+        formData.append('year',year);
+        formData.append('instagram',instagram);
+        formData.append('avatar',avatar);
+        formData.append('otp',otp);
+
+
+
+        const response = await apiConnector("POST", SIGNUP_API, formData,{
+          headers: {
+            'Content-Type': 'multipart/form-data'
+        }
         })
-  
+       
+        
         console.log("SIGNUP API RESPONSE............", response)
   
         if (!response.data.success) {

@@ -9,12 +9,23 @@ import { useNavigate } from 'react-router-dom';
 import {useSelector,useDispatch} from "react-redux"
 import { sendOtp } from '../services/operations/authAPI'
 import { setSignupData } from '../slices/authSlice';
+import DropDownModal from '../components/common/DropDownModal';
+import Modal from '../components/common/Modal';
 
 const Signup = () => {
   const {signupData}=useSelector((state)=>state.auth); 
   const navigate=useNavigate();
   const dispatch=useDispatch();
   const [loading,setLoading] = useState(false)
+
+
+  const [isChecked, setIsChecked] = useState(false);
+  const handleCheckboxChange = (event) => {
+    setIsChecked(!isChecked);
+  };
+
+
+
   const {
     register,
     handleSubmit,
@@ -24,10 +35,15 @@ const Signup = () => {
     formState: {errors, isSubmitSuccessful}
   } = useForm()
 
+
   const handleSignup = async(data) => {
     setLoading(true);
     try{
-      const obj=getValues();
+      const obj={
+        ...getValues(),
+      avatar: avatar.file
+      }
+      
       dispatch(setSignupData(obj))
   
       // dispatch(setSignupData(obj))
@@ -56,7 +72,7 @@ useEffect(()=>{
       branch:"",
       year:"",
       avatar:setAvatar({
-        file: null,
+        file:  null,
         url: ""
       }),
       gender:""
@@ -71,6 +87,20 @@ useEffect(()=>{
     file: null,
     url:""
 })
+// function getBase64(file) {
+//   let base64="";
+//   const ourPromise=new Promise((resolve, reject) => {
+//     const reader = new FileReader();
+//     reader.readAsDataURL(file);
+//     reader.onload = () => resolve(reader.result);
+//     reader.onerror = error => reject(error);
+//   }).then((result)=>{
+//     console.log(result)
+//     base64=result
+//   });
+
+//   return base64;
+// }
 
 const handleAvatar = async (e) => {
 
@@ -82,18 +112,33 @@ const handleAvatar = async (e) => {
         file:e.target.files[0],
         url:fileUrl
       })
+    setValue('avatar',e.target.files[0])
   }
+  
 }
 
+useEffect(()=>{     
+  if(token){
+    navigate("/feed")
+  }
+},[token,navigate])
+
+
+
 useEffect(()=>{
-  setValue("avatar",avatar?.file)
+
+  console.log(getValues())
+
 },[avatar])
+
+
 
   
   return (
-    <div className='w-full  h-full mx-auto text-cFont'>
 
-      <div className='min-h-screen p-8  item-center justify-between w-full'>
+    <div className='w-full relative h-full mx-auto text-cFont'>
+
+      <div className='min-h-screen relative p-8  item-center justify-between w-full'>
 
         <div className='py-12 px-12 xs:w-[100%] md:w-fit bg-gray-400 rounded-md bg-clip-padding backdrop-filter mx-auto justify-center backdrop-blur-md bg-opacity-20 border border-gray-400'>
 
@@ -124,7 +169,7 @@ useEffect(()=>{
               
             <label className="text-white hover:underline hover:cursor-pointer" htmlFor="file" >
             {avatar.url ? (
-              <img src={avatar.url}    className="rounded-full w-[100px] h-[100px]" alt="Avatar" />
+              <img src={avatar.url}    className="rounded-full object-cover w-[100px] h-[100px]" alt="Avatar" />
             ) : (
               <RxAvatar  fontSize={100} color='ffffff'/>
             )}<span className='text-center mx-auto'>
@@ -163,7 +208,9 @@ useEffect(()=>{
           type="password"
           required={true}
           error={errors?.password}
-          register={register}/>
+          register={register}
+          
+          />
 
          <PasswordInput 
          name="Confirm password" 
@@ -175,33 +222,27 @@ useEffect(()=>{
             
           </div>
 
-          <div className='flex flex-col md:flex-row gap-10'>
-            <DropdownMenu 
-            data={gender} 
-            name="Gender" 
-            value="gender"
-            error={errors?.gender} 
-            register={register}
-            required={false}
+          <div className='flex flex-col  md:flex-row gap-10'>
+            <DropDownModal
+            setModal={setGenderModal}
+            name={"Gender"}
+            showModal={genderModal}
+            getValues={getValues}
             />
-            <DropdownMenu 
-            data={branches} 
-            name="Branch" 
-            value="branch" 
-            customClasses="overflow-y-auto max-h-[95px]"
-            error={errors?.branch}
-            required={false}
-            register={register}/>
+            <DropDownModal 
+              setModal={setBranchModal}
+              name={"Branch"}
+              showModal={branchModal}
+              getValues={getValues}
+            />
           </div>
 
           <div className='flex flex-col md:flex-row gap-10'>
-            <DropdownMenu 
-            data={year} 
-            name="Year" 
-            value="year"
-            error={errors?.year}
-            register={register}
-            required={true}
+            <DropDownModal 
+              setModal={setYearModal}
+              name={"Year"}
+              showModal={yearModal}
+              getValues={getValues}
             />
             <SignUpInput 
             name="Instagram" 
@@ -236,8 +277,46 @@ useEffect(()=>{
           </form>
 
         </div>
+           {genderModal && <Modal
+      data={gender} 
+      name="Gender" 
+      value="gender"
+      error={errors?.gender} 
+      register={register}
+      required={false}
+      setModal={setGenderModal} 
+      />}
+
+      {
+        branchModal && <Modal
+        data={branches} 
+        name="Branch" 
+        value="branch" 
+        setModal={setBranchModal} 
+        error={errors?.branch}
+        required={false}
+        register={register}
+      
+        />
+      }
+     
+     {
+      yearModal && <Modal
+      data={year} 
+      name="Year" 
+      value="year"
+      setModal={setYearModal} 
+      error={errors?.year}
+      register={register}
+      required={true}
+      />
+     }
       </div>
+ 
+   
+      
     </div>
+ 
   )
 }
 
