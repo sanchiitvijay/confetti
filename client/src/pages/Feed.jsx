@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Navbar from '../components/core/Home/Navbar'
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 
 const Feed = () => {
@@ -18,6 +18,13 @@ const Feed = () => {
   return (
     <div>
       <Navbar/>
+
+
+
+
+
+
+    <Outlet/>
     </div>
   )
 }

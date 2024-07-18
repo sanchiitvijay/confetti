@@ -6,7 +6,7 @@ const jwt=require('jsonwebtoken');
 const cloudinary=require('cloudinary').v2;
 const mailSender=require('../utils/mailSender');
 require("dotenv").config();
-
+const {uploadImageToCloudinary}=require("../utils/imageUploader");
 
 const {passwordUpdated}=require("../mail/templates/passwordUpdate");
 const { cloudinaryConnect } = require("../configs/cloudinary");
@@ -78,14 +78,15 @@ exports.signup=async(req,res)=>{
             branch,
             year,
             email,
-            avatar,
             instagram,
             accountType,
             otp,
         }=req.body;
-
-        console.log(req.body)
-
+        
+        const avatar=req.files.avatar;
+       
+        console.log("REQ BODY:",req.body)
+        console.log("REQ FILE:",req.files);
 
         if(!name || !password || !confirmPassword || !email || !gender || !username){
             return res.status(403).json({
@@ -144,8 +145,11 @@ exports.signup=async(req,res)=>{
         if(avatar){
             try{
             cloudinaryConnect()
-            const result=await cloudinary.uploader.upload(avatar.tempFilePath);
+            console.log("------------------ cloudiary")
+            const result=await uploadImageToCloudinary(avatar,process.env.FOLDER_NAME,1000,1000);
+            console.log("------------------- cloudinary1")
             avatarUrl=result.secure_url;
+            console.log("------------------- cloudinary2")
             console.log("Image Url of Cloudinary:",avatarUrl)
             }
             catch(error){
