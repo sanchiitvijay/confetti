@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
  import { resetPassword } from "../services/operations/authAPI";
 import { AiFillEyeInvisible,AiFillEye } from "react-icons/ai";
@@ -13,7 +13,6 @@ const UpdatePassword = () => {
         password:"",
         confirmPassword:"",
       });
-      const navigate=useNavigate();
       const location=useLocation();
       const {password,confirmPassword}=formData;
       const {loading}=useSelector((state)=>state.auth);
@@ -26,7 +25,7 @@ const UpdatePassword = () => {
       useEffect(()=>{
     
         if(!token){
-          navigate("/login")
+          navigate("/")
         }
       },[token,navigate])
           

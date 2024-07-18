@@ -1,19 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../components/core/Home/Navbar'
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 
 const Feed = () => {
   const {token}=useSelector((state)=>state.auth)
   const navigate = useNavigate()
     
-  useEffect(()=>{
+  // useEffect(()=>{
  
-    if(!token){
-      navigate("/login")
-    }
-  },[token,navigate])
+  //   if(!token){
+  //     navigate("/")
+  //   }
+  // },[token,navigate])
  
   return (
     <div>
