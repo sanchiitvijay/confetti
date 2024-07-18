@@ -25,7 +25,7 @@ const UpdatePassword = () => {
       useEffect(()=>{
     
         if(!token){
-          navigate("/login")
+          navigate("/")
         }
       },[token,navigate])
           

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import logo from "../../../assets/confettiNoText.png"
 import { Link, useNavigate } from 'react-router-dom'
 import { MdDarkMode } from "react-icons/md";
@@ -8,6 +8,7 @@ import { RxAvatar } from "react-icons/rx";
 import { useSelector } from 'react-redux';
 import { logout } from '../../../services/operations/authAPI';
 import { useDispatch } from 'react-redux';
+import { toggleDarkMode } from '../../../slices/themeSlice';
 
 const Navbar = () => {
   const user = useSelector((state) => state.profile.user);
@@ -16,10 +17,27 @@ const Navbar = () => {
   const logoutHandler=()=>{
     dispatch(logout(navigate));
   }
+
+  const darkMode  = useSelector(state => state.theme.darkMode);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
+
+
+  const handleToggle = () => {
+    dispatch(toggleDarkMode());
+    console.log("-------------------")
+    console.log("document.documentElement.classList------",document.documentElement.classList)
+  };
   return (
     
 
-<nav className=" border-gray-200 bg-confettiGrey1">
+<nav className=" border-gray-200">
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-1 md:px-5 px-3">
   <Link href="/feed" className="flex ml-4 items-center space-x-3 rtl:space-x-reverse">
       <img src={logo} className="h-[90px] mt-[-10px] mb-[-30px]" alt="Confetti Logo" />
@@ -32,7 +50,7 @@ const Navbar = () => {
     
       <FaHeart fontSize={27} color={'white'}/> 
 
-       <MdDarkMode fontSize={30} color={'white'}/> 
+       <MdDarkMode fontSize={30} color={'white'} onClick={handleToggle}/> 
          {/* Dark Mode Icon have to make it functions when we re putting theme */}
 
 

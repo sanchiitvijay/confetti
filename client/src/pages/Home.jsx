@@ -62,7 +62,7 @@ const Home = () => {
               onSubmit={handleOnSubmit}
               className="mt-8 flex w-full flex-col gap-y-8"
             >
-                <label className="w-full text-white">
+                <label className="w-full dark:text-red-700 text-white">
                 
                   <input
                     required
