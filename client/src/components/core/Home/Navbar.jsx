@@ -12,11 +12,14 @@ import { toggleDarkMode } from '../../../slices/themeSlice';
 
 const Navbar = () => {
   const user = useSelector((state) => state.profile.user);
+  const avatarUrl=user?.image;
   const dispatch=useDispatch();
   const navigate=useNavigate();
   const logoutHandler=()=>{
     dispatch(logout(navigate));
   }
+
+  
 
   const darkMode  = useSelector(state => state.theme.darkMode);
 
@@ -37,7 +40,7 @@ const Navbar = () => {
   return (
     
 
-<nav className=" border-gray-200">
+<nav className=" bg-confettiGrey4 border-gray-200">
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-1 md:px-5 px-3">
   <Link href="/feed" className="flex ml-4 items-center space-x-3 rtl:space-x-reverse">
       <img src={logo} className="h-[90px] mt-[-10px] mb-[-30px]" alt="Confetti Logo" />
@@ -62,8 +65,8 @@ const Navbar = () => {
             className="flex text-md rounded-full md:me-0"
           >
             <span className="sr-only">Open user menu</span>
-            {user && user.avatar ? (
-          <img className="w-[32px] h-[32px] rounded-full" src={user.avatar} alt="user photo" />
+            {user && user?.image ? (
+          <img className="w-[32px] h-[32px] rounded-full" src={user?.image} alt="user photo" />
         ) : (
           <RxAvatar className="rounded-full" fontSize={31} color={'white'} />
         )}
