@@ -3,12 +3,12 @@ import { useForm } from 'react-hook-form';
 const Modal = ({ data, name, value, error, register, required,setModal}) => {
   const [chosen,setChosen]=useState(false);
   return (
-    <div className="fixed inset-0 backdrop-blur  w-[100vw] h-[100vh] flex items-center justify-center z-50">
+    <div className="fixed inset-0 backdrop-blur w-[100vw] h-[100vh] flex items-center justify-center z-50">
       <div className="px-12 py-8 xs:w-[100%] md:w-fit bg-gray-600 rounded-md bg-clip-padding backdrop-filter mx-auto justify-center backdrop-blur-md bg-opacity-20 border text-white border-gray-400">
         <div className="mb-4">
           <h2 className="text-xl font-semibold">{`Choose ${name}`}</h2>
         </div>
-        <div className=" overflow-y-auto">
+        <div className=" overflow-y-auto  max-h-[300px]">
           {
           data.map((topic, index) => (
             <div className='flex flex-row items-center gap-2'>
