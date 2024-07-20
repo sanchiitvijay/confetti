@@ -12,7 +12,7 @@ const SignUpInput =({name,type,value,register,error,required}) => {
         />
         
         <div className='h-[1px] w-full bg-white'></div>
-        {error && <p className="text-red mt-1">{value.charAt(0).toUpperCase() + value.slice(1)} is required
+        {error && <p className="ml-2 text-yellow-100 mt-1">{value.charAt(0).toUpperCase() + value.slice(1)} is required
           <sup className="text-yellow-400">{" "}*</sup></p>}
       </label>
   )
