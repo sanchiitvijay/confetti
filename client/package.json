@@ -14,7 +14,7 @@
     "concurrently": "^8.2.2",
     "flowbite": "^2.3.0",
     "flowbite-react": "^0.9.0",
-    "framer-motion": "^11.3.2",
+    "framer-motion": "^11.3.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-fast-marquee": "^1.6.4",
