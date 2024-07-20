@@ -23,7 +23,7 @@ const DropDownModal = ({ name, setModal, showModal,getValues}) => {
         placeholder={`Choose ${name}`}
         value={getValues(name.toLowerCase())}
       />
-      <span className='absolute right-3 top-[16px] z-[10]'>
+      <span className='absolute right-3 top-[16px] mr-1 z-[10]'>
         <FaRegWindowMaximize />
       </span>
 

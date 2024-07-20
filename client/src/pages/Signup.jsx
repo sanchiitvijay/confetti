@@ -11,6 +11,8 @@ import { sendOtp } from '../services/operations/authAPI'
 import { setSignupData } from '../slices/authSlice';
 import DropDownModal from '../components/common/DropDownModal';
 import Modal from '../components/common/Modal';
+import { motion } from 'framer-motion';
+
 
 const Signup = () => {
 
@@ -146,11 +148,16 @@ useEffect(()=>{
 },[avatar])
 
 
-
   
   return (
 
-    <div className='w-full relative h-full mx-auto text-cFont'>
+    <motion.div 
+    className='w-full relative h-full mx-auto text-cFont'
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: 20 }}
+    transition={{ duration: 0.5 }}
+    >
 
       <div className='min-h-screen relative p-8  item-center justify-between w-full'>
 
@@ -336,7 +343,7 @@ useEffect(()=>{
  
    
       
-    </div>
+    </motion.div>
  
   )
 }
