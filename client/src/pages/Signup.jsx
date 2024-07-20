@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from "react-hook-form";
 import SignUpInput from '../components/common/SignUpInput';
 import PasswordInput from '../components/common/PasswordInput';
@@ -13,7 +13,12 @@ import DropDownModal from '../components/common/DropDownModal';
 import Modal from '../components/common/Modal';
 
 const Signup = () => {
+
   const {token}=useSelector((state)=>state.auth)
+  // const genderRef=useRef();
+  // const yearRef=useRef();
+  // const branchRef=useRef();
+
   const {signupData}=useSelector((state)=>state.auth); 
   const navigate=useNavigate();
   const dispatch=useDispatch();
@@ -22,6 +27,13 @@ const Signup = () => {
   const [yearModal,setYearModal]=useState(false);
   const [branchModal,setBranchModal]=useState(false);
 
+
+
+  // const genderHandler=()=>{setGenderModal(false)}
+  // const yearHandler=()=>{setYearModal(false)}
+  // const branchHandler=()=>{setBranchModal(false)}
+  
+  
   const [isChecked, setIsChecked] = useState(false);
   const handleCheckboxChange = (event) => {
     setIsChecked(!isChecked);
@@ -284,6 +296,7 @@ useEffect(()=>{
 
         </div>
            {genderModal && <Modal
+          
       data={gender} 
       name="Gender" 
       value="gender"
@@ -295,6 +308,7 @@ useEffect(()=>{
 
       {
         branchModal && <Modal
+       
         data={branches} 
         name="Branch" 
         value="branch" 
@@ -308,6 +322,7 @@ useEffect(()=>{
      
      {
       yearModal && <Modal
+     
       data={year} 
       name="Year" 
       value="year"
