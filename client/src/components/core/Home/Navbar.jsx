@@ -12,7 +12,10 @@ import { toggleDarkMode } from '../../../slices/themeSlice';
 
 const Navbar = () => {
   const user = useSelector((state) => state.profile.user);
-  const avatarUrl=user?.image;
+  console.log("USER",user)
+  
+  const avatarUrl=user?.displayPicture;
+
   const dispatch=useDispatch();
   const navigate=useNavigate();
   const logoutHandler=()=>{
@@ -65,8 +68,8 @@ const Navbar = () => {
             className="flex text-md rounded-full md:me-0"
           >
             <span className="sr-only">Open user menu</span>
-            {user && user?.image ? (
-          <img className="w-[32px] h-[32px] rounded-full" src={user?.image} alt="user photo" />
+            {user?.displayPicture ? (
+          <img className="w-[32px] h-[32px] object-cover rounded-full" src={user?.displayPicture} alt="user photo" />
         ) : (
           <RxAvatar className="rounded-full" fontSize={31} color={'white'} />
         )}
