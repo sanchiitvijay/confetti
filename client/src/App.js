@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Home from "./pages/Home";
 import '@fontsource/roboto/300.css';
@@ -13,11 +13,10 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import OTP from "./pages/OTP";
 import Feed from "./pages/Feed";
-import { useLocation } from "react-router-dom";
-// import { CSSTransition, TransitionGroup } from "react-transition-group";
+import Page404 from "./pages/Page404";
 import { toggleDarkMode } from "./slices/themeSlice";
 import { useEffect } from "react";
-import Page404 from "./pages/Page404";
+import { AnimatePresence, motion } from "framer-motion";
 
 function App() {
   const { token } = useSelector((state) => state.auth);
@@ -35,30 +34,131 @@ function App() {
 
   return (
     <div className={`w-screen ${token ? "bg-white" : "bg-ring"} bg-cover bg-center min-h-screen flex flex-col`}>
-      {/* <TransitionGroup>
-        <CSSTransition key={location.key} timeout={500} classNames="fade"> */}
-     
-          <Routes location={location}>
-            <Route path="/" element={<Home />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/update-password/:uid" element={<UpdatePassword />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-            <Route path="/otp" element={<OTP />} />
-
-            {/*DashBoard Paths Via Outlet*/}
-            <Route path="/feed" element={ <Feed /> } >
-              <Route path="/feed/settings" element=""/>
-              <Route path="/feed/my-profile" element=""/>
-              <Route path="" element=""/>
-            </Route>
-           
-            <Route path="*" element={ <Page404 /> } />
-          </Routes>
-        
-        {/* </CSSTransition>
-      </TransitionGroup> */}
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route
+            path="/"
+            element={
+              <motion.div
+                initial={{ y: -50 }}
+                animate={{ y: 0 }}
+                exit={{ y: -50 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Home />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <motion.div
+                initial={{ y: -50 }}
+                animate={{ y: 0 }}
+                exit={{ y: -50 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Signup />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/forgot-password"
+            element={
+              <motion.div
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -50 }}
+                transition={{ duration: 0.5 }}
+              >
+                <ForgotPassword />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/update-password/:uid"
+            element={
+              <motion.div
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -50 }}
+                transition={{ duration: 0.5 }}
+              >
+                <UpdatePassword />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/privacy-policy"
+            element={
+              <motion.div
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0  , y: -50 }}
+                transition={{ duration: 0.5 }}
+              >
+                <PrivacyPolicy />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/terms-and-conditions"
+            element={
+              <motion.div
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -50 }}
+                transition={{ duration: 0.5 }}
+              >
+                <TermsAndConditions />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/otp"
+            element={
+              <motion.div
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -50 }}
+                transition={{ duration: 0.5 }}
+              >
+                <OTP />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/feed"
+            element={
+              <motion.div
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -50 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Feed />
+              </motion.div>
+            }
+          >
+            <Route path="/feed/settings" element="" />
+            <Route path="/feed/my-profile" element="" />
+            <Route path="" element="" />
+          </Route>
+          <Route
+            path="*"
+            element={
+              <motion.div
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -50 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Page404 />
+              </motion.div>
+            }
+          />
+        </Routes>
+      </AnimatePresence>
     </div>
   );
 }
