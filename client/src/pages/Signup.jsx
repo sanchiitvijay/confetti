@@ -104,20 +104,6 @@ useEffect(()=>{
     file: null,
     url:""
 })
-// function getBase64(file) {
-//   let base64="";
-//   const ourPromise=new Promise((resolve, reject) => {
-//     const reader = new FileReader();
-//     reader.readAsDataURL(file);
-//     reader.onload = () => resolve(reader.result);
-//     reader.onerror = error => reject(error);
-//   }).then((result)=>{
-//     console.log(result)
-//     base64=result
-//   });
-
-//   return base64;
-// }
 
 const handleAvatar = async (e) => {
 
@@ -151,13 +137,7 @@ useEffect(()=>{
   
   return (
 
-    <motion.div 
-    className='w-full relative h-full mx-auto text-cFont'
-    initial={{ opacity: 0, y: -20 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: 20 }}
-    transition={{ duration: 0.5 }}
-    >
+    <div className='w-full relative h-full mx-auto text-cFont'>
 
       <div className='min-h-screen relative p-8  item-center justify-between w-full'>
 
@@ -340,10 +320,7 @@ useEffect(()=>{
       />
      }
       </div>
- 
-   
-      
-    </motion.div>
+    </div>
  
   )
 }
