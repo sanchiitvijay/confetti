@@ -32,18 +32,18 @@ module.exports = {
           "confettiGrey5":"#7f7f7f",
 
           
-            confettiColor1: '#fff4ce',
-            confettiColor2: '#ffeeb6',
-            confettiColor3: '#ffe89d',
-            confettiColor4: '#ffe385',
-            confettiColor5: '#ffdd6c',
+            confettiLightColor1: '#fff4ce',
+            confettiLightColor2: '#ffeeb6',
+            confettiLightColor3: '#ffe89d',
+            confettiLightColor4: '#ffe385',
+            confettiLightColor5: '#ffdd6c',
           
           
-            confettiColor1: '#49332b',
-            confettiColor2: '#3d2b24',
-            confettiColor3: '#30221d',
-            confettiColor4: '#241a16',
-            confettiColor5: '#18110e',
+            confettiDarkColor1: '#353839',
+            confettiDarkColor2: '#343434',
+            confettiDarkColor3: '#26282A',
+            confettiDarkColor4: '#1A1110',
+            confettiDarkColor5: '#2C3539',
           
 
           

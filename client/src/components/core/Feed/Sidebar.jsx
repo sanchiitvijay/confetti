@@ -23,7 +23,7 @@ const Sidebar=()=>{
   }
   
   return (
-    <div className="relative flex min-w-[222px] flex-col border-r-[1px] 
+    <div className="relative flex w-[200px] dark:text-white flex-col border-r-[1px] 
     h-[calc(100vh-3.5rem)] text-black font-bold py-10">
       <div className="flex relative  flex-col">
         {
@@ -36,7 +36,7 @@ const Sidebar=()=>{
         }
       </div>
 
-      <div className="mx-auto  mt-6 mb-6 h-[1px] w-10/12 "></div>
+      <div className="mx-auto mt-6 mb-6 h-[1px] w-10/12 "></div>
 
       <div className="flex relative flex-col ">
         <SidebarLink
@@ -55,7 +55,7 @@ const Sidebar=()=>{
         >
         
 
-        <div className="flex text-black ml-8 items-center gap-x-2">
+        <div className="flex dark:text-white ml-8 items-center gap-x-2">
           <VscSignOut className="text-lg" />
           <span>Logout</span>
         </div>

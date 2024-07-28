@@ -1,7 +1,8 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { motion, AnimatePresence } from 'framer-motion';
 import useOnClickOutside from "../../hooks/useOnClickOutside";
+import useEscape from '../../hooks/useEscape';
 
 const Modal = ({ data, name, value, error, register, required, setModal }) => {
   const [chosen, setChosen] = useState(false);
@@ -14,20 +15,7 @@ const Modal = ({ data, name, value, error, register, required, setModal }) => {
   };
 
   useOnClickOutside(modalRef, modalHandler);
-
-  useEffect(() => {
-    const handleEscape = (event) => {
-      if (event.key === 'Escape') {
-        modalHandler();
-      }
-    };
-
-    document.addEventListener('keydown', handleEscape);
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-    };
-  }, []);
+  useEscape(modalRef, modalHandler);
 
   return (
     <AnimatePresence>

@@ -1,3 +1,4 @@
+import SubmitButton from "../common/SubmitButton"
 import IconBtn from "../common/SubmitButton"
 
 export default function ConfirmationModal({ modalData }) {
@@ -10,9 +11,10 @@ export default function ConfirmationModal({ modalData }) {
         <p className="mt-3 mb-5 leading-6 ">
           {modalData?.text2}
         </p>
-        <div className="flex items-center gap-x-4">
-          <IconBtn
-          customClasses="bg-yellow-100 text-black rounded-md px-4 py-2 font-semibold "
+        <div className="flex mx-5 justify-between gap-x-4">
+          <SubmitButton
+          customClasses="text-black rounded-md font-semibold "
+            type="submit"
             onclick={modalData?.btn1Handler}
             disabled={false}
             text={modalData?.btn1Text}
