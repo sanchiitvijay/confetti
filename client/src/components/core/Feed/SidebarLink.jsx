@@ -12,9 +12,7 @@ const SidebarLink=({link,iconName})=>{
   const matchRoute=(route)=>{
     return matchPath({path:route},location.pathname);
   }
-  if(link.name==="Purchase History"){
-    return ;
-  }
+
   return(
 
       <NavLink
