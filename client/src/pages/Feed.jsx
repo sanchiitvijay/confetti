@@ -20,7 +20,7 @@ const Feed = () => {
     setShow(false);
   }
 
-  // useOnClickOutsideProfile(showRef,stickRef,showHandler);
+  useOnClickOutsideProfile(showRef,stickRef,showHandler);
 
   
   
@@ -45,7 +45,7 @@ const Feed = () => {
   
 
   return (
-    <div>
+    <div className='bg-confettiYellowColor1 dark:bg-confettiDarkColor1' >
       <Navbar/>
       <div className="relative flex min-h-[calc(100vh-3.5rem)]">
       <div ref={showRef} className={`z-30 ${show?`left-0`:`-left-96`} sm:relative sm:left-0 absolute transition-all duration-500 `}>
