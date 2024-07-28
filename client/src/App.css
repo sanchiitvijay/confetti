@@ -55,8 +55,9 @@ input[type="radio"]:focus {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #ffee00dc;
+  background: linear-gradient(90deg, rgba(245,255,0,1) 0%, rgba(255,188,0,1) 100%, rgba(0,212,255,1) 100%);
   border-radius: 10px;
+  
 }
 
 
