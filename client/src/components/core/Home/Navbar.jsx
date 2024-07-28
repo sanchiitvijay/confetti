@@ -9,6 +9,11 @@ import { useSelector } from 'react-redux';
 import { logout } from '../../../services/operations/authAPI';
 import { useDispatch } from 'react-redux';
 import { toggleDarkMode } from '../../../slices/themeSlice';
+import { motion } from 'framer-motion';
+import { VscCoffee, VscSignOut, VscSettingsGear, VscSnake } from "react-icons/vsc";
+
+
+
 
 const Navbar = () => {
   const user = useSelector((state) => state.profile.user);
@@ -43,25 +48,30 @@ const Navbar = () => {
   return (
     
 
-<nav className=" bg-confettiGrey4 border-gray-200">
+<motion.div className=" bg-confettiLightColor3 dark:bg-confettiDarkColor3 dark:text-white text-black border-gray-200"
+                // initial={{  y: -50 }}
+                // animate={{  y: 0 }}
+                // exit={{  y: -50 }}
+                // transition={{ duration: 0.5 }}
+        >
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-1 md:px-5 px-3">
   <Link href="/feed" className="flex ml-4 items-center space-x-3 rtl:space-x-reverse">
       <img src={logo} className="h-[90px] mt-[-10px] mb-[-30px]" alt="Confetti Logo" />
       {/* <span className="self-center justify-center text-2xl font-semibold whitespace-nowrap text-white">Confetti</span> */}
   </Link>  
-  <div className='justify-between text-white md:text-[25px] text-2xl'>
+  <div className='justify-between  md:text-[25px] text-2xl'>
     Confetti
   </div>
   <div className="flex items-center  md:order-2 md:gap-4 gap-1 space-x-3 md:space-x-0 mr-3 rtl:space-x-reverse">
     
-      <FaHeart fontSize={27} color={'white'}/> 
+      <FaHeart fontSize={27}/> 
 
-       <MdDarkMode fontSize={30} color={'white'} onClick={handleToggle}/> 
+       <MdDarkMode fontSize={30} onClick={handleToggle}/> 
          {/* Dark Mode Icon have to make it functions when we re putting theme */}
 
 
     <div className="relative">
-      <Dropdown className='bg-confettiGrey2' arrowIcon={false} inline={true}
+      <Dropdown className='dark:bg-confettiDarkColor1 rounded-md px-1' arrowIcon={false} inline={true}
         label={
           <button
             type="button"
@@ -71,31 +81,35 @@ const Navbar = () => {
             {user?.displayPicture ? (
           <img className="w-[32px] h-[32px] object-cover rounded-full" src={user?.displayPicture} alt="user photo" />
         ) : (
-          <RxAvatar className="rounded-full" fontSize={31} color={'white'} />
+          <RxAvatar className="rounded-full" fontSize={31} />
         )}
           </button>
         }
       >
-        <div className='px-5'>
+        <div className='px-5 py-2 flex flex-col rounded-md bg-confettiLightColor3 text-black dark:text-white dark:bg-confettiDarkColor3'>
 
-        <div className="px-4 py-3 text-center border-b border-white mb-4">
-          <span className="block text-md text-white">
+        <div className="flex flex-row justify-center cursor-pointer gap-4 p-3  min-w-[200px]  border-b dark:border-confettiLightColor1 border-black  mb-4">
+          <VscSnake className='mt-1'/>
+          <span className="block text-md ">
             {user ? "hi " + user.name : "Welcome"}
           </span>
 
         </div>
-        <div className='p-3 text-center'>
-          <Link to="/settings" className="px-4 py-2 text-md hover:underline text-white">
+        <div className='flex flex-row justify-center gap-4 p-3 '>
+          <VscSettingsGear className='mt-1'/>
+          <Link to="/settings" className="block cursor-pointer text-md hover:underline">
             Settings
           </Link>
         </div>
-        <div className='p-3 text-center'>
-          <div onClick={logoutHandler} className="block px-4 py-2 text-md hover:underline text-white">
+        <div className='flex flex-row justify-center gap-4 p-3 '>
+          <VscSignOut className='mt-1'/>
+          <div onClick={logoutHandler} className="block cursor-pointer text-md hover:underline">
             {'Logout' }
           </div>
         </div>
-        <div className='p-3 text-center'>
-          <Link to="/coffee" className="block px-4 py-2 text-md hover:underline text-white">
+        <div className='flex flex-row justify-center gap-4 p-3 '>
+          <VscCoffee className='mt-1'/>
+          <Link to="/coffee" className="block cursor-pointer text-md hover:underline">
             Buy us a coffee
           </Link>
         </div>
@@ -104,7 +118,7 @@ const Navbar = () => {
     </div>
   </div>
   </div>
-</nav>
+</motion.div>
 
   )
 }

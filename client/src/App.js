@@ -33,7 +33,7 @@ function App() {
   }, [darkMode]);
 
   return (
-    <div className={`w-screen ${token ? "bg-white" : "bg-ring"} bg-cover bg-center min-h-screen flex flex-col`}>
+    <div className={`w-screen ${token ? "bg-white" : "bg-ring"} dark:bg-confettiDarkColor1 bg-cover bg-center min-h-screen flex flex-col`}>
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route
@@ -130,14 +130,14 @@ function App() {
           <Route
             path="/feed"
             element={
-              <motion.div
-                initial={{  y: -50 }}
-                animate={{  y: 0 }}
-                exit={{  y: -50 }}
-                transition={{ duration: 0.5 }}
+              <div
+                // initial={{  y: -50 }}
+                // animate={{  y: 0 }}
+                // exit={{  y: -50 }}
+                // transition={{ duration: 0.5 }}
               >
                 <Feed />
-              </motion.div>
+              </div>
             }
           >
             <Route path="/feed/settings" element="" />
