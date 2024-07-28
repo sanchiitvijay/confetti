@@ -1,13 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { sidebarLinks } from "../../../data/dashboard-links";
-import { logout } from "../../../services/operations/authAPI";
+import { sidebarLinks } from "../Feed/dashboard-links";
 import { useNavigate } from "react-router-dom";
 import SidebarLink from "./SidebarLink";
 import { VscSignOut } from "react-icons/vsc";
 import { useState } from "react";
 import Spinner from "../../common/Spinner";
 import ConfirmationModal from "../../common/ConfirmationModal";
-
+import { logout } from "../../../services/operations/authAPI";
 const Sidebar=()=>{
   const {user,loading:profileLoading}=useSelector((state)=>state.profile);
   const {loading:authLoading}=useSelector((state)=>state.auth);
@@ -24,8 +23,8 @@ const Sidebar=()=>{
   }
   
   return (
-    <div className="relative flex min-w-[222px] flex-col border-r-[1px] border-r-richblack-700
-    h-[calc(100vh-3.5rem)] text-white font-bold bg-richblack-800 py-10">
+    <div className="relative flex min-w-[222px] flex-col border-r-[1px] 
+    h-[calc(100vh-3.5rem)] text-black font-bold py-10">
       <div className="flex relative  flex-col">
         {
           sidebarLinks.map((link)=>{
@@ -37,11 +36,11 @@ const Sidebar=()=>{
         }
       </div>
 
-      <div className="mx-auto  mt-6 mb-6 h-[1px] w-10/12 bg-richblack-600 "></div>
+      <div className="mx-auto  mt-6 mb-6 h-[1px] w-10/12 "></div>
 
       <div className="flex relative flex-col ">
         <SidebarLink
-        link={{name:"Settings",path:"dashboard/settings"}}
+        link={{name:"Settings",path:"/feed/settings"}}
         iconName={"VscSettingsGear"}
         />
         <button onClick={()=>setConfirmationModal({
@@ -52,11 +51,11 @@ const Sidebar=()=>{
           btn1Handler:()=>dispatch(logout(navigate)),
           btn2Handler: ()=>setConfirmationModal(null),
         })}
-        className="text-sm mt-2 font-medium text-richblack-300"
+        className="text-sm mt-2 font-medium "
         >
         
 
-        <div className="flex text-white ml-8 items-center gap-x-2">
+        <div className="flex text-black ml-8 items-center gap-x-2">
           <VscSignOut className="text-lg" />
           <span>Logout</span>
         </div>

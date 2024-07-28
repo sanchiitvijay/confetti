@@ -66,9 +66,9 @@ function App() {
             path="/forgot-password"
             element={
               <motion.div
-                initial={{ opacity: 0, y: -50 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -50 }}
+                initial={{  y: -50 }}
+                animate={{ y: 0 }}
+                exit={{  y: -50 }}
                 transition={{ duration: 0.5 }}
               >
                 <ForgotPassword />
@@ -79,9 +79,9 @@ function App() {
             path="/update-password/:uid"
             element={
               <motion.div
-                initial={{ opacity: 0, y: -50 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -50 }}
+                initial={{  y: -50 }}
+                animate={{  y: 0 }}
+                exit={{  y: -50 }}
                 transition={{ duration: 0.5 }}
               >
                 <UpdatePassword />
@@ -92,9 +92,9 @@ function App() {
             path="/privacy-policy"
             element={
               <motion.div
-                initial={{ opacity: 0, y: -50 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0  , y: -50 }}
+                initial={{  y: -50 }}
+                animate={{  y: 0 }}
+                exit={{  y: -50 }}
                 transition={{ duration: 0.5 }}
               >
                 <PrivacyPolicy />
@@ -105,9 +105,9 @@ function App() {
             path="/terms-and-conditions"
             element={
               <motion.div
-                initial={{ opacity: 0, y: -50 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -50 }}
+                initial={{  y: -50 }}
+                animate={{  y: 0 }}
+                exit={{  y: -50 }}
                 transition={{ duration: 0.5 }}
               >
                 <TermsAndConditions />
@@ -118,9 +118,9 @@ function App() {
             path="/otp"
             element={
               <motion.div
-                initial={{ opacity: 0, y: -50 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -50 }}
+                initial={{  y: -50 }}
+                animate={{  y: 0 }}
+                exit={{  y: -50 }}
                 transition={{ duration: 0.5 }}
               >
                 <OTP />
@@ -131,9 +131,9 @@ function App() {
             path="/feed"
             element={
               <motion.div
-                initial={{ opacity: 0, y: -50 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -50 }}
+                initial={{  y: -50 }}
+                animate={{  y: 0 }}
+                exit={{  y: -50 }}
                 transition={{ duration: 0.5 }}
               >
                 <Feed />
@@ -148,9 +148,9 @@ function App() {
             path="*"
             element={
               <motion.div
-                initial={{ opacity: 0, y: -50 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -50 }}
+                initial={{  y: -50 }}
+                animate={{  y: 0 }}
+                exit={{  y: -50 }}
                 transition={{ duration: 0.5 }}
               >
                 <Page404 />
