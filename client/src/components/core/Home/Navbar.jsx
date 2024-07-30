@@ -42,8 +42,6 @@ const Navbar = () => {
 
   const handleToggle = () => {
     dispatch(toggleDarkMode());
-    console.log("-------------------")
-    console.log("document.documentElement.classList------",document.documentElement.classList)
   };
   return (
     
@@ -57,16 +55,15 @@ const Navbar = () => {
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-1 md:px-5 px-3">
   <Link href="/feed" className="flex ml-4 items-center space-x-3 rtl:space-x-reverse">
       <img src={logo} className="h-[90px] mt-[-10px] mb-[-30px]" alt="Confetti Logo" />
-      {/* <span className="self-center justify-center text-2xl font-semibold whitespace-nowrap text-white">Confetti</span> */}
   </Link>  
-  <div className='justify-between  md:text-[25px] text-2xl'>
+  <div className='justify-between dancing-script-font max-md:hidden text-4xl'>
     Confetti
   </div>
-  <div className="flex items-center  md:order-2 md:gap-4 gap-1 space-x-3 md:space-x-0 mr-3 rtl:space-x-reverse">
+  <div className="flex items-center md:order-2 md:gap-4 gap-1 space-x-3 md:space-x-0 mr-3 rtl:space-x-reverse">
     
-      <FaHeart fontSize={27}/> 
+      <FaHeart fontSize={25}/> 
 
-       <MdDarkMode fontSize={30} onClick={handleToggle}/> 
+       <MdDarkMode fontSize={29} onClick={handleToggle}/> 
          {/* Dark Mode Icon have to make it functions when we re putting theme */}
 
 
@@ -81,7 +78,7 @@ const Navbar = () => {
             {user?.displayPicture ? (
           <img className="w-[32px] h-[32px] object-cover rounded-full" src={user?.displayPicture} alt="user photo" />
         ) : (
-          <RxAvatar className="rounded-full" fontSize={31} />
+          <RxAvatar className="rounded-full" fontSize={29} />
         )}
           </button>
         }
