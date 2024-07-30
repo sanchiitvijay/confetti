@@ -12,7 +12,7 @@ const PostSchema=new mongoose.Schema({
     ,
     caption:{
         type:String,
-        requried:true,
+        // requried:true,
     },
     likes:[{
         type:mongoose.Schema.Types.ObjectId,
@@ -24,6 +24,15 @@ const PostSchema=new mongoose.Schema({
        ref:'comment',
        required:true, 
     }],
+    branch:{
+        type:String,
+    },
+    year:{
+        type:String,
+    },
+    name:{
+        type:String,
+    },
     createdAt:{
         type:Date,
         default:Date.now(),
