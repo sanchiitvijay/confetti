@@ -1,7 +1,7 @@
 import { toast } from "react-hot-toast"
 import { setLoading, setReplies } from "../../slices/replySlice"
-import { apiConnector } from "..apiconnector"
-import { replyEndpoints } from "../apis"
+import { apiConnector } from "../apiConnector"
+import { replyEndpoints } from "../api"
 
 const {
     CREATE_REPLY_API,

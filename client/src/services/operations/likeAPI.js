@@ -1,15 +1,15 @@
 import { toast } from "react-hot-toast"
 
 import { setLoading, setLikes } from "../../slices/likeSlice"
-import { apiConnector } from "..apiconnector"
-import { likeEndpoints } from "../apis"
+import { apiConnector } from "../apiConnector"
+import { likeEndpoints } from "../api"
 
 const {
     LIKED_API,
     GET_ALL_LIKES_API,
   } = likeEndpoints;
 
-  export function liked (token, data) {
+  export function getAllLikes (token, data) {
     return async(dispatch) => {
         let result = null
         const toastId = toast.loading("Loading...")
