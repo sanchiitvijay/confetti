@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
 import logo from "../../../assets/confettiNoText.png"
-import { VscGripper } from "react-icons/vsc";
+import { VscGripper, VscKebabVertical } from "react-icons/vsc";
 import { IoShareSocialOutline, IoChatbubbleOutline } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
-
-
-import { Link, useNavigate } from 'react-router-dom'
+import { liked } from '../../../services/operations/likeAPI';
+import { reportPost } from '../../../services/operations/postAPI';
+import { getAllComments } from '../../../services/operations/commentAPI';
 import { Dropdown } from 'flowbite-react';
-import { RxAvatar } from "react-icons/rx";
-import { VscCoffee, VscSignOut, VscSettingsGear, VscSnake } from "react-icons/vsc";
-
+import { FaHeart } from "react-icons/fa";
+import { setTotalLikes } from '../../../slices/postSlice';
 
 
 
@@ -21,11 +20,38 @@ import { VscCoffee, VscSignOut, VscSettingsGear, VscSnake } from "react-icons/vs
 
 const Post = () => {
   const dispatch = useDispatch();
+  const [comment, setComment] = useState(false);
+  // const likes = useSelector((state) => state.post.totalLikes);
+  const token = useSelector((state) => state.auth.token);
   const post = useSelector((state) => state.post);
-  
+  const profile = useSelector((state) => state.profile);
+  const [like, setLike] = useState(false);
+
+  if (post?.likes?.includes(profile?.user?._id)) {
+    setLike(true);
+  }
+
   const likeHandler = () => {
-    post.like = !post.like;
-    // dispatch(setPost(post));
+    if (post?.likes?.includes(profile?.user?._id)) {
+      post.likes = post.likes.filter((like) => like !== profile?.user?._id);
+      setLike(false);
+    } else {
+      post.likes.push(profile?.user?._id);
+      setLike(true);
+    }
+
+    dispatch(setTotalLikes(post.likes));
+    
+    dispatch(liked(token, post));
+  }
+
+  const commentHandler = () => {
+    setComment(!comment);
+    dispatch(getAllComments(token, post));
+  }
+
+  const reportHandler = () => {
+    dispatch(reportPost(token, post));
   }
 
   return (
@@ -62,31 +88,56 @@ const Post = () => {
           }
         >
 
-          <div className='px-5 py-2 flex flex-col rounded-md bg-confettiLightColor3 text-black dark:text-white dark:bg-confettiDarkColor3'>
-            <div className='flex flex-row justify-center'>
-              <Link className='block cursor-pointer text-sm hover:underline'>
+          <div className='px-5 py-2 flex flex-col rounded-md mx-1 bg-confettiLightColor3 text-black dark:text-white dark:bg-confettiDarkColor3'>
+            <div className='flex flex-row justify-center '>
+              <div className='block cursor-pointer text-sm hover:underline' onClick={reportHandler}>
                 Report
-              </Link>
+              </div>
             </div>
           </div>
         </Dropdown>
 
       </div>
+
+
   
       {/* content */}
       <div className='p-4 min-h-[200px] text-center text-xl content-center border-black dark:border-white border-b'>
         Remember, contributions to this repository should follow our GitHub Community Guidelines. Trying to avoid encountering the strangest and most random errors while compiling the code. Trying to avoid encountering the strangest and most random errors while compiling the code. Trying to avoid encountering the strangest and most random errors while compiling the code.
       </div>
       
+
+
       {/* footer */}
       <div className='flex pt-2 justify-between px-5 flex-row'>
         <div className='flex gap-3 content-center flex-row'>
-          <IoMdHeartEmpty fontSize={'23px'} onClick={likeHandler} />
-          <IoChatbubbleOutline fontSize={'20px'} />
+          {
+            like ?
+              <FaHeart color={"#DE3163"} fontSize={'23px'} onClick={likeHandler} />
+              :
+              <IoMdHeartEmpty fontSize={'23px'} onClick={likeHandler} />
+          }
+          <IoChatbubbleOutline fontSize={'20px'} onClick={commentHandler}/>
           <IoShareSocialOutline fontSize={'18px'} />
         </div>
         <div className='content-center text-xs'>Time</div>
       </div>
+
+      {/* comments */}
+      {
+        comment &&
+        <div className='p-4 border-t border-black mt-2'>
+        <div className='flex flex-row justify-between py-2'>
+          <div className='flex flex-row gap-3'>
+          <img src={logo} alt="" className='w-[28px] border border-black rounded-full h-[28px] '/>
+          <div className='text-[10px] my-auto'><span className='text-xs font-semibold mr-2'> Username: </span>Comment</div>
+          </div>
+          <VscKebabVertical fontSize={'20px'}  className='my-auto mr-1'/>
+      </div>
+        
+       
+      </div>
+      }
     </div>
   );  
 }

@@ -1,7 +1,7 @@
 import { toast } from "react-hot-toast"
 
 import { setLoading, setComments } from "../../slices/commentSlice"
-import { apiConnector } from "..apiconnector"
+import { apiConnector } from "../apiConnector"
 import { commentEndpoints } from "../api";
 
 const {

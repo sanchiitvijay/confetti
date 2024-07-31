@@ -1,7 +1,7 @@
 import { toast } from "react-hot-toast"
 import { setLoading, setPost } from "../../slices/postSlice"
-import { apiConnector } from "..apiconnector"
-import { postEndpoints } from "../apis"
+import { apiConnector } from "../apiConnector"
+import { postEndpoints } from "../api"
 
 const {
     CREATE_POST_API,
