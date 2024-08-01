@@ -7,6 +7,7 @@ import useOnClickOutsideProfile from '../hooks/useOnClickOutsideProfile';
 import { MdSpaceDashboard } from 'react-icons/md';
 import Sidebar from "../components/core/Feed/Sidebar"
 import Post from '../components/core/Feed/Post';
+import CreatePost from '../components/common/CreatePost';
 
 const Feed = () => {
   
@@ -67,6 +68,7 @@ const Feed = () => {
         </div>
       </div>
       <div className=''>
+        <CreatePost/>
         <Post/>
       </div>
     </div>
