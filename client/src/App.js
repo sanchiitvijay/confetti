@@ -17,12 +17,16 @@ import Page404 from "./pages/Page404";
 import { toggleDarkMode } from "./slices/themeSlice";
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import MyFeed from "./components/core/Feed/MyFeed";
+import Settings from "./components/core/Feed/Settings";
+import MyPosts from "./components/core/Feed/MyPosts";
+import MyProfile from "./components/core/Feed/MyProfile";
 
 function App() {
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   let location = useLocation();
-  const darkMode  = useSelector(state => state.theme.darkMode);
+  const darkMode = useSelector(state => state.theme.darkMode);
 
   useEffect(() => {
     if (darkMode) {
@@ -66,9 +70,9 @@ function App() {
             path="/forgot-password"
             element={
               <motion.div
-                initial={{  y: -50 }}
+                initial={{ y: -50 }}
                 animate={{ y: 0 }}
-                exit={{  y: -50 }}
+                exit={{ y: -50 }}
                 transition={{ duration: 0.5 }}
               >
                 <ForgotPassword />
@@ -79,9 +83,9 @@ function App() {
             path="/update-password/:uid"
             element={
               <motion.div
-                initial={{  y: -50 }}
-                animate={{  y: 0 }}
-                exit={{  y: -50 }}
+                initial={{ y: -50 }}
+                animate={{ y: 0 }}
+                exit={{ y: -50 }}
                 transition={{ duration: 0.5 }}
               >
                 <UpdatePassword />
@@ -92,9 +96,9 @@ function App() {
             path="/privacy-policy"
             element={
               <motion.div
-                initial={{  y: -50 }}
-                animate={{  y: 0 }}
-                exit={{  y: -50 }}
+                initial={{ y: -50 }}
+                animate={{ y: 0 }}
+                exit={{ y: -50 }}
                 transition={{ duration: 0.5 }}
               >
                 <PrivacyPolicy />
@@ -105,9 +109,9 @@ function App() {
             path="/terms-and-conditions"
             element={
               <motion.div
-                initial={{  y: -50 }}
-                animate={{  y: 0 }}
-                exit={{  y: -50 }}
+                initial={{ y: -50 }}
+                animate={{ y: 0 }}
+                exit={{ y: -50 }}
                 transition={{ duration: 0.5 }}
               >
                 <TermsAndConditions />
@@ -118,9 +122,9 @@ function App() {
             path="/otp"
             element={
               <motion.div
-                initial={{  y: -50 }}
-                animate={{  y: 0 }}
-                exit={{  y: -50 }}
+                initial={{ y: -50 }}
+                animate={{ y: 0 }}
+                exit={{ y: -50 }}
                 transition={{ duration: 0.5 }}
               >
                 <OTP />
@@ -129,28 +133,21 @@ function App() {
           />
           <Route
             path="/feed"
-            element={
-              <div
-                // initial={{  y: -50 }}
-                // animate={{  y: 0 }}
-                // exit={{  y: -50 }}
-                // transition={{ duration: 0.5 }}
-              >
-                <Feed />
-              </div>
-            }
+            element={<Feed />}
           >
-            <Route path="/feed/settings" element="" />
-            <Route path="/feed/my-profile" element="" />
-            <Route path="" element="" />
+            <Route path="/feed/" element={<MyFeed/>} />
+            <Route path="/feed/settings" element={<Settings/>} />
+            <Route path="/feed/my-posts" element={<MyPosts/>} />
+            <Route path="/feed/my-profile" element={<MyProfile/>} />
+
           </Route>
           <Route
             path="*"
             element={
               <motion.div
-                initial={{  y: -50 }}
-                animate={{  y: 0 }}
-                exit={{  y: -50 }}
+                initial={{ y: -50 }}
+                animate={{ y: 0 }}
+                exit={{ y: -50 }}
                 transition={{ duration: 0.5 }}
               >
                 <Page404 />

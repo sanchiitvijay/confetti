@@ -23,7 +23,7 @@ const Sidebar=()=>{
   }
   
   return (
-    <div className="relative flex w-[200px] dark:text-white flex-col border-r-[1px] 
+    <div className="relative flex w-[200px] bg-white dark:bg-gray-900 dark:text-white flex-col border-r-[1px] 
     h-[calc(100vh-3.5rem)] text-black font-bold py-10">
       <div className="flex relative  flex-col">
         {
