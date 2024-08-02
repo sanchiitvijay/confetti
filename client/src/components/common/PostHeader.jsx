@@ -3,14 +3,15 @@ import logo from "../../assets/confettiNoText.png"
 import { VscGripper, VscKebabVertical } from "react-icons/vsc";
 import { Dropdown } from 'flowbite-react';
 import { reportPost } from '../../services/operations/postAPI';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
-const PostHeader = ({token, post}) => {
-
+const PostHeader = (props) => {
+    const token = useSelector((state) => state.auth.token);
     const dispatch = useDispatch();
+
     const reportHandler = () => {
-        dispatch(reportPost(token, post));
+        dispatch(reportPost(token, ...props));
       }
     
 
@@ -19,13 +20,13 @@ const PostHeader = ({token, post}) => {
     <div className='flex flex-row border-b border-black dark:border-white pb-3 justify-between'>
         <div className='flex flex-row gap-3'>
           <img
-            src={logo}
+            src={props?.displayProfile || logo}
             className='w-[40px] h-[40px] object-fill rounded-full border border-confettiDarkColor1 dark:border-confettiLightColor1'
             alt='img'
           />
           <div className='flex flex-col'>
-            <h1 className='font-semibold text-sm'>username</h1>
-            <p className='text-xs'>college</p>
+            <h1 className='font-semibold text-sm'>{props?.username ||"username"}</h1>
+            <p className='text-xs'>{props?.college || "college"}</p>
           </div>
         </div>
 
