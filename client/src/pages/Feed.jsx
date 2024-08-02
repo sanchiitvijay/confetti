@@ -8,6 +8,7 @@ import { MdSpaceDashboard } from 'react-icons/md';
 import Sidebar from "../components/core/Feed/Sidebar"
 import Post from '../components/core/Feed/Post';
 import CreatePost from '../components/common/CreatePost';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Feed = () => {
   
@@ -18,7 +19,6 @@ const Feed = () => {
   const [show,setShow]=useState(false);
   const showRef=useRef();
   const stickRef=useRef();
-  // const [dashboardShow, setDashboardShow] = useState(window.screen.availWidth > 640);
   const showHandler=()=>{
     setShow(false);
   }
@@ -30,30 +30,6 @@ const Feed = () => {
     }
   },[token,navigate])
  
-
-
-  // const handleResize = () => {
-  //   if (window.screen.availWidth <= 640) {
-  //     setDashboardShow(false);
-  //   } else {
-  //     setDashboardShow(true);
-  //   }
-  //   console.log(window.screen.availWidth);
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener('resize', handleResize);
-
-  //   // Call handleResize once to set the initial state
-  //   handleResize();
-
-  //   // Clean up the event listener on component unmount
-  //   return () => {
-  //     window.removeEventListener('resize', handleResize);
-  //   };
-  // }, []);
-
-
 
   useOnClickOutsideProfile(showRef,stickRef,showHandler);
 
