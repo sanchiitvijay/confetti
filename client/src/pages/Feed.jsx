@@ -8,6 +8,7 @@ import { MdSpaceDashboard } from 'react-icons/md';
 import Sidebar from "../components/core/Feed/Sidebar"
 import Post from '../components/core/Feed/Post';
 import CreatePost from '../components/common/CreatePost';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Feed = () => {
   
@@ -18,7 +19,6 @@ const Feed = () => {
   const [show,setShow]=useState(false);
   const showRef=useRef();
   const stickRef=useRef();
-  const [dashboardShow, setDashboardShow] = useState(window.screen.availWidth > 640);
   const showHandler=()=>{
     setShow(false);
   }
@@ -30,30 +30,6 @@ const Feed = () => {
     }
   },[token,navigate])
  
-
-
-  const handleResize = () => {
-    if (window.screen.availWidth <= 640) {
-      setDashboardShow(false);
-    } else {
-      setDashboardShow(true);
-    }
-    console.log(window.screen.availWidth);
-  };
-
-  useEffect(() => {
-    window.addEventListener('resize', handleResize);
-
-    // Call handleResize once to set the initial state
-    handleResize();
-
-    // Clean up the event listener on component unmount
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-
 
   useOnClickOutsideProfile(showRef,stickRef,showHandler);
 
@@ -73,12 +49,12 @@ const Feed = () => {
   
 
   return (
-    <div className='bg-confettiYellowColor1 relative dark:bg-confettiDarkColor1' >
+    <div className='bg-confettiYellowColor1 relative dark:bg-confettiDarkColor1 overflow-hidden' >
       <Navbar/>
       <div className="flex relative w-full flex-row">
         <div className="relative flex min-h-[calc(100vh-3.5rem)]">
-        <div className={`w-[200px] ${dashboardShow?("block"):("hidden")}`}> </div>
-        <div ref={showRef} className={`z-30 ${show?`left-0 fixed`:`-left-96 fixed`} sm:fixed sm:left-0 transition-all duration-500 `}>
+        {/* <div className={`w-[200px] ${dashboardShow?("block"):("hidden")}`}> </div> */}
+        <div ref={showRef} className={`z-30 ${show?`left-0 `:`-left-96 `} sm:relative  absolute sm:left-0 transition-all duration-500 `}>
           <Sidebar/>
         </div>
         <button onClick={()=>{
@@ -91,7 +67,7 @@ const Feed = () => {
         
       </div>
 
-      <div className="min-h-[calc(100vh-3.5rem)] w-full flex justify-center ">
+      <div className="h-[calc(100vh-3.5rem)] w-full flex justify-center overflow-auto ">
             <Outlet />
          
         </div>
