@@ -35,7 +35,7 @@ const CreatePost = () => {
 
   return (
     <div>
-        <div className='border dark:text-white  md:w-[500px] bg-confettiLightColor2 dark:bg-confettiDarkColor3 border-black rounded-md m-3 md:m-12 p-3 md:p-4 pb-3'>
+        <div className='border dark:text-white w-max md:w-[500px] bg-confettiLightColor2 dark:bg-confettiDarkColor3 border-black rounded-md m-3 md:m-12 p-3 md:p-4 pb-3'>
             <label htmlFor="post" className="text-sm px-2" >Write Confession</label>
             <input type="text" placeholder="What is in your mind" name="description"  onClick={() => !openMoreInfo && setOpenMoreInfo(true)}  onChange={handleOnChange} className="border border-black dark:border-white my-2 rounded-md p-2 h-12 w-full"/>
 

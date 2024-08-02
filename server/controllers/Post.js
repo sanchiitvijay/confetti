@@ -46,12 +46,14 @@ exports.createPost = async(req, res)=>{
                     })
                 }
             }
-        }
-
+        } 
+        const posts =await Post.find().sort({ createdAt: -1 });
+        slicedPost = posts.slice(0, req.body.count)
+        
         return res.status(200).json({
             success: true,
             message: "Post has been created successfully",
-            post
+            slicedPost
         })
 
     } catch (error) {
@@ -150,11 +152,13 @@ exports.deletePost = async(req, res) => {
 exports.getPosts = async(req, res) => {
     try {
         const posts =await Post.find().sort({ createdAt: -1 });
+
+        slicedPost = posts.slice(0, req.body.count)
     
         return res.status(200).json({
             success: true,
             message: "Post has been sent successfully",
-            posts
+            slicedPost
         })
     } catch (error) {
         return res.status(500).json({
@@ -178,11 +182,13 @@ exports.getUserPosts=async(req,res)=>{
 
         const posts=await Post.find({author:userId});
 
+        slicedPost = posts.slice(0, req.body.count)
+
         const user=await User.findById(userId);
         return res.status(200).json({
             success:true,
             message:`Posts fetched for the user ${user?.name}`,
-            posts
+            slicedPost
         })
     }
     catch(error){
