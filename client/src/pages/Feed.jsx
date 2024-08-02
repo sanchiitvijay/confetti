@@ -18,9 +18,42 @@ const Feed = () => {
   const [show,setShow]=useState(false);
   const showRef=useRef();
   const stickRef=useRef();
+  const [dashboardShow, setDashboardShow] = useState(window.screen.availWidth > 640);
   const showHandler=()=>{
     setShow(false);
   }
+
+  useEffect(()=>{
+ 
+    if(!token){
+      navigate("/")
+    }
+  },[token,navigate])
+ 
+
+
+  const handleResize = () => {
+    if (window.screen.availWidth <= 640) {
+      setDashboardShow(false);
+    } else {
+      setDashboardShow(true);
+    }
+    console.log(window.screen.availWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+
+    // Call handleResize once to set the initial state
+    handleResize();
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
 
   useOnClickOutsideProfile(showRef,stickRef,showHandler);
 
@@ -35,23 +68,17 @@ const Feed = () => {
     )
   }
   
-  // useEffect(()=>{
  
-  //   if(!token){
-  //     navigate("/")
-  //   }
-  // },[token,navigate])
- 
-
 
   
 
   return (
-    <div className='bg-confettiYellowColor1 dark:bg-confettiDarkColor1' >
+    <div className='bg-confettiYellowColor1 relative dark:bg-confettiDarkColor1' >
       <Navbar/>
-      <div className="flex flex-row">
+      <div className="flex relative w-full flex-row">
         <div className="relative flex min-h-[calc(100vh-3.5rem)]">
-        <div ref={showRef} className={`z-30 ${show?`left-0`:`-left-96`} sm:relative sm:left-0 absolute transition-all duration-500 `}>
+        <div className={`w-[200px] ${dashboardShow?("block"):("hidden")}`}> </div>
+        <div ref={showRef} className={`z-30 ${show?`left-0 fixed`:`-left-96 fixed`} sm:fixed sm:left-0 transition-all duration-500 `}>
           <Sidebar/>
         </div>
         <button onClick={()=>{
@@ -61,16 +88,14 @@ const Feed = () => {
         className=" fixed bottom-4 right-10  shadow-2xl  hover:scale-95 transition-all duration-200  z-40 p-5 rounded-full  bg-yellow-50 sm:hidden">
           <MdSpaceDashboard fontSize={20}/>
         </button>
-        <div className="h-[calc(100vh-3.5rem)] w-full overflow-auto">
-          <div className="mx-auto w-11/12 max-w-[1000px] py-10">
-            <Outlet/>
-          </div>
+        
+      </div>
+
+      <div className="min-h-[calc(100vh-3.5rem)] w-full flex justify-center ">
+            <Outlet />
+         
         </div>
-      </div>
-      <div className=''>
-        <CreatePost/>
-        <Post/>
-      </div>
+      
     </div>
     </div>
   )

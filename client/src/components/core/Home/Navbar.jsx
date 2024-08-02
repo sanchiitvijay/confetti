@@ -46,13 +46,13 @@ const Navbar = () => {
   return (
     
 
-<motion.div className=" bg-confettiLightColor3 dark:bg-confettiDarkColor3 dark:text-white text-black border-gray-200"
+<motion.div className="sticky top-0 z-50 bg-confettiLightColor3 dark:bg-confettiDarkColor3 dark:text-white text-black border-gray-200"
                 // initial={{  y: -50 }}
                 // animate={{  y: 0 }}
                 // exit={{  y: -50 }}
                 // transition={{ duration: 0.5 }}
         >
-  <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-1 md:px-5 px-3">
+  <div className="max-w-screen-xl flex  flex-wrap h-[3.5rem] items-center justify-between mx-auto py-1 md:px-5 px-3">
   <Link href="/feed" className="flex ml-4 items-center space-x-3 rtl:space-x-reverse">
       <img src={logo} className="h-[90px] mt-[-10px] mb-[-30px]" alt="Confetti Logo" />
   </Link>  
