@@ -52,9 +52,6 @@ const CreatePost = () => {
 
             <div className='flex lg:flex-row flex-col max-md:gap-3 justify-between '>
 
-              
-            
-
 
             <div className="flex flex-col gap-2 lg:w-[48%]">
               <label htmlFor="year" className="text-[14px] mt-4 leading-[22px] font-[400] dark:text-white">
