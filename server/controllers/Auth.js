@@ -18,7 +18,7 @@ exports.sendotp=async(req,res)=>{
         const checkUserPresent=await User.findOne({email});
 
         if(checkUserPresent){
-            return res.status(401).json({
+            return res.status(417).json({
                 success:false,
                 message:"user already registered"
             })
@@ -82,8 +82,9 @@ exports.signup=async(req,res)=>{
             accountType,
             otp,
         }=req.body;
-        
-        const avatar=req.files.avatar;
+        console.log("avatar se phele------------------------")
+        const avatar=req?.files?.avatar;
+        console.log("avatar se badmein------------------------")
        
         console.log("REQ BODY:",req.body)
         console.log("REQ FILE:",req.files);
@@ -208,7 +209,7 @@ exports.login=async(req,res)=>{
       //check if user exists or not
       const user=await User.findOne({email}).populate("notifications");
       if(!user){
-        return res.status(401).json({
+        return res.status(417).json({
           success:false,
           message:"User does not exist, Sign up first please"
         })
@@ -241,7 +242,7 @@ exports.login=async(req,res)=>{
       }
   
       else{
-        return res.status(401).json({
+        return res.status(417).json({
           success:false,
           message:"Password is incorrect"
         })
@@ -278,7 +279,7 @@ exports.changePassword=async(req,res)=>{
         if (!isPasswordMatch) {
         
             return res
-                .status(401)
+                .status(417)
                 .json({ success: false, message: "The password is incorrect" });
         }
 

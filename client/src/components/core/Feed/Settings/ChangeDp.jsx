@@ -61,12 +61,12 @@ const ChangeDp = () => {
     }, [imageFile])
     return (
       <>
-        <div className="flex mt-10 items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12 text-richblack-5">
+        <div className="flex flex-col mt-10 max-w-[628px ] items-center justify-between rounded-md border-[1px] dark:border-white border-confettiDarkColor5 bg-confettiLightColor3 dark:bg-confettiDarkColor5 p-8 px-12 text-richblack-5">
           <div className="flex items-center gap-x-8 sm:gap-x-4">
             <img
               src={previewSource || user?.displayPicture}
               alt={`profile-${user?.name}`}
-              className="aspect-square w-[78px] rounded-full object-cover"
+              className="aspect-square w-[78px] rounded-full border dark:border-white border-confettiDarkColor5 p-1 object-cover"
             />
             <div className="space-y-2">
               <p>Change Profile Picture</p>
