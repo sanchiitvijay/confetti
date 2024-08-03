@@ -6,6 +6,7 @@ exports.createPost = async(req, res)=>{
     try{
         const {
             description,
+
             year
         } = req.body;
         console.log("req body--------------", req.body)
