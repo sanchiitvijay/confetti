@@ -3,8 +3,8 @@ import IconBtn from "../common/SubmitButton"
 
 export default function ConfirmationModal({ modalData }) {
   return (
-    <div className="fixed inset-0 z-[1000] !mt-0 grid place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
-      <div className="w-11/12 max-w-[350px] rounded-lg border  p-6">
+    <div className="fixed inset-0 z-[1000] !mt-0 grid place-items-center overflow-auto bg-black bg-opacity-10 backdrop-blur-sm">
+      <div className="w-11/12 max-w-[350px] rounded-lg bg-confettiLightColor3 dark:bg-confettiDarkColor3 border border-black dark:border-white  p-6">
         <p className="text-2xl font-semibold text-richblack-5">
           {modalData?.text1}
         </p>

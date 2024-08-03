@@ -6,14 +6,14 @@ exports.createPost = async(req, res)=>{
     try{
         const {
             description,
-            caption,
             year
         } = req.body;
-
-        const userId = req.body.userId || req.user.id
-        const name = req.body || req.user
+        console.log("req body--------------", req.body)
+        console.log("req.user--------------", req.user)
+        const userId = req?.body?.userId || req?.user?.id
+        const name = req?.body?.name
         
-        if(!userId || !description || !caption) {
+        if(!userId || !description) {
             return res.status(403).json({
                 success: false,
                 message: "All fields are required",
@@ -24,7 +24,6 @@ exports.createPost = async(req, res)=>{
         const post = await Post.create({
             author: userId,
             description,
-            caption,
             likes:[],
             comments:[],
         });

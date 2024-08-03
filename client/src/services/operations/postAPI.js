@@ -49,6 +49,7 @@ export function createPost (token, data) {
     return async(dispatch) => {
         let result = null
         const toastId = toast.loading("Loading...")
+        console.log("create post 1 -----------------")
         dispatch(setLoading(true))
         try {
             const response = await apiConnector("POST",CREATE_POST_API, data, {
