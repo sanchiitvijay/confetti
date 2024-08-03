@@ -18,12 +18,12 @@ const Modal = ({ data, name, value, error, register, required, setModal }) => {
   useEscape(modalRef, modalHandler);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence >
       {isVisible && (
-        <div className="fixed inset-0 backdrop-blur w-[100vw] h-[100vh] flex items-center justify-center z-50">
+        <div className="fixed  inset-0 backdrop-blur w-[100vw] h-[100vh] flex items-center justify-center z-50">
           <div
             ref={modalRef}
-            className="px-12 py-8 xs:w-[100%] md:w-fit bg-gray-600 rounded-md bg-clip-padding backdrop-filter mx-auto justify-center backdrop-blur-md bg-opacity-20 border text-black border-gray-400"
+            className="px-12 py-8 xs:w-[100%] text-white md:w-fit bg-gray-600 rounded-md bg-clip-padding backdrop-filter mx-auto justify-center backdrop-blur-md bg-opacity-20 border text-black border-gray-400"
           >
             <div className="mb-4">
               <h2 className="text-xl font-semibold">{`Choose ${name}`}</h2>
