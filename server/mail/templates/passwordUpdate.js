@@ -7,7 +7,7 @@ exports.passwordUpdated = (email, name) => {
         <title>Password Update Confirmation</title>
         <style>
             body {
-                background-color: #ffffff;
+                background-color: #fffff0;
                 font-family: Arial, sans-serif;
                 font-size: 16px;
                 line-height: 1.4;
@@ -55,8 +55,8 @@ exports.passwordUpdated = (email, name) => {
     
     <body>
         <div class="container">
-            <a hregister="https://studynotion-edtech-project.vercel.app"><img class="logo"
-                    src="https://i.ibb.co/7Xyj3PC/logo.png" alt="StudyNotion Logo"></a>
+            <a hregister="https://github.com/sanchiitvijay/confetti"><img class="logo"
+                    src="https://res.cloudinary.com/dcnhb3jwv/image/upload/v1720419911/chat-app/confetti_dea0wh.png" alt="Confetti Logo"></a>
             <div class="message">Password Update Confirmation</div>
             <div class="body">
                 <p>Hey ${name},</p>
@@ -66,7 +66,7 @@ exports.passwordUpdated = (email, name) => {
             </div>
             <div class="support">If you have any questions or need further assistance, please feel free to reach out to us
                 at
-                <a hregister="mailto:info@studynotion.com">info@studynotion.com</a>. We are here to help!
+                <a hregister="mailto:confetti.site.01@gmail.com">confetti.site.01@gmail.com</a>. We are here to help!
             </div>
         </div>
     </body>

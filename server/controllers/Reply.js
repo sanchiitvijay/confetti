@@ -31,7 +31,7 @@ exports.createReply=async(req,res)=>{
 
 
         if(!reply){
-            return res.status(401).json({
+            return res.status(417).json({
                 success:false,
                 message:"Cant reply to the comment"
             })
@@ -160,7 +160,7 @@ exports.getAllReplies=async(req,res)=>{
 
 
         if(!replies){
-            return res.status(401).json({
+            return res.status(417).json({
                 success:false,
                 message:"Replies for the comment cant be found"
             })

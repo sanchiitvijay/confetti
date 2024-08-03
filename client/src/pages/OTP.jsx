@@ -14,6 +14,8 @@ const OTP = () => {
     const dispatch=useDispatch();
     const [otp,setOtp]=useState("");
     const navigate=useNavigate();
+
+    console.log("otp mein jaa rha hai---------------");
     
   
     useEffect(()=>{
