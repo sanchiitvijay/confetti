@@ -5,18 +5,19 @@ export const authEndpoints = {
     LOGIN_API: BASE_URL + "/auth/login",
     SENDOTP_API: BASE_URL + "/auth/send-otp",
     SIGNUP_API: BASE_URL + "/auth/signup",
-    CHANGEPASSWORD_API: BASE_URL + "/auth/changePassword",
     RESETPASSTOKEN_API: BASE_URL + "/auth/resetPasswordToken",
     RESETPASSWORD_API: BASE_URL + "/auth/resetPassword"
 }
 
 export const userEndpoints = {
-    GET_ALL_USERS_API: BASE_URL + "/user/getAllUsers",
-    REMOVE_USER_API: BASE_URL + "/user/removeUser",
-    EDIT_USER_API: BASE_URL + "/user/editUser",
-    DELETE_USER_API: BASE_URL + "/user/deleteUser",
-    DELETE_GRADUATES_API: BASE_URL + "/user/deleteGraduates",
-    PROMOTE_STUDENTS_API: BASE_URL + "/user/promoteStudents",
+    GET_ALL_USERS_API: BASE_URL + "/auth/get-all-user",
+    REMOVE_USER_API: BASE_URL + "/auth/remove-user",
+    EDIT_USER_API: BASE_URL + "/auth/edit-user",
+    CHANGEPASSWORD_API: BASE_URL + "/auth/change-password",
+    DELETE_USER_API: BASE_URL + "/auth/remove-user",
+    DELETE_GRADUATES_API: BASE_URL + "/auth/delete-graduates",
+    PROMOTE_STUDENTS_API: BASE_URL + "/auth/promote-students",
+    UPDATE_DP_API: BASE_URL + "/auth/update-dp",
 }
 
 export const postEndpoints = {

@@ -222,14 +222,14 @@ exports.login=async(req,res)=>{
           accountType:user.accountType,
         }
         const token=jwt.sign(payload,process.env.JWT_SECRET,{
-          expiresIn:"36h",
+          expiresIn:"3h",
         })
         user.token=token;
         user.password=undefined;
   
          //create cookie and send response
         const options={
-          expires:new Date(Date.now()+3*24*60*60*1000),
+          expires:new Date(Date.now()+3*60*60*1000),
           httpOnly:true,
         }
         res.cookie("token",token,options).status(200).json({
@@ -263,11 +263,12 @@ exports.login=async(req,res)=>{
 exports.changePassword=async(req,res)=>{
 
   try {
+        const { oldPassword, newPassword,userId} = req.body;
+        const uid=userId || req.user.id;
          
-        const userDetails = await User.findById(req.user.id);
-    //get data from req body
-     //get oldPassword,newPassword,confirmNewPassword
-        const { oldPassword, newPassword, confirmNewPassword } = req.body;
+        const userDetails = await User.findById(uid);
+   
+       
 
     //Validation
         const isPasswordMatch = await bcrypt.compare(
@@ -282,18 +283,10 @@ exports.changePassword=async(req,res)=>{
         }
 
 
-        if (newPassword !== confirmNewPassword) {
-        
-            return res.status(400).json({
-                success: false,
-                message: "The password and confirm password does not match",
-            });
-        }
-
     //Hashing and updating    
         const encryptedPassword = await bcrypt.hash(newPassword, 10);
         const updatedUserDetails = await User.findByIdAndUpdate(
-            req.user.id,
+            uid,
             { password: encryptedPassword },
             { new: true }
         );
