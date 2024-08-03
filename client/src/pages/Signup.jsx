@@ -229,12 +229,14 @@ useEffect(()=>{
             name={"Gender"}
             showModal={genderModal}
             getValues={getValues}
+            required={true}
             />
             <DropDownModal 
               setModal={setBranchModal}
               name={"Branch"}
               showModal={branchModal}
               getValues={getValues}
+              required={true}
             />
           </div>
 
@@ -244,6 +246,7 @@ useEffect(()=>{
               name={"Year"}
               showModal={yearModal}
               getValues={getValues}
+              required={true}
             />
             <SignUpInput 
             name="Instagram" 
