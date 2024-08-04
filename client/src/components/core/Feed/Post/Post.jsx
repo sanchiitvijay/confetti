@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import logo from "../../../assets/confettiNoText.png";
 import { VscSend } from "react-icons/vsc";
 import { IoShareSocialOutline, IoChatbubbleOutline } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
-import { liked } from '../../../services/operations/likeAPI';
-import { reportPost } from '../../../services/operations/postAPI';
-import { createComments, getAllComments } from '../../../services/operations/commentAPI';
+import { liked } from '../../../../services/operations/likeAPI';
+import { createComments, getAllComments } from '../../../../services/operations/commentAPI';
 import { FaHeart } from "react-icons/fa";
-import { setTotalLikes } from '../../../slices/postSlice';
-import Comment from '../../common/Comment';
-import PostHeader from '../../common/PostHeader';
+import { setTotalLikes } from '../../../../slices/postSlice';
+import Comment from '../../../common/Comment';
+import PostHeader from '../../../common/PostHeader';
 
 const Post = (props) => {
   const dispatch = useDispatch();
@@ -58,7 +56,7 @@ const Post = (props) => {
   }
 
   return (
-    <div className='border dark:text-white  md:w-[500px] w-max bg-confettiLightColor2 dark:bg-confettiDarkColor3 border-black rounded-md m-3 md:m-12 p-3 md:p-4 pb-3'>
+    <div className='border dark:text-white min-w-[280px] md:w-[500px] w-max bg-confettiLightColor2 dark:bg-confettiDarkColor3 border-black rounded-md m-3 md:m-12 p-3 md:p-4 pb-3'>
       {/* post header */}
       <PostHeader props={props} />
 
