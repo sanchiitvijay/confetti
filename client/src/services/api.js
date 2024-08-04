@@ -21,12 +21,12 @@ export const userEndpoints = {
 }
 
 export const postEndpoints = {
-    CREATE_POST_API: BASE_URL + "/post/createPost",
-    EDIT_POST_API: BASE_URL + "/post/editPost",
-    DELETE_POST_API: BASE_URL + "/post/deletePost",
-    GET_POST_API: BASE_URL + "/post/getPost",
-    GET_USER_POSTS_API: BASE_URL + "/post/getuserPosts",
-    REPORT_POST_API: BASE_URL + "/post/reportPost",
+    CREATE_POST_API: BASE_URL + "/post/create-post",
+    EDIT_POST_API: BASE_URL + "/post/edit-post",
+    DELETE_POST_API: BASE_URL + "/post/delete-post",
+    GET_POST_API: BASE_URL + "/post/get-post",
+    GET_USER_POSTS_API: BASE_URL + "/post/get-user-posts",
+    REPORT_POST_API: BASE_URL + "/post/report-post",
 }
 
 export const likeEndpoints = {
