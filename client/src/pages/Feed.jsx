@@ -6,8 +6,6 @@ import Spinner from '../components/common/Spinner';
 import useOnClickOutsideProfile from '../hooks/useOnClickOutsideProfile';
 import { MdSpaceDashboard } from 'react-icons/md';
 import Sidebar from "../components/core/Feed/Sidebar"
-import Post from '../components/core/Feed/Post';
-import CreatePost from '../components/common/CreatePost';
 import InfiniteScroll from 'react-infinite-scroll-component';
 //console.log("HAM JEET GYE");
 const Feed = () => {

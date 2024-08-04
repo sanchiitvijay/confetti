@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { createPost } from '../../services/operations/postAPI';
-import SubmitButton from './SubmitButton';
+import { createPost } from '../../../../services/operations/postAPI';
+import SubmitButton from '../../../common/SubmitButton';
 
 const CreatePost = () => {
   const [openMoreInfo, setOpenMoreInfo] = useState(false);
@@ -30,8 +30,8 @@ const CreatePost = () => {
 
   return (
     <div>
-      <div className='border dark:text-white w-full max-md:mx-7 md:w-[500px] bg-confettiLightColor2 dark:bg-confettiDarkColor3 border-black rounded-md m-3 md:m-12 p-3 md:p-4 pb-3'>
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <div className='border dark:text-white w-full md:w-[500px] bg-confettiLightColor2 mx-auto dark:bg-confettiDarkColor3 border-black rounded-md m-3 lg:my-8 p-3 md:p-4 pb-3'>
+        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
           <label htmlFor="description" className="text-sm mt-4 px-2">Write Confession</label>
           <input
             type="text"
@@ -54,7 +54,7 @@ const CreatePost = () => {
             <div className='flex lg:flex-row flex-col max-md:gap-3 justify-between '>
 
 
-            <div className="flex flex-col gap-2 lg:w-[48%]">
+            <div className="flex flex-col gap-2 lg:w-[48%] w-full">
               <label htmlFor="year" className="text-[14px] mt-4 leading-[22px] font-[400] dark:text-white">
                 Year
               </label>
@@ -80,7 +80,7 @@ const CreatePost = () => {
             </div>
 
 
-            <div className="flex flex-col gap-2 lg:w-[48%]">
+            <div className="flex flex-col gap-2 lg:w-[48%] w-full">
               <label htmlFor="branch" className="text-[14px] mt-4 leading-[22px] font-[400] dark:text-white">
                 Branch
               </label>

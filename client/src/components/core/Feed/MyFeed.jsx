@@ -1,6 +1,6 @@
 import React from 'react'
-import CreatePost from '../../common/CreatePost'
-import Post from './Post'
+import CreatePost from './Post/CreatePost'
+import Post from './Post/Post'
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const MyFeed = () => {
