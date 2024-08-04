@@ -9,7 +9,7 @@ import Sidebar from "../components/core/Feed/Sidebar"
 import Post from '../components/core/Feed/Post';
 import CreatePost from '../components/common/CreatePost';
 import InfiniteScroll from 'react-infinite-scroll-component';
-
+//console.log("HAM JEET GYE");
 const Feed = () => {
   
   const {token}=useSelector((state)=>state.auth)
@@ -22,7 +22,7 @@ const Feed = () => {
   const showHandler=()=>{
     setShow(false);
   }
-
+  console.log("HAM JEET GYE");
   useEffect(()=>{
  
     if(!token){
