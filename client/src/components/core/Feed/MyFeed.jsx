@@ -12,7 +12,7 @@ const MyFeed = () => {
     
   }
   return (
-    <div className='w-full grid place-items-center overflow-auto' >
+    <div className='w-full grid place-items-center overflow-auto over' >
         <CreatePost/>
         <InfiniteScroll
   dataLength={data.length} //This is important field to render the next data
