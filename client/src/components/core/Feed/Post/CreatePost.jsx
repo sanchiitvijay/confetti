@@ -30,7 +30,7 @@ const CreatePost = () => {
 
   return (
     <div>
-      <div className='border dark:text-white w-full md:w-[500px] bg-confettiLightColor2 mx-auto dark:bg-confettiDarkColor3 border-black rounded-md m-3 lg:my-8 p-3 md:p-4 pb-3'>
+      <div className='border dark:text-white w-full md:w-[500px] bg-confettiLightColor2 mx-auto dark:bg-confettiDarkColor3 border-black rounded-md my-3 lg:my-8 p-3 md:p-4 pb-3'>
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
           <label htmlFor="description" className="text-sm mt-4 px-2">Write Confession</label>
           <input

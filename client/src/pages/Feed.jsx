@@ -7,6 +7,7 @@ import useOnClickOutsideProfile from '../hooks/useOnClickOutsideProfile';
 import { MdSpaceDashboard } from 'react-icons/md';
 import Sidebar from "../components/core/Feed/Sidebar"
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Stats from '../components/core/Feed/Stats';
 //console.log("HAM JEET GYE");
 const Feed = () => {
   
@@ -67,8 +68,8 @@ const Feed = () => {
 
       <div className="h-[calc(100vh-3.5rem)] w-full flex justify-center overflow-auto ">
             <Outlet />
-         
         </div>
+      <Stats className="max-lg:hidden"/>
       
     </div>
     </div>

@@ -2,17 +2,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { sidebarLinks } from "../Feed/dashboard-links";
 import { useNavigate } from "react-router-dom";
 import SidebarLink from "./SidebarLink";
-import { VscSignOut } from "react-icons/vsc";
+import { VscSignOut, VscVersions } from "react-icons/vsc";
 import { useState } from "react";
 import Spinner from "../../common/Spinner";
 import ConfirmationModal from "../../common/ConfirmationModal";
 import { logout } from "../../../services/operations/authAPI";
+import Stats from "./Stats";
+
+
 const Sidebar=()=>{
   const {user,loading:profileLoading}=useSelector((state)=>state.profile);
   const {loading:authLoading}=useSelector((state)=>state.auth);
   const dispatch=useDispatch();
   const navigate=useNavigate();
   const [confirmationModal,setConfirmationModal]=useState(null);
+  const [stats, setStats] = useState(false);
+
+  const handleStats=()=>{
+    
+    setStats(!stats);
+  };
   
   if(profileLoading || authLoading){
     return (
@@ -34,7 +43,21 @@ const Sidebar=()=>{
             )
             })
         }
-      </div>
+
+        {/* workr here-------------------- */}
+         <div className={`relative px-8 py-2 text-sm font-medium ${stats?("bg-confettiLightColor4 dark:bg-confettiDarkColor3 dark:text-white "):("bg-opacity-0")}`}
+         onClick={handleStats}>
+        <span className={`absolute left-0 top-0 h-full w-[0.2rem] bg-yellow-50 ${
+          stats?("opacity-100"):("opacity-0")} `}>
+        </span>
+        {/* </div> */}
+        
+        <div className="flex item-center gap-x-2">
+          <VscVersions className="text-lg"/>
+          <span>Stats</span>
+        </div>
+        </div>
+        </div>
 
       <div className="mx-auto mt-6 mb-6 h-[1px] w-10/12 "></div>
 
@@ -53,8 +76,13 @@ const Sidebar=()=>{
         })}
         className="text-sm mt-2 font-medium "
         >
-        
+        <div className="flex flex-col mb-3 relative">
 
+        <SidebarLink
+        link={{name:"About us",path:"/feed/about-us"}}
+        iconName={"VscTerminalLinux"}
+        />
+        </div>
         <div className="flex dark:text-white ml-8 items-center gap-x-2">
           <VscSignOut className="text-lg" />
           <span>Logout</span>

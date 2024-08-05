@@ -56,7 +56,7 @@ const Post = (props) => {
   }
 
   return (
-    <div className='border dark:text-white min-w-[280px] md:w-[500px] w-max bg-confettiLightColor2 dark:bg-confettiDarkColor3 border-black rounded-md m-3 md:m-12 p-3 md:p-4 pb-3'>
+    <div className='border dark:text-white mx-auto md:w-[500px] w-full bg-confettiLightColor2 dark:bg-confettiDarkColor3 border-black rounded-md my-3 md:my-12 p-3 md:p-4 pb-3'>
       {/* post header */}
       <PostHeader props={props} />
 
