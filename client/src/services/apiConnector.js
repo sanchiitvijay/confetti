@@ -7,18 +7,25 @@ export const axiosInstance = axios.create({
   withCredentials: true, 
 });
 
-// Add a response interceptor
+
 axiosInstance.interceptors.response.use(
   response => response,
   error => {
     if (error.response && error.response.status === 401) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      // Dispatch actions to reset user and token
-      store.dispatch(setUser(null));
-      store.dispatch(setToken(null));
-      toast.error("Session expired, Please log in again")
-      window.location.href = '/';
+      let toastId;
+      setTimeout(()=>{toastId=toast.loading("Session expired,logging out...")},1*500)
+      setTimeout(()=>{
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+     
+        store.dispatch(setUser(null));
+        store.dispatch(setToken(null));
+        toast.dismiss(toastId)  
+      },1*1000)
+
+      
+      
+      setTimeout(()=>{toast.error("Session Expired,Login again")},2*1000)
       
     }
     return Promise.reject(error);
