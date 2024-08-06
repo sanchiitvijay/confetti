@@ -35,12 +35,13 @@ const PostSchema=new mongoose.Schema({
     },
     createdAt:{
         type:Date,
-        default:Date.now(),
+        default:Date.now,
     },
     reports:{
         type:Number,
         default: 0,
-    }
+    },
+
 },
 {
     timestamps:true

@@ -6,11 +6,18 @@ import {combineReducers} from "@reduxjs/toolkit"
 import authReducer from "../slices/authSlice"
 import profileReducer from "../slices/profileSlice"
 import themeReducer from "../slices/themeSlice"
-
+import postReducer from "../slices/postSlice"
+import replyReducer from "../slices/replySlice"
+import likeReducer from "../slices/likeSlice"
+import commentReducer from "../slices/commentSlice"
 const rootReducer=combineReducers({
     auth:authReducer,
     profile:profileReducer,
-    theme: themeReducer
+    theme: themeReducer,
+    post:postReducer,
+    reply:replyReducer,
+    like:likeReducer,
+    comment:commentReducer
 })
 
 export default rootReducer;

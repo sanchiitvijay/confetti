@@ -46,13 +46,15 @@ exports.createPost = async(req, res)=>{
                 }
             }
         } 
-        const posts =await Post.find().sort({ createdAt: -1 });
-        slicedPost = posts.slice(0, req.body.count)
+        let posts =await Post.find().sort({ createdAt: -1 });
+        let postLength=posts.length;
+        posts=posts.slice(0,4);
         
         return res.status(200).json({
             success: true,
             message: "Post has been created successfully",
-            slicedPost
+            posts,
+            postLength
         })
 
     } catch (error) {
@@ -151,13 +153,25 @@ exports.deletePost = async(req, res) => {
 exports.getPosts = async(req, res) => {
     try {
         const posts =await Post.find().sort({ createdAt: -1 });
-
-        slicedPost = posts.slice(0, req.body.count)
+        console.log("POSTS DB SE LE AAYE")
+        let count=req?.headers?.count;
+        console.log("COUNT LELIYE")
+        const totalLength=posts.length;
+        console.log("LENGHT LELIYE")
+        console.log("REQUEST COUNT:",req.headers.count)
+        if(count>totalLength){
+            count=totalLength;
+        }
+        console.log("MAX CHECK")
+        slicedPost = posts.slice(0,count)
+        console.log("SLICED LIKE A CHOPER")
+ 
     
         return res.status(200).json({
             success: true,
             message: "Post has been sent successfully",
-            slicedPost
+            slicedPost,
+            totalLength
         })
     } catch (error) {
         return res.status(500).json({

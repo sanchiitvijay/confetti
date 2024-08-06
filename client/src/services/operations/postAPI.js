@@ -1,5 +1,5 @@
 import { toast } from "react-hot-toast"
-import { setLoading, setPost } from "../../slices/postSlice"
+import { setLoading, setPost,setTotalPosts} from "../../slices/postSlice"
 import { apiConnector } from "../apiConnector"
 import { postEndpoints } from "../api"
 
@@ -12,32 +12,35 @@ const {
     REPORT_POST_API
 } = postEndpoints
 
-export function getPosts (token) {
+export function getPosts (count,token) {
     return async(dispatch) => {
         let result = null
-        const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
-            const response = await apiConnector("GET",GET_POST_API, null, {
-                Authorization: `Bearer ${token}`
+            const response = await apiConnector("GET",GET_POST_API,null, {
+               "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${token}`,
+                count:count,
             })
-
             console.log("GET_POST RESPONSE....", response)
-
+            
             if(!response.data.success) {
                 throw new Error(response.data.message)
             }
+            
 
-            dispatch(setPost(response.data.data))
-            toast.success("post is fetched succesfully")
-            result = response?.data?.data
+            dispatch(setPost(response.data.slicedPost))
+            dispatch(setTotalPosts(response.data.totalLength))
+            
+          
+         
 
         } catch (err) {
             console.log("GET_POST_API FAILED....", err)
             toast.error("Could not get all posts")
 
         } finally {
-            toast.dismiss(toastId)
+            
             dispatch(setLoading(false))
         }
 
@@ -62,7 +65,8 @@ export function createPost (token, data) {
                 throw new Error(response.data.message)
             }
 
-            dispatch(setPost({...response.data.data}))
+            dispatch(setPost(response.data.posts))
+            dispatch(setTotalPosts(response.data.postLength))
             toast.success("post is created succesfully")
             result = response?.data?.data
 
