@@ -66,7 +66,13 @@ const Post = (props) => {
       </div>
 
       {/* footer */}
-      <div className='flex pt-2 justify-between px-5 flex-row'>
+      <div className='flex pt-2 justify-between px-5 flAbout Us
+￼
+Name
+Description
+￼
+Name
+Descriptionex-row'>
         <div className='flex gap-3 content-center flex-row'>
           {
             like ?
