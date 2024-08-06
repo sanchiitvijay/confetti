@@ -46,7 +46,7 @@ exports.createPost = async(req, res)=>{
                 }
             }
         } 
-        let posts =await Post.find().sort({ createdAt: -1 });
+        let posts =await Post.find().sort({ createdAt: -1 }).populate('author').exec();
         let postLength=posts.length;
         posts=posts.slice(0,4);
         
@@ -152,19 +152,20 @@ exports.deletePost = async(req, res) => {
 
 exports.getPosts = async(req, res) => {
     try {
-        const posts =await Post.find().sort({ createdAt: -1 });
-        console.log("POSTS DB SE LE AAYE")
+        const posts =await Post.find().sort({ createdAt: -1 }).populate('author').exec();
+        // console.log("YE POSTS H HAMARE POPULATED:",posts)
+        // console.log("POSTS DB SE LE AAYE")
         let count=req?.headers?.count;
-        console.log("COUNT LELIYE")
+        // console.log("COUNT LELIYE")
         const totalLength=posts.length;
-        console.log("LENGHT LELIYE")
-        console.log("REQUEST COUNT:",req.headers.count)
+        // console.log("LENGHT LELIYE")
+        // console.log("REQUEST COUNT:",req.headers.count)
         if(count>totalLength){
             count=totalLength;
         }
-        console.log("MAX CHECK")
+        // console.log("MAX CHECK")
         slicedPost = posts.slice(0,count)
-        console.log("SLICED LIKE A CHOPER")
+        // console.log("SLICED LIKE A CHOPER")
  
     
         return res.status(200).json({

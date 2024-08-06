@@ -14,7 +14,6 @@ import TermsAndConditions from "./pages/TermsAndConditions";
 import OTP from "./pages/OTP";
 import Feed from "./pages/Feed";
 import Page404 from "./pages/Page404";
-import { toggleDarkMode } from "./slices/themeSlice";
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import MyFeed from "./components/core/Feed/MyFeed";
@@ -22,6 +21,7 @@ import Settings from "./components/core/Feed/Settings";
 import MyPosts from "./components/core/Feed/MyPosts";
 import MyProfile from "./components/core/Feed/MyProfile";
 import AboutUs from "./pages/AboutUs";
+import MetaData from "./services/MetaData";
 
 function App() {
   const { token } = useSelector((state) => state.auth);
@@ -39,6 +39,7 @@ function App() {
 
   return (
     <div className={`w-screen ${token ? "bg-white" : "bg-ring"} dark:bg-confettiDarkColor1 bg-cover bg-center min-h-screen flex flex-col`}>
+      <MetaData />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route

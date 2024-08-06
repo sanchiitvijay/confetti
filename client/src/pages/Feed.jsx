@@ -32,9 +32,6 @@ const Feed = () => {
 
   useOnClickOutsideProfile(showRef,stickRef,showHandler);
 
-  
-  
- 
   if(profileLoading || authLoading){
     return (
       <div>
@@ -44,9 +41,6 @@ const Feed = () => {
   }
   
  
-
-  
-
   return (
     <div className='bg-confettiYellowColor1 relative dark:bg-confettiDarkColor1 overflow-hidden' >
       <Navbar/>

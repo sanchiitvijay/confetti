@@ -9,6 +9,7 @@ const initialState={
 }
 
 
+
 const postSlice=createSlice({
     name:"post",
     initialState:initialState,

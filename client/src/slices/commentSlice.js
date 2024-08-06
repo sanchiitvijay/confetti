@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit"
 
 const initialState={
-    comment:localStorage.getItem("comment")?(JSON.parse(localStorage.getItem("comment"))):(null),
+    comment:localStorage.getItem("comment")?(JSON.parse(localStorage.getItem("comment"))):[],
     loading:false,
 }
 
@@ -12,6 +12,7 @@ const commentSlice=createSlice({
     reducers:{
         setComments(state,value){
             state.comment=value.payload
+            localStorage.setItem("comment",JSON.stringify(state.comment))
         },
         setLoading(state,value){
             state.loading=value.payload
