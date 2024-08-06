@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { createPost } from '../../../../services/operations/postAPI';
 import SubmitButton from '../../../common/SubmitButton';
+import "./post.css"
 
 const CreatePost = () => {
   const [openMoreInfo, setOpenMoreInfo] = useState(false);
@@ -110,8 +111,18 @@ const CreatePost = () => {
 
 
         
-            <div className='mt-4 flex flex-row-reverse'>
-            <SubmitButton type="submit" text="Post"/>
+            <div className='mt-4 flex flex-col md:flex-row justify-between'>
+            <div className="my-auto md:gap-4 flex flex-row justify-around">
+              <div className = "rounded-full h-[25px] w-[25px] light1 dark:dark1 border"></div>
+              <div className = "rounded-full h-[25px] w-[25px] bg-blue-100 border-blue-200 border"></div>
+              <div className = "rounded-full h-[25px] w-[25px] bg-blue-100 border-blue-200 border"></div>
+              <div className = "rounded-full h-[25px] w-[25px] bg-blue-100 border-blue-200 border"></div>
+              <div className = "rounded-full h-[25px] w-[25px] bg-blue-100 border-blue-200 border"></div>
+              <div className = "rounded-full h-[25px] w-[25px] bg-blue-100 border-blue-200 border"></div>
+            </div>
+            <div className="grid place-items-end mt-5 mb-3">
+              <SubmitButton type="submit" text="Post"/>
+            </div>
             </div>
 
           </>}
