@@ -6,10 +6,10 @@ import { reportPost } from '../../services/operations/postAPI';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-const PostHeader = (props) => {
+const PostHeader = ({props}) => {
     const token = useSelector((state) => state.auth.token);
     const dispatch = useDispatch();
-
+    // console.log("props---------------------",props)
     const reportHandler = () => {
         dispatch(reportPost(token, ...props));
       }
@@ -20,13 +20,13 @@ const PostHeader = (props) => {
     <div className='flex flex-row border-b border-black dark:border-white pb-3 justify-between'>
         <div className='flex flex-row gap-3'>
           <img
-            src={props?.displayProfile || logo}
+            src={props?.author?.displayPicture || logo}
             className='w-[40px] h-[40px] object-fill rounded-full border border-confettiDarkColor1 dark:border-confettiLightColor1'
             alt='img'
           />
           <div className='flex flex-col'>
-            <h1 className='font-semibold text-sm'>{props?.username ||"username"}</h1>
-            <p className='text-xs'>{props?.college || "college"}</p>
+            <h1 className='font-semibold text-sm'>{props?.author?.username ||"Anonymous"}</h1>
+            <p className='text-xs'>{props.createdAt.substring(11,19) || "Time"}</p>
           </div>
         </div>
 

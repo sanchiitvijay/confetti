@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import logo from "../assets/confetti.png" 
+import logo from "../assets/confettiNoText.png" 
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import {AiOutlineEye} from "react-icons/ai"
@@ -125,24 +125,16 @@ const Home = () => {
 
 
             {/* Login form here */}
-            <div className='py-12   lg:h-[478px] text-white px-8 lg:px-12 md:w-[80%] xl:w-[600px] bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-400 '>
-              {/* <div className='z-0 mt-4'>
-                  <Marquee autoFill="true" delay="2" className='[word-spacing:95px]'>
+            <div className='xl:py-12 py-7 min-h-[478px] text-white my-auto px-7 xl:px-12 md:w-[80%] xl:w-[600px] bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-400 '>
 
-                    <div className="mr-[95px] text-lg text-gray-800" >
-                      CONFESS PROPOSE LIKE FIGHT<br/>
-                    </div>
-                </Marquee>
-              </div> */}
-            <img src={logo} className=' mx-auto w-[120px] h-[120px]  alt=' />
-            {/* <h2 className='text-white text-center font-semibold text-2xl'>About Us</h2> */}
+            <img src={logo} className=' mx-auto w-[120px] 'alt="" />
+            <div className="dancing-script-font grid place-items-center mt-[-25px] mb-6 mx-auto text-2xl font-semibold">Confetti</div>
+
+            <h2 className='text-white text-center font-semibold text-2xl'>Welcome to Confetti</h2>
             <p className='mt-5 leading-6 text-sm lg:text-[1rem] text-justify'>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been 
-              the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of 
-              type and scrambled it to make a type specimen book. It has survived not only five centuries, but 
-              also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in 
-              the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently 
-              with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            Dive into the anonymous world of college life where secrets are shared, stories are told, and connections are made. Post your deepest confessions, comment on others, and engage in the most candid conversations on campus. Whether it’s a hilarious mishap, a heartfelt moment, or a daring secret, College Confessions is your go-to platform for sharing and discovering the untold tales of college life.
+            <br/>
+            Join the community. Share your story. Be a part of the conversation.
             </p>
 
             </div>

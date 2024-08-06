@@ -18,7 +18,7 @@ const ReplySchema=new mongoose.Schema({
     },
     createdAt:{
         type:Date,
-        deafult:Date.now()
+        deafult:Date.now
     }
 
 },{

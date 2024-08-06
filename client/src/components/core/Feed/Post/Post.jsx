@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { liked } from '../../../../services/operations/likeAPI';
 import { createComments, getAllComments } from '../../../../services/operations/commentAPI';
 import { FaHeart } from "react-icons/fa";
-import { setTotalLikes } from '../../../../slices/postSlice';
+import { setComments, setTotalLikes } from '../../../../slices/postSlice';
 import Comment from '../../../common/Comment';
 import PostHeader from '../../../common/PostHeader';
 
@@ -15,10 +15,12 @@ const Post = (props) => {
   const [showComments, setShowComments] = useState(false);
   const token = useSelector((state) => state.auth.token);
   const profile = useSelector((state) => state.profile);
+  const {comment} = useSelector((state) => state.comment);
 
   const [like, setLike] = useState(false);
-  const [comment, setComment] = useState("");
-  const [comments, setComments] = useState([]);
+  const [commentForm, setCommentForm] = useState("");
+ 
+
 
   useEffect(() => {
     if (props?.likes?.includes(profile?.user?._id)) {
@@ -40,19 +42,29 @@ const Post = (props) => {
     dispatch(liked(token, props));
   }
 
-  const commentHandler = async () => {
-    setShowComments(!showComments);
-    if (!showComments) {
-      const comments = await dispatch(getAllComments(token, props)).unwrap();
-      setComments(comments);
-    }
-  }
+
+  
+
+  useEffect(()=>{
+    const commentHandler = async () => {
+      if (showComments) {
+        const postId = props?._id;
+        // console.log("POST ID IN POST COMPONENT", postId);
+        const result=dispatch(getAllComments(token, postId))
+      
+      }}
+    commentHandler();
+
+  },[showComments])
+  // console.log("props in post--------------", props)
 
   const handleSubmitComment = async () => {
-    await dispatch(createComments(token, { post: props?._id, comment }));
-    setComment("");
-    const updatedComments = await dispatch(getAllComments(token, props)).unwrap();
-    setComments(updatedComments);
+    // console.log("COMMENT", commentForm);
+    const comments = await dispatch(createComments(token, { postId: props?._id, commentForm }));
+    // const comments = useSelector((state) => state.comment);
+    // console.log("COMMENTS-----------------", comments);
+    setCommentForm(" ");
+    dispatch(getAllComments(token, props));
   }
 
   return (
@@ -66,13 +78,7 @@ const Post = (props) => {
       </div>
 
       {/* footer */}
-      <div className='flex pt-2 justify-between px-5 flAbout Us
-￼
-Name
-Description
-￼
-Name
-Descriptionex-row'>
+      <div className='flex pt-2 justify-between px-5 flex-row'>
         <div className='flex gap-3 content-center flex-row'>
           {
             like ?
@@ -80,10 +86,10 @@ Descriptionex-row'>
               :
               <IoMdHeartEmpty fontSize={'23px'} onClick={likeHandler} />
           }
-          <IoChatbubbleOutline fontSize={'20px'} onClick={commentHandler} />
+          <IoChatbubbleOutline fontSize={'20px'} onClick={()=>{setShowComments(!showComments)}} />
           <IoShareSocialOutline fontSize={'18px'} />
         </div>
-        <div className='content-center text-xs'>{props.createdAt}</div>
+        <div className='content-center text-xs'>{props.createdAt.substring(0,10)}</div>
       </div>
 
       {/* showComments */}
@@ -91,13 +97,13 @@ Descriptionex-row'>
         showComments &&
         <div className='max-md:px-2 p-4 border-t border-black mt-2'>
           <div className='flex flex-row gap-5 pb-4 pt-2 px-1'>
-            <input type='text' placeholder='Add a comment' value={comment} onChange={(e) => setComment(e.target.value)} className='w-full h-9 border border-black rounded-md p-2 focus:ring-0 focus:outline-none  focus:border-black focus:shadow-lg' />
+            <input type='text' placeholder='Add a comment' value={commentForm} onChange={(e) => setCommentForm(e.target.value)} className='w-full h-9 border border-black rounded-md p-2 focus:ring-0 focus:outline-none  focus:border-black focus:shadow-lg' />
             <VscSend fontSize={30} className='my-auto' onClick={handleSubmitComment} />
           </div>
           {
-            comments.map((com) => (
-              <Comment key={com._id} props={com} />
-            ))
+            comment.length > 0 ? comment.map((com) => (
+              <Comment key={com._id} {...com} />
+            )) : <div className='text-center'>No comments</div>
           }
         </div>
       }

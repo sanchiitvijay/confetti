@@ -14,9 +14,11 @@ const {
 export function createComments (token, data) {
     return async (dispatch) => {
         let result = null;
+        console.log("CREATE_COMMENT_API DATA....", data)
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
+            
             const response = await apiConnector("POST", CREATE_COMMENT_API, data, {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "multipart/form-data",
@@ -28,9 +30,13 @@ export function createComments (token, data) {
                 throw new Error(response.data.message)
             }
 
-            dispatch(setComments({...response.data.data}))
+
+            console.log("CREATE_COMMENT RESPONSE....", response)
+            dispatch(setComments(response.data.comments))
             toast.success("comment is created successfully")
-            result = response?.data?.data
+            // result = response?.data?.comments
+
+
         } catch (err) {
             console.log("CREATE_COMMENTS_API FAILED...", err);
             toast.error("Could not create comment")
@@ -39,30 +45,33 @@ export function createComments (token, data) {
             dispatch(setLoading(false))
         }
 
-        return result;
+        // return result;
     }
 }
 
 
 export function getAllComments (token, data) {
+    // console.log("GET_ALL_COMMENTS_API DATA....", data)
     return async(dispatch) => {
         let result = null
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
-            const response = await apiConnector("GET",GET_ALL_COMMENTS_API, data, {
-                Authorization: `Bearer ${token}`
-            })
+            const response = await apiConnector("GET",GET_ALL_COMMENTS_API,null,{
+                "Content-Type": "apllication/json",
+                 Authorization: `Bearer ${token}`,
+                 postId:data,
+             })
 
             console.log("GET_ALL_COMMENTS RESPONSE....", response)
 
             if(!response.data.success) {
                 throw new Error(response.data.message)
             }
-
-            dispatch(setComments(response.data.data))
+            console.log("------------------",response.data.comments)
+            dispatch(setComments(response.data.comments))
             toast.success("comments has been fetched succesfully")
-            result = response?.data?.data
+            result = response?.data?.comments
 
         } catch (err) {
             console.log("GET_ALL_COMMENTS_API FAILED....", err)

@@ -4,12 +4,14 @@ const Reply=require("../models/Reply");
 
 exports.createComment=async(req,res)=>{
     try{
-        const {
-            postId,
-            description,
-        }=req.body;
+        console.log("Inside create comment----------", req.body);
+        const postId = req.body.postId;
+        const description = req.body.comment;
     
         const userId=req.user.id;
+        console.log("USER ID", userId);
+        console.log("POST ID", postId);
+        console.log("DESCRIPTION", description);
 
          //Validation for user
         if(!userId || !description || !postId){
@@ -21,7 +23,7 @@ exports.createComment=async(req,res)=>{
        
         //find Post exists or not
         const post=await Post.findById({_id:postId});
-    
+        console.log("after post--------------");
         if(!post){
             return res.status(404).json({
                 success:false,
@@ -29,7 +31,9 @@ exports.createComment=async(req,res)=>{
             })
         }
 
-
+        console.log("creating comment--------------");
+        console.log(typeof(post._id));
+        console.log(typeof(postId))
         //now post checked , create comment and push it in to the post 
         const comment=await Comment.create({
             author:userId,
@@ -44,16 +48,17 @@ exports.createComment=async(req,res)=>{
                 message:"Comment cant be created"
             })
         }
-
+        console.log("comment created--------------",comment);
         //now comment created now push it into the post 
         post.comments.push(comment._id);
         await post.save();
-
+        
+        console.log("post saved--------------", post);
 
         //return successful response
         return res.status(200).json({
             success:true,
-            message:`Comment created successfully created for the post with the id:${post._id}`,
+            message:"Comment created successfully created for the post",
             comment,
         })
 
@@ -124,8 +129,8 @@ exports.removeComment=async(req,res)=>{
      
       
        while(comment.replies.length){
-        replyId=comment.replies.pop();
-        await Reply.findByIdAndDelete(replyId);
+            replyId=comment.replies.pop();
+            await Reply.findByIdAndDelete(replyId);
        }
 
        await comment.save();
@@ -164,7 +169,8 @@ exports.getAllComments=async(req,res)=>{
 
     try{
         //get the post id for which you want to fetch the comments for 
-        const {postId}=req.body;
+        
+        const postId=req.headers.postid;
 
 
         //validate
@@ -176,7 +182,9 @@ exports.getAllComments=async(req,res)=>{
         }
 
         //db call to find the comments by post id
-        const comments=await Comment.find({post:postId});
+        const comments=await Comment.find({post:postId}).populate('author').exec();
+
+        console.log("comments-----------------",comments);
 
         //return response
         return res.status(200).json({

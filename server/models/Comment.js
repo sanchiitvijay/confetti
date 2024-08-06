@@ -17,7 +17,7 @@ const CommentSchema=new mongoose.Schema({
     },
     createdAt:{
         type:Date,
-        default:Date.now()
+        default:Date.now
     },
     replies:[{
         type:mongoose.Schema.Types.ObjectId,
