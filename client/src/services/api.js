@@ -36,7 +36,7 @@ export const likeEndpoints = {
 
 export const commentEndpoints = {
     CREATE_COMMENT_API: BASE_URL + "/comment/create-comment",
-    DELETE_COMMENT_API: BASE_URL + "/comment/removeComment",
+    DELETE_COMMENT_API: BASE_URL + "/Comment/remove-comment",
     GET_ALL_COMMENTS_API: BASE_URL + "/comment/get-all-comments",
     GET_USER_COMMENTS_API: BASE_URL + "/comment/get-user-comments",
 }

@@ -4,7 +4,7 @@ const initialState={
     post:localStorage.getItem("post")?(JSON.parse(localStorage.getItem("post"))):[],
     totalPosts:localStorage.getItem("totalPosts")?(Number.parseInt(localStorage.getItem("totalPosts"))):0,
     comments:[],
-    totalLikes:localStorage.getItem("totalLikes")?(Number.parseInt(localStorage.getItem("Likes"))):(0),
+    totalLikes:localStorage.getItem("totalLikes")?(Number.parseInt(localStorage.getItem("Likes"))):[],
     loading:false,
 }
 
@@ -23,6 +23,17 @@ const postSlice=createSlice({
         },
         setTotalLikes(state,value){
             state.totalLikes=value.payload
+            const posts = JSON.parse(localStorage.getItem("post"));
+            const post = posts.find(post => post._id === value.payload.post);
+            if (post) {
+                if (!post.likes.includes(value.payload.author)) {
+                  post.likes.push(value.payload.author);
+                }
+                else {
+                    post.likes = post.likes.filter(like => like !== value.payload.author);
+                }
+                localStorage.setItem("post", JSON.stringify(posts));
+            }
         },
         setLoading(state,value){
             state.loading=value.payload

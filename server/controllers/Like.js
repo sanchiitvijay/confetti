@@ -23,6 +23,7 @@ exports.getLikes = async(req, res)=> {
 
 exports.liked = async(req, res) => {
     try {
+        console.log(req.body)
         const authorId = req.user.id;
         const postId = req.body.postId;
     
@@ -54,8 +55,8 @@ exports.liked = async(req, res) => {
                 {new: true}
             )
 
-            console.log(updatedPost)
-            console.log(newLike)
+            // console.log(updatedPost)
+            // console.log(newLike)
 
 
     
@@ -67,6 +68,7 @@ exports.liked = async(req, res) => {
             }
             like = newLike
         }
+        console.log("like-----------", like)
         return res.status(200).json({
             success: true,
             message: "Like unlike has been added",

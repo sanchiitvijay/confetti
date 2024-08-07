@@ -9,9 +9,9 @@ exports.createComment=async(req,res)=>{
         const description = req.body.comment;
     
         const userId=req.user.id;
-        console.log("USER ID", userId);
-        console.log("POST ID", postId);
-        console.log("DESCRIPTION", description);
+        // console.log("USER ID", userId);
+        // console.log("POST ID", postId);
+        // console.log("DESCRIPTION", description);
 
          //Validation for user
         if(!userId || !description || !postId){
@@ -23,7 +23,7 @@ exports.createComment=async(req,res)=>{
        
         //find Post exists or not
         const post=await Post.findById({_id:postId});
-        console.log("after post--------------");
+        // console.log("after post--------------");
         if(!post){
             return res.status(404).json({
                 success:false,
@@ -31,9 +31,9 @@ exports.createComment=async(req,res)=>{
             })
         }
 
-        console.log("creating comment--------------");
-        console.log(typeof(post._id));
-        console.log(typeof(postId))
+        // console.log("creating comment--------------");
+        // console.log(typeof(post._id));
+        // console.log(typeof(postId))
         //now post checked , create comment and push it in to the post 
         const comment=await Comment.create({
             author:userId,
@@ -48,18 +48,19 @@ exports.createComment=async(req,res)=>{
                 message:"Comment cant be created"
             })
         }
-        console.log("comment created--------------",comment);
+        // console.log("comment created--------------",comment);
         //now comment created now push it into the post 
         post.comments.push(comment._id);
         await post.save();
         
-        console.log("post saved--------------", post);
+        const comments = await Comment.find({post:postId}).sort({ createdAt: -1 }).populate('author').exec();
+        // console.log("post saved--------------", post);
 
         //return successful response
         return res.status(200).json({
             success:true,
             message:"Comment created successfully created for the post",
-            comment,
+            comments,
         })
 
 
@@ -77,6 +78,7 @@ exports.createComment=async(req,res)=>{
 exports.removeComment=async(req,res)=>{
     try{
         //get the post and its comment id
+        console.log("Inside remove comment----------", req.body);
         const{
             commentId,
             postId,
@@ -139,18 +141,21 @@ exports.removeComment=async(req,res)=>{
 
        const deletedComment=await Comment.findByIdAndDelete({_id:commentId});
 
+       const comments = await Comment.find({post:postId}).sort({ createdAt: -1 }).populate('author').exec();
+        
+
        if(!deletedComment){
         return res.status(400).json({
             success:false,
             message:"Comment cant be deleted for some reason"
         })
        }
-
+       console.log("comments has been deleted-----------------");
        //return response
        return res.status(200).json({
         success:true,
         message:"Comment successfully removed",
-        deletedComment
+        comments
        })
     }
     catch(error){
@@ -182,7 +187,7 @@ exports.getAllComments=async(req,res)=>{
         }
 
         //db call to find the comments by post id
-        const comments=await Comment.find({post:postId}).populate('author').exec();
+        const comments=await Comment.find({post:postId}).sort({ createdAt: -1 }).populate('author').exec();
 
         console.log("comments-----------------",comments);
 

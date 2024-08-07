@@ -18,9 +18,10 @@ const Comment = (props) => {
   // }, [deleteComment])
 
   const deleteCommentHandler = async () => {
-    dispatch(deleteComment(token, props._id));
+    // console.log("props data in comts-------", props)
+    dispatch(deleteComment(token, {postId: props.post, commentId: props._id}));
   }
-  console.log("user in comment", user)
+  // console.log("user in comment", user)
   // console.log("cooments mein hai ",)
   return (
     <div className='flex flex-row justify-between py-2'>
