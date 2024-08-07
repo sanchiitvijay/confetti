@@ -6,65 +6,56 @@ import { useDispatch, useSelector } from 'react-redux';
 import { liked } from '../../../../services/operations/likeAPI';
 import { createComments, getAllComments } from '../../../../services/operations/commentAPI';
 import { FaHeart } from "react-icons/fa";
-import { setComments, setTotalLikes } from '../../../../slices/postSlice';
+import { setTotalLikes } from '../../../../slices/postSlice';
 import Comment from '../../../common/Comment';
 import PostHeader from '../../../common/PostHeader';
 
 const Post = (props) => {
   const dispatch = useDispatch();
-  const [showComments, setShowComments] = useState(false);
-  const token = useSelector((state) => state.auth.token);
-  const profile = useSelector((state) => state.profile);
-  const {comment} = useSelector((state) => state.comment);
 
+  const [showComments, setShowComments] = useState(false);
+  const [allComments, setAllComments] = useState(false);
   const [like, setLike] = useState(false);
   const [commentForm, setCommentForm] = useState("");
- 
 
+  const token = useSelector((state) => state.auth.token);
+  const profile = useSelector((state) => state.profile);
+  const post = useSelector((state) => state.post);
+  const {comment} = useSelector((state) => state.comment);
 
   useEffect(() => {
-    if (props?.likes?.includes(profile?.user?._id)) {
-      setLike(true);
-    }
-  }, [props?.likes, profile?.user?._id]);
+    // if (props.likes.some(like => like.author === profile?.user?._id)) {
+    //   setLike(true);
+    // } else {
+    //   setLike(false);
+    // }
+
+  }, [post?.likes, profile?.user?._id, like]);
 
   const likeHandler = () => {
-    let updatedLikes;
-    if (props?.likes?.includes(profile?.user?._id)) {
-      updatedLikes = props?.likes.filter((like) => like !== profile?.user?._id);
-      setLike(false);
-    } else {
-      updatedLikes = [...props.likes, profile?.user?._id];
-      setLike(true);
-    }
-
-    dispatch(setTotalLikes(updatedLikes));
-    dispatch(liked(token, props));
+    dispatch(liked(token, {postId: props?._id}));
+    
+    console.log("props--------------------",props.likes)
   }
 
-
-  
 
   useEffect(()=>{
     const commentHandler = async () => {
       if (showComments) {
         const postId = props?._id;
-        // console.log("POST ID IN POST COMPONENT", postId);
+        setAllComments(false);
         const result=dispatch(getAllComments(token, postId))
       
       }}
     commentHandler();
 
   },[showComments])
-  // console.log("props in post--------------", props)
 
-  const handleSubmitComment = async () => {
-    // console.log("COMMENT", commentForm);
-    const comments = await dispatch(createComments(token, { postId: props?._id, commentForm }));
-    // const comments = useSelector((state) => state.comment);
-    // console.log("COMMENTS-----------------", comments);
+  const handleSubmitComment = async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const comments = await dispatch(createComments(token, { postId: props?._id, comment: commentForm }));
     setCommentForm(" ");
-    dispatch(getAllComments(token, props));
   }
 
   return (
@@ -86,6 +77,9 @@ const Post = (props) => {
               :
               <IoMdHeartEmpty fontSize={'23px'} onClick={likeHandler} />
           }
+          {
+            props.likes.length > 0 && <div className='content-center'>{props.likes.length}</div>
+          }
           <IoChatbubbleOutline fontSize={'20px'} onClick={()=>{setShowComments(!showComments)}} />
           <IoShareSocialOutline fontSize={'18px'} />
         </div>
@@ -95,16 +89,30 @@ const Post = (props) => {
       {/* showComments */}
       {
         showComments &&
-        <div className='max-md:px-2 p-4 border-t border-black mt-2'>
+        <div className='max-md:px-2 p-4 border-t max-h-[200px] overflow-auto border-black mt-2'>
+          <form onSubmit={handleSubmitComment}>
           <div className='flex flex-row gap-5 pb-4 pt-2 px-1'>
+
             <input type='text' placeholder='Add a comment' value={commentForm} onChange={(e) => setCommentForm(e.target.value)} className='w-full h-9 border border-black rounded-md p-2 focus:ring-0 focus:outline-none  focus:border-black focus:shadow-lg' />
-            <VscSend fontSize={30} className='my-auto' onClick={handleSubmitComment} />
+            <button type="submit" onClick={handleSubmitComment}><VscSend fontSize={30} className='my-auto'/></button>
           </div>
-          {
-            comment.length > 0 ? comment.map((com) => (
+            </form>
+          {comment.length > 0 ? 
+            comment.slice(0, Math.min(4, comment.length)).map((com) => (
               <Comment key={com._id} {...com} />
-            )) : <div className='text-center'>No comments</div>
+            )) : 
+            <div className='text-center'>No comments</div>
           }
+          {comment.length > 4 && (
+            !allComments ? 
+              <div className='text-center text-xs cursor-pointer  *:' onClick={() => setAllComments(true)}>
+                View all comments
+              </div> : 
+              comment.slice(4).map((com) => (
+                <Comment key={com._id} {...com} />
+              ))
+          )}
+
         </div>
       }
     </div>

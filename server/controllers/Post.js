@@ -117,8 +117,8 @@ exports.deletePost = async(req, res) => {
             })
         }
         const post = await Post.findById(postId);
-        console.log(userId);
-        console.log(post);
+        // console.log(userId);
+        // console.log(post);
         
         if(!post) {
             return res.status(500).json({
@@ -134,7 +134,7 @@ exports.deletePost = async(req, res) => {
             })
         }
         const result =await Post.deleteOne({ _id: postId })
-        console.log(3);
+        // console.log(3);
         
         return res.status(200).json({
             success: true,

@@ -126,7 +126,7 @@ export function deleteComment (token, data) {
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
-            const response = await apiConnector("DELETE",DELETE_COMMENT_API, data, {
+            const response = await apiConnector("POST",DELETE_COMMENT_API, data, {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "multipart/form-data",
             })
@@ -137,7 +137,7 @@ export function deleteComment (token, data) {
                 throw new Error(response.data.message)
             }
 
-            dispatch(setComments({...response.data.data}))
+            dispatch(setComments(response.data.comments))
             toast.success("comment has been deleted succesfully")
             result = response?.data?.data
             

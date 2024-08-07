@@ -3,6 +3,7 @@ import { toast } from "react-hot-toast"
 import { setLoading, setLikes } from "../../slices/likeSlice"
 import { apiConnector } from "../apiConnector"
 import { likeEndpoints } from "../api"
+import { setPost, setTotalLikes } from "../../slices/postSlice";
 
 const {
     LIKED_API,
@@ -60,9 +61,9 @@ export function liked (token, data) {
                 throw new Error(response.data.message)
             }
 
-            dispatch(setLikes({...response.data.data}))
+            dispatch(setTotalLikes(response.data.like))
             toast.success("like is set succesfully")
-            result = response?.data?.data
+            // result = response?.data?.data
 
         } catch (err) {
             console.log("LIKED_API FAILED....", err)
@@ -73,6 +74,6 @@ export function liked (token, data) {
             dispatch(setLoading(false))
         }
 
-        return result;
+        // return result;
     }
 }
