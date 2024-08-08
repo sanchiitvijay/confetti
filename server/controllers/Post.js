@@ -152,7 +152,7 @@ exports.deletePost = async(req, res) => {
 
 exports.getPosts = async(req, res) => {
     try {
-        const posts =await Post.find().sort({ createdAt: -1 }).populate('author').exec();
+        const posts =await Post.find().sort({ createdAt: -1 }).populate('author', 'like').exec();
         // console.log("YE POSTS H HAMARE POPULATED:",posts)
         // console.log("POSTS DB SE LE AAYE")
         let count=req?.headers?.count;
