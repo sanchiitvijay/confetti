@@ -4,6 +4,7 @@ import Post from './Post/Post';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { getPosts } from '../../../services/operations/postAPI';
 import { useDispatch, useSelector } from 'react-redux';
+import PostSkeleton from './Post/PostSkeleton';
 
 const MyFeed = () => {
   const dispatch = useDispatch();
@@ -41,10 +42,10 @@ const MyFeed = () => {
         dataLength={post.length}
         next={fetchMoreData}
         hasMore={post.length===totalPosts?(false):(true)}
-        loader={<h4>Loading...</h4>}
+        loader={<PostSkeleton/>}
         endMessage={
-          <p style={{ textAlign: 'center' }}>
-            <b>Yay! You have seen it all</b>
+          <p className='mb-8 dark:text-white text-black text-center'>
+            <b>Yay! You have seen it all 😉</b>
           </p>
         }
         scrollableTarget="scrollableDiv"

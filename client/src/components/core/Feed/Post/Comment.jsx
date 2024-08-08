@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import logo from "../../assets/confettiNoText.png"
 import { MdOutlineDelete } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteComment } from '../../services/operations/commentAPI';
+import { deleteComment } from '../../../../services/operations/commentAPI';
 
 const Comment = (props) => {
   const user = useSelector((state) => state.profile.user);
@@ -21,6 +20,7 @@ const Comment = (props) => {
     // console.log("props data in comts-------", props)
     dispatch(deleteComment(token, {postId: props.post, commentId: props._id}));
   }
+  
   // console.log("user in comment", user)
   // console.log("cooments mein hai ",)
   return (

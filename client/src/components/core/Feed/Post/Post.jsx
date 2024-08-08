@@ -7,8 +7,8 @@ import { liked } from '../../../../services/operations/likeAPI';
 import { createComments, getAllComments } from '../../../../services/operations/commentAPI';
 import { FaHeart } from "react-icons/fa";
 import { setTotalLikes } from '../../../../slices/postSlice';
-import Comment from '../../../common/Comment';
-import PostHeader from '../../../common/PostHeader';
+import Comment from './Comment';
+import PostHeader from './PostHeader';
 
 const Post = (props) => {
   const dispatch = useDispatch();
@@ -20,22 +20,28 @@ const Post = (props) => {
 
   const token = useSelector((state) => state.auth.token);
   const profile = useSelector((state) => state.profile);
-  const post = useSelector((state) => state.post);
+  const { post } = useSelector((state) => state.post);
   const {comment} = useSelector((state) => state.comment);
+  let likes = props.likes;
 
-  useEffect(() => {
-    // if (props.likes.some(like => like.author === profile?.user?._id)) {
-    //   setLike(true);
-    // } else {
-    //   setLike(false);
-    // }
-
-  }, [post?.likes, profile?.user?._id, like]);
+  // console.log("rpofiles-------------------",profile)
+  const posts = post.filter((p) => p?._id === props?._id);
+    // console.log("posts-------------------",posts)
+    likes = posts[0]?.likes;
+    // console.log("likes-------------------",likes)
+    if (likes?.includes(profile?.user?._id)) {
+      // console.log("liked kra hai-------------------")
+      setLike(true);
+    }
 
   const likeHandler = () => {
     dispatch(liked(token, {postId: props?._id}));
-    
-    console.log("props--------------------",props.likes)
+    setLike(!like);
+    if (like) {
+      likes++;
+    } else {
+      like--;
+    }
   }
 
 
@@ -78,7 +84,7 @@ const Post = (props) => {
               <IoMdHeartEmpty fontSize={'23px'} onClick={likeHandler} />
           }
           {
-            props.likes.length > 0 && <div className='content-center'>{props.likes.length}</div>
+            props.likes.length > 0 && <div className='content-center'>{likes.length}</div>
           }
           <IoChatbubbleOutline fontSize={'20px'} onClick={()=>{setShowComments(!showComments)}} />
           <IoShareSocialOutline fontSize={'18px'} />

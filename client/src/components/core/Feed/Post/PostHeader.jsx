@@ -1,8 +1,8 @@
 import React from 'react'
-import logo from "../../assets/confettiNoText.png"
+import logo from "../../../../assets/confettiNoText.png"
 import { VscGripper, VscKebabVertical } from "react-icons/vsc";
 import { Dropdown } from 'flowbite-react';
-import { reportPost } from '../../services/operations/postAPI';
+import { reportPost } from '../../../../services/operations/postAPI';
 import { useDispatch, useSelector } from 'react-redux';
 
 
