@@ -20,6 +20,7 @@ const Comment = (props) => {
     // console.log("props data in comts-------", props)
     dispatch(deleteComment(token, {postId: props.post, commentId: props._id}));
   }
+  
   // console.log("user in comment", user)
   // console.log("cooments mein hai ",)
   return (
