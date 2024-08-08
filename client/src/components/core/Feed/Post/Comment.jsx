@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { MdOutlineDelete } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteComment } from '../../../../services/operations/commentAPI';
-import CreateReply from './Reply/CreateReply';
 import { VscSend } from "react-icons/vsc";
 import Reply from './Reply/Reply';
 
