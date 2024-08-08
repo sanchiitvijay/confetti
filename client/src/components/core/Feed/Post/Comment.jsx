@@ -27,12 +27,12 @@ const Comment = (props) => {
     <div className='flex flex-row justify-between py-2'>
           <div className='flex flex-row gap-3'>
           <img src={props.author.displayPicture} alt="" className='w-[28px] border border-black rounded-full h-[28px] '/>
-          <div className='text-[10px] my-auto'><span className='text-xs font-semibold mr-2'> { props.author.username } </span>{ props.description }</div>
+          <div className='text-[12px] font-light my-auto'><span className='text-sm font-semibold mr-2'> { props.author.username } </span>{ props.description }</div>
           </div>
           {
             user ?(
             user?._id === props?.author?._id &&
-            <MdOutlineDelete fontSize={'20px'}  className='my-auto mr-1' onClick={deleteCommentHandler}/>):(<></>)
+            <MdOutlineDelete fontSize={'25px'}  className='my-auto mr-1' onClick={deleteCommentHandler}/>):(<></>)
           }
       </div>
   )
