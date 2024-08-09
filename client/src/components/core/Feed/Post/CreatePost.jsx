@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { createPost } from '../../../../services/operations/postAPI';
@@ -24,14 +24,14 @@ const CreatePost = () => {
     }
   };
 
+  const [background, setBackground] = useState("bg-1")
   
     const years=["First","Second","Third","Fourth"]
     const branches = ['CS','IS','AD','AI','AT','BT','CH','CI','CY','EC','EE','EI','IM','BA','MC','MD','ME','CV']
   
 
   return (
-    <div>
-      <div className='border dark:text-white w-full md:w-[500px] bg-confettiLightColor2 mx-auto dark:bg-confettiDarkColor3 border-black rounded-md my-3 lg:my-8 p-3 md:p-4 pb-3'>
+      <div className="border dark:text-white border-slate-600 w-full md:w-[500px] mx-auto rounded-md my-3 lg:my-8 p-3 md:p-4 pb-3" style={{ backgroundColor: "var(--bg-1)" }}>
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
           <label htmlFor="description" className="text-sm mt-4 px-2">Write Confession</label>
           <input
@@ -108,17 +108,14 @@ const CreatePost = () => {
             </div>
 
             </div>
-
-
-        
             <div className='mt-4 flex flex-col md:flex-row justify-between'>
             <div className="my-auto md:gap-4 flex flex-row justify-around">
-              <div className = "rounded-full h-[25px] w-[25px] light1 dark:dark1 border"></div>
-              <div className = "rounded-full h-[25px] w-[25px] bg-blue-100 border-blue-200 border"></div>
-              <div className = "rounded-full h-[25px] w-[25px] bg-blue-100 border-blue-200 border"></div>
-              <div className = "rounded-full h-[25px] w-[25px] bg-blue-100 border-blue-200 border"></div>
-              <div className = "rounded-full h-[25px] w-[25px] bg-blue-100 border-blue-200 border"></div>
-              <div className = "rounded-full h-[25px] w-[25px] bg-blue-100 border-blue-200 border"></div>
+              <div className = "rounded-full h-[25px] w-[25px] bg-1 border" onClick={() =>setBackground("bg-1")}></div>
+              <div className = "rounded-full h-[25px] w-[25px] bg-2 border" onClick={() =>setBackground("bg-2")}></div>
+              <div className = "rounded-full h-[25px] w-[25px] bg-3 border" onClick={() =>setBackground("bg-3")}></div>
+              <div className = "rounded-full h-[25px] w-[25px] bg-4 border" onClick={() =>setBackground("bg-4")}></div>
+              <div className = "rounded-full h-[25px] w-[25px] bg-5 border" onClick={() =>setBackground("bg-5")}></div>
+              <div className = "rounded-full h-[25px] w-[25px] bg-6 border" onClick={() =>setBackground("bg-6")}></div>
             </div>
             <div className="grid place-items-end mt-5 mb-3">
               <SubmitButton type="submit" text="Post"/>
@@ -128,7 +125,6 @@ const CreatePost = () => {
           </>}
         </form>
       </div>
-    </div>
   );
 };
 

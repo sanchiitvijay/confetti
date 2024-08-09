@@ -32,11 +32,16 @@ module.exports = {
         'red':'linear-gradient(to right, #FFFFFF, #EF3B36)',
         'darkred': 'linear-gradient(to right, #BD3F32, #CB356B)',
         'purpleblue': 'linear-gradient(to right, #89fffd, #ef32d9)',
-        'darkpurpleblue': 'linear-gradient(to right, #333399, #ff00cc)',
+        '6': 'linear-gradient(to right, #333399, #ff00cc)',
         'green': 'linear-gradient(to right, #faffc5, #73f7dc)',
         'darkgreen': 'linear-gradient(to right, #001510, #00bf8f)',
         'yellow': 'linear-gradient(to right, #ffcf4c, #fceabb)',
         'darkyellow': 'linear-gradient(to right, #F37335, #FDC830)',
+        '1':'linear-gradient(90deg, hsla(1, 84%, 80%, 1) 0%, hsla(56, 100%, 50%, 1) 100%)',
+        '2':'linear-gradient(90deg, hsla(303, 79%, 76%, 1) 0%, hsla(360, 86%, 67%, 1) 100%)',
+        '3':'linear-gradient(90deg, hsla(347, 89%, 61%, 1) 0%, hsla(242, 42%, 40%, 1) 100%)',
+        '4':'linear-gradient(90deg, hsla(47, 100%, 87%, 1) 0%, hsla(334, 81%, 60%, 1) 50%, hsla(237, 64%, 56%, 1) 100%)',
+        '5':'linear-gradient(90deg, hsla(348, 88%, 66%, 1) 0%, hsla(36, 89%, 68%, 1) 100%)',
       },
       
         "colors":{

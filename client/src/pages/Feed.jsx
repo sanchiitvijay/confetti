@@ -8,7 +8,7 @@ import { MdSpaceDashboard } from 'react-icons/md';
 import Sidebar from "../components/core/Feed/Sidebar"
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Stats from '../components/core/Feed/Stats';
-//console.log("HAM JEET GYE");
+import "../components/core/Feed/sidebar.css"
 const Feed = () => {
   
   const {token}=useSelector((state)=>state.auth)
@@ -47,7 +47,7 @@ const Feed = () => {
       <div className="flex relative w-full flex-row">
         <div className="relative flex min-h-[calc(100vh-3.5rem)]">
         {/* <div className={`w-[200px] ${dashboardShow?("block"):("hidden")}`}> </div> */}
-        <div ref={showRef} className={`z-30 ${show?`left-0 `:`-left-96 `} sm:relative  absolute sm:left-0 transition-all duration-500 `}>
+        <div ref={showRef} className={`z-30 container ${show?`left-0 `:`-left-96 `} sm:relative  absolute sm:left-0 transition-all duration-500 `}>
           <Sidebar/>
         </div>
         <button onClick={()=>{

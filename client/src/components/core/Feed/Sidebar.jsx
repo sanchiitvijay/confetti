@@ -8,7 +8,7 @@ import Spinner from "../../common/Spinner";
 import ConfirmationModal from "../../common/ConfirmationModal";
 import { logout } from "../../../services/operations/authAPI";
 import Stats from "./Stats";
-
+import "./sidebar.css"
 
 const Sidebar=()=>{
   const {user,loading:profileLoading}=useSelector((state)=>state.profile);
@@ -32,7 +32,7 @@ const Sidebar=()=>{
   }
   
   return (
-    <div className="relative flex w-[200px] bg-white dark:bg-gray-900 dark:text-white flex-col border-r-[1px] 
+    <div className="relative flex w-[200px] bg-white dark:bg-[#151c1f] dark:text-white flex-col border-r-[1px] 
     h-[calc(100vh-3.5rem)] text-black font-bold py-10">
       <div className="flex relative  flex-col">
         {
@@ -52,7 +52,7 @@ const Sidebar=()=>{
         </span>
         {/* </div> */}
         
-        <div className="flex item-center gap-x-2">
+        <div className="flex link item-center gap-x-2">
           <VscVersions className="text-lg"/>
           <span>Stats</span>
         </div>
@@ -83,7 +83,7 @@ const Sidebar=()=>{
         iconName={"VscTerminalLinux"}
         />
         </div>
-        <div className="flex dark:text-white ml-8 items-center gap-x-2">
+        <div className="flex dark:text-white link ml-8 items-center gap-x-2">
           <VscSignOut className="text-lg" />
           <span>Logout</span>
         </div>
