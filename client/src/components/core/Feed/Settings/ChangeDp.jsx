@@ -4,7 +4,7 @@ import { FiUpload } from "react-icons/fi"
 import { useDispatch, useSelector } from "react-redux"
 import IconBtn from '../../../common/IconBtn'
 import { updateDisplayPicture } from '../../../../services/operations/userAPI'
-
+import  "./Settings.css"
 
 const ChangeDp = () => {
     const { token } = useSelector((state) => state.auth)
@@ -60,8 +60,8 @@ const ChangeDp = () => {
       }
     }, [imageFile])
     return (
-      <>
-        <div className="flex mt-10 items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12 text-richblack-5">
+      <div>
+        <div className="flex  mt-10 items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12 text-richblack-5">
           <div className="flex items-center gap-x-8 sm:gap-x-4">
             <img
               src={previewSource || user?.displayPicture}
@@ -97,7 +97,7 @@ const ChangeDp = () => {
             </div>
           </div>
         </div>
-      </>
+      </div>
     )
   }
 
