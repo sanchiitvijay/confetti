@@ -13,17 +13,21 @@ const BuyUsCoffee = () => {
         <div className='flex md:flex-row flex-col gap-9'>
             <div className='items-center text-center'>
                 <img src={Logo} alt="person1" className='h-[80px] mx-auto rounded-full border-2'/>
-                <div className='text-lg font-semibold'>Name</div>
+                <div className='text-lg font-semibold'>Ashutosh Kumar</div>
                 <div>Description</div>
-                <div className='flex flex-row mx-auto gap-3'>
+                <div className='flex flex-row place-content-center text-center text-2xl mt-3 gap-3'>
                   <FaGithub/>
                   <FaLinkedin/>
                 </div>
             </div>
             <div className='items-center text-center'>
                 <img src={Logo} alt="person1" className='h-[80px] mx-auto rounded-full border-2'/>
-                <div className='text-lg font-semibold'>Name</div>
+                <div className='text-lg font-semibold'>Sanchit Vijay</div>
                 <div>Description</div>
+                <div className='flex flex-row place-content-center text-center text-2xl mt-3 gap-3'>
+                  <FaGithub/>
+                  <FaLinkedin/>
+                </div>
             </div>
         </div>
         </div>

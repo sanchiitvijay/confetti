@@ -60,9 +60,9 @@ const ChangeDp = () => {
       }
     }, [imageFile])
     return (
-      <div className='' >
+      <div className='my-10 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 background-animate gradient-box p-1 rounded-md' >
        
-        <div className="flex border  mt-10 items-center justify-between rounded-md  border-richblack-700 bg-richblack-800 p-8 px-12 text-richblack-5">
+        <div className="flex  items-center justify-between rounded-md bg-white dark:bg-black p-8 md:px-12 text-richblack-5">
           <div className="flex items-center gap-x-8 sm:gap-x-4">
             <img
               src={previewSource || user?.displayPicture}
