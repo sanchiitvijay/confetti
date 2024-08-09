@@ -1,0 +1,18 @@
+  .link:hover {
+      border-color: transparent;
+      background: linear-gradient(270deg,#e20a0a,#ffc200,#74e10b,#12b1e1,#bb11e1,#e20a0a);
+      background-size: 500% 500%;
+      animation: HoverGradient 2s linear infinite;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+  }
+  
+  @keyframes HoverGradient {
+    0% {
+      background-position: 0% 50%
+    }
+  
+    100% {
+      background-position: 250% 50%
+    }
+  }

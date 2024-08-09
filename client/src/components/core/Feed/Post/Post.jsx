@@ -64,12 +64,12 @@ const Post = (props) => {
   }
 
   return (
-    <div className='border drop-shadow-md shadow-black dark:text-white mx-auto md:w-[500px] w-full bg-confettiLightColor2 dark:bg-confettiDarkColor3 border-black rounded-md my-3 md:my-12 p-3 md:p-4 pb-3'>
+    <div className='border drop-shadow-md dark:shadow-pink-50 dark:text-white mx-auto md:w-[500px] w-full bg-confettiLightColor2 dark:bg-confettiDarkColor3 border-black dark:border-slate-500 rounded-md my-3 md:my-12 p-3 md:p-4 pb-3'>
       {/* post header */}
       <PostHeader props={props} />
 
       {/* content */}
-      <div className='p-3 md:p-4 min-h-[200px] text-center text-lg md:text-xl content-center dark:bg-slate-900 rounded-md border border-black dark:border-white'>
+      <div className='p-3 md:p-4 min-h-[200px] text-center text-lg md:text-xl content-center bg-6 rounded-md border border-black dark:border-white'>
         {props?.description}
       </div>
 

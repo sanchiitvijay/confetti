@@ -1,6 +1,7 @@
 import * as Icons from "react-icons/vsc";
 import { useDispatch } from "react-redux";
 import { NavLink, matchPath, useLocation } from "react-router-dom";
+import "./sidebar.css";
 
 const SidebarLink=({link,iconName})=>{
   
@@ -17,7 +18,7 @@ const SidebarLink=({link,iconName})=>{
 
       <NavLink
       to={link.path}
-      className={`relative px-8 py-2 text-sm font-medium ${matchRoute(link.path)?("bg-confettiLightColor4 dark:bg-confettiDarkColor3 dark:text-white "):("bg-opacity-0")}`}
+      className={`relative link px-8 py-2 text-sm font-medium ${matchRoute(link.path)?("bg-confettiLightColor4 dark:bg-confettiDarkColor3 dark:text-white "):("bg-opacity-0")}`}
       >
         <span className={`absolute left-0 top-0 h-full w-[0.2rem] bg-yellow-50 ${
           matchRoute(link.path)?("opacity-100"):("opacity-0")} `}>
@@ -25,7 +26,7 @@ const SidebarLink=({link,iconName})=>{
         
         <div className="flex item-center gap-x-2">
           <Icon className="text-lg"/>
-          <span>{link.name}</span>
+          <span className="">{link.name}</span>
         </div>
 
       </NavLink>
