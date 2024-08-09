@@ -5,6 +5,7 @@ import  "../../../../App.css";
 import SubmitButton from "../../../common/SubmitButton"
 import { editUser } from "../../../../services/operations/userAPI";
 import { setUser } from "../../../../slices/profileSlice";
+import "./Settings.css"
 
 const genders = ["Male", "Female","Other"]
 const years=["First","Second","Third","Fourth"]
@@ -32,9 +33,11 @@ export default function EditProfile() {
   }
   return (
     <>
-      <form onSubmit={handleSubmit(submitProfileForm)}>
+      <form onSubmit={handleSubmit(submitProfileForm)} className="p-2">
         {/* Profile Information */}
-        <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
+        <div className="my-10 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 background-animate gradient-box p-1 rounded-md">
+
+        <div className="flex flex-col rounded-md p-8 bg-white dark:bg-black">
           <h2 className="text-lg font-semibold text-richblack-5">
             Profile Information
           </h2>
@@ -54,7 +57,7 @@ export default function EditProfile() {
                 className="w-full text-[16px] leading-[24px] font-[500] dark:text-[#999DAA] rounded-[0.5rem] dark:bg-[#2C333F] p-[12px] pr-12 "
                 {...register("name", { required: true })}
                 defaultValue={user?.name}
-              />
+                />
               {errors.name && (
                 <span className="-mt-1 text-[12px] text-yellow-100">
                   Please enter your name.
@@ -76,7 +79,7 @@ export default function EditProfile() {
                 className="w-full rounded-[0.5rem] dark:bg-[#2C333F] p-[12px] pr-12 text-[16px] leading-[24px] font-[500] dark:text-[#999DAA]"
                 {...register("username", { required: true })}
                 defaultValue={user?.username}
-              />
+                />
               {errors.username && (
                 <span className="-mt-1 text-[12px] text-yellow-100">
                   Please enter your username
@@ -101,7 +104,7 @@ export default function EditProfile() {
                 className="w-full rounded-[0.5rem] dark:bg-[#2C333F] p-[12px] pr-12 text-[16px] leading-[24px] font-[500] dark:text-[#999DAA]"
                 {...register("instagram", { required: true })}
                 defaultValue={user?.instagram}
-              />
+                />
               {errors.instagram && (
                 <span className="-mt-1 text-[12px] text-yellow-100">
                   Please enter your insta handle carefully.
@@ -123,7 +126,7 @@ export default function EditProfile() {
                 className="w-full rounded-[0.5rem] dark:bg-[#2C333F] p-[12px] pr-12 text-[16px] leading-[24px] font-[500] dark:text-[#999DAA]"
                 {...register("year", { required: true })}
                 defaultValue={user?.year}
-              >
+                >
                 {years.map((ele, i) => {
                   return (
                     <option key={i} value={ele}>
@@ -143,6 +146,7 @@ export default function EditProfile() {
 
          
         </div>
+        </div>
 
         <div className="flex justify-end gap-2">
           <button
@@ -157,6 +161,18 @@ export default function EditProfile() {
            type="submit" text="Save" />
         </div>
       </form>
+      {/* <div class="wrapper">
+        <h2>Change on hover</h2>
+        <div class="section">
+            <div class="card-snake draw">
+            <div class="inner">Hover over me</div>
+            <div class="tail top"></div>
+            <div class="tail right"></div>
+            <div class="tail bottom"></div>
+            <div class="tail left"></div>
+          </div>
+        </div>
+      </div> */}
     </>
   )
 }

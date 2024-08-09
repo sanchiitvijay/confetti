@@ -7,10 +7,6 @@ import IconBtn from "../../../common/IconBtn"
 import { changePassword } from "../../../../services/operations/userAPI"
 
 
-
-
-
-
 const ChangePassword = () => {
   const { token } = useSelector((state) => state.auth)
   const {user}=useSelector((state)=>state.profile);
@@ -43,8 +39,10 @@ const ChangePassword = () => {
   }
   return (
     <>
-      <form onSubmit={handleSubmit(submitPasswordForm)}>
-        <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
+      <form onSubmit={handleSubmit(submitPasswordForm)} className="p-2">
+        <div className="my-10 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 background-animate gradient-box p-1 rounded-md">
+
+        <div className="flex flex-col rounded-md p-8 bg-white dark:bg-black">
           <h2 className="text-lg font-semibold text-richblack-5">Password</h2>
           <div className="flex flex-col gap-5 lg:flex-row">
             <div className="relative flex flex-col gap-2 lg:w-[48%]">
@@ -61,11 +59,11 @@ const ChangePassword = () => {
                 }}
                 className="w-full rounded-[0.5rem] dark:bg-[#2C333F] p-[12px] pr-12 text-[16px] leading-[24px] font-[500] dark:text-[#999DAA]"
                 {...register("oldPassword", { required: true })}
-              />
+                />
               <span
                 onClick={() => setShowOldPassword((prev) => !prev)}
                 className="absolute right-3 top-[42px] z-[10] cursor-pointer"
-              >
+                >
                 {showOldPassword ? (
                   <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
                 ) : (
@@ -92,11 +90,11 @@ const ChangePassword = () => {
                 }}
                 className="w-full rounded-[0.5rem] dark:bg-[#2C333F] p-[12px] pr-12 text-[16px] leading-[24px] font-[500] dark:text-[#999DAA]"
                 {...register("newPassword", { required: true })}
-              />
+                />
               <span
                 onClick={() => setShowNewPassword((prev) => !prev)}
                 className="absolute right-3 top-[42px] z-[10] cursor-pointer"
-              >
+                >
                 {showNewPassword ? (
                   <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
                 ) : (
@@ -111,13 +109,14 @@ const ChangePassword = () => {
             </div>
           </div>
         </div>
+        </div>
         <div className="flex justify-end gap-2">
           <button
             onClick={() => {
               navigate("/feed/my-profile")
             }}
             className="cursor-pointer rounded-md bg-richblack-700 py-2 px-5 font-semibold text-richblack-50"
-          >
+            >
             Cancel
           </button>
           <IconBtn
