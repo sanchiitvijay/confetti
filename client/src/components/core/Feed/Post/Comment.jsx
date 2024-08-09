@@ -46,8 +46,8 @@ const Comment = (props) => {
     <>
       <div className='flex flex-row max-w-[500px] justify-between pt-2'>
           <div className='flex flex-row gap-3'>
-          <img src={props.author.displayPicture} alt="" className='w-[28px] border border-black rounded-full h-[28px] '/>
-          <div className='text-[12px] font-light my-auto'><span className='text-sm font-semibold mr-2'> { props.author.username } </span>{ props.description }</div>
+          <img src={props?.author?.displayPicture} alt="" className='w-[28px] border border-black rounded-full h-[28px] '/>
+          <div className='text-[12px] font-light my-auto'><span className='text-sm font-semibold mr-2'> { props?.author?.username } </span>{ props?.description }</div>
           </div>
           {
             user ?(
@@ -63,16 +63,16 @@ const Comment = (props) => {
             <form onSubmit={submitReplyHandle}>
               <div className='flex flex-row gap-5 pb-4 pt-2 px-1'>
 
-                <input type='text' placeholder='Add a reply' value={replyForm} onChange={(e) => setReplyForm(e.target.value)} className='w-full h-9 border text-black border-black rounded-md p-2 focus:ring-0 focus:outline-none  focus:border-black focus:shadow-lg' />
+                <input type='text' placeholder='Add a reply' value={replyForm} onChange={(e) => setReplyForm(e?.target?.value)} className='w-full h-9 border text-black border-black rounded-md p-2 focus:ring-0 focus:outline-none  focus:border-black focus:shadow-lg' />
                 <button type="submit"><VscSend fontSize={30} className='my-auto'/></button>
               </div>
             </form>
           }
           {
-            showReply && reply? 
+            showReply && (reply? 
             reply?.map((reply) => {
               return <Reply key={reply._id} {...reply} />
-            }) : <div className='text-center'>No replies</div>
+            }) : <div className='text-center'>No replies</div>)
           }
         </div>
     </>
