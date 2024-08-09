@@ -37,11 +37,11 @@ export default function EditProfile() {
         {/* Profile Information */}
         <div className="my-10 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 background-animate gradient-box p-1 rounded-md">
 
-        <div className="flex flex-col rounded-md p-8 bg-white dark:bg-black">
-          <h2 className="text-lg font-semibold text-richblack-5">
+        <div className="flex flex-col gap-y-6 rounded-md p-8 bg-white dark:bg-confettiDarkColor1">
+          <h2 className="text-lg mb-2 font-semibold text-richblack-5">
             Profile Information
           </h2>
-          <div className="flex flex-col gap-5 lg:flex-row">
+          <div className="flex flex-col gap-5  lg:flex-row">
             <div className="flex flex-col gap-2 lg:w-[48%]">
               <label htmlFor="name" className="text-[14px] leading-[22px] font-[400] dark:text-white">
                 Name
@@ -54,7 +54,7 @@ export default function EditProfile() {
                 style={{
                   boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                 }}
-                className="w-full text-[16px] leading-[24px] font-[500] dark:text-[#999DAA] rounded-[0.5rem] dark:bg-[#2C333F] p-[12px] pr-12 "
+                className="w-full  text-[16px] leading-[24px] font-[500] dark:text-[#999DAA] rounded-[0.5rem] dark:bg-[#2C333F] p-[12px] pr-12 "
                 {...register("name", { required: true })}
                 defaultValue={user?.name}
                 />
@@ -76,7 +76,7 @@ export default function EditProfile() {
                 style={{
                   boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                 }}
-                className="w-full rounded-[0.5rem] dark:bg-[#2C333F] p-[12px] pr-12 text-[16px] leading-[24px] font-[500] dark:text-[#999DAA]"
+                className="w-full  rounded-[0.5rem] dark:bg-[#2C333F] p-[12px] pr-12 text-[16px] leading-[24px] font-[500] dark:text-[#999DAA]"
                 {...register("username", { required: true })}
                 defaultValue={user?.username}
                 />
