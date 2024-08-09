@@ -31,7 +31,7 @@ export const postEndpoints = {
 
 export const likeEndpoints = {
     LIKED_API: BASE_URL + "/like/liked",
-    GET_ALL_LIKES_API: BASE_URL + "/like/getLikes",
+    GET_ALL_LIKES_API: BASE_URL + "/like/get-likes",
 }
 
 export const commentEndpoints = {
@@ -42,9 +42,9 @@ export const commentEndpoints = {
 }
 
 export const replyEndpoints = {
-    CREATE_REPLY_API: BASE_URL + "/reply/createReply",
-    DELETE_REPLY_API: BASE_URL + "/reply/deleteReply",
-    GET_ALL_REPLIES_API: BASE_URL + "/reply/getAllReplies",
+    CREATE_REPLY_API: BASE_URL + "/reply/create-reply",
+    DELETE_REPLY_API: BASE_URL + "/reply/delete-reply",
+    GET_ALL_REPLIES_API: BASE_URL + "/reply/get-all-replies",
 }
 
 

@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { liked } from '../../../../services/operations/likeAPI';
 import { createComments, getAllComments } from '../../../../services/operations/commentAPI';
 import { FaHeart } from "react-icons/fa";
-import { setTotalLikes } from '../../../../slices/postSlice';
 import Comment from './Comment';
 import PostHeader from './PostHeader';
 
@@ -84,10 +83,13 @@ const Post = (props) => {
               <IoMdHeartEmpty fontSize={'23px'} onClick={likeHandler} />
           }
           {
-            props.likes.length > 0 && <div className='content-center'>{likes.length}</div>
+            props.likes.length > 0 && <div className=' ml-[-4px] content-center my-auto'>{likes.length}</div>
           }
-          <IoChatbubbleOutline fontSize={'20px'} onClick={()=>{setShowComments(!showComments)}} />
-          <IoShareSocialOutline fontSize={'18px'} />
+          <IoChatbubbleOutline fontSize={'20px'} className='my-auto' onClick={()=>{setShowComments(!showComments)}} />
+          {
+            props.comments.length > 0 && <div className='ml-[-3px] content-center my-auto'>{props.comments.length}</div>
+          }
+          <IoShareSocialOutline fontSize={'18px'}  className='my-auto'/>
         </div>
         <div className='content-center text-xs'>{props.createdAt.substring(0,10)}</div>
       </div>
@@ -99,7 +101,7 @@ const Post = (props) => {
           <form onSubmit={handleSubmitComment}>
           <div className='flex flex-row gap-5 pb-4 pt-2 px-1'>
 
-            <input type='text' placeholder='Add a comment' value={commentForm} onChange={(e) => setCommentForm(e.target.value)} className='w-full h-9 border border-black rounded-md p-2 focus:ring-0 focus:outline-none  focus:border-black focus:shadow-lg' />
+            <input type='text' placeholder='Add a comment' value={commentForm} onChange={(e) => setCommentForm(e.target.value)} className='w-full h-9 border text-black border-black rounded-md p-2 focus:ring-0 focus:outline-none  focus:border-black focus:shadow-lg' />
             <button type="submit" onClick={handleSubmitComment}><VscSend fontSize={30} className='my-auto'/></button>
           </div>
             </form>

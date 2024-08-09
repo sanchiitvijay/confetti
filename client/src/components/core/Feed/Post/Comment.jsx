@@ -3,12 +3,15 @@ import { MdOutlineDelete } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteComment } from '../../../../services/operations/commentAPI';
 import { VscSend } from "react-icons/vsc";
-import Reply from './Reply/Reply';
+import Reply from './Reply';
+import { createReply, getAllReplies } from '../../../../services/operations/replyAPI';
 
 const Comment = (props) => {
   const user = useSelector((state) => state.profile.user);
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
+  const reply = useSelector((state) => state.reply.reply);
+
 
   const [showReply, setShowReply] = useState(false);
   const [writeReply, setWriteReply] = useState(false);
@@ -18,8 +21,23 @@ const Comment = (props) => {
     dispatch(deleteComment(token, {postId: props.post, commentId: props._id}));
   }
 
-  const handleSubmitReply = (e) => {
+  const submitReplyHandle = (e) => {
     e.preventDefault();
+    e.stopPropagation();
+    dispatch(createReply(token, {commentId: props._id, description: replyForm}));
+    setReplyForm("");
+    setShowReply(true);
+    setWriteReply(false)
+
+  }
+
+
+  const showReplyHandle = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if(!showReply) {
+      dispatch(getAllReplies(token, {commentId: props._id}));
+    }
     setShowReply(!showReply);
   }
 
@@ -39,19 +57,22 @@ const Comment = (props) => {
         </div>
         <div className='ml-10 my-3'>
           <span onClick = {() => setWriteReply(!writeReply)} className='text-sm mr-8'>Reply </span>
-          <span onClick = {() => setShowReply(!showReply)} className='text-sm'>Show all replies </span>
+          <span onClick = {showReplyHandle} className='text-sm'>Show all replies </span>
           {
             writeReply && 
-            <form onSubmit={handleSubmitReply}>
+            <form onSubmit={submitReplyHandle}>
               <div className='flex flex-row gap-5 pb-4 pt-2 px-1'>
 
-                <input type='text' placeholder='Add a reply' value={replyForm} onChange={(e) => setReplyForm(e.target.value)} className='w-full h-9 border border-black rounded-md p-2 focus:ring-0 focus:outline-none  focus:border-black focus:shadow-lg' />
-                <button type="submit" onClick={handleSubmitReply}><VscSend fontSize={30} className='my-auto'/></button>
+                <input type='text' placeholder='Add a reply' value={replyForm} onChange={(e) => setReplyForm(e.target.value)} className='w-full h-9 border text-black border-black rounded-md p-2 focus:ring-0 focus:outline-none  focus:border-black focus:shadow-lg' />
+                <button type="submit"><VscSend fontSize={30} className='my-auto'/></button>
               </div>
             </form>
           }
           {
-            showReply && <Reply />
+            showReply && reply? 
+            reply?.map((reply) => {
+              return <Reply key={reply._id} {...reply} />
+            }) : <div className='text-center'>No replies</div>
           }
         </div>
     </>
