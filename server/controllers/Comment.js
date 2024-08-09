@@ -189,7 +189,7 @@ exports.getAllComments=async(req,res)=>{
         //db call to find the comments by post id
         const comments=await Comment.find({post:postId}).sort({ createdAt: -1 }).populate('author').exec();
 
-        console.log("comments-----------------",comments);
+        // console.log("comments-----------------",comments);
 
         //return response
         return res.status(200).json({

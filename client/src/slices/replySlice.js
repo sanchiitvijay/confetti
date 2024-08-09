@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit"
 
 const initialState={
-    reply:localStorage.getItem("reply")?(JSON.parse(localStorage.getItem("reply"))):(null),
+    reply:localStorage.getItem("reply")?(JSON.parse(localStorage.getItem("reply"))):[],
     loading:false,
 }
 
@@ -12,6 +12,7 @@ const replySlice=createSlice({
     reducers:{
         setReplies(state,value){
             state.reply=value.payload
+            localStorage.setItem("reply",JSON.stringify(state.reply))
         },
         setLoading(state,value){
             state.loading=value.payload

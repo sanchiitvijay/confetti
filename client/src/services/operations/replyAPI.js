@@ -28,7 +28,7 @@ export function createReply (token, data) {
                 throw new Error(response.data.message)
             }
 
-            dispatch(setReplies({...response.data.data}))
+            dispatch(setReplies(response.data.replies))
             toast.success("reply is created succesfully")
             result = response?.data?.data
 
@@ -40,6 +40,8 @@ export function createReply (token, data) {
             toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
+
+        console.log("CREATE_REPLY_API CHAL GAYA....",)
 
         return result;
     }
@@ -63,10 +65,8 @@ export function deleteReply (token, data) {
                 throw new Error(response.data.message)
             }
 
-            dispatch(setReplies({...response.data.data}))
+            dispatch(setReplies(response.data.replies))
             toast.success("reply is deleted succesfully")
-            result = response?.data?.data
-            
 
         } catch (err) {
             console.log("DELETE_REPLY_API FAILED....", err)
@@ -76,7 +76,6 @@ export function deleteReply (token, data) {
             toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
-        return result;
     }
 }
 
@@ -86,7 +85,7 @@ export function getAllReplies (token, data) {
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
-            const response = await apiConnector("GET",GET_ALL_REPLIES_API, data, {
+            const response = await apiConnector("POST",GET_ALL_REPLIES_API, data, {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "multipart/form-data",
             })
@@ -97,9 +96,9 @@ export function getAllReplies (token, data) {
                 throw new Error(response.data.message)
             }
 
-            dispatch(setPost(response.data.data))
+            dispatch(setReplies(response.data.replies))
             toast.success("replies have been fetched succesfully")
-            result = response?.data?.data
+    
 
         } catch (err) {
             console.log("GET_ALL_REPLIES_API FAILED....", err)
@@ -110,6 +109,5 @@ export function getAllReplies (token, data) {
             dispatch(setLoading(false))
         }
 
-        return result;
     }
 }

@@ -54,7 +54,7 @@ const OTP = () => {
         navigate));
     }
     return (
-      <div class="text-white flex items-center justify-center flex-col h-[calc(100vh-56px)]">
+      <div className="text-white flex items-center justify-center flex-col h-[calc(100vh-56px)]">
         {
           loading?
           (

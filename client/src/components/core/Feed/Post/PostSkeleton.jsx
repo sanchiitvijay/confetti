@@ -4,7 +4,7 @@ import { IoMdHeartEmpty } from "react-icons/io";
 
 const PostSkeleton = () => {
   return (
-    <div role="status" class="animate-pulse">
+    <div role="status" className="animate-pulse">
        <div className='border dark:text-white mx-auto md:w-[500px] w-full bg-confettiLightColor2 dark:bg-confettiDarkColor3 border-black rounded-md my-3 md:my-12 p-3 md:p-4 pb-3'>
         <div className='flex flex-row border-b border-black dark:border-white pb-3 justify-between'>
             <div className='flex flex-row gap-3'>

@@ -41,11 +41,13 @@ exports.createReply=async(req,res)=>{
         comment.replies.push(reply._id);
         await comment.save();
 
+        const replies = await Reply.find({comment:commentId}).sort({createdAt:-1}).populate("author").exec();
+        
         //send successful response
         return res.status(200).json({
             success:true,
             message:"replied successfully",
-            reply
+            replies,
         })
 
     }
@@ -100,6 +102,8 @@ exports.deleteReply=async(req,res)=>{
         //now delete the reply
         const deletedReply=await Reply.findByIdAndDelete(replyId);
 
+        const replies = await Reply.find({comment:commentId}).sort({createdAt:-1}).populate("author").exec();
+
         if(!deletedReply){
             return res.status(400).json({
                 success:false,
@@ -111,8 +115,7 @@ exports.deleteReply=async(req,res)=>{
         return res.status(200).json({
             success:true,
             message:"reply successfully removed",
-            deletedReply,
-            comment
+            replies
         })
 
       
@@ -156,7 +159,7 @@ exports.getAllReplies=async(req,res)=>{
         //now move ahead and fetch the replies
         const replies=await Reply.find({
             comment:commentId,
-        }).sort({createdAt:-1});
+        }).sort({createdAt:-1}).populate("author").exec();
 
 
         if(!replies){
@@ -170,8 +173,7 @@ exports.getAllReplies=async(req,res)=>{
         return res.status(200).json({
             success:true,
             message:"Replies fetched successfully for the comment",
-            replies,
-            commentCheck,
+            replies
         })
     }
     catch(error){
