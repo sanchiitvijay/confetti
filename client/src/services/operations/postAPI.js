@@ -8,10 +8,34 @@ const {
     EDIT_POST_API,
     DELETE_POST_API,
     GET_POST_API,
-    GET_USER_POST_API,
+    GET_USER_POSTS_API,
     REPORT_POST_API
 } = postEndpoints
 
+export function getUserPosts(userId,count,token){
+
+    return async(dispatch)=>{
+        try{    
+            const response=await apiConnector("GET",GET_USER_POSTS_API,null, {
+                "Content-Type": "multipart/form-data",
+                 Authorization: `Bearer ${token}`,
+                 userId:userId,
+                 count:count,
+             });
+             console.log("GET_POST_BY_USER RESPONSE....",response)
+
+             if(!response?.data?.success){
+                throw new Error(response?.data?.message)
+             }
+
+             //result
+             return response?.data?.totalLength;
+        }
+        catch(err){
+            console.log("GET_POST_BY_USER_API FAILED....", err)
+        }
+    }
+}
 export function getPosts (count,token) {
     return async(dispatch) => {
         let result = null

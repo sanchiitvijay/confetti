@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { createPost } from '../../../../services/operations/postAPI';
 import SubmitButton from '../../../common/SubmitButton';
 import "./post.css"
-
+import "../Settings/Settings.css"
 const CreatePost = () => {
   const [openMoreInfo, setOpenMoreInfo] = useState(false);
   const dispatch = useDispatch();
@@ -24,14 +24,15 @@ const CreatePost = () => {
     }
   };
 
-  const [background, setBackground] = useState("bg-1")
+
   
     const years=["First","Second","Third","Fourth"]
     const branches = ['CS','IS','AD','AI','AT','BT','CH','CI','CY','EC','EE','EI','IM','BA','MC','MD','ME','CV']
   
 
   return (
-      <div className="border dark:text-white border-slate-600 w-full md:w-[500px] mx-auto rounded-md my-3 lg:my-8 p-3 md:p-4 pb-3" style={{ backgroundColor: "var(--bg-1)" }}>
+    <div className='w-[90%] md:w-[510px] my-3 lg:my-8 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 background-animate gradient-box p-1 rounded-md'>
+      <div className="border bg-white  dark:bg-confettiDarkColor1 my-[2px] dark:text-white border-slate-600 w-[99%] md:w-[500px] mx-auto rounded-md  p-3 md:p-4 pb-3" >
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
           <label htmlFor="description" className="text-sm mt-4 px-2">Write Confession</label>
           <input
@@ -108,14 +109,14 @@ const CreatePost = () => {
             </div>
 
             </div>
-            <div className='mt-4 flex flex-col md:flex-row justify-between'>
+            <div className=' flex max-lg:gap-1 max-lg:mt-7  flex-col md:flex-row justify-between'>
             <div className="my-auto md:gap-4 flex flex-row justify-around">
-              <div className = "rounded-full h-[25px] w-[25px] bg-1 border" onClick={() =>setBackground("bg-1")}></div>
-              <div className = "rounded-full h-[25px] w-[25px] bg-2 border" onClick={() =>setBackground("bg-2")}></div>
-              <div className = "rounded-full h-[25px] w-[25px] bg-3 border" onClick={() =>setBackground("bg-3")}></div>
-              <div className = "rounded-full h-[25px] w-[25px] bg-4 border" onClick={() =>setBackground("bg-4")}></div>
-              <div className = "rounded-full h-[25px] w-[25px] bg-5 border" onClick={() =>setBackground("bg-5")}></div>
-              <div className = "rounded-full h-[25px] w-[25px] bg-6 border" onClick={() =>setBackground("bg-6")}></div>
+              <div className = "rounded-full h-[25px] w-[25px] bg-1 border" ></div>
+              <div className = "rounded-full h-[25px] w-[25px] bg-2 border" ></div>
+              <div className = "rounded-full h-[25px] w-[25px] bg-3 border" ></div>
+              <div className = "rounded-full h-[25px] w-[25px] bg-4 border" ></div>
+              <div className = "rounded-full h-[25px] w-[25px] bg-5 border" ></div>
+              <div className = "rounded-full h-[25px] w-[25px] bg-6 border" ></div>
             </div>
             <div className="grid place-items-end mt-5 mb-3">
               <SubmitButton type="submit" text="Post"/>
@@ -124,6 +125,7 @@ const CreatePost = () => {
 
           </>}
         </form>
+      </div>
       </div>
   );
 };
