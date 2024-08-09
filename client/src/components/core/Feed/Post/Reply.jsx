@@ -11,15 +11,15 @@ const Reply = (props) => {
     const deleteReplyHandle = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        dispatch(deleteReply(token, {replyId: props._id}));
+        dispatch(deleteReply(token, {replyId: props?._id}));
     }
 
 
   return (
       <div className='flex flex-row ml-1 max-w-[500px] justify-between pt-2'>
           <div className='flex flex-row gap-3'>
-          <img src={props.author.displayPicture} alt="" className='w-[28px] border border-black rounded-full h-[28px] '/>
-          <div className='text-[12px] font-light my-auto'><span className='text-sm font-semibold mr-2'> {props.author.username} </span>{ props.description }</div>
+          <img src={props?.author?.displayPicture} alt="" className='w-[28px] border border-black rounded-full h-[28px] '/>
+          <div className='text-[12px] font-light my-auto'><span className='text-sm font-semibold mr-2'> {props?.author?.username} </span>{ props?.description }</div>
           </div>
 
           {

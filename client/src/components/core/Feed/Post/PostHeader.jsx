@@ -17,7 +17,7 @@ const PostHeader = ({props}) => {
 
 
   return (
-    <div className='flex flex-row border-b border-black dark:border-white pb-3 justify-between'>
+    <div className='flex flex-row pb-3 justify-between'>
         <div className='flex flex-row gap-3'>
           <img
             src={props?.author?.displayPicture || logo}

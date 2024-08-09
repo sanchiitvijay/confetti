@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const { pink, yellow } = require('@mui/material/colors');
+const { dark } = require('@mui/material/styles/createPalette');
 const flowbite = require("flowbite-react/tailwind");
 module.exports = {
   darkMode: 'class',
@@ -21,6 +23,20 @@ module.exports = {
         'dark_card1': "url('/src/assets/dark_card_wallpaper.jpg')",
         'card2': "url('/src/assets/card-day.webp')",
         'dark_card2': "url('/src/assets/card-night.webp')",
+        
+        // gradient
+        'pink': 'linear-gradient(to right, #ffdde1, #ee9ca7)',
+        'darkpink': 'linear-gradient(to right, #493240, #FF0099)',
+        'blue': 'linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9)',
+        'darkblue' : 'linear-gradient(to right, #4286f4, #373B44)',
+        'red':'linear-gradient(to right, #FFFFFF, #EF3B36)',
+        'darkred': 'linear-gradient(to right, #BD3F32, #CB356B)',
+        'purpleblue': 'linear-gradient(to right, #89fffd, #ef32d9)',
+        'darkpurpleblue': 'linear-gradient(to right, #333399, #ff00cc)',
+        'green': 'linear-gradient(to right, #faffc5, #73f7dc)',
+        'darkgreen': 'linear-gradient(to right, #001510, #00bf8f)',
+        'yellow': 'linear-gradient(to right, #ffcf4c, #fceabb)',
+        'darkyellow': 'linear-gradient(to right, #F37335, #FDC830)',
       },
       
         "colors":{
@@ -36,21 +52,19 @@ module.exports = {
           "confettiGrey5":"#7f7f7f",
 
           
-            confettiLightColor1: '#fff4ce',
-            confettiLightColor2: '#ffeeb6',
-            confettiLightColor3: '#ffe89d',
-            confettiLightColor4: '#ffe385',
-            confettiLightColor5: '#ffdd6c',
+          confettiLightColor1: '#ffffff',
+          confettiLightColor2: '#ffffff',
+          confettiLightColor3: '#ffffff',
+          confettiLightColor4: '#ffffff',
+          confettiLightColor5: '#ffffff',
           
           
-            confettiDarkColor1: '#353839',
-            confettiDarkColor2: '#343434',
-            confettiDarkColor3: '#26282A',
-            confettiDarkColor4: '#1A1110',
-            confettiDarkColor5: '#2C3539',
-          
+            confettiDarkColor1: '#070d0d',
+            confettiDarkColor2: '#070d0d',
+            confettiDarkColor3: '#12171a',
+            confettiDarkColor4: '#070d0d',
+            confettiDarkColor5: '#070d0d',
 
-          
           "cFont":"#111111",
         }  ,
         "root": {
