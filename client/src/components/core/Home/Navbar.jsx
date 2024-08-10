@@ -61,9 +61,9 @@ const Navbar = () => {
   </div>
   <div className="flex items-center md:order-2 md:gap-4 gap-1 space-x-3 md:space-x-0 mr-3 rtl:space-x-reverse">
     
-      <FaHeart fontSize={25}/> 
+      <FaHeart className='hover:cursor-pointer' fontSize={25}/> 
 
-       <MdDarkMode fontSize={29} onClick={handleToggle}/> 
+       <MdDarkMode className='hover:cursor-pointer' fontSize={29} onClick={handleToggle}/> 
          {/* Dark Mode Icon have to make it functions when we re putting theme */}
 
 
@@ -85,16 +85,16 @@ const Navbar = () => {
       >
         <div className='px-5 py-2 flex flex-col rounded-md bg-confettiLightColor3 text-black dark:text-white dark:bg-confettiDarkColor3'>
 
-        <div className="flex flex-row justify-center cursor-pointer gap-4 p-3  min-w-[200px]  border-b dark:border-confettiLightColor1 border-black  mb-4">
+        <div onClick={()=>{navigate("/feed/my-profile")}} className="flex flex-row hover:underline justify-center cursor-pointer gap-4 p-3  min-w-[200px]  border-b dark:border-confettiLightColor1 border-black  mb-4">
           <VscSnake className='mt-1'/>
-          <span className="block text-md ">
-            {user ? "hi " + user.name : "Welcome"}
+          <span className="block text-md">
+            {user ? "Hi " + user?.name?.charAt(0).toUpperCase() + user?.name?.slice(1) : "Welcome"}
           </span>
 
         </div>
         <div className='flex flex-row justify-center gap-4 p-3 '>
           <VscSettingsGear className='mt-1'/>
-          <Link to="/settings" className="block cursor-pointer text-md hover:underline">
+          <Link to="/feed/settings" className="block cursor-pointer text-md hover:underline">
             Settings
           </Link>
         </div>
