@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const { auth, isStudent, isAdmin} = require("../middlewares/auth")
 const { sendotp, login, signup, changePassword } = require("../controllers/Auth")
-const { getAllUsers, removeUser, editUser, deleteGraduates, promoteStudents, updateDisplayPicture } = require("../controllers/User")
+const { getAllUsers, removeUser, editUser, deleteGraduates, promoteStudents, updateDisplayPicture, leaderboard } = require("../controllers/User")
 const {resetPassword,resetPasswordToken}=require('../controllers/ResetPassword');
 
 
@@ -20,4 +20,7 @@ router.route("/promote-students").post(auth, isAdmin, promoteStudents);
 router.route("/resetPasswordToken").post(auth,resetPasswordToken)
 router.route("/resetPassword").post(auth,resetPassword)
 router.route("/update-dp").post(auth,updateDisplayPicture);
+router.route("/leaderboard").get(auth,leaderboard);
+
+
 module.exports = router;
