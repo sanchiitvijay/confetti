@@ -268,15 +268,37 @@ exports.getUserPostsStats=async(req,res)=>{
             })
         }
 
-        const posts=await Post.find({author:userId}).populate("author").populate({
-            path:"likes"
-        }).exec()
+        const posts=await Post.find({author:userId});
+        if(!posts){
+            return response.status(404).json({
+                success:false,
+                message:"Post cant be found "
+            })
+        }
         const postLength=posts.length;
-        console.log(posts);
+        var likesLength=0;
+        var commentsLength=0;
+        
+        posts.map((post)=>{
+            likesLength+=post?.likes?.length
+            commentsLength+=post?.comments?.length
+
+        })
+
+    
+
+      
+        const data={
+            postLength:postLength,
+            likesLength,
+            commentsLength
+        }
+
+        console.log(data);
         return res.status(200).json({
             success:true,
             message:"User Posts Stats fetched successfully",
-            postLength,
+            data
         })
     }
     catch(err){

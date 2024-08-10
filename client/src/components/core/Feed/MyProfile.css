@@ -21,3 +21,30 @@
     }
   }
    */
+
+   hr {
+    display: block;
+    height: 0;
+    width: 0;
+    border: none;
+    font-size: 0;
+  }
+   .gradient-line { 
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, #57b947, #009ad6 35%, #57b947 65%, #009ad6 );
+    background-size: 400% 400%;
+    animation: Gradient 5s ease infinite;
+  }
+  
+  @keyframes Gradient {
+    0% {
+      background-position: 0% 50%
+    }
+    50% {
+      background-position: 100% 50%
+    }
+    100% {
+      background-position: 0% 50%
+    }
+  }

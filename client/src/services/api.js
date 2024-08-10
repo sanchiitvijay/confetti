@@ -30,6 +30,7 @@ export const postEndpoints = {
     GET_POST_API: BASE_URL + "/post/get-post",
     GET_USER_POSTS_API: BASE_URL + "/post/get-user-posts",
     REPORT_POST_API: BASE_URL + "/post/report-post",
+    GET_USER_POST_STATS_API: BASE_URL + "/post/get-user-stats"
 }
 
 export const likeEndpoints = {
