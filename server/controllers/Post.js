@@ -220,7 +220,7 @@ exports.getUserPosts=async(req,res)=>{
 
 exports.getUserPostsStats=async(req,res)=>{
     try{
-        const userId=req.headers.userid || req.user.id;
+        const userId=req.user.id;
         if(!userId){
             return res.status(404).json({
                 success:false,
@@ -228,16 +228,23 @@ exports.getUserPostsStats=async(req,res)=>{
             })
         }
 
-        const posts=await Post.findById({author:userId});
-        const postLength=posts?.length;
-
+        const posts=await Post.find({author:userId}).populate("author").populate({
+            path:"likes"
+        }).exec()
+        const postLength=posts.length;
+        console.log(posts);
         return res.status(200).json({
             success:true,
-            message:"User Posts Stats fetched successfully"
+            message:"User Posts Stats fetched successfully",
+            postLength,
         })
     }
     catch(err){
-
+        console.log("User Post Stats Error",err);
+        return res.status(500).json({
+            success:false,
+            message:"Internal Server Error"
+        })
     }
 }
 exports.reportPost = async(req, res)=> {
