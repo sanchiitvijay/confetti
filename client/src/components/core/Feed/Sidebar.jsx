@@ -3,12 +3,12 @@ import { sidebarLinks } from "../Feed/dashboard-links";
 import { useNavigate } from "react-router-dom";
 import SidebarLink from "./SidebarLink";
 import { VscSignOut, VscVersions } from "react-icons/vsc";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Spinner from "../../common/Spinner";
 import ConfirmationModal from "../../common/ConfirmationModal";
 import { logout } from "../../../services/operations/authAPI";
-import Stats from "./Stats";
 import "./sidebar.css"
+import { setStats } from "../../../slices/themeSlice";
 
 const Sidebar=()=>{
   const {user,loading:profileLoading}=useSelector((state)=>state.profile);
@@ -16,12 +16,15 @@ const Sidebar=()=>{
   const dispatch=useDispatch();
   const navigate=useNavigate();
   const [confirmationModal,setConfirmationModal]=useState(null);
-  const [stats, setStats] = useState(false);
+  const [changeStats, changeSetStats] = useState(false);
 
-  const handleStats=()=>{
-    
-    setStats(!stats);
-  };
+    const handleStats=()=>{
+      console.log("STATS1---------------",changeStats);
+      changeSetStats(!changeStats);
+      dispatch(setStats(changeStats));
+      console.log("STATS",changeStats);
+    };
+
   
   if(profileLoading || authLoading){
     return (
@@ -45,14 +48,14 @@ const Sidebar=()=>{
         }
 
         {/* workr here-------------------- */}
-         <div className={`relative px-8 py-2 text-sm font-medium ${stats?("bg-confettiLightColor4 dark:bg-confettiDarkColor3 dark:text-white "):("bg-opacity-0")}`}
+         <div className={`relative px-8 py-2 lg:hidden text-sm font-medium ${changeStats?("bg-confettiLightColor4 dark:bg-confettiDarkColor3 dark:text-white "):("bg-opacity-0")}`}
          onClick={handleStats}>
         <span className={`absolute left-0 top-0 h-full w-[0.2rem] bg-yellow-50 ${
-          stats?("opacity-100"):("opacity-0")} `}>
+          changeStats?("opacity-100"):("opacity-0")} `}>
         </span>
         {/* </div> */}
         
-        <div className="flex link item-center gap-x-2">
+        <div className="flex item-center gap-x-2">
           <VscVersions className="text-lg"/>
           <span>Stats</span>
         </div>
@@ -83,15 +86,12 @@ const Sidebar=()=>{
         iconName={"VscTerminalLinux"}
         />
         </div>
-        <div className="flex dark:text-white link ml-8 items-center gap-x-2">
+        <div className="flex dark:text-white ml-8 items-center gap-x-2">
           <VscSignOut className="text-lg" />
           <span>Logout</span>
         </div>
-        </button>
-
-    
+        </button>    
       </div>
-
 
       {confirmationModal && <ConfirmationModal modalData={confirmationModal}/>}
     </div>

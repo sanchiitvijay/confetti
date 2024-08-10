@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const Notification = require("../models/Notification");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
+const welcomeTemplate = require("../mail/templates/newJoining");
 
 //updateUserDetails->to check what needs to be updated
 //also update  req.user object,check for token
@@ -100,7 +101,7 @@ exports.removeUser = async (req, res) => {
         console.log("USER DADA FETCH HOGYE")
         //delete his notfications to clear the db
         while (user?.notfications?.length) {
-            notificationId = user.notfications.pop();
+            const notificationId = user.notfications.pop();
             await Notification.findByIdAndDelete(notificationId);
         }
         console.log("NOTIFICATION GYA")

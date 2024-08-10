@@ -15,6 +15,7 @@ const Feed = () => {
   const navigate = useNavigate()
   const {loading:authLoading}=useSelector((state)=>state.auth);
   const {loading:profileLoading}=useSelector((state)=>state.profile);
+  const {stats} = useSelector((state)=>state.theme);
   const [show,setShow]=useState(false);
   const showRef=useRef();
   const stickRef=useRef();
@@ -58,12 +59,21 @@ const Feed = () => {
           <MdSpaceDashboard fontSize={20}/>
         </button>
         
-      </div>
+        </div>
 
       <div className="h-[calc(100vh-3.5rem)] w-full flex justify-center overflow-auto ">
             <Outlet />
         </div>
-      <Stats className="max-lg:hidden"/>
+
+        <div className="max-lg:hidden min-h-[calc(100vh-3.5rem)] z-10">
+          <Stats/>
+        </div>
+      {/* {
+        stats && 
+        <div className='z-30  lg:hidden transition-all duration-500'>
+        <Stats/>
+        </div>
+      } */}
       
     </div>
     </div>

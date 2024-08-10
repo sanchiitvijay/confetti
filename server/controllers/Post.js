@@ -107,10 +107,14 @@ exports.editPost = async(req, res) => {
               })
         }
 
+        const posts = await Post.find().sort({ createdAt: -1 }).populate('author').exec();
+
+        console.log("POSTS", posts)
+
         return res.status(200).json({
           success: true,
           message: "Post has been updated succesfully",
-          updatedPost
+          posts
         })
     } catch(error) {
         return res.status(500).json({
@@ -121,10 +125,10 @@ exports.editPost = async(req, res) => {
 }
 
 exports.deletePost = async(req, res) => {
-    
+    console.log("DELETE POST CONTROLLER", req.body)
     try {
         const postId  = req.body.postId;
-        const userId = req.user.id || req.body;
+        const userId = req?.user?.id || req?.body;
 
         if(!postId || !userId) {
             return res.status(500).json({
@@ -167,10 +171,11 @@ exports.deletePost = async(req, res) => {
                 message:"Couldnt update the user's posts"
             })
         }
+        const posts = await Post.find().sort({ createdAt: -1 }).populate('author').exec();
         return res.status(200).json({
             success: true,
             message: "Post has been deleted succesfully",
-            result
+            posts
         })
         
     } catch (error) {
@@ -183,20 +188,17 @@ exports.deletePost = async(req, res) => {
 
 exports.getPosts = async(req, res) => {
     try {
-        const posts =await Post.find().sort({ createdAt: -1 }).populate('author').exec();
-        // console.log("YE POSTS H HAMARE POPULATED:",posts)
-        // console.log("POSTS DB SE LE AAYE")
+        const posts =await Post.find().sort({ createdAt: -1 }).populate('author').populate({
+            path:"likes"
+        }).exec();
+
+
         let count=req?.headers?.count;
-        // console.log("COUNT LELIYE")
         const totalLength=posts.length;
-        // console.log("LENGHT LELIYE")
-        // console.log("REQUEST COUNT:",req.headers.count)
         if(count>totalLength){
             count=totalLength;
         }
-        // console.log("MAX CHECK")
         slicedPost = posts.slice(0,count)
-        // console.log("SLICED LIKE A CHOPER")
  
     
         return res.status(200).json({
@@ -278,6 +280,8 @@ exports.getUserPostsStats=async(req,res)=>{
         })
     }
 }
+
+
 exports.reportPost = async(req, res)=> {
     const postId = req.body.postId;
 
@@ -324,9 +328,11 @@ exports.reportPost = async(req, res)=> {
             }
         }
     }
+    const posts = await Post.find().sort({ createdAt: -1 }).populate('author').exec();
     return res.status(200).json({
         success:true,
-        message:"Post has been reported succesfully"
+        message:"Post has been reported succesfully",
+        posts
     })
 }
 

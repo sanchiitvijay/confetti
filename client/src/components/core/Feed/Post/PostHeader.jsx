@@ -1,20 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from "../../../../assets/confettiNoText.png"
 import { VscGripper, VscKebabVertical } from "react-icons/vsc";
 import { Dropdown } from 'flowbite-react';
-import { reportPost } from '../../../../services/operations/postAPI';
+import { deletePost, reportPost } from '../../../../services/operations/postAPI';
 import { useDispatch, useSelector } from 'react-redux';
+import EditPostModal from './EditPostModal';
 
 
 const PostHeader = ({props}) => {
     const token = useSelector((state) => state.auth.token);
+    const user = useSelector(state=>state.profile.user)
+
     const dispatch = useDispatch();
-    // console.log("props---------------------",props)
+    const [modal, setModal] = useState(false);
+
+
     const reportHandler = () => {
-        dispatch(reportPost(token, ...props));
+        dispatch(reportPost(token, {postId: props?._id}));
       }
     
-
+      const deleteHandler = () => {
+        dispatch(deletePost(token, {postId: props?._id}));
+      }
 
   return (
     <div className='flex flex-row pb-3 justify-between'>
@@ -48,7 +55,22 @@ const PostHeader = ({props}) => {
           }
         >
 
-          <div className='px-5 py-2 flex flex-col rounded-md mx-1 bg-confettiLightColor3 text-black dark:text-white dark:bg-confettiDarkColor3'>
+          <div className='px-5 gap-y-3 py-2 flex flex-col rounded-md mx-1 bg-confettiLightColor3 text-black dark:text-white dark:bg-confettiDarkColor3'>
+            {
+              user?._id === props?.author?._id && <>
+
+                <div className='flex flex-row justify-center '>
+                  <div className='block cursor-pointer text-sm hover:underline' onClick={() => (setModal(!modal))}>
+                    Edit
+                  </div>
+                </div>
+                <div className='flex flex-row justify-center '>
+                  <div className='block cursor-pointer text-sm hover:underline' onClick={deleteHandler}>
+                    Delete
+                  </div>
+                </div>
+            </>
+            }
             <div className='flex flex-row justify-center '>
               <div className='block cursor-pointer text-sm hover:underline' onClick={reportHandler}>
                 Report
@@ -56,7 +78,10 @@ const PostHeader = ({props}) => {
             </div>
           </div>
         </Dropdown>
-
+        {
+          modal &&
+          <EditPostModal {...props} setModal={setModal}/>
+        }
       </div>
   )
 }
