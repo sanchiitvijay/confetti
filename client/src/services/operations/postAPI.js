@@ -1,5 +1,6 @@
 import { toast } from "react-hot-toast"
 import { setLoading, setPost,setTotalPosts} from "../../slices/postSlice"
+import { setUserPost,setUserTotalPosts } from "../../slices/profileSlice"
 import { apiConnector } from "../apiConnector"
 import { postEndpoints } from "../api"
 
@@ -30,7 +31,9 @@ export function getUserPosts(userId,count,token){
              }
 
              //result
-             return response?.data?.totalLength;
+             console.log("RESPONSE CHECK:",response?.data?.slicedPost)
+             dispatch(setUserPost(response?.data?.slicedPost))
+             dispatch(setUserTotalPosts(response?.data?.totalLength))
         }
         catch(err){
             console.log("GET_POST_BY_USER_API FAILED....", err)
