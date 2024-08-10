@@ -20,7 +20,14 @@ exports.createPost = async(req, res)=>{
             })
         }
         
-
+        const userPost = await Post.find({author:userId}).sort({createdAt:-1});
+        const currentTime = Date.now();
+        if(userPost.length>5 && currentTime-userPost[4].createdAt<86400000){
+            return res.status(403).json({
+                success: false,
+                message: "You can only post 5 times a day"
+            })
+        }
 
         const post = await Post.create({
             author: userId,
