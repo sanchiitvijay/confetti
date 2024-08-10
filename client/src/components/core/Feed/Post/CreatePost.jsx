@@ -5,16 +5,21 @@ import { createPost } from '../../../../services/operations/postAPI';
 import SubmitButton from '../../../common/SubmitButton';
 import "./post.css"
 import "../Settings/Settings.css"
+
+
 const CreatePost = () => {
+  const [maxLen, setMaxLen] = useState(0);
+
+  
   const [openMoreInfo, setOpenMoreInfo] = useState(false);
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-
+  
   const { register, 
     handleSubmit, 
     formState: { errors }, 
     reset 
-    } = useForm();
+  } = useForm();
 
   const onSubmit = async (data) => {
     const result = await dispatch(createPost(token, data));
@@ -24,8 +29,6 @@ const CreatePost = () => {
     }
   };
 
-
-  
     const years=["First","Second","Third","Fourth"]
     const branches = ['CS','IS','AD','AI','AT','BT','CH','CI','CY','EC','EE','EI','IM','BA','MC','MD','ME','CV']
   
@@ -38,11 +41,13 @@ const CreatePost = () => {
           <input
             type="text"
             placeholder="What is in your mind"
-            {...register('description', { required: true })}
+            {...register('description', { required: true, maxLength:500 })}
+            onChange={(e) => setMaxLen(e.target.value.length)}
             onClick={() => !openMoreInfo && setOpenMoreInfo(true)}
-            className="w-full rounded-[0.5rem] mt-3 mb-4 focus:ring-0 dark:focus:border-white focus:border-black dark:bg-[#2C333F] p-[12px] pr-12 text-[16px] leading-[24px] font-[500] dark:text-[#999DAA]"
+            className={"w-full rounded-[0.5rem] mt-3 mb-4 focus:ring-0 dark:focus:border-white focus:border-black dark:bg-[#2C333F] p-[12px] pr-12 text-[16px] leading-[24px] font-[500] dark:text-[#999DAA]"}
           />
           {errors.description && <div className="text-red-500 mb-3 text-xs">This field is required</div>}
+          {maxLen > 500 && <div className="text-red-500 mb-3 text-xs">Reached maximum character limit</div>}
 
           {openMoreInfo && <>
             <label htmlFor="name" className="text-sm mt-4 px-2">Name</label>
