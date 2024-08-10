@@ -62,6 +62,12 @@ const UserSchema=new mongoose.Schema({
     token:{
         type:String
     },
+    posts:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"post"
+        }
+    ],
     likes:[
         {
             type:mongoose.Schema.Types.ObjectId,
