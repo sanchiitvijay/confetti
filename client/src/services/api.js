@@ -20,6 +20,7 @@ export const userEndpoints = {
     UPDATE_DP_API: BASE_URL + "/auth/update-dp",
     SEND_FEEDBACK_API: BASE_URL + "/feedback/write-feedback",
     GET_FEEDBACK_API: BASE_URL + "/feedback/get-feedback",
+    GET_LEADERBOARD_API: BASE_URL + "/auth/leaderboard",
 }
 
 export const postEndpoints = {

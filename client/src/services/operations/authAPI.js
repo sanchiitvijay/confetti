@@ -19,6 +19,9 @@ const {
       const toastId = toast.loading("Loading...")
       dispatch(setLoading(true))
       try {
+
+        
+
         console.log("Send otp api:",SENDOTP_API)
         const response = await apiConnector("POST", SENDOTP_API, {
           email
