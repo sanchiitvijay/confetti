@@ -186,7 +186,8 @@ exports.getPosts = async(req, res) => {
 //Get posts function for the admin to get the posts by a user's id
 exports.getUserPosts=async(req,res)=>{
     try{
-        const userId=req.body.userId || req.user.id;
+       
+        const userId=req.headers.userid || req.user.id;
         if(!userId){
             return res.status(404).json({
                 success:false,
@@ -195,14 +196,15 @@ exports.getUserPosts=async(req,res)=>{
         }
 
         const posts=await Post.find({author:userId});
-
-        slicedPost = posts.slice(0, req.body.count)
+        const totalLength=posts?.length;
+        slicedPost = posts.slice(0, req.headers.count)
 
         const user=await User.findById(userId);
         return res.status(200).json({
             success:true,
             message:`Posts fetched for the user ${user?.name}`,
-            slicedPost
+            slicedPost,
+            totalLength,
         })
     }
     catch(error){
@@ -216,6 +218,28 @@ exports.getUserPosts=async(req,res)=>{
     }
 }
 
+exports.getUserPostsStats=async(req,res)=>{
+    try{
+        const userId=req.headers.userid || req.user.id;
+        if(!userId){
+            return res.status(404).json({
+                success:false,
+                message:"User not found"
+            })
+        }
+
+        const posts=await Post.findById({author:userId});
+        const postLength=posts?.length;
+
+        return res.status(200).json({
+            success:true,
+            message:"User Posts Stats fetched successfully"
+        })
+    }
+    catch(err){
+
+    }
+}
 exports.reportPost = async(req, res)=> {
     const postId = req.body.postId;
 

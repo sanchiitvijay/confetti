@@ -37,7 +37,7 @@ export default function EditProfile() {
         {/* Profile Information */}
         <div className="my-10 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 background-animate gradient-box p-1 rounded-md">
 
-        <div className="flex flex-col gap-y-6 rounded-md p-8 bg-white dark:bg-confettiDarkColor1">
+        <div className="flex flex-col gap-y-6 rounded-md p-8 bg-white dark:bg-confettiDarkColor3">
           <h2 className="text-lg mb-2 font-semibold text-richblack-5">
             Profile Information
           </h2>
