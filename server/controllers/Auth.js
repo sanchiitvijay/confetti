@@ -7,9 +7,22 @@ const cloudinary=require('cloudinary').v2;
 const mailSender=require('../utils/mailSender');
 require("dotenv").config();
 const {uploadImageToCloudinary}=require("../utils/imageUploader");
-
 const {passwordUpdated}=require("../mail/templates/passwordUpdate");
 const { cloudinaryConnect } = require("../configs/cloudinary");
+const welcomeTemplate = require("../mail/templates/newJoining");
+
+
+async function sendJoiningEmail(email,name){
+    try{
+        const mailResponse=await mailSender(email,"Verification Email from Confetti",welcomeTemplate(name));
+        console.log("Email sent successfully:",mailResponse);
+    }
+    catch(error){
+        console.log("Error occured while sending mails:",error);
+        throw error;
+    }
+}
+
 
 
 exports.sendotp=async(req,res)=>{
@@ -145,12 +158,8 @@ exports.signup=async(req,res)=>{
         if(avatar){
             try{
             cloudinaryConnect()
-            console.log("------------------ cloudiary")
             const result=await uploadImageToCloudinary(avatar,process.env.FOLDER_NAME,1000,1000);
-            console.log("------------------- cloudinary1")
             avatarUrl=result.secure_url;
-            console.log("------------------- cloudinary2")
-            console.log("Image Url of Cloudinary:",avatarUrl)
             }
             catch(error){
                 console.log("FILE COULD NOT BE UPLOADED",error)
@@ -175,7 +184,7 @@ exports.signup=async(req,res)=>{
             
             });
 
-
+            sendJoiningEmail(email,user.name);
         return res.status(200).json({
             success:true,
             message:"Sign up Successfull",

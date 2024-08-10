@@ -6,7 +6,7 @@ const router = Router();
 
 router.route("/create-post").post(auth, createPost);
 router.route("/edit-post").post(auth, editPost);
-router.route("/delete-post").delete(auth, deletePost);
+router.route("/delete-post").post(auth, deletePost);
 router.route("/get-post").get(auth, getPosts);
 router.route("/get-user-posts").get(auth, getUserPosts);
 router.route("/report-post").post(auth, reportPost);

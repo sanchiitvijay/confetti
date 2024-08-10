@@ -23,15 +23,15 @@ const Post = (props) => {
   const {comment} = useSelector((state) => state.comment);
   let likes = props.likes;
 
-  // console.log("rpofiles-------------------",profile)
-  const posts = post.filter((p) => p?._id === props?._id);
-    // console.log("posts-------------------",posts)
-    likes = posts[0]?.likes;
-    // console.log("likes-------------------",likes)
-    if (likes?.includes(profile?.user?._id)) {
-      // console.log("liked kra hai-------------------")
-      setLike(true);
-    }
+  console.log("rpofiles-------------------",post)
+  // const posts = post.filter((p) => p?._id === props?._id);
+  //   console.log("posts-------------------",posts)
+  //   likes = posts[0]?.likes;
+  //   console.log("likes-------------------",likes)
+  //   if (likes?.includes(profile?.user?._id)) {
+  //     console.log("liked kra hai-------------------")
+  //     setLike(true);
+  //   }
 
   const likeHandler = () => {
     dispatch(liked(token, {postId: props?._id}));

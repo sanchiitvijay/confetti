@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Logo from "../assets/confetti.png";
 import { VscCoffee } from "react-icons/vsc";
 import { Link } from 'react-router-dom';
@@ -7,14 +7,24 @@ import { TbMailFilled } from "react-icons/tb";
 import "../components/core/Feed/Settings/Settings.css"
 
 const BuyUsCoffee = () => {
+  const [isHovered, setIsHovered] = useState(false);
   return (  
     <div className='flex relative flex-col mx-auto w-full text-black dark:text-white dark:bg-confettiDarkColor2 bg-confettiLightColor2 min-h-[100vh] items-center content-center'>
         
-        <div className='absolute top-5 right-5 flex flex-row'>
-          <div className='w-[200px] hidden hover:block'>
+        <div className='absolute top-5 border rounded-3xl gap-4 right-5 flex flex-row'>
+          <div className={`w-[200px] text-sm transition-all duration-500 delay-500 ease-linear text-right 
+                    ${isHovered ? 'opacity-100' : 'hidden'}`}>
             If you have a moment, please star this repo ⭐. Thanks!
           </div>
-            <Link to='/'> <FaGithub fontSize={42}/> </Link>
+            <a 
+            href='https://github.com/sanchiitvijay/confetti'
+            target='_blank'
+            className='cursor-pointer'
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            > 
+              <FaGithub fontSize={42}/> 
+            </a>
         </div>
         <div>
         <div className='text-3xl pb-5 font-semibold my-8 text-center'>About Us</div>

@@ -50,7 +50,7 @@ const MyFeed = () => {
         }
         scrollableTarget="scrollableDiv"
       >
-        {post.map((p) => (
+        {post?.map((p) => (
           <Post key={p.id} {...p} />
         ))}
       </InfiniteScroll>

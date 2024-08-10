@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     darkMode: localStorage.getItem("darkMode") === "true",
     loading: false,
+    stats: localStorage.getItem("stats") === "false",
 };
 
 const themeSlice = createSlice({
@@ -16,9 +17,15 @@ const themeSlice = createSlice({
         toggleDarkMode(state) {
             state.darkMode = !state.darkMode;
             localStorage.setItem("darkMode", state.darkMode);
+        },
+        setStats(state, action) {
+            state.stats = action.payload;
+            console.log("in slice", action.payload);
+            localStorage.setItem("stats", action.payload);
         }
+
     }
 });
 
-export const { setDarkMode, toggleDarkMode } = themeSlice.actions;
+export const { setDarkMode, toggleDarkMode, setStats } = themeSlice.actions;
 export default themeSlice.reducer;

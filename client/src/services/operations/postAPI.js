@@ -109,7 +109,6 @@ export function createPost (token, data) {
 
 export function editPost (token, data) {
     return async(dispatch) => {
-        let result = null
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
@@ -124,9 +123,8 @@ export function editPost (token, data) {
                 throw new Error(response.data.message)
             }
 
-            dispatch(setPost({...response.data.data}))
-            toast.success("post is created succesfully")
-            result = response?.data?.data
+            dispatch(setPost(response.data.posts))
+            toast.success("post is edited succesfully")
 
         } catch (err) {
             console.log("EDIT_POST_API FAILED....", err)
@@ -137,17 +135,17 @@ export function editPost (token, data) {
             dispatch(setLoading(false))
         }
 
-        return result;
     }
 }
 
 export function deletePost (token, data) {
     return async(dispatch) => {
         let result = null
+        console.log("DELETE_POST_API data-----------",data)
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
-            const response = await apiConnector("DELETE",DELETE_POST_API, data, {
+            const response = await apiConnector("POST",DELETE_POST_API, data, {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "multipart/form-data",
             })
@@ -158,7 +156,7 @@ export function deletePost (token, data) {
                 throw new Error(response.data.message)
             }
 
-            dispatch(setPost({...response.data.data}))
+            dispatch(setPost(response.data.posts))
             toast.success("post is deleted succesfully")
             result = response?.data?.data
             
@@ -193,7 +191,7 @@ export function reportPost (token, data) {
                 throw new Error(response.data.message)
             }
 
-            dispatch(setPost({...response.data.data}))
+            dispatch(setPost(response.data.posts))
             toast.success("post is reported succesfully")
             result = response?.data?.data
             
