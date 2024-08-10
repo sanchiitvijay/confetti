@@ -42,7 +42,7 @@ const ChangePassword = () => {
       <form onSubmit={handleSubmit(submitPasswordForm)} className="p-2">
         <div className="my-10 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 background-animate gradient-box p-1 rounded-md">
 
-        <div className="flex flex-col rounded-md p-8 bg-white dark:bg-confettiDarkColor1">
+        <div className="flex flex-col rounded-md p-8 bg-white dark:bg-confettiDarkColor3">
           <h2 className="text-lg font-semibold text-richblack-5 mb-2">Password</h2>
           <div className="flex flex-col gap-5 lg:flex-row">
             <div className="relative flex flex-col gap-2 lg:w-[48%]">
