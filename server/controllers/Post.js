@@ -235,7 +235,7 @@ exports.getUserPosts=async(req,res)=>{
             })
         }
 
-        const posts=await Post.find({author:userId});
+        const posts=await Post.find({author:userId}).populate("author").exec();
         const totalLength=posts?.length;
         slicedPost = posts.slice(0, req.headers.count)
 

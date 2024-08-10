@@ -92,7 +92,7 @@ const MyProfile = () => {
       {
         user &&
         (
-          <div className='background-animate  mt-10 w-[90%] rounded-md bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-1'>
+          <div className='background-animate  mt-16 w-[90%] rounded-md bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-1'>
             <div className='bg-white dark:bg-confettiDarkColor2  rounded-md p-10 h-fit '>
               <h1 className='text-4xl text-center md:text-left md:text-5xl mb-4' ><span className='animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent text-4xl md:text-5xl font-black '>Hi {user?.name?.charAt(0).toUpperCase() + user?.name?.slice(1) }</span>{" "}👋</h1>
            
