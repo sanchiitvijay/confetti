@@ -1,5 +1,6 @@
 const Like = require("../models/Like")
 const Post = require("../models/Post")
+const User= require("../models/User")
 
 exports.getLikes = async(req, res)=> {
     try {
@@ -36,9 +37,16 @@ exports.liked = async(req, res) => {
                 { new: true }
             )
             
+            const updatedUser=await User.findByIdAndUpdate(
+                authorId,
+                { $pull: {likes:like._id}},
+                {new:true}
+            );
+
             const deletedLike = await Like.findByIdAndDelete(like._id);
+
     
-            if(!updatedPost || !deletedLike) {
+            if(!updatedPost || !deletedLike || !updatedUser) {
                 return res.status(400).json({
                     success: false,
                     message: "Error while removing the like"
@@ -54,13 +62,16 @@ exports.liked = async(req, res) => {
                 {$push: {likes: newLike._id}},
                 {new: true}
             )
+            const updatedUser= await User.findByIdAndUpdate(authorId,
+                {$push:{likes:newLike._id}},{new:true}
+           );
 
             // console.log(updatedPost)
             // console.log(newLike)
-
+            //console.log(updatedUser)
 
     
-            if(!newLike || !updatedPost) {
+            if(!newLike || !updatedPost || !updatedUser) {
                 return res.status(400).json({
                     success: false,
                     message: "Error while adding the like"

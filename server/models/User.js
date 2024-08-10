@@ -62,6 +62,24 @@ const UserSchema=new mongoose.Schema({
     token:{
         type:String
     },
+    likes:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"like"
+        }
+    ],
+    comments:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"comment"
+        }
+    ],
+    replies:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"comment"
+        }
+    ],
     },
     {
         timestamps: true

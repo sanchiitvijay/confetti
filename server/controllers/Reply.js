@@ -1,5 +1,6 @@
 const Reply=require("../models/Reply");
 const Comment=require("../models/Comment");
+const User = require("../models/User");
 
 
 exports.createReply=async(req,res)=>{
@@ -34,6 +35,18 @@ exports.createReply=async(req,res)=>{
             return res.status(415).json({
                 success:false,
                 message:"Cant reply to the comment"
+            })
+        }
+
+        //push the reply in user
+        const updatedUser=User.findByIdAndUpdate(userId,{
+            $push:{replies:reply._id}
+        },{new:true})
+
+        if(!updatedUser){
+            return res.status(400).json({
+                success:false,
+                message:"Reply couldnt be pushed to the User"
             })
         }
 
@@ -98,6 +111,17 @@ exports.deleteReply=async(req,res)=>{
             new:true
         });
 
+        //pull the reply id from user model
+        const updatedUser=User.findByIdAndUpdate(userId,{
+            $pull:{replies:reply._id}
+        },{new:true})
+
+        if(!updatedUser){
+            return res.status(400).json({
+                success:false,
+                message:"Reply couldnt be pulled to the User"
+            })
+        }
 
         //now delete the reply
         const deletedReply=await Reply.findByIdAndDelete(replyId);
