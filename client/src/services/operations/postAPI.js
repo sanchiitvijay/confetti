@@ -9,7 +9,8 @@ const {
     DELETE_POST_API,
     GET_POST_API,
     GET_USER_POSTS_API,
-    REPORT_POST_API
+    REPORT_POST_API,
+    GET_USER_POST_STATS_API
 } = postEndpoints
 
 export function getUserPosts(userId,count,token){
@@ -33,6 +34,28 @@ export function getUserPosts(userId,count,token){
         }
         catch(err){
             console.log("GET_POST_BY_USER_API FAILED....", err)
+        }
+    }
+}
+
+export function getUserStats(token){
+    return async(dispatch)=>{
+        try{
+            const response=await apiConnector("GET",GET_USER_POST_STATS_API,null,{
+                Authorization: `Bearer ${token}`
+            });
+
+            console.log("GET_USER_POSTS_STATS_API_RESPONSE",response)
+
+            if(!response?.data?.success){
+                throw new Error(response?.data?.message)
+
+            }
+
+            return response?.data?.data;
+        }
+        catch(err){
+            console.log("Error in Fetching User Statistics:",err);
         }
     }
 }
