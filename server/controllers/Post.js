@@ -21,6 +21,7 @@ exports.createPost = async(req, res)=>{
         }
         
 
+
         const post = await Post.create({
             author: userId,
             description,
@@ -46,6 +47,21 @@ exports.createPost = async(req, res)=>{
                 }
             }
         } 
+
+        const updatedUser=await User.findByIdAndUpdate(userId,{
+            $push:{
+                posts:post._id
+            }
+        },{
+            new:true
+        });
+
+        if(!updatedUser){
+            return res.status(400).json({
+                success:false,
+                message:"Couldnt update the user's posts"
+            })
+        }
         let posts =await Post.find().sort({ createdAt: -1 }).populate('author').exec();
         let postLength=posts.length;
         posts=posts.slice(0,4);
@@ -136,6 +152,21 @@ exports.deletePost = async(req, res) => {
         const result =await Post.deleteOne({ _id: postId })
         // console.log(3);
         
+
+        const updatedUser=await User.findByIdAndUpdate(userId,{
+            $pull:{
+                posts:postId
+            }
+        },{
+            new:true
+        });
+
+        if(!updatedUser){
+            return res.status(400).json({
+                success:false,
+                message:"Couldnt update the user's posts"
+            })
+        }
         return res.status(200).json({
             success: true,
             message: "Post has been deleted succesfully",
