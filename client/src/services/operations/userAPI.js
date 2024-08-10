@@ -14,6 +14,8 @@ const {
     PROMOTE_STUDENTS_API,
     CHANGEPASSWORD_API,
     UPDATE_DP_API,
+    SEND_FEEDBACK_API,
+    GET_FEEDBACK_API,
 } = userEndpoints;
 
 
@@ -255,4 +257,66 @@ export function updateDisplayPicture(token,data){
             dispatch(setLoading(false))
         }
     } 
+}
+
+export function sendFeedback(token, data) {
+    return async(dispatch) => {
+        const toastId = toast.loading("Loading...");
+        dispatch(setLoading(true))
+        try{
+            const response = await (apiConnector("POST", SEND_FEEDBACK_API, data, {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            }))
+
+            console.log("Feedback response...", response)
+
+            if(!response.data.success) {
+                throw new Error(response.data.message)
+            }
+
+            toast.success("Feedback sent successfully")
+
+        } catch (err) {
+            console.log("SEND FEEDBACK API FAILED....", err)
+            toast.error("Could not send the feedback")
+
+        } finally {
+            toast.dismiss(toastId)
+            dispatch(setLoading(false))
+        }
+    }
+}
+
+export function getFeedback(token) {
+    return async(dispatch) => {
+        let result = null
+        const toastId = toast.loading("Loading...");
+        dispatch(setLoading(true))
+
+        try{
+            const response = await (apiConnector("GET", GET_FEEDBACK_API, null, {
+                Authorization: `Bearer ${token}`,
+            }))
+
+            console.log("Feedback response...", response)
+
+            if(!response.data.success) {
+                throw new Error(response.data.message)
+            }
+
+            toast.success("Feedback fetched successfully")
+            result = response?.data?.data
+
+        } catch (err) {
+            console.log("GET FEEDBACK API FAILED....", err)
+            toast.error("Could not get the feedback")
+
+        } finally {
+            toast.dismiss(toastId)
+            dispatch(setLoading(false))
+        }
+
+        return result;
+    }
 }

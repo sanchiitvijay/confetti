@@ -18,6 +18,8 @@ export const userEndpoints = {
     DELETE_GRADUATES_API: BASE_URL + "/auth/delete-graduates",
     PROMOTE_STUDENTS_API: BASE_URL + "/auth/promote-students",
     UPDATE_DP_API: BASE_URL + "/auth/update-dp",
+    SEND_FEEDBACK_API: BASE_URL + "/feedback/write-feedback",
+    GET_FEEDBACK_API: BASE_URL + "/feedback/get-feedback",
 }
 
 export const postEndpoints = {

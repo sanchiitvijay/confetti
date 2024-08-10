@@ -9,6 +9,7 @@ const postRoutes=require("./routes/Post");
 const likeRoutes=require("./routes/Like");
 const commentRoutes=require("./routes/Comment");
 const replyRoutes=require("./routes/Reply");
+const feedbackRoutes=require("./routes/Feedback");
 
 //connection for databse
 const database=require("./configs/database");
@@ -63,6 +64,7 @@ app.use('/api/v1/post',postRoutes);
 app.use('/api/v1/like',likeRoutes);
 app.use('/api/v1/comment',commentRoutes);
 app.use('/api/v1/reply',replyRoutes);
+app.use('/api/v1/feedback',feedbackRoutes);
 
 
 
