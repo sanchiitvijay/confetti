@@ -1,4 +1,7 @@
-const SignUpInput =({name,type,value,register,error,required}) => {
+import { memo } from "react"
+
+
+const SignUpInput =memo(function SignUpInput({name,type,value,register,error,required}){
  
   return (
     <label className="w-full text-white">
@@ -16,6 +19,6 @@ const SignUpInput =({name,type,value,register,error,required}) => {
           <sup className="text-yellow-400">{" "}*</sup></p>}
       </label>
   )
-}
+})
 
 export default SignUpInput

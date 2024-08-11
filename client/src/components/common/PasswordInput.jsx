@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { memo, useState } from 'react'
 import {AiOutlineEye} from "react-icons/ai"
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
 
 
-const PasswordInput = (props) => {
+const PasswordInput = memo(function PasswordInput(props){
         const [showPassword, setShowPassword] = useState(false)
         return (
             <label className="relative text-white outline-none" >
@@ -34,6 +34,6 @@ const PasswordInput = (props) => {
     </label>
 
   )
-}
+})
 
 export default PasswordInput

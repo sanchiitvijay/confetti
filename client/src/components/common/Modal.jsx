@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { memo, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { motion, AnimatePresence } from 'framer-motion';
 import useOnClickOutside from "../../hooks/useOnClickOutside";
 import useEscape from '../../hooks/useEscape';
 
-const Modal = ({ data, name, value, error, register, required, setModal }) => {
+const Modal = memo(function Modal({ data, name, value, error, register, required, setModal }){
   const [chosen, setChosen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const modalRef = useRef();
@@ -58,6 +58,6 @@ const Modal = ({ data, name, value, error, register, required, setModal }) => {
       )}
     </AnimatePresence>
   );
-};
+})
 
 export default Modal;

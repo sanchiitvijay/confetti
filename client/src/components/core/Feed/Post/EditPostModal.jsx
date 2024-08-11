@@ -1,11 +1,11 @@
-import React, { useRef, useState } from 'react'
+import React, { memo, useRef, useState } from 'react'
 import IconBtn from '../../../common/IconBtn'
 import { useDispatch, useSelector } from 'react-redux';
 import { editPost } from '../../../../services/operations/postAPI';
 import useEscape from '../../../../hooks/useEscape';
 import useOnClickOutside from '../../../../hooks/useOnClickOutside';
 
-const EditPostModal = (props) => {
+const EditPostModal = memo(function EditPostModal(props){
     const token = useSelector((state) => state.auth.token);
     const dispatch = useDispatch();
     const [newDesc, setNewDesc] = useState(props?.description);
@@ -54,6 +54,6 @@ const EditPostModal = (props) => {
         }
         </>
         )
-    }
+    })
     
     export default EditPostModal

@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { TbMailFilled } from "react-icons/tb";
 
-const OurInfo = (props) => {
+const OurInfo = memo(function OurInfo(props){
   console.log("inside our info---------------",props)
   return (
     <div className='items-center text-center'>
@@ -19,6 +19,6 @@ const OurInfo = (props) => {
                 </div>
       </div>
   )
-}
+})
 
 export default OurInfo

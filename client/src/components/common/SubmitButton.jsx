@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const SubmitButton = ({text,type,disabled,customClasses="",onclick=""}) => {
+const SubmitButton = memo(function SubmitButton({text,type,disabled,customClasses="",onclick=""}){
   const navigate=useNavigate();
   return (
     <button  type={type} onClick={onclick} className={`p-[3px] relative ${customClasses}`} disabled={disabled}>
@@ -11,6 +11,6 @@ const SubmitButton = ({text,type,disabled,customClasses="",onclick=""}) => {
         </div>
     </button>
   )
-}
+})
 
 export default SubmitButton

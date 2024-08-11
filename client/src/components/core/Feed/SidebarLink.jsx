@@ -2,8 +2,9 @@ import * as Icons from "react-icons/vsc";
 import { useDispatch } from "react-redux";
 import { NavLink, matchPath, useLocation } from "react-router-dom";
 import "./sidebar.css";
+import { memo } from "react";
 
-const SidebarLink=({link,iconName})=>{
+const SidebarLink=memo(function SideBarLink({link,iconName}){
   
   const Icon= Icons[iconName];
   const location=useLocation();
@@ -32,6 +33,6 @@ const SidebarLink=({link,iconName})=>{
       </NavLink>
    
   );
-}
+});
 
 export default SidebarLink;

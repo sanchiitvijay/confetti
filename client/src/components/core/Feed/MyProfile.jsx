@@ -5,17 +5,20 @@ import { LiaEditSolid } from "react-icons/lia";
 import Tilt from 'react-parallax-tilt';
 import { getUserStats } from '../../../services/operations/postAPI';
 import "./MyProfile.css"
+import useDebounce from '../../../hooks/useDebounce';
+import useThrottle from '../../../hooks/useThrottle';
 const MyProfile = () => {
   const { user } = useSelector(state => state.profile)
   const navigate = useNavigate()
   const dispatch = useDispatch();
+  
   const [data, setData] = useState({
     postLength: 0,
     likesLength: 0,
     commentsLength: 0,
     reportLength: 0
   })
-
+  
   // Function to animate count-up effect
   const animateCountUp = (target, count, suffix = '', duration = 1000) => {
     let start = 0;
@@ -31,30 +34,31 @@ const MyProfile = () => {
     };
     requestAnimationFrame(updateCounter);
   }
+  async function fetchStats() {
+    try {
+      console.log("MAI CALL HUA")
+      const response = await dispatch(getUserStats());
+      setData(response);
 
-  useEffect(() => {
-    async function fetchStats() {
-      try {
-        const response = await dispatch(getUserStats());
-        setData(response);
+      const targets = [
+        { element: document.getElementById('postCount'), count: response.postLength, suffix: '' },
+        { element: document.getElementById('likeCount'), count: response.likesLength, suffix: '' },
+        { element: document.getElementById('commentCount'), count: response.commentsLength, suffix: '' },
+        { element: document.getElementById('reportCount'), count: user?.reports, suffix: '' }
+      ];
 
-        const targets = [
-          { element: document.getElementById('postCount'), count: response.postLength, suffix: '' },
-          { element: document.getElementById('likeCount'), count: response.likesLength, suffix: '' },
-          { element: document.getElementById('commentCount'), count: response.commentsLength, suffix: '' },
-          { element: document.getElementById('reportCount'), count: user?.reports, suffix: '' }
-        ];
-
-        targets.forEach(target => {
-          if (target.element) {
-            animateCountUp(target.element, target.count, target.suffix);
-          }
-        });
-      } catch (err) {
-        console.log("User Stats can't be fetched right now", err)
-      }
+      targets.forEach(target => {
+        if (target.element) {
+          animateCountUp(target.element, target.count, target.suffix);
+        }
+      });
+    } catch (err) {
+      console.log("User Stats can't be fetched right now", err)
     }
-    fetchStats();
+  }
+  const handleFetchStats=useThrottle(fetchStats,5000,false);
+  useEffect(() => {
+    handleFetchStats();
   }, [dispatch]);
 
 
@@ -69,7 +73,7 @@ const MyProfile = () => {
             <div className='w-fit relative  card flex flex-col md:flex-row md:gap-4 gap-2  shadow-lg dark:bg-card1 bg-dark_card1 bg-cover text-white border-spacing-4 border-4 h-max dark:border-slate-600 border-white p-6 md:p-7 rounded-lg  item-center'>
               <LiaEditSolid className='absolute right-2 top-2 text-[25px] cursor-pointer' onClick={() => navigate("/feed/settings")} />
               <div className='flex flex-col max-md:mb-3 max-md:mx-auto my-auto'>
-                <img src={user?.displayPicture} alt="" className='w-[80px] m-4 h-[80px] rounded-full border border-white object-cover' />
+                <img src={user?.displayPicture} alt="" className='w-[80px] m-4 h-[80px] rounded-full  object-cover' />
                 <div>{"@" + user?.username}</div>
               </div>
               <div className='flex flex-col'>
@@ -94,34 +98,34 @@ const MyProfile = () => {
         (
           <div className='background-animate  mt-16 w-[90%] rounded-md bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-1'>
             <div className='bg-white dark:bg-confettiDarkColor2  rounded-md p-10 h-fit '>
-              <h1 className='text-4xl text-center md:text-left md:text-5xl mb-4' ><span className='animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent text-4xl md:text-5xl font-black '>Hi {user?.name?.charAt(0).toUpperCase() + user?.name?.slice(1) }</span>{" "}👋</h1>
-           
-              <hr className='gradient-line mb-8'/>
-              <div className='flex flex-col sm:flex-row justify-around'>
+              <h1 className='text-4xl text-center md:text-left md:text-5xl mb-4' ><span className='animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent text-4xl md:text-5xl font-black '>Hi {user?.name?.charAt(0).toUpperCase() + user?.name?.slice(1)}</span>{" "}👋</h1>
+
+              <hr className='gradient-line mb-8' />
+              <div className='flex flex-col gap-2 sm:gap-0 sm:flex-row justify-around'>
 
                 <div className='flex  flex-col gap-4 '>
-                  <div  className='text-center'>
-                   
+                  <div className='text-center'>
+
                     <p id="postCount" className='order-1 text-4xl md:text-5xl font-extrabold leading-none text-indigo-600 dark:text-indigo-100'>{data?.postLength}</p>
                     <h2 className='order-2 mt-2 text-md md:text-lg font-medium leading-6 text-gray-500 dark:text-gray-400'>Total Posts</h2>
                   </div>
 
                   <div className='text-center'>
-                   
+
                     <p id="likeCount" className='order-1 text-4xl md:text-5xl font-extrabold leading-none text-indigo-600 dark:text-indigo-100'>{data?.likesLength}</p>
                     <h2 className='order-2 mt-2 text-md md:text-lg font-medium leading-6 text-gray-500 dark:text-gray-400'>Total Likes</h2>
                   </div>
                 </div>
 
-              <div className='flex gap-4 flex-col '>
+                <div className='flex gap-4 flex-col '>
                   <div className='text-center'>
-                    
+
                     <p id="commentCount" className='order-1 text-4xl md:text-5xl font-extrabold leading-none text-indigo-600 dark:text-indigo-100'>{data?.commentsLength}</p>
                     <h2 className='order-2 mt-2 text-md md:text-lg font-medium leading-6 text-gray-500 dark:text-gray-400'>Total Comments</h2>
                   </div>
 
                   <div className='text-center'>
-                    
+
                     <p id="reportCount" className='order-1 text-4xl md:text-5xl font-extrabold leading-none text-indigo-600 dark:text-indigo-100'>{user?.reports}</p>
                     <h2 className='order-2 mt-2 text-md md:text-lg font-medium leading-6 text-gray-500 dark:text-gray-400'>Total Reports</h2>
                   </div>

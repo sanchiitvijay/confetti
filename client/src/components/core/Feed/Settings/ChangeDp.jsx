@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useEffect, useRef, useState } from "react"
 import { FiUpload } from "react-icons/fi"
 import { useDispatch, useSelector } from "react-redux"
 import IconBtn from '../../../common/IconBtn'
 import { updateDisplayPicture } from '../../../../services/operations/userAPI'
 import  "./Settings.css"
+
 
 const ChangeDp = () => {
     const { token } = useSelector((state) => state.auth)
@@ -24,6 +25,7 @@ const ChangeDp = () => {
     const handleFileChange = (e) => {
       const file = e.target.files[0]
       // console.log(file)
+      console.log("COME TO CHANGE FILE")
       if (file) {
         setImageFile(file)
         previewFile(file)
@@ -31,6 +33,7 @@ const ChangeDp = () => {
     }
   
     const previewFile = (file) => {
+      console.log("PREVIEW FILE")
       const reader = new FileReader()
       reader.readAsDataURL(file)
       reader.onloadend = () => {
@@ -52,7 +55,7 @@ const ChangeDp = () => {
         console.log("ERROR MESSAGE - ", error.message)
       }
     }
-    console.log(user);
+
   
     useEffect(() => {
       if (imageFile) {
