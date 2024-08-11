@@ -128,8 +128,8 @@ const Signup = () => {
 
   return (
     <div className='w-full relative h-full mx-auto text-cFont'>
-      <div className='min-h-screen relative p-8 item-center justify-between w-full'>
-        <div className='py-12 px-12 xs:w-[100%] md:w-fit bg-gray-400 rounded-md bg-clip-padding backdrop-filter mx-auto justify-center backdrop-blur-md bg-opacity-20 border border-gray-400'>
+      <div className='min-h-screen relative p-4 md:p-8 item-center justify-between w-full'>
+        <div className='md:p-12 p-7 xs:w-[100%] md:w-fit bg-gray-400 rounded-md bg-clip-padding backdrop-filter mx-auto justify-center backdrop-blur-md bg-opacity-20 border border-gray-400'>
           <h2 className='text-white text-4xl font-semibold text-center'>
             Sign Up
           </h2>

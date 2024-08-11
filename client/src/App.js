@@ -22,6 +22,7 @@ import MyPosts from "./components/core/Feed/MyPosts";
 import MyProfile from "./components/core/Feed/MyProfile";
 import AboutUs from "./pages/AboutUs";
 import MetaData from "./services/MetaData";
+import Stats from "./pages/Stats";
 
 function App() {
   const { token } = useSelector((state) => state.auth);
@@ -142,6 +143,7 @@ function App() {
             <Route path="/feed/my-posts" element={<MyPosts/>} />
             <Route path="/feed/my-profile" element={<MyProfile/>} />
             <Route path="/feed/about-us" element={<AboutUs/>} />
+            <Route path="/feed/stats" element={<Stats/>} />
 
           </Route>
           <Route
