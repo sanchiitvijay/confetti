@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { VscSend } from "react-icons/vsc";
 import { IoShareSocialOutline, IoChatbubbleOutline } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
@@ -9,7 +9,7 @@ import { FaHeart } from "react-icons/fa";
 import Comment from './Comment';
 import PostHeader from './PostHeader';
 
-const Post = (props) => {
+const Post = memo(function Post(props){
   const dispatch = useDispatch();
 
   const [showComments, setShowComments] = useState(false);
@@ -125,6 +125,6 @@ const Post = (props) => {
       }
     </div>
   );
-}
+})
 
 export default Post;

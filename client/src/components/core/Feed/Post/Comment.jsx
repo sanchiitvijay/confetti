@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { MdOutlineDelete } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteComment } from '../../../../services/operations/commentAPI';
@@ -6,7 +6,7 @@ import { VscSend } from "react-icons/vsc";
 import Reply from './Reply';
 import { createReply, getAllReplies } from '../../../../services/operations/replyAPI';
 
-const Comment = (props) => {
+const Comment = memo(function Comment(props){
   const user = useSelector((state) => state.profile.user);
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
@@ -77,6 +77,6 @@ const Comment = (props) => {
         </div>
     </>
   )
-}
+})
 
 export default Comment

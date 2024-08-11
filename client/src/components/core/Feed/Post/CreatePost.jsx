@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { createPost } from '../../../../services/operations/postAPI';
@@ -7,7 +7,7 @@ import "./post.css"
 import "../Settings/Settings.css"
 
 
-const CreatePost = () => {
+const CreatePost = memo(function CreatePost(){
   const [maxLen, setMaxLen] = useState(0);
 
   
@@ -133,6 +133,6 @@ const CreatePost = () => {
       </div>
       </div>
   );
-};
+})
 
 export default CreatePost;

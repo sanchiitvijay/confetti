@@ -1,7 +1,8 @@
+import { memo } from "react"
 import SubmitButton from "../common/SubmitButton"
 import IconBtn from "../common/SubmitButton"
 
-export default function ConfirmationModal({ modalData }) {
+export default memo(function ConfirmationModal({ modalData }) {
   return (
     <div className="fixed inset-0 z-[1000] !mt-0 grid place-items-center overflow-auto bg-black bg-opacity-10 backdrop-blur-sm">
       <div className="w-11/12 max-w-[350px] rounded-lg bg-confettiLightColor3 dark:bg-confettiDarkColor3 border border-black dark:border-white  p-6">
@@ -30,4 +31,4 @@ export default function ConfirmationModal({ modalData }) {
       </div>
     </div>
   )
-}
+})

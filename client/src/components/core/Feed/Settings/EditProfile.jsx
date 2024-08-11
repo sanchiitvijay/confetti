@@ -9,12 +9,12 @@ import "./Settings.css"
 
 const genders = ["Male", "Female","Other"]
 const years=["First","Second","Third","Fourth"]
-export default function EditProfile() {
+export default function EditProfile () {
   const { user } = useSelector((state) => state.profile)
   const { token } = useSelector((state) => state.auth)
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  console.log(user)
+
   const {
     register,
     handleSubmit,
@@ -25,7 +25,7 @@ export default function EditProfile() {
     // console.log("Form Data - ", data)
     try {
      const newUser=dispatch(editUser(data,token));
-     console.log("NEW USER:",newUser)
+      console.log("JAI MATA DI")
      
     } catch (error) {
       console.log("ERROR MESSAGE - ", error.message)

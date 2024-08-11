@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { MdOutlineDelete } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteReply } from '../../../../services/operations/replyAPI';
 
-const Reply = (props) => {
+const Reply =memo(function Reply(props){
     const dispatch = useDispatch();
     const token = useSelector((state) => state.auth.token);
     const user = useSelector((state) => state.profile.user);
@@ -31,5 +31,5 @@ const Reply = (props) => {
   
   )
 }
-
+)
 export default Reply

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { memo, useState } from 'react'
 import logo from "../../../../assets/confettiNoText.png"
 import { VscGripper, VscKebabVertical } from "react-icons/vsc";
 import { Dropdown } from 'flowbite-react';
@@ -9,7 +9,7 @@ import { TbMessageReport } from "react-icons/tb";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 
-const PostHeader = ({props}) => {
+const PostHeader = memo(function PostHeader({props}){
     const token = useSelector((state) => state.auth.token);
     const user = useSelector(state=>state.profile.user)
 
@@ -89,6 +89,6 @@ const PostHeader = ({props}) => {
         }
       </div>
   )
-}
+})
 
 export default PostHeader
