@@ -1,6 +1,5 @@
 import { memo } from "react"
 import SubmitButton from "../common/SubmitButton"
-import IconBtn from "../common/SubmitButton"
 
 export default memo(function ConfirmationModal({ modalData }) {
   return (

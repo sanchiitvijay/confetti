@@ -3,7 +3,7 @@ import { sidebarLinks } from "../Feed/dashboard-links";
 import { useNavigate } from "react-router-dom";
 import SidebarLink from "./SidebarLink";
 import { VscSignOut, VscVersions } from "react-icons/vsc";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Spinner from "../../common/Spinner";
 import ConfirmationModal from "../../common/ConfirmationModal";
 import { logout } from "../../../services/operations/authAPI";
@@ -19,10 +19,8 @@ const Sidebar=()=>{
   const [changeStats, changeSetStats] = useState(false);
 
     const handleStats=()=>{
-      console.log("STATS1---------------",changeStats);
       changeSetStats(!changeStats);
       dispatch(setStats(changeStats));
-      console.log("STATS",changeStats);
     };
 
   

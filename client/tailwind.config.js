@@ -15,14 +15,9 @@ module.exports = {
         'newsmall':'400px'
       },
       backgroundImage: {
-        'confess': "url('/src/assets/confess.jpg')",
-        'propose': "url('/src/assets/propose.jpg')",
-        'propose1': "url('/src/assets/propose1.jpg')",
         'ring': "url('/src/assets/hands.jpg')",
         'card1': "url('/src/assets/card_wallpaper.jpg')",
         'dark_card1': "url('/src/assets/dark_card_wallpaper.jpg')",
-        'card2': "url('/src/assets/card-day.webp')",
-        'dark_card2': "url('/src/assets/card-night.webp')",
         
         // gradient
         'pink': 'linear-gradient(to right, #ffdde1, #ee9ca7)',

@@ -1,30 +1,17 @@
 import React, { useEffect } from 'react'
 import logo from "../../../../assets/confettiNoText.png"
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { MdDarkMode } from "react-icons/md";
-
-import { useSelector } from 'react-redux';
-import { logout } from '../../../../services/operations/authAPI';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { toggleDarkMode } from '../../../../slices/themeSlice';
 import { motion } from 'framer-motion';
 import UserDetails from './UserDetails';
 import Notification from './Notification';
 
 
-
-
 const Navbar = () => {
   const user = useSelector((state) => state.profile.user);
-  console.log("USER",user)
-  
-  
-
   const dispatch=useDispatch();
-
-
-  
-
   const darkMode  = useSelector(state => state.theme.darkMode);
 
   useEffect(() => {
@@ -39,17 +26,11 @@ const Navbar = () => {
   const handleToggle = () => {
     dispatch(toggleDarkMode());
   };
-  return (
-    
+  return ( 
 
-<motion.div className="sticky top-0 z-50 bg-confettiLightColor3 dark:bg-confettiDarkColor3 dark:text-white text-black border-gray-200"
-                // initial={{  y: -50 }}
-                // animate={{  y: 0 }}
-                // exit={{  y: -50 }}
-                // transition={{ duration: 0.5 }}
-        >
+<motion.div className="sticky top-0 z-50 bg-[#fff9d8] shadow-md dark:bg-confettiDarkColor3 dark:text-white text-black border-gray-200">
   <div className="max-w-screen-xl flex  flex-wrap h-[3.5rem] items-center justify-between mx-auto py-1 md:px-5 px-3">
-  <Link href="/feed" className="flex ml-4 items-center space-x-3 rtl:space-x-reverse">
+  <Link to="/feed" className="flex ml-4 items-center space-x-3 rtl:space-x-reverse">
       <img src={logo} className="h-[90px] mt-[-10px] mb-[-30px]" alt="Confetti Logo" />
   </Link>  
   <div className='justify-between dancing-script-font max-md:hidden text-4xl'>

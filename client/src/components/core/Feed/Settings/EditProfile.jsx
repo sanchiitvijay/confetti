@@ -22,10 +22,8 @@ export default function EditProfile () {
   } = useForm()
 
   const submitProfileForm = async (data) => {
-    // console.log("Form Data - ", data)
     try {
      const newUser=dispatch(editUser(data,token));
-      console.log("JAI MATA DI")
      
     } catch (error) {
       console.log("ERROR MESSAGE - ", error.message)

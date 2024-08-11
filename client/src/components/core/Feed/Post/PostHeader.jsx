@@ -1,6 +1,6 @@
 import React, { memo, useState } from 'react'
 import logo from "../../../../assets/confettiNoText.png"
-import { VscGripper, VscKebabVertical } from "react-icons/vsc";
+import { VscGripper } from "react-icons/vsc";
 import { Dropdown } from 'flowbite-react';
 import { deletePost, reportPost } from '../../../../services/operations/postAPI';
 import { useDispatch, useSelector } from 'react-redux';

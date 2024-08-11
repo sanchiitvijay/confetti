@@ -12,7 +12,6 @@ const UserDetails = (props) => {
     const logoutHandler=()=>{
         dispatch(logout(navigate));
       }
-    //   const avatarUrl=props?.user?.displayPicture;
   return (
     <div className="relative">
       <Dropdown className='dark:bg-confettiDarkColor1 rounded-md px-1' arrowIcon={false} inline={true}

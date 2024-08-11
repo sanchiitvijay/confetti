@@ -6,7 +6,6 @@ import Spinner from '../components/common/Spinner';
 import useOnClickOutsideProfile from '../hooks/useOnClickOutsideProfile';
 import { MdSpaceDashboard } from 'react-icons/md';
 import Sidebar from "../components/core/Feed/Sidebar"
-import InfiniteScroll from 'react-infinite-scroll-component';
 import Stats from '../components/core/Feed/Stats';
 import "../components/core/Feed/sidebar.css"
 const Feed = () => {
@@ -15,14 +14,12 @@ const Feed = () => {
   const navigate = useNavigate()
   const {loading:authLoading}=useSelector((state)=>state.auth);
   const {loading:profileLoading}=useSelector((state)=>state.profile);
-  const {stats} = useSelector((state)=>state.theme);
   const [show,setShow]=useState(false);
   const showRef=useRef();
   const stickRef=useRef();
   const showHandler=()=>{
     setShow(false);
   }
-  console.log("HAM JEET GYE");
   useEffect(()=>{
  
     if(!token){
@@ -47,7 +44,6 @@ const Feed = () => {
       <Navbar/>
       <div className="flex relative w-full flex-row">
         <div className="relative flex min-h-[calc(100vh-3.5rem)]">
-        {/* <div className={`w-[200px] ${dashboardShow?("block"):("hidden")}`}> </div> */}
         <div ref={showRef} className={`z-30 container ${show?`left-0 `:`-left-96 `} sm:relative  absolute sm:left-0 transition-all duration-500 `}>
           <Sidebar/>
         </div>
@@ -68,12 +64,6 @@ const Feed = () => {
         <div className="max-lg:hidden min-h-[calc(100vh-3.5rem)] w-[300px] z-10">
           <Stats/>
         </div>
-      {/* {
-        stats && 
-        <div className='z-30  lg:hidden transition-all duration-500'>
-        <Stats/>
-        </div>
-      } */}
       
     </div>
     </div>

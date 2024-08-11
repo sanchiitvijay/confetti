@@ -1,8 +1,7 @@
 import React from 'react'
 import confetti from "../../../../assets/notifConfetti.svg"
 import message from "../../../../assets/notifMessage.svg"
-import { PiConfettiLight } from "react-icons/pi";
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Dropdown } from 'flowbite-react';
 import { FaHeart } from "react-icons/fa";
 import "./notification.css"

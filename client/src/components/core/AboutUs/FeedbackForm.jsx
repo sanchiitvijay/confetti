@@ -12,7 +12,6 @@ const FeedbackForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(sendFeedback(token, {message:feedback}))
-    console.log("Feedback submitted")
   }
 
 

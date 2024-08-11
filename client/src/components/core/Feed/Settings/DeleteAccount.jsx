@@ -12,12 +12,10 @@ export default function DeleteAccount() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [confirmationModal,setConfirmationModal]=useState(null);
-  // console.log("TOKEN THIS ONE:",token)
   async function handleDeleteAccount() {
     try {    
       const formData=new FormData();
       formData.append("userId",user?._id);
-      console.log("removing user heheheheh-------")
       dispatch(removeUser(formData,token,navigate));
     } catch (error) {
       console.log("ERROR MESSAGE - ", error.message)

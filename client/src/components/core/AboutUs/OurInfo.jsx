@@ -3,7 +3,6 @@ import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { TbMailFilled } from "react-icons/tb";
 
 const OurInfo = memo(function OurInfo(props){
-  console.log("inside our info---------------",props)
   return (
     <div className='items-center text-center'>
               <div className='rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 background-animate gradient-box p-[3px]'>

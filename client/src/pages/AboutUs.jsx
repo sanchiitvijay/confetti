@@ -28,7 +28,7 @@ const BuyUsCoffee = () => {
   return (  
     <div className='flex relative flex-col mx-auto w-full text-black dark:text-white dark:bg-confettiDarkColor2 bg-confettiLightColor2 min-h-[100vh] items-center content-center'>
         
-        <div className='absolute top-5 border rounded-3xl gap-4 right-5 flex flex-row'>
+        <div className='absolute top-5 z-10 bg-white dark:bg-confettiDarkColor2 border dark:border-white border-black rounded-3xl gap-4 right-5 flex flex-row'>
           <div className={`w-[200px] text-sm transition-all duration-500 delay-500 ease-linear text-right 
                     ${isHovered ? 'opacity-100' : 'hidden'}`}>
             If you have a moment, please star this repo ⭐. Thanks!
@@ -39,6 +39,7 @@ const BuyUsCoffee = () => {
             className='cursor-pointer'
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+
             > 
               <FaGithub fontSize={42}/> 
             </a>

@@ -4,7 +4,6 @@ import Post from './Post/Post'
 import { getUserPosts } from '../../../services/operations/postAPI';
 import { useDispatch, useSelector } from 'react-redux';
 import PostSkeleton from './Post/PostSkeleton';
-import useThrottle from '../../../hooks/useThrottle';
 
 const MyPosts = () => {
   const dispatch = useDispatch();
@@ -25,8 +24,6 @@ const MyPosts = () => {
     const fetchData = async () => {
       try {
         await dispatch(getUserPosts(user?.id,count, token));
-        console.log("POST DATA:", userPost);
-        console.log("TOTAL NUMBER OF POSTS:", userTotalPosts);
       } catch (err) {
         console.log(err);
       }

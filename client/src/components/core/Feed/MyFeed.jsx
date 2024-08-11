@@ -14,7 +14,6 @@ const MyFeed = () => {
 
   const fetchMoreData = async () => {
     try {
-      console.log("I CAME HERE I CALLED");
       dispatch(getPosts(count + 4, token));
       setCount(count + 4);
     } catch (err) {
@@ -26,8 +25,6 @@ const MyFeed = () => {
     const fetchData = async () => {
       try {
         dispatch(getPosts(count, token));
-        console.log("POST DATA:", post);
-        console.log("TOTAL NUMBER OF POSTS:", totalPosts);
       } catch (err) {
         console.log(err);
       }
@@ -36,7 +33,7 @@ const MyFeed = () => {
   }, []);
 
   return (
-    <div className="w-full grid place-items-center overflow-auto over" id="scrollableDiv">
+    <div className="w-full grid overflow-auto over" id="scrollableDiv">
       <CreatePost />
       <InfiniteScroll
         dataLength={post.length}

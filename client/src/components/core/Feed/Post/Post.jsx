@@ -18,8 +18,6 @@ const Post = memo(function Post(props){
   const [commentForm, setCommentForm] = useState("");
 
   const token = useSelector((state) => state.auth.token);
-  const profile = useSelector((state) => state.profile);
-  const { post } = useSelector((state) => state.post);
   const {comment} = useSelector((state) => state.comment);
   let likes = props.likes;
 
