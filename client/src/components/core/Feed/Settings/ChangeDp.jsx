@@ -1,10 +1,11 @@
-import React, { memo } from 'react'
+import React from 'react'
 import { useEffect, useRef, useState } from "react"
 import { FiUpload } from "react-icons/fi"
 import { useDispatch, useSelector } from "react-redux"
 import IconBtn from '../../../common/IconBtn'
 import { updateDisplayPicture } from '../../../../services/operations/userAPI'
 import  "./Settings.css"
+import { LiaCloudUploadAltSolid } from "react-icons/lia";
 
 
 const ChangeDp = () => {
@@ -14,6 +15,7 @@ const ChangeDp = () => {
   
     const [loading, setLoading] = useState(false)
     const [imageFile, setImageFile] = useState(null)
+    const [isHovered, setIsHovered] = useState(false);
     const [previewSource, setPreviewSource] = useState(null)
   
     const fileInputRef = useRef(null)
@@ -24,7 +26,6 @@ const ChangeDp = () => {
   
     const handleFileChange = (e) => {
       const file = e.target.files[0]
-      // console.log(file)
       console.log("COME TO CHANGE FILE")
       if (file) {
         setImageFile(file)
@@ -67,11 +68,26 @@ const ChangeDp = () => {
        
         <div className="flex  items-center justify-between rounded-md bg-white dark:bg-confettiDarkColor3 p-8 md:px-12 text-richblack-5">
           <div className="flex items-center gap-x-8 sm:gap-x-4">
+            <div className='relative'
+              onMouseEnter={() => !isHovered && setIsHovered(true)}
+              onMouseLeave={() => isHovered && setIsHovered(false)}
+            >
+
             <img
               src={previewSource || user?.displayPicture}
               alt={`profile-${user?.name}`}
               className="aspect-square w-[78px] rounded-full object-cover"
+              onclick={handleFileUpload}
             />
+            {isHovered && (
+              <LiaCloudUploadAltSolid 
+              className='absolute left-0 top-0 opacity-60 bg-white rounded-full' 
+              fontSize={78}
+              onClick={handleClick}
+               />)
+          }
+            </div>
+
             <div className="space-y-2">
               <p>Change Profile Picture</p>
               <div className="flex  flex-col sm:flex-row gap-3">

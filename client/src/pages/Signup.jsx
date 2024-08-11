@@ -14,20 +14,12 @@ import toast from 'react-hot-toast';
 
 const Signup = () => {
   const { token } = useSelector((state) => state.auth);
-  // const genderRef = useRef();
-  // const yearRef = useRef();
-  // const branchRef = useRef();
-  const { signupData } = useSelector((state) => state.auth); 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [genderModal, setGenderModal] = useState(false);
   const [yearModal, setYearModal] = useState(false);
   const [branchModal, setBranchModal] = useState(false);
-
-  // const genderHandler = () => { setGenderModal(false); }
-  // const yearHandler = () => { setYearModal(false); }
-  // const branchHandler = () => { setBranchModal(false); }
 
   const [isChecked, setIsChecked] = useState(false);
   const handleCheckboxChange = (event) => {
@@ -46,13 +38,6 @@ const Signup = () => {
 
   const handleSignup = async (data) => {
     setLoading(true);
-    // const nameRegex = new RegExp(`^(?!.*${data.name}).*$`, 'i')
-    // if (nameRegex.test(data.username)) {
-    //   toast.error("Username should not contain your name")
-    //   console.log("Username should not contain your name")
-    //   setLoading(false)
-    //   return
-    // }
 
     try {
       const obj = {
@@ -122,9 +107,6 @@ const Signup = () => {
     }
   }, [token, navigate]);
 
-  useEffect(() => {
-    console.log(getValues());
-  }, [avatar]);
 
   return (
     <div className='w-full relative h-full mx-auto text-cFont'>

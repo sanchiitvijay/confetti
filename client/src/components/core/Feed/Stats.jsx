@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import logo from "../../../assets/confettiNoText.png"
+import React from 'react'
 import "./Settings/Settings.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { getLeaderboard } from '../../../services/operations/userAPI';
@@ -17,7 +16,7 @@ const Stats = () => {
 
 
   return (
-    <div className='text-white text-center p-2 w-full'>
+    <div className='text-black dark:text-white text-center p-2 w-full'>
         <p className='text-2xl mb-3'>Leaderboard</p>
         <div className='flex flex-col text-sm gap-5 items-center justify-evenly'>
 
@@ -30,7 +29,7 @@ const Stats = () => {
                     {
                         topLikes?.map((post) => (
                         <div className='flex place-content-center flex-row gap-4 mt-2'>
-                            <img src={post?.displayPicture} alt="" className='w-[32px] h-[32px] my-auto rounded-full border-white border'/>
+                            <img src={post?.displayPicture} alt="" className='w-[32px] h-[32px] my-auto rounded-full border-black dark:border-white border'/>
                             <div className='text-left my-auto'>
                             <p >{post?.username}</p>
                             <p className='text-xs'>Likes Count: {post?.likes?.length}</p>
@@ -50,7 +49,7 @@ const Stats = () => {
                     {
                         topPost?.map((post) => (
                         <div className='flex place-content-center flex-row gap-4 mt-2'>
-                            <img src={post?.displayPicture} alt="" className='w-[32px] h-[32px] my-auto rounded-full border-white border'/>
+                            <img src={post?.displayPicture} alt="" className='w-[32px] h-[32px] my-auto rounded-full border-black dark:border-white border'/>
                             <div className='text-left my-auto'>
                             <p>{post?.username}</p>
                             <p className='text-xs'>Post Count: {post?.posts.length}</p>

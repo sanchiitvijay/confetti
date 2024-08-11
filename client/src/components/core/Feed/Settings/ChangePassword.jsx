@@ -22,11 +22,8 @@ const ChangePassword = () => {
   } = useForm()
 
   const submitPasswordForm = async (data) => {
-    // console.log("password Data - ", data)
     try {
-      console.log("token");
       data={...data,"userId":user?._id};
-      console.log("DATA:",data);
       const formData=new FormData();
       formData.append("oldPassword",data?.oldPassword);
       formData.append("newPassword",data?.newPassword);

@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useState } from 'react'
 import { MdOutlineDelete } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteComment } from '../../../../services/operations/commentAPI';

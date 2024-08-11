@@ -1,6 +1,5 @@
 import React, { memo, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import useOnClickOutside from "../../hooks/useOnClickOutside";
 import useEscape from '../../hooks/useEscape';
 

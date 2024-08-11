@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "../../App.css";
 import { FaRegWindowMaximize } from "react-icons/fa";
-import Modal from './Modal';
-import Button from "../common/SubmitButton"
 const DropDownModal = ({ name, setModal, showModal,getValues}) => {
   const handleClick = () => {
     setModal(true);
@@ -10,7 +8,6 @@ const DropDownModal = ({ name, setModal, showModal,getValues}) => {
   const [inputValues, setInputValues] = useState(getValues(name));
 
   useEffect(() => {
-    console.log(showModal);
     setInputValues(getValues(name));
   }, [showModal,getValues]);
 

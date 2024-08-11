@@ -1,11 +1,9 @@
 import React from 'react'
-import logo from "../assets/confettiNoText.png"
 import "./../components/core/Feed/Settings/Settings.css"
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const Stats = () => {
 
-    const dispatch = useDispatch();
     const topLikes = useSelector((state) => state.profile.topLikes);
     const topPost = useSelector((state) => state.profile.topPost);
 

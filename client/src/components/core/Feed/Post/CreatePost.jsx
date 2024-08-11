@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { createPost } from '../../../../services/operations/postAPI';
@@ -9,8 +9,6 @@ import "../Settings/Settings.css"
 
 const CreatePost = memo(function CreatePost(){
   const [maxLen, setMaxLen] = useState(0);
-
-  
   const [openMoreInfo, setOpenMoreInfo] = useState(false);
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
@@ -34,7 +32,7 @@ const CreatePost = memo(function CreatePost(){
   
 
   return (
-    <div className='relative w-[90%] md:w-[510px] my-3 lg:my-8 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 background-animate gradient-box p-1 rounded-md'>
+    <div className='relative mx-auto shadow-md w-[90%] md:w-[510px] my-3 lg:my-8 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 background-animate gradient-box p-1 rounded-md'>
       <div className=" bg-white  dark:bg-confettiDarkColor3 my-[2px] dark:text-white  w-[99%] md:w-[500px] mx-auto rounded-md  p-3 md:p-4 pb-3" >
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
           <label htmlFor="description" className="text-sm mt-4 px-2">Write Confession</label>

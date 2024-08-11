@@ -1,8 +1,6 @@
 import React, { memo } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 const SubmitButton = memo(function SubmitButton({text,type,disabled,customClasses="",onclick=""}){
-  const navigate=useNavigate();
   return (
     <button  type={type} onClick={onclick} className={`p-[3px] relative ${customClasses}`} disabled={disabled}>
         <div className="absolute inset-0 bg-gradient-to-r from-confettiYellow2 to-orange-400 rounded-lg" />

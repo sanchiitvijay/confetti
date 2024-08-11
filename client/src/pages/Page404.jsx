@@ -1,15 +1,21 @@
 import React from 'react'
 import gif404 from "../assets/gif404.gif"
+import Navbar from '../components/core/Feed/Navbar/Navbar'
+import { Link } from 'react-router-dom'
 
 const Page404 = () => {
   return (
-    <>
-      <div className="flex flex-col text-white bg-confettiGrey2 items-center justify-center h-screen">
-        <img src={gif404} width={700} alt="404" className='rounded-lg' />
-        <h1 className="text-4xl mt-12 font-bold">404 Page Not Found</h1>
-        <h2 className="text-2xl mt-10 font-semibold">You think you're uncovering a secret page, but sucks to be you there isn't one. Haha</h2>
+    <div className='overflow-hidden text-center'>
+      <Navbar/>
+      <div className="flex flex-col dark:text-white text-black bg-white py-10 dark:bg-confettiDarkColor1 items-center">
+        <img src={gif404} alt="404" className='rounded-lg w-[90%] md:w-[50%]' />
+        <h1 className="text-3xl mt-12 font-semibold">404 Page Not Found 🤷🏻‍♂️</h1>
+        <p className="  text-xl mt-10">
+          You think you're uncovering a secret page, but sucks to be you there isn't one. Haha
+          <Link to="/feed" className="text-blue-500"> Go back to Home</Link>
+        </p>
       </div>
-    </>
+    </div>
   )
 }
 

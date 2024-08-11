@@ -1,12 +1,10 @@
 import React, { forwardRef, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import "../../App.css"
 const DropdownMenu = forwardRef((props, ref) => {
   const [selectedValue, setSelectedValue] = useState(" ");
 
   const handleChange = (event) => {
     const newValue = event.target.value;
-    console.log(newValue);
     setSelectedValue(newValue);
     if (props.onChange) {
       props.onChange(newValue);

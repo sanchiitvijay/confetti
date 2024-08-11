@@ -1,6 +1,5 @@
 import { memo } from "react"
 
-
 const SignUpInput =memo(function SignUpInput({name,type,value,register,error,required}){
  
   return (

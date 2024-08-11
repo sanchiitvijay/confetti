@@ -12,8 +12,6 @@ const PasswordInput = memo(function PasswordInput(props){
           required
           type={showPassword ? "text" : "password"}
           name={props.name.trim()}
-         //  value={password}
-         //  onChange={handleOnChange}
           placeholder={(props.name === "password" ? "Enter " : "") + props.name}
           {...props?.register(props?.value,{required:props?.required})}
           className="w-full bg-transparent border-transparent focus:border-transparent focus:ring-0 placeholder-white rounded-[0.5rem]  p-[12px]"
