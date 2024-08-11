@@ -5,7 +5,9 @@ import { Dropdown } from 'flowbite-react';
 import { deletePost, reportPost } from '../../../../services/operations/postAPI';
 import { useDispatch, useSelector } from 'react-redux';
 import EditPostModal from './EditPostModal';
-
+import { TbMessageReport } from "react-icons/tb";
+import { FiEdit } from "react-icons/fi";
+import { AiOutlineDelete } from "react-icons/ai";
 
 const PostHeader = ({props}) => {
     const token = useSelector((state) => state.auth.token);
@@ -59,23 +61,26 @@ const PostHeader = ({props}) => {
             {
               user?._id === props?.author?._id && <>
 
-                <div className='flex flex-row justify-center '>
-                  <div className='block cursor-pointer text-sm hover:underline' onClick={() => (setModal(!modal))}>
-                    Edit
+                
+                  <div className='flex flex-row cursor-pointer gap-2 mx-auto text-sm hover:underline' onClick={() => (setModal(!modal))}>
+                    <FiEdit className='mx-auto ' fontSize={16}/>Edit
                   </div>
-                </div>
-                <div className='flex flex-row justify-center '>
-                  <div className='block cursor-pointer text-sm hover:underline' onClick={deleteHandler}>
-                    Delete
+                
+                
+                  <div className='flex flex-row cursor-pointer gap-2 mx-auto text-sm hover:underline' onClick={deleteHandler}>
+                    <AiOutlineDelete className='mx-auto ' fontSize={17}/>Delete
                   </div>
-                </div>
+                
             </>
             }
-            <div className='flex flex-row justify-center '>
-              <div className='block cursor-pointer text-sm hover:underline' onClick={reportHandler}>
-                Report
+            {
+              user?._id !== props?.author?._id &&
+            
+              <div className='cursor-pointer flex flex-row gap-2 mx-auto text-sm hover:underline' onClick={reportHandler}>
+                <TbMessageReport className='mx-auto ' fontSize={18}/>Report
               </div>
-            </div>
+        
+            }
           </div>
         </Dropdown>
         {

@@ -17,7 +17,7 @@ const FeedbackForm = () => {
 
 
   return (
-    <form className="p-2 w-[80%] lg:w-[60%]" onSubmit={handleSubmit}>
+    <form className="p-2 w-[80%] lg:w-[60%]">
         <div className="my-10 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 background-animate gradient-box p-1 rounded-md">
 
         <div className="flex flex-col gap-y-6 rounded-md p-8 bg-white dark:bg-confettiDarkColor3">
@@ -42,7 +42,7 @@ const FeedbackForm = () => {
 
         <div className="flex justify-end gap-2">
           <SubmitButton
-          type="submit" text="Submit" />
+          type="submit" text="Submit" onclick={handleSubmit}/>
         </div>
       </form>
   )
