@@ -4,6 +4,7 @@ import Post from './Post/Post'
 import { getUserPosts } from '../../../services/operations/postAPI';
 import { useDispatch, useSelector } from 'react-redux';
 import PostSkeleton from './Post/PostSkeleton';
+import useThrottle from '../../../hooks/useThrottle';
 
 const MyPosts = () => {
   const dispatch = useDispatch();
@@ -11,7 +12,6 @@ const MyPosts = () => {
   const { token } = useSelector((state) => state.auth);
   const { userPost, userTotalPosts } = useSelector((state) => state.profile);
   const [count, setCount] = useState(4);
-
   const fetchMoreData = async () => {
     try {
       await dispatch(getUserPosts(user?.id,count + 4, token));
@@ -34,7 +34,7 @@ const MyPosts = () => {
     fetchData();
   }, []);
   return (
-    <div className="w-full grid place-items-center overflow-auto over" id="scrollableDiv">
+    <div className="w-full  overflow-auto over" id="scrollableDiv">
     <InfiniteScroll
       dataLength={userPost.length}
       next={fetchMoreData}

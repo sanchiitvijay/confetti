@@ -23,7 +23,7 @@ const Post = (props) => {
   const {comment} = useSelector((state) => state.comment);
   let likes = props.likes;
 
-  console.log("rpofiles-------------------",post)
+  // console.log("rpofiles-------------------",post)
   // const posts = post.filter((p) => p?._id === props?._id);
   //   console.log("posts-------------------",posts)
   //   likes = posts[0]?.likes;
