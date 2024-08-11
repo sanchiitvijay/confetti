@@ -2,7 +2,7 @@ const Comment = require("../models/Comment");
 const Post = require("../models/Post");
 const Reply = require("../models/Reply");
 const User = require("../models/User");
-
+const client = require('../configs/client');
 exports.createComment = async (req, res) => {
     try {
         console.log("Inside create comment----------", req.body);

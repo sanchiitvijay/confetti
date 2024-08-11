@@ -1,7 +1,9 @@
 const Like = require("../models/Like")
 const Post = require("../models/Post")
 const User= require("../models/User")
+const client = require('../configs/client');
 
+//It was never called 
 exports.getLikes = async(req, res)=> {
     try {
         const postId = req.body.postId;
