@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import Navbar from '../components/core/Home/Navbar'
+import Navbar from '../components/core/Feed/Navbar/Navbar'
 import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import Spinner from '../components/common/Spinner';
