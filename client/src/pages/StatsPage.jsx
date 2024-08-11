@@ -1,9 +1,14 @@
 import React from 'react'
 import logo from "../assets/confettiNoText.png"
 import "./../components/core/Feed/Settings/Settings.css"
-import { LuBadge } from "react-icons/lu";
+import { useDispatch, useSelector } from 'react-redux';
 
 const Stats = () => {
+
+    const dispatch = useDispatch();
+    const topLikes = useSelector((state) => state.profile.topLikes);
+    const topPost = useSelector((state) => state.profile.topPost);
+
   return (
     <div className='text-white text-center w-[90%]'>
         <p className='text-2xl m-7'>Leaderboard</p>
@@ -15,14 +20,15 @@ const Stats = () => {
                     <p className='text-lg mb-5'>Top liked posts</p>
 
                     {/* map isme lgana hai */}
+                    {topLikes?.map((post) => (
                     <div className='flex place-content-center flex-row gap-4 mt-5'>
-                        <LuBadge className='' fontSize={20}/>
-                        <img src={logo} alt="" className='w-[50px] h-[50px] rounded-full border-white border'/>
+                        <img src={post?.displayPicture} alt="" className='w-[50px] h-[50px] rounded-full border-white border'/>
                         <div className='text-left'>
-                        <p className='my-auto'>username</p>
-                        <p className='my-auto'>Likes Count: 3</p>
+                        <p className='my-auto'>{post?.username}</p>
+                        <p className='my-auto'>Likes Count: {post?.likes?.length}</p>
                         </div>
                     </div>
+                    ))}
                 </div>
             </div>
 
@@ -32,13 +38,17 @@ const Stats = () => {
                     <p className='text-lg mb-5'>Top posts count</p>
 
                     {/* map isme lagana hai */}
-                    <div className='flex place-content-center flex-row gap-4 mt-5'>
-                        <img src={logo} alt="" className='w-[50px] h-[50px] rounded-full border-white border'/>
-                        <div className='text-left'>
-                        <p className='my-auto'>username</p>
-                        <p className='my-auto'>Post Count: 3</p>
-                        </div>
-                    </div>
+                    {
+                        topPost?.map((post) => (
+                            <div className='flex place-content-center flex-row gap-4 mt-5'>
+                                <img src={post?.displayPicture} alt="" className='w-[50px] h-[50px] rounded-full border-white border'/>
+                                <div className='text-left'>
+                                <p className='my-auto'>{post?.username}</p>
+                                <p className='my-auto'>Post Count: {post?.posts?.length}</p>
+                                </div>
+                            </div>
+                        ))
+                    }
                 </div>
             </div>
         </div>
