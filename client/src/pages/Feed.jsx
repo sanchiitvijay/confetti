@@ -65,7 +65,7 @@ const Feed = () => {
             <Outlet />
         </div>
 
-        <div className="max-lg:hidden min-h-[calc(100vh-3.5rem)] z-10">
+        <div className="max-lg:hidden min-h-[calc(100vh-3.5rem)] w-[300px] z-10">
           <Stats/>
         </div>
       {/* {
