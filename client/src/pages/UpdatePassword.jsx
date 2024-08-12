@@ -23,13 +23,7 @@ const UpdatePassword = () => {
       const {token}=useSelector((state)=>state.auth)
       const navigate=useNavigate();
       
-      useEffect(()=>{
-    
-        if(!token){
-          navigate("/")
-        }
-      },[token,navigate])
-          
+
     
       const handleOnChange=(e)=>{
         setFormData((prevData)=>(
