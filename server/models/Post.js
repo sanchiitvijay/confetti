@@ -42,8 +42,8 @@ const PostSchema=new mongoose.Schema({
         type:Number,
         default: 0,
     },
-    colorHash:{
-        type:String,
+    color:{
+        type:Number,
         required:true
     }
 },

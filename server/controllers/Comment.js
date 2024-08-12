@@ -13,7 +13,8 @@ exports.createComment = async (req, res) => {
         // console.log("USER ID", userId);
         // console.log("POST ID", postId);
         // console.log("DESCRIPTION", description);
-
+        const cachedpost=await client.get(`post:${postId}`);
+        const cachedPost=await JSON.parse(cachedpost);
         //Validation for user
         if (!userId || !description || !postId) {
             return res.status(404).json({
@@ -68,6 +69,12 @@ exports.createComment = async (req, res) => {
         const comments = await Comment.find({ post: postId }).sort({ createdAt: -1 }).populate('author').exec();
         // console.log("post saved--------------", post);
 
+        if(cachedPost){
+            await cachedPost?.comments?.push(comment?._id);
+            await client.set(`post:${postId}`,JSON.stringify(cachedPost));
+            const userComments=await client.get(`user:${cachedPost?.author?._id}:totalComments`) || 0;
+            await client.set(`user:${cachedPost?.author?._id}:totalComments`,userComments+1);
+        }
         //return successful response
         return res.status(200).json({
             success: true,
@@ -96,6 +103,9 @@ exports.removeComment = async (req, res) => {
             postId,
         } = req.body;
 
+
+        const cachedpost=await client.get(`post:${postId}`);
+        const cachedPost=await JSON.parse(cachedpost);
         //validate
         if (!commentId || !postId) {
             return res.status(404).json({
@@ -166,7 +176,12 @@ exports.removeComment = async (req, res) => {
 
         const comments = await Comment.find({ post: postId }).sort({ createdAt: -1 }).populate('author').exec();
 
-
+        if(cachedPost){
+            await cachedPost?.comments?.filter((comment)=>comment!=commentId);
+            await client.set(`post:${postId}`,JSON.stringify(cachedPost));
+            const userComments=await client.get(`user:${cachedPost?.author?._id}:totalComments`) || 0;
+            await client.set(`user:${cachedPost?.author?._id}:totalComments`,userComments-1);
+        }
         if (!deletedComment) {
             return res.status(400).json({
                 success: false,

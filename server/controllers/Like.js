@@ -29,7 +29,8 @@ exports.liked = async(req, res) => {
         console.log(req.body)
         const authorId = req.user.id;
         const postId = req.body.postId;
-    
+        const cachedpost=await client.get(`post${postId}`);
+        const cachedPost=JSON.parse(cachedpost);
         let like = await Like.findOne({ author: authorId })
     
         if(like) {
@@ -47,7 +48,12 @@ exports.liked = async(req, res) => {
 
             const deletedLike = await Like.findByIdAndDelete(like._id);
 
-    
+            if(cachedPost){
+                await cachedPost?.likes?.filter((l)=>l._id!=like._id);
+                await client.set(`post:${postId}`,JSON.stringify(cachedPost));
+                const userLikes=await client.get(`user:${cachedPost?.author?._id}:totalLikes`) || 0;
+                await client.set(`user:${cachedPost?.author?._id}:totalLikes`,userLikes-1);
+            }
             if(!updatedPost || !deletedLike || !updatedUser) {
                 return res.status(400).json({
                     success: false,
@@ -68,11 +74,17 @@ exports.liked = async(req, res) => {
                 {$push:{likes:newLike._id}},{new:true}
            );
 
+           if(cachedPost){
+            await cachedPost?.likes?.push(newLike);
+            await client.set(`post:${postId}`,JSON.stringify(cachedPost));
+            const userLikes=await client.get(`user:${cachedPost?.author?._id}:totalLikes`) || 0;
+            await client.set(`user:${cachedPost?.author?._id}:totalLikes`,userLikes+1);
+           }
             // console.log(updatedPost)
             // console.log(newLike)
             //console.log(updatedUser)
 
-    
+            //cache code 
             if(!newLike || !updatedPost || !updatedUser) {
                 return res.status(400).json({
                     success: false,

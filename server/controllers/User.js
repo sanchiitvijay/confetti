@@ -2,18 +2,7 @@ const User = require("../models/User");
 const Notification = require("../models/Notification");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
 const welcomeTemplate = require("../mail/templates/newJoining");
-
-//updateUserDetails->to check what needs to be updated
-//also update  req.user object,check for token
-//make sure u make password in req.user =null or undefind
-//or simply not just touch it 
-//for reference->look for auth controllers 
-
-
-//Note: already have controller for changing passwrod in auth
-
-
-//create user already done in auth controller 
+const client = require("../configs/client");
 
 exports.getAllUsers = async (req, res) => {
     try {
@@ -62,6 +51,27 @@ exports.editUser = async (req, res) => {
 
         const updatedUser = await user.save();
 
+        const postIds = await client.lRange(`posts:ids`, 0, -1);
+        let posts = await Promise.all(postIds.map(id => client.get(`post:${id}`)));
+        posts = posts.map(post => JSON.parse(post));
+
+        if (posts?.length !== 0) {
+            let userPosts = posts.filter(post => post.author._id === userId);
+
+            if (userPosts.length !== 0) {
+                userPosts.forEach(post => {
+                    post.author.name = name;
+                    post.author.username = username;
+                    post.author.year = year;
+                    post.author.instagram = instagram;
+                });
+
+                await Promise.all(
+                    userPosts.map(post => client.set(`post:${post._id}`, JSON.stringify(post)))
+                );
+            }
+        }
+
         if (!updatedUser) {
             return res.status(500).json({
                 success: false,
@@ -108,7 +118,8 @@ exports.removeUser = async (req, res) => {
         //now remove the user 
         const deletedUser = await User.findByIdAndDelete(userId);
         console.log("DELETE KRDIYA HAHHAHA")
-        //return response
+        //return response   
+        await client.del(`user:${userId}`);
         return res.status(200).json({
             success: true,
             message: "Deleted the user successfully",
@@ -184,7 +195,7 @@ exports.promoteStudents = async (req, res) => {
 
 exports.updateDisplayPicture = async (req, res) => {
     try {
-        const { displayPicture } = req.files; 
+        const { displayPicture } = req.files;
         const userId = req.user.id
         const image = await uploadImageToCloudinary(
             displayPicture,
@@ -198,6 +209,26 @@ exports.updateDisplayPicture = async (req, res) => {
             { displayPicture: image.secure_url },
             { new: true }
         )
+
+        //redis code 
+        const postIds = await client.lRange(`posts:ids`, 0, -1);
+        let posts = await Promise.all(postIds.map(id => client.get(`post:${id}`)));
+        posts = posts.map(post => JSON.parse(post));
+
+        if (posts?.length !== 0) {
+            let userPosts = posts.filter(post => post.author._id === userId);
+
+            if (userPosts.length !== 0) {
+                userPosts.forEach(post => {
+                    post.author.displayPicture=image?.secure_url
+                });
+
+                await Promise.all(
+                    userPosts.map(post => client.set(`post:${post._id}`, JSON.stringify(post)))
+                );
+            }
+        }
+
         res.send({
             success: true,
             message: `Image Updated successfully`,
@@ -227,10 +258,10 @@ exports.leaderboard = async (req, res) => {
         const topPost = await User.find({}).sort({ posts: -1 }).limit(5);
         const topLikes = await User.find({}).sort({ likes: -1 }).limit(5);
 
-        console.log("topost------------",topPost);
-        console.log("toplikes------------",topLikes);
+        console.log("topost------------", topPost);
+        console.log("toplikes------------", topLikes);
 
-        if(!topPost || !topLikes){
+        if (!topPost || !topLikes) {
             return res.status(500).json({
                 success: false,
                 message: "Somthing went wrong while fetching the leaderboard"
