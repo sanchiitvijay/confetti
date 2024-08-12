@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Navbar from '../components/core/Feed/Navbar/Navbar'
 import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
@@ -40,7 +40,6 @@ const Feed = () => {
   
  
   return (
-    <Suspense fallback={<Loader/>}>
       <div className='bg-confettiYellowColor1 relative dark:bg-confettiDarkColor1 overflow-hidden' >
         <Navbar/>
         <div className="flex relative w-full flex-row">
@@ -68,7 +67,6 @@ const Feed = () => {
         
       </div>
       </div>
-    </Suspense>
   )
 }
 

@@ -16,18 +16,25 @@ const Post = memo(function Post(props){
   const [allComments, setAllComments] = useState(false);
   let [like, setLike] = useState(false);
   const [commentForm, setCommentForm] = useState("");
+  
+  const gradientColor = [
+    "bg-1", "bg-2", "bg-3", "bg-4", "bg-5", "bg-6"
+  ]
 
+  const {post} = useSelector((state) => state.post);
   const token = useSelector((state) => state.auth.token);
   const {comment} = useSelector((state) => state.comment);
+  const {user} = useSelector((state) => state.profile);
   let likes = props.likes;
 
-  // console.log("rpofiles-------------------",post)
+  // // console.log("rpofiles-------------------",post)
   // const posts = post.filter((p) => p?._id === props?._id);
-  //   console.log("posts-------------------",posts)
+  //   // console.log("posts-------------------",posts)
   //   likes = posts[0]?.likes;
-  //   console.log("likes-------------------",likes)
-  //   if (likes?.includes(profile?.user?._id)) {
-  //     console.log("liked kra hai-------------------")
+  //   // console.log("likes-------------------",likes)
+  //   const islike = likes?.filter((like) => like?.author === user?._id);
+  //   if (islike) {
+  //     // console.log("liked kra hai-------------------")
   //     setLike(true);
   //   }
 
@@ -67,7 +74,7 @@ const Post = memo(function Post(props){
       <PostHeader props={props} />
      
       {/* content */}
-      <div className='p-3 md:p-4 min-h-[200px] text-center  md:text-md content-center bg-6 rounded-md border border-black dark:border-white break-words'>
+      <div className={`p-3 md:p-4 min-h-[200px] text-center  md:text-md content-center ${gradientColor[props?.color]} rounded-md border border-black dark:border-white break-words`}>
         {props?.description}
       </div>
 
