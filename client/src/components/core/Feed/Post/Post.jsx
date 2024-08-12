@@ -8,12 +8,18 @@ import { createComments, getAllComments } from '../../../../services/operations/
 import { FaHeart } from "react-icons/fa";
 import Comment from './Comment';
 import PostHeader from './PostHeader';
+import { useNavigate } from 'react-router-dom';
 
 const Post = memo(function Post(props){
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  let tempcommentidentifier = false
+  if (props?.showAllComment === true){
+    tempcommentidentifier = true;
+  }
 
-  const [showComments, setShowComments] = useState(false);
-  const [allComments, setAllComments] = useState(false);
+  const [showComments, setShowComments] = useState(tempcommentidentifier);
+  const [allComments, setAllComments] = useState(tempcommentidentifier);
   let [like, setLike] = useState(false);
   const [commentForm, setCommentForm] = useState("");
   
@@ -25,7 +31,9 @@ const Post = memo(function Post(props){
   const token = useSelector((state) => state.auth.token);
   const {comment} = useSelector((state) => state.comment);
   const {user} = useSelector((state) => state.profile);
-  let likes = props.likes;
+  let likes = props?.likes;
+
+  // console.log("props-------------------",props)
 
   // // console.log("rpofiles-------------------",post)
   // const posts = post.filter((p) => p?._id === props?._id);
@@ -60,6 +68,10 @@ const Post = memo(function Post(props){
     commentHandler();
 
   },[showComments])
+  console.log("int post------")
+  const redirectionHandler = () => {  
+    navigate("/feed/:"+props?._id);
+  }
 
   const handleSubmitComment = async (event) => {
     event.preventDefault();
@@ -74,7 +86,8 @@ const Post = memo(function Post(props){
       <PostHeader props={props} />
      
       {/* content */}
-      <div className={`p-3 md:p-4 min-h-[200px] text-center  md:text-md content-center ${gradientColor[props?.color]} rounded-md border border-black dark:border-white break-words`}>
+      <div onClick={redirectionHandler}
+      className={`p-3 md:p-4 min-h-[200px] text-center  md:text-md content-center ${gradientColor[props?.color]} rounded-md border border-black dark:border-white break-words`}>
         {props?.description}
       </div>
 
@@ -88,11 +101,11 @@ const Post = memo(function Post(props){
               <IoMdHeartEmpty fontSize={'23px'} onClick={likeHandler} />
           }
           {
-            props.likes.length > 0 && <div className=' ml-[-4px] content-center my-auto'>{likes.length}</div>
+            props?.likes?.length > 0 && <div className=' ml-[-4px] content-center my-auto'>{likes?.length}</div>
           }
           <IoChatbubbleOutline fontSize={'20px'} className='my-auto' onClick={()=>{setShowComments(!showComments)}} />
           {
-            props.comments.length > 0 && <div className='ml-[-3px] content-center my-auto'>{props.comments.length}</div>
+            props?.comments?.length > 0 && <div className='ml-[-3px] content-center my-auto'>{props?.comments?.length}</div>
           }
           <IoShareSocialOutline fontSize={'18px'}  className='my-auto'/>
         </div>
@@ -110,19 +123,19 @@ const Post = memo(function Post(props){
             <button type="submit" onClick={handleSubmitComment}><VscSend fontSize={30} className='my-auto'/></button>
           </div>
             </form>
-          {comment.length > 0 ? 
-            comment.slice(0, Math.min(4, comment.length)).map((com) => (
-              <Comment key={com._id} {...com} />
+          {comment?.length > 0 ? 
+            comment?.slice(0, Math.min(4, comment?.length)).map((com) => (
+              <Comment key={com?._id} {...com} />
             )) : 
             <div className='text-center'>No comments</div>
           }
-          {comment.length > 4 && (
+          {comment?.length > 4 && (
             !allComments ? 
               <div className='text-center text-xs cursor-pointer  *:' onClick={() => setAllComments(true)}>
                 View all comments
               </div> : 
-              comment.slice(4).map((com) => (
-                <Comment key={com._id} {...com} />
+              comment?.slice(4).map((com) => (
+                <Comment key={com?._id} tempcommentidentifier {...com} />
               ))
           )}
 

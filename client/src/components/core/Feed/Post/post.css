@@ -87,3 +87,13 @@
     --bg-5:linear-gradient(90deg, hsla(348, 88%, 66%, 1) 0%, hsla(36, 89%, 68%, 1) 100%);
     --bg-6:linear-gradient(to right, #333399, #ff00cc);
   }
+
+
+  .border {
+    border: 1px solid gray;
+  }
+  
+  .border:focus {
+    border: 2px solid rgb(249, 249, 255);
+    outline: none; 
+  }

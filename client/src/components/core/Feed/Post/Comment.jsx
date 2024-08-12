@@ -5,18 +5,25 @@ import { deleteComment } from '../../../../services/operations/commentAPI';
 import { VscSend } from "react-icons/vsc";
 import Reply from './Reply';
 import { createReply, getAllReplies } from '../../../../services/operations/replyAPI';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Comment = memo(function Comment(props){
   const user = useSelector((state) => state.profile.user);
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const reply = useSelector((state) => state.reply.reply);
 
+  let tempreplyidentifier = false
+  if (props?.tempcommentidentifer === true){
+    tempreplyidentifier = true;
+  }
 
+  
   const [showReply, setShowReply] = useState(false);
   const [writeReply, setWriteReply] = useState(false);
   const [replyForm, setReplyForm] = useState("");
-
+  
   const deleteCommentHandler = async () => {
     dispatch(deleteComment(token, {postId: props.post, commentId: props._id}));
   }
@@ -37,6 +44,9 @@ const Comment = memo(function Comment(props){
     e.stopPropagation();
     if(!showReply) {
       dispatch(getAllReplies(token, {commentId: props._id}));
+      if(!tempreplyidentifier) {
+        navigate(`/feed/:${props.post}`)
+      }
     }
     setShowReply(!showReply);
   }

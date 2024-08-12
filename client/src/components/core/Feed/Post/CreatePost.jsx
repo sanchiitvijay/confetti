@@ -135,8 +135,15 @@ const CreatePost = memo(function CreatePost(){
                  return (
                   <div 
                     key={i} 
-                    onClick={() => setGradient(i)} 
-                    className={`rounded-full h-[25px] w-[25px] ${ele} border`} >
+                    onClick={() => {
+                      setGradient(i);
+                      // Optionally, you can call a function to focus the div
+                      document.getElementById(`w-[20px]`).focus();
+                    }} 
+                    className={`rounded-full h-[25px] w-[25px] ${ele} border`} 
+                    tabIndex="0" 
+                    id={`colorDiv-${i}`}
+                  >
                   </div>
                 )
               })
