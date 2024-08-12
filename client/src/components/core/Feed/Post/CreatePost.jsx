@@ -32,7 +32,7 @@ const CreatePost = memo(function CreatePost(){
     gradientHandler(gradient)
   }, [gradient, setGradient])
     
-  const onSubmit = async (data) => {
+  const onSubmitHandle = async (data) => {
     if (data.branch === "Do you know their branch?") {
       data.branch = "";
     }
@@ -51,9 +51,9 @@ const CreatePost = memo(function CreatePost(){
   
 
   return (
-    <div className='relative mx-auto shadow-md w-[90%] md:w-[510px] my-3 lg:my-8 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 background-animate gradient-box p-1 rounded-md'>
-      <div className=" bg-white  dark:bg-confettiDarkColor3 my-[2px] dark:text-white  w-[99%] md:w-[500px] mx-auto rounded-md  p-3 md:p-4 pb-3" >
-        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
+    <div className='relative mx-auto shadow-md w-[90%] md:w-[510px] h-max my-3 lg:my-8 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 background-animate gradient-box p-1 rounded-md'>
+      <div className=" bg-white  dark:bg-confettiDarkColor3 my-[2px] h-max dark:text-white  w-[99%] md:w-[500px] mx-auto rounded-md  p-3 md:p-4 pb-3" >
+        <form onSubmit={handleSubmit(onSubmitHandle)} className='flex flex-col'>
           <label htmlFor="description" className="text-sm mt-4 px-2">Write Confession</label>
           <input
             type="text"
@@ -143,7 +143,7 @@ const CreatePost = memo(function CreatePost(){
             }
             </div>
             <div className="grid place-items-end mt-5 mb-3">
-              <SubmitButton type="submit" text="Post"/>
+              <SubmitButton type="submit" text="Post" on/>
             </div>
             </div>
 
