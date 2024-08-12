@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { createPost } from '../../../../services/operations/postAPI';
@@ -12,14 +12,33 @@ const CreatePost = memo(function CreatePost(){
   const [openMoreInfo, setOpenMoreInfo] = useState(false);
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
+  const [gradient, setGradient] = useState(0);
   
-  const { register, 
+  const gradientColor = [
+    "bg-1", "bg-2", "bg-3", "bg-4", "bg-5", "bg-6"
+  ]
+
+    const { register, 
     handleSubmit, 
     formState: { errors }, 
     reset 
   } = useForm();
 
+  useEffect(() => {
+
+    const gradientHandler = (index) => {
+      register("color", { value: index });
+    }
+    gradientHandler(gradient)
+  }, [gradient, setGradient])
+    
   const onSubmit = async (data) => {
+    if (data.branch === "Do you know their branch?") {
+      data.branch = "";
+    }
+    if (data.year === "Do you know their year") {
+      data.year = "";
+    }
     const result = await dispatch(createPost(token, data));
     if (result.fullfiled){
         reset();
@@ -27,8 +46,8 @@ const CreatePost = memo(function CreatePost(){
     }
   };
 
-    const years=["First","Second","Third","Fourth"]
-    const branches = ['CS','IS','AD','AI','AT','BT','CH','CI','CY','EC','EE','EI','IM','BA','MC','MD','ME','CV']
+    const years=["Do you know their year","First","Second","Third","Fourth"]
+    const branches = ["Do you know their branch?", 'CS','IS','AD','AI','AT','BT','CH','CI','CY','EC','EE','EI','IM','BA','MC','MD','ME','CV']
   
 
   return (
@@ -64,23 +83,21 @@ const CreatePost = memo(function CreatePost(){
                 Year
               </label>
               <select
-                type="text"
                 name="year"
                 id="year"
-                placeholder="Do you know their year?"
                 style={{
                   boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                 }}
                 className="w-full rounded-[0.5rem] dark:bg-[#2C333F] mt-3 focus:ring-0 dark:focus:border-white focus:border-black p-[12px] pr-12 text-[16px] leading-[24px] font-[500] dark:text-[#999DAA]"
                 {...register("year")}
+                defaultValue="" 
               >
-                {years.map((ele, i) => {
-                  return (
+                {/* <option value="" className='hidden' disabled>Do you know their year?</option> */}
+                {years.map((ele, i) => 
                     <option key={i} value={ele}>
                       {ele}
                     </option>
-                  )
-                })}
+                )}
               </select>
             </div>
 
@@ -114,12 +131,16 @@ const CreatePost = memo(function CreatePost(){
             </div>
             <div className=' flex max-lg:gap-1 max-lg:mt-7  flex-col md:flex-row justify-between'>
             <div className="my-auto md:gap-4 flex flex-row justify-around">
-              <div className = "rounded-full h-[25px] w-[25px] bg-1 border" ></div>
-              <div className = "rounded-full h-[25px] w-[25px] bg-2 border" ></div>
-              <div className = "rounded-full h-[25px] w-[25px] bg-3 border" ></div>
-              <div className = "rounded-full h-[25px] w-[25px] bg-4 border" ></div>
-              <div className = "rounded-full h-[25px] w-[25px] bg-5 border" ></div>
-              <div className = "rounded-full h-[25px] w-[25px] bg-6 border" ></div>
+              {gradientColor.map((ele, i) => {
+                 return (
+                  <div 
+                    key={i} 
+                    onClick={() => setGradient(i)} 
+                    className={`rounded-full h-[25px] w-[25px] ${ele} border`} >
+                  </div>
+                )
+              })
+            }
             </div>
             <div className="grid place-items-end mt-5 mb-3">
               <SubmitButton type="submit" text="Post"/>

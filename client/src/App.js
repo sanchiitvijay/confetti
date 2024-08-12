@@ -20,9 +20,10 @@ import MyFeed from "./components/core/Feed/MyFeed";
 import Settings from "./components/core/Feed/Settings";
 import MyPosts from "./components/core/Feed/MyPosts";
 import MyProfile from "./components/core/Feed/MyProfile";
-import AboutUs from "./pages/AboutUs";
 import MetaData from "./services/MetaData";
 import StatsPage from "./pages/StatsPage";
+import BuyUsACoffee from "./pages/BuyUsACoffee";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
   const { token } = useSelector((state) => state.auth);
@@ -143,7 +144,7 @@ function App() {
             <Route path="/feed/my-profile" element={<MyProfile/>} />
             <Route path="/feed/about-us" element={<AboutUs/>} />
             <Route path="/feed/stats" element={<StatsPage/>} />
-
+            <Route path="/feed/buy-us-coffee" element={<BuyUsACoffee/>} />
           </Route>
           <Route
             path="*"

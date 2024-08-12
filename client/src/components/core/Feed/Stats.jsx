@@ -20,7 +20,7 @@ const Stats = () => {
 
   return (
     <div className='text-black dark:text-white text-center p-2 w-full'>
-        <p className='text-2xl mb-3'>Leaderboard</p>
+        <p className='text-2xl mb-3 animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent  '>Leaderboard</p>
         <div className='flex flex-col text-sm gap-5 items-center justify-evenly'>
 
             {/* 1st component */}

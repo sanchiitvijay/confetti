@@ -52,7 +52,7 @@ const UserDetails = (props) => {
         </div>
         <div className='flex flex-row justify-center gap-4 p-3 '>
           <VscCoffee className='mt-1'/>
-          <Link to="/about-us" className="block cursor-pointer text-md hover:underline">
+          <Link to="/feed/buy-us-coffee" className="block cursor-pointer text-md hover:underline">
             Buy us a coffee
           </Link>
         </div>
