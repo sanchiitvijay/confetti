@@ -77,8 +77,8 @@ const ChangeDp = () => {
             />
             {isHovered && (
               <LiaCloudUploadAltSolid 
-              className='absolute left-0 top-0 opacity-60 bg-white rounded-full' 
-              fontSize={78}
+              className='absolute my-auto mx-auto top-2 left-2 opacity-25 text-white dark:text-black bg-black dark:bg-white rounded-full' 
+              fontSize={60}
               onClick={handleClick}
                />)
           }

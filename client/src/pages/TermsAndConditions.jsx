@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { MdArrowBack } from 'react-icons/md';
 import logo from "../assets/confetti.png"
 import downArrow from "../assets/arrowDown.svg"
 import {useNavigate} from "react-router-dom"
 import Button from "../components/common/Button"
+import Loader from '../components/common/Loader';
 const TermsAndConditions = () => {
     const tnc= [
         {
@@ -38,42 +39,44 @@ const TermsAndConditions = () => {
     ]
     const navigate=useNavigate();
   return (
-    <div className='w-full h-full mx-auto text-cFont p-5 md:p-10'>
-        <div className='lg:w-[90%] mx-auto bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-400 text-white p-5 md:p-16'>
-            <div className='flex flex-col-reverse md:flex-row'>
+    <Suspense fallback={<Loader/>}>
+        <div className='w-full h-full mx-auto text-cFont p-5 md:p-10'>
+            <div className='lg:w-[90%] mx-auto bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-400 text-white p-5 md:p-16'>
+                <div className='flex flex-col-reverse md:flex-row'>
 
-            <div className='text-2xl md:text-4xl w-full text-normal  text-center'>Terms and Conditions for Confetti</div>
-            <img src={logo} className='relative mt-0.5 h-[100px] w-[100px] md:h-[60px] md:w-[60px] mx-auto' alt="confetti logo"/>
-            </div>
-            <div className='text-xl md:text-2xl my-6  text-justify'>Welcome to Confetti! This platform allows you to anonymously share confessions related to your college experience. By using our service, you agree to these terms and conditions.</div>
-            <ul>
-                {tnc.map((data) => (
-                    <li key={data.heading} className='my-5 mx-3'>
-                        <div className='flex flex-row  mb-2'>
-                            <MdKeyboardDoubleArrowRight className='mt-1.5 mr-2'/>
-                            <div className='text-lg md:text-xl'>{data.heading}:</div>
-                        </div>
-                        <div className='flex flex-row ml-4'>
-                        <img src={downArrow} className='mt-0.5 h-[15px] w-[15px]' alt="down arrow"/>
-                        <p className=' text-justify text-md text-gray-200 ml-2 font-light'>{data.description}</p>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+                <div className='text-2xl md:text-4xl w-full text-normal  text-center'>Terms and Conditions for Confetti</div>
+                <img src={logo} className='relative mt-0.5 h-[100px] w-[100px] md:h-[60px] md:w-[60px] mx-auto' alt="confetti logo"/>
+                </div>
+                <div className='text-xl md:text-2xl my-6  text-justify'>Welcome to Confetti! This platform allows you to anonymously share confessions related to your college experience. By using our service, you agree to these terms and conditions.</div>
+                <ul>
+                    {tnc.map((data) => (
+                        <li key={data.heading} className='my-5 mx-3'>
+                            <div className='flex flex-row  mb-2'>
+                                <MdKeyboardDoubleArrowRight className='mt-1.5 mr-2'/>
+                                <div className='text-lg md:text-xl'>{data.heading}:</div>
+                            </div>
+                            <div className='flex flex-row ml-4'>
+                            <img src={downArrow} className='mt-0.5 h-[15px] w-[15px]' alt="down arrow"/>
+                            <p className=' text-justify text-md text-gray-200 ml-2 font-light'>{data.description}</p>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
 
-            <p className='mx-3 my-2 text-justify font-light'>
-                <span className='font-semibold mr-3'>
-                Contact:
-                </span>
-                 If you have any questions about these terms and conditions, please contact us at
-                    <span className='font-semibold mx-2'>
-                     confetti.site01@gmail.com
+                <p className='mx-3 my-2 text-justify font-light'>
+                    <span className='font-semibold mr-3'>
+                    Contact:
                     </span>
-                </p>
-            <p className='m-3 font-light text-justify '>We appreciate your cooperation! By using Confetti, you agree to these terms and conditions.</p>
-            <Button onClick={() => navigate(-1)} child={<MdArrowBack/>} cc1='m-3 ' px={8} cc2='flex gap-1 pl-6 justify-between items-center' text={"Back"}/>
+                    If you have any questions about these terms and conditions, please contact us at
+                        <span className='font-semibold mx-2'>
+                        confetti.site01@gmail.com
+                        </span>
+                    </p>
+                <p className='m-3 font-light text-justify '>We appreciate your cooperation! By using Confetti, you agree to these terms and conditions.</p>
+                <Button onClick={() => navigate(-1)} child={<MdArrowBack/>} cc1='m-3 ' px={8} cc2='flex gap-1 pl-6 justify-between items-center' text={"Back"}/>
+            </div>
         </div>
-    </div>
+    </Suspense>
   )
 }
 

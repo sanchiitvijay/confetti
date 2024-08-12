@@ -16,5 +16,11 @@ export const sidebarLinks = [
     name: "My Posts",
     path:"/feed/my-posts",
     icon:"VscPreview"
+  },
+  {
+    id: 4,
+    name: "Stats",
+    path:"/feed/stats",
+    icon:"VscVersions"
   }
 ];

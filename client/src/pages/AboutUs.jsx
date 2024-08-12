@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { Suspense, useState } from 'react'
 import { VscCoffee } from "react-icons/vsc";
 import { FaGithub } from "react-icons/fa6";
 import "../components/core/Feed/Settings/Settings.css"
 import FeedbackForm from '../components/core/AboutUs/FeedbackForm';
 import OurInfo from '../components/core/AboutUs/OurInfo';
+import Loader from '../components/common/Loader';
 
-const BuyUsCoffee = () => {
+const AboutUs = () => {
   const developerData = [
     {
         name: 'Ashutosh Kumar',
@@ -25,45 +26,47 @@ const BuyUsCoffee = () => {
     }
 ]
   const [isHovered, setIsHovered] = useState(false);
-  return (  
-    <div className='flex relative flex-col mx-auto w-full text-black dark:text-white dark:bg-confettiDarkColor2 bg-confettiLightColor2 min-h-[100vh] items-center content-center'>
-        
-        <div className='absolute top-5 z-10 bg-white dark:bg-confettiDarkColor2 border dark:border-white border-black rounded-3xl gap-4 right-5 flex flex-row'>
-          <div className={`w-[200px] text-sm transition-all duration-500 delay-500 ease-linear text-right 
-                    ${isHovered ? 'opacity-100' : 'hidden'}`}>
-            If you have a moment, please star this repo ⭐. Thanks!
-          </div>
-            <a 
-            href='https://github.com/sanchiitvijay/confetti'
-            target='_blank'
-            rel="noreferrer"
-            className='cursor-pointer'
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-
-            > 
-              <FaGithub fontSize={42}/> 
-            </a>
-        </div>
-        <div className='text-3xl pb-5 font-semibold my-8 text-center'>About Us</div>
-        <div className='flex md:flex-row flex-col gap-9'>
-            {
-              developerData?.map((d, i) => (
-                <OurInfo key={i} {...d}/>
-              ))
-          }
+  return (
+    <Suspense fallback={<Loader/>}>  
+      <div className='flex relative flex-col mx-auto w-full text-black dark:text-white dark:bg-confettiDarkColor2 bg-confettiLightColor2 min-h-[100vh] items-center content-center'>
           
-        </div>
+          <div className='absolute top-5 z-10 bg-white dark:bg-confettiDarkColor2 border dark:border-white border-black rounded-3xl gap-4 right-5 flex flex-row'>
+            <div className={`w-[200px] text-sm transition-all duration-500 delay-500 ease-linear text-right 
+                      ${isHovered ? 'opacity-100' : 'hidden'}`}>
+              If you have a moment, please star this repo ⭐. Thanks!
+            </div>
+              <a 
+              href='https://github.com/sanchiitvijay/confetti'
+              target='_blank'
+              rel="noreferrer"
+              className='cursor-pointer'
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
 
-        <FeedbackForm/>
+              > 
+                <FaGithub fontSize={42}/> 
+              </a>
+          </div>
+          <div className='text-3xl pb-5 font-semibold my-8 text-center'>About Us</div>
+          <div className='flex md:flex-row flex-col gap-9'>
+              {
+                developerData?.map((d, i) => (
+                  <OurInfo key={i} {...d}/>
+                ))
+            }
+            
+          </div>
 
-            {/* buy us a coffee */}
-        <div className='flex my-10 text-yellow-500  flex-row gap-4 '>
-          <div className='text-3xl font-bold'>Buy Us Coffee </div>
-          <VscCoffee fontSize={40} className='my-auto'/>
-        </div>
-    </div>
+          <FeedbackForm/>
+
+              {/* buy us a coffee */}
+          <div className='flex my-10 text-yellow-500  flex-row gap-4 '>
+            <div className='text-3xl font-bold'>Buy Us Coffee </div>
+            <VscCoffee fontSize={40} className='my-auto'/>
+          </div>
+      </div>
+    </Suspense>
   )
 }
 
-export default BuyUsCoffee
+export default AboutUs;

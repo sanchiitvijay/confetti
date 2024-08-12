@@ -33,9 +33,6 @@ const MetaData = () => {
       <meta name="revisit-after" content="7 days" />
       <meta name="rating" content="general" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-
-      {/* Favicon */}
-      <link rel="icon" href="https://www.yoursite.com/path_to_favicon.ico" type="image/x-icon" />
     </Helmet>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import SignUpInput from '../components/common/SignUpInput';
 import PasswordInput from '../components/common/PasswordInput';
@@ -11,6 +11,7 @@ import { setSignupData } from '../slices/authSlice';
 import DropDownModal from '../components/common/DropDownModal';
 import Modal from '../components/common/Modal';
 import toast from 'react-hot-toast';
+import Loader from '../components/common/Loader';
 
 const Signup = () => {
   const { token } = useSelector((state) => state.auth);
@@ -109,169 +110,171 @@ const Signup = () => {
 
 
   return (
-    <div className='w-full relative h-full mx-auto text-cFont'>
-      <div className='min-h-screen relative p-4 md:p-8 item-center justify-between w-full'>
-        <div className='md:p-12 p-7 xs:w-[100%] md:w-fit bg-gray-400 rounded-md bg-clip-padding backdrop-filter mx-auto justify-center backdrop-blur-md bg-opacity-20 border border-gray-400'>
-          <h2 className='text-white text-4xl font-semibold text-center'>
-            Sign Up
-          </h2>
-          <form className='mt-8 flex w-full flex-col gap-y-8' onSubmit={handleSubmit(handleSignup)}>
-            {/* having 2 input field in one row */}
-            <div className='flex flex-col-reverse md:flex-row gap-10'>
-              <div className='flex flex-col gap-y-8'>
+    <Suspense fallback={<Loader />}>
+      <div className='w-full relative h-full mx-auto text-cFont'>
+        <div className='min-h-screen relative p-4 md:p-8 item-center justify-between w-full'>
+          <div className='md:p-12 p-7 xs:w-[100%] md:w-fit bg-gray-400 rounded-md bg-clip-padding backdrop-filter mx-auto justify-center backdrop-blur-md bg-opacity-20 border border-gray-400'>
+            <h2 className='text-white text-4xl font-semibold text-center'>
+              Sign Up
+            </h2>
+            <form className='mt-8 flex w-full flex-col gap-y-8' onSubmit={handleSubmit(handleSignup)}>
+              {/* having 2 input field in one row */}
+              <div className='flex flex-col-reverse md:flex-row gap-10'>
+                <div className='flex flex-col gap-y-8'>
+                  <SignUpInput 
+                    name="name" 
+                    value="name"
+                    type="text"
+                    error={errors?.name}
+                    required={true}
+                    register={() => register("name", {
+                      required: "Name is required",
+                      maxLength: {
+                        value: 20,
+                        message: "Name should be less than 20 characters"
+                      }
+                    })} />
+                  <SignUpInput 
+                    name="email" 
+                    value="email"
+                    type="email"
+                    error={errors?.email}
+                    required={true}
+                    register={() => register("email", {
+                      required: "Email is required",
+                      pattern: {
+                        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                        message: "Invalid email format"
+                      }
+                    })} />
+                </div>
+                <div className='flex flex-row mx-auto'>
+                  <label className="text-white hover:underline hover:cursor-pointer" htmlFor="file">
+                    {avatar.url ? (
+                      <img src={avatar.url} className="rounded-full object-cover w-[100px] h-[100px]" alt="Avatar" />
+                    ) : (
+                      <RxAvatar fontSize={100} color='ffffff' />
+                    )}
+                    <span className='text-center mx-auto'>Upload avatar</span>
+                  </label>
+                  <input type="file" id="file" style={{ display: "none" }} {...register("avatar")} onChange={handleAvatar} />
+                </div>
+              </div>
+              <div className='flex flex-col md:flex-row gap-10'>
                 <SignUpInput 
-                  name="name" 
-                  value="name"
+                  name="username" 
+                  value="username" 
+                  required={true}
                   type="text"
-                  error={errors?.name}
-                  required={true}
-                  register={() => register("name", {
-                    required: "Name is required",
-                    maxLength: {
-                      value: 20,
-                      message: "Name should be less than 20 characters"
-                    }
+                  error={errors?.username}
+                  register={() => register("username", {
+                    required: "Username is required",
+                    pattern: namePattern,
+                    maxLength: 15,
                   })} />
                 <SignUpInput 
-                  name="email" 
-                  value="email"
-                  type="email"
-                  error={errors?.email}
+                  name="USN" 
+                  value="usn" 
+                  type="text"
                   required={true}
-                  register={() => register("email", {
-                    required: "Email is required",
-                    pattern: {
-                      value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                      message: "Invalid email format"
-                    }
-                  })} />
+                  error={errors?.usn}
+                  register={register} />
               </div>
-              <div className='flex flex-row mx-auto'>
-                <label className="text-white hover:underline hover:cursor-pointer" htmlFor="file">
-                  {avatar.url ? (
-                    <img src={avatar.url} className="rounded-full object-cover w-[100px] h-[100px]" alt="Avatar" />
-                  ) : (
-                    <RxAvatar fontSize={100} color='ffffff' />
-                  )}
-                  <span className='text-center mx-auto'>Upload avatar</span>
-                </label>
-                <input type="file" id="file" style={{ display: "none" }} {...register("avatar")} onChange={handleAvatar} />
+              <div className='flex flex-col md:flex-row gap-10'>
+                <PasswordInput
+                  name="password" 
+                  value="password" 
+                  type="password"
+                  required={true}
+                  error={errors?.password}
+                  register={register} />
+                <PasswordInput 
+                  name="Confirm password" 
+                  value="confirmPassword" 
+                  type="password"
+                  error={errors?.confirmPassword}
+                  required={true}
+                  register={register} />
               </div>
-            </div>
-            <div className='flex flex-col md:flex-row gap-10'>
-              <SignUpInput 
-                name="username" 
-                value="username" 
-                required={true}
-                type="text"
-                error={errors?.username}
-                register={() => register("username", {
-                  required: "Username is required",
-                  pattern: namePattern,
-                  maxLength: 15,
-                })} />
-              <SignUpInput 
-                name="USN" 
-                value="usn" 
-                type="text"
-                required={true}
-                error={errors?.usn}
-                register={register} />
-            </div>
-            <div className='flex flex-col md:flex-row gap-10'>
-              <PasswordInput
-                name="password" 
-                value="password" 
-                type="password"
-                required={true}
-                error={errors?.password}
-                register={register} />
-              <PasswordInput 
-                name="Confirm password" 
-                value="confirmPassword" 
-                type="password"
-                error={errors?.confirmPassword}
-                required={true}
-                register={register} />
-            </div>
-            <div className='flex flex-col md:flex-row gap-10'>
-              <DropDownModal
-                setModal={setGenderModal}
-                name={"Gender"}
-                showModal={genderModal}
-                getValues={getValues} />
-              <DropDownModal 
-                setModal={setBranchModal}
-                name={"Branch"}
-                showModal={branchModal}
-                getValues={getValues} />
-            </div>
-            <div className='flex flex-col md:flex-row gap-10'>
-              <DropDownModal 
-                setModal={setYearModal}
-                name={"Year"}
-                showModal={yearModal}
-                getValues={getValues} />
-              <SignUpInput 
-                name="Instagram" 
-                value="instagram" 
-                type="text" 
-                error={errors?.instagram}
-                register={() => register("instagram", {
-                  maxLength: 15,
-                  message: "Instagram username should be less than 15 characters"
-                })}
-                required={false} />
-            </div>
-            <div className='text-white'>
-              <input id="termsAndConditions" 
-                type="checkbox" 
-                checked={isChecked}
-                onChange={handleCheckboxChange}
-                className="w-4 h-4 mr-3 focus:ring-transparent text-white bg-transparent border-white rounded " />
-              Accept our
-              <span 
-                onClick={() => navigate("/terms-and-conditions")} 
-                className='hover:underline hover:cursor-pointer mx-2'>
-                terms and conditions 
-              </span>
-              to proceed further. 
-            </div>
-            <SubmitButton
-              disabled={!isChecked || loading}
-              text="Sign Up"
-              type="submit" />
-            <div className='text-white text-center'>
-              Already Have An Account, <span onClick={() => navigate("/")} className='hover:underline hover:cursor-pointer'>Log In Here</span>
-            </div>
-          </form>
+              <div className='flex flex-col md:flex-row gap-10'>
+                <DropDownModal
+                  setModal={setGenderModal}
+                  name={"Gender"}
+                  showModal={genderModal}
+                  getValues={getValues} />
+                <DropDownModal 
+                  setModal={setBranchModal}
+                  name={"Branch"}
+                  showModal={branchModal}
+                  getValues={getValues} />
+              </div>
+              <div className='flex flex-col md:flex-row gap-10'>
+                <DropDownModal 
+                  setModal={setYearModal}
+                  name={"Year"}
+                  showModal={yearModal}
+                  getValues={getValues} />
+                <SignUpInput 
+                  name="Instagram" 
+                  value="instagram" 
+                  type="text" 
+                  error={errors?.instagram}
+                  register={() => register("instagram", {
+                    maxLength: 15,
+                    message: "Instagram username should be less than 15 characters"
+                  })}
+                  required={false} />
+              </div>
+              <div className='text-white'>
+                <input id="termsAndConditions" 
+                  type="checkbox" 
+                  checked={isChecked}
+                  onChange={handleCheckboxChange}
+                  className="w-4 h-4 mr-3 focus:ring-transparent text-white bg-transparent border-white rounded " />
+                Accept our
+                <span 
+                  onClick={() => navigate("/terms-and-conditions")} 
+                  className='hover:underline hover:cursor-pointer mx-2'>
+                  terms and conditions 
+                </span>
+                to proceed further. 
+              </div>
+              <SubmitButton
+                disabled={!isChecked || loading}
+                text="Sign Up"
+                type="submit" />
+              <div className='text-white text-center'>
+                Already Have An Account, <span onClick={() => navigate("/")} className='hover:underline hover:cursor-pointer'>Log In Here</span>
+              </div>
+            </form>
+          </div>
+          {genderModal && <Modal
+            data={gender} 
+            name="Gender" 
+            value="gender"
+            error={errors?.gender} 
+            register={register}
+            required={false}
+            setModal={setGenderModal} />}
+          {branchModal && <Modal
+            data={branches} 
+            name="Branch" 
+            value="branch" 
+            setModal={setBranchModal} 
+            error={errors?.branch}
+            required={false}
+            register={register} />}
+          {yearModal && <Modal
+            data={year} 
+            name="Year" 
+            value="year"
+            setModal={setYearModal} 
+            error={errors?.year}
+            register={register}
+            required={true} />}
         </div>
-        {genderModal && <Modal
-          data={gender} 
-          name="Gender" 
-          value="gender"
-          error={errors?.gender} 
-          register={register}
-          required={false}
-          setModal={setGenderModal} />}
-        {branchModal && <Modal
-          data={branches} 
-          name="Branch" 
-          value="branch" 
-          setModal={setBranchModal} 
-          error={errors?.branch}
-          required={false}
-          register={register} />}
-        {yearModal && <Modal
-          data={year} 
-          name="Year" 
-          value="year"
-          setModal={setYearModal} 
-          error={errors?.year}
-          register={register}
-          required={true} />}
       </div>
-    </div>
+    </Suspense>
   );
 };
 

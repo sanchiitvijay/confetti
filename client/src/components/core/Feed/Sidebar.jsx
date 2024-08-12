@@ -2,13 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { sidebarLinks } from "../Feed/dashboard-links";
 import { useNavigate } from "react-router-dom";
 import SidebarLink from "./SidebarLink";
-import { VscSignOut, VscVersions } from "react-icons/vsc";
+import { VscSignOut } from "react-icons/vsc";
 import { useState } from "react";
 import Spinner from "../../common/Spinner";
 import ConfirmationModal from "../../common/ConfirmationModal";
 import { logout } from "../../../services/operations/authAPI";
 import "./sidebar.css"
-import { setStats } from "../../../slices/themeSlice";
 
 const Sidebar=()=>{
   const {user,loading:profileLoading}=useSelector((state)=>state.profile);
@@ -16,12 +15,7 @@ const Sidebar=()=>{
   const dispatch=useDispatch();
   const navigate=useNavigate();
   const [confirmationModal,setConfirmationModal]=useState(null);
-  const [changeStats, changeSetStats] = useState(false);
 
-    const handleStats=()=>{
-      changeSetStats(!changeStats);
-      dispatch(setStats(changeStats));
-    };
 
   
   if(profileLoading || authLoading){
@@ -44,20 +38,6 @@ const Sidebar=()=>{
             )
             })
         }
-
-        {/* workr here-------------------- */}
-         <div className={`relative px-8 py-2 lg:hidden text-sm font-medium ${changeStats?("bg-confettiLightColor4 dark:bg-confettiDarkColor3 dark:text-white "):("bg-opacity-0")}`}
-         onClick={handleStats}>
-        <span className={`absolute left-0 top-0 h-full w-[0.2rem] bg-yellow-50 ${
-          changeStats?("opacity-100"):("opacity-0")} `}>
-        </span>
-        {/* </div> */}
-        
-        <div className="flex item-center gap-x-2">
-          <VscVersions className="text-lg"/>
-          <span>Stats</span>
-        </div>
-        </div>
         </div>
 
       <div className="mx-auto mt-6 mb-6 h-[1px] w-10/12 "></div>
