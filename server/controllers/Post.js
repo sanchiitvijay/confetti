@@ -10,7 +10,7 @@ exports.createPost = async (req, res) => {
         const {
             description,
             year,
-            colorHash
+            color
         } = req.body;
         // console.log("req body--------------", req.body)
         // console.log("req.user--------------", req.user)
@@ -38,7 +38,7 @@ exports.createPost = async (req, res) => {
             description,
             likes: [],
             comments: [],
-            colorHash:colorHash,
+            color
         });
         if (name && year) {
             const confessedTo = await User.findOne({ name, year })
@@ -67,6 +67,9 @@ exports.createPost = async (req, res) => {
         }, {
             new: true
         });
+
+        const userPosts=await client.get(`user:${userId}:totalPosts`) || 0;
+        await client.set(`user:${userId}:totalPosts`,userPosts+1);
 
         if (!updatedUser) {
             return res.status(400).json({
@@ -155,16 +158,26 @@ exports.editPost = async (req, res) => {
         //update the post in redis
         const cacheKey = `post:${postId}`;
         const updatedPostString=JSON.stringify(updatedPost);
-        await client.set(cacheKey, updatedPostString);
+        const updatedPostCache=await client.set(cacheKey, updatedPostString);
 
-
-        // fetch the updated posts
-        let posts = await client.lRange(`posts:ids`, 0, -1);
-        posts = await Promise.all(posts.map(id => client.get(`post:${id}`)));
-        posts=posts.map(post=>JSON.parse(post))
+        if(updatedPostCache){
+              // fetch the updated posts
+            let posts = await client.lRange(`posts:ids`, 0, -1);
+            posts = await Promise.all(posts.map(id => client.get(`post:${id}`)));
+            posts=posts.map(post=>JSON.parse(post))
         return res.status(200).json({
             success: true,
             message: "Post has been updated succesfully",
+            posts
+        })
+        }
+        const posts=Post.find({}).populate("author").populate({
+            path:"likes"
+        }).sort({createdAt:-1}).exec();
+        
+        return res.status(200).json({
+            success:true,
+            message:"Posts has been updated successfully",
             posts
         })
     } catch (error) {
@@ -204,10 +217,15 @@ exports.deletePost = async (req, res) => {
                 message: "User is not the post owner"
             })
         }
-        const result = await Post.deleteOne({ _id: postId })
+        const deletedPost = await Post.deleteOne({ _id: postId })
         // console.log(3);
+        const userLikes=await client.get(`user:${deletedPost?.author?._id}:totalLikes`);
+        const userComments=await client.get(`user:${deletedPost?.author?._id}:totalComments`);
+        const userPosts=await client.get(`user:${deletedPost?.author?._id}:totalPosts`);
 
-
+        await client.set(`user:${deletedPost?.author?._id}:totalLikes`,userLikes-deletedPost?.likes?.length);
+        await client.set(`user:${deletedPost?.author?._id}:totalComments`,userComments-deletedPost?.comments?.length);
+        await client.set(`user:${deletedPost?.author?._id}:totalPosts`,userPosts-1);
         const updatedUser = await User.findByIdAndUpdate(userId, {
             $pull: {
                 posts: postId
@@ -473,6 +491,8 @@ exports.reportPost = async (req, res) => {
     }
 
     const post = await Post.findById(postId)
+    const cachedpost=await client.get(`post:${postId}`);
+    const cachedPost=await JSON.parse(cachedpost);
     if (!post) {
         return res.status(404).json({
             success: false,
@@ -482,12 +502,25 @@ exports.reportPost = async (req, res) => {
 
     post.reports += 1;
     await post.save();
+
+
     const userId = post.author;
 
     if (post.reports >= 3) {
 
-        await Post.findByIdAndDelete(postId);
+        const deletedPost=await Post.findByIdAndDelete(postId);
 
+        if(cachedPost){
+            await client.lRem(`posts:ids`,0,postId.toString());
+            await client.del(`post:${postId}:`);
+            const userLikes=await client.get(`user:${deletedPost?.author?._id}:totalLikes`);
+            const userComments=await client.get(`user:${deletedPost?.author?._id}:totalComments`);
+            const userPosts=await client.get(`user:${deletedPost?.author?._id}:totalPosts`);
+    
+            await client.set(`user:${deletedPost?.author?._id}:totalLikes`,userLikes-deletedPost?.likes?.length);
+            await client.set(`user:${deletedPost?.author?._id}:totalComments`,userComments-deletedPost?.comments?.length);
+            await client.set(`user:${deletedPost?.author?._id}:totalPosts`,userPosts-1);
+        }
         const user = await User.findById(userId)
         if (!user) {
             return res.status(404).json({
@@ -500,6 +533,7 @@ exports.reportPost = async (req, res) => {
 
         if (user.reports >= 5) {
             const deletedUser = await User.findByIdAndDelete(userId)
+            await client.rem(`user:${userId}`);
             if (!deletedUser) {
                 return res.status(500).json({
                     success: false,
@@ -534,6 +568,18 @@ exports.deleteAllPosts = async (req, res) => {
 
         //find all posts for user and delete them
         const deletedPosts = await Post.findByIdAndDelete({ author: userId });
+        
+        //remove them all from the cache as well 
+        //first individually remove the post by fetching all the ids , then remove the ids as well
+        const postIds=await client.lRange('posts:ids',0,-1);
+        await Promise.all(postIds.map(id=>client.del(`post:${id}`)))
+        await client.del('posts:ids');
+
+
+        //update user
+        await client.set(`user:${userId}:totalPosts`,0);
+        await client.set(`user:${userId}:totalLikes`,0);
+        await client.set(`user:${userId}:totalComments`,0);
 
         //return res
         return res.status(200).json({
