@@ -13,8 +13,6 @@ const {
 
 export function createComments (token, data) {
     return async (dispatch) => {
-        let result = null;
-        console.log("CREATE_COMMENT_API DATA....", data)
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
@@ -24,19 +22,12 @@ export function createComments (token, data) {
                 "Content-Type": "multipart/form-data",
             })
 
-            console.log("CREATE_COMMENT RESPONSE....", response);
-
             if(!response.data.success) {
                 throw new Error(response.data.message)
             }
 
-
-            console.log("CREATE_COMMENT RESPONSE....", response)
             dispatch(setComments(response.data.comments))
-            toast.success("comment is created successfully")
-            // result = response?.data?.comments
-
-
+            
         } catch (err) {
             console.log("CREATE_COMMENTS_API FAILED...", err);
             toast.error("Could not create comment")
@@ -44,16 +35,12 @@ export function createComments (token, data) {
             toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
-
-        // return result;
     }
 }
 
 
 export function getAllComments (token, data) {
-    // console.log("GET_ALL_COMMENTS_API DATA....", data)
     return async(dispatch) => {
-        let result = null
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
@@ -63,26 +50,20 @@ export function getAllComments (token, data) {
                  postId:data,
              })
 
-            console.log("GET_ALL_COMMENTS RESPONSE....", response)
-
+            
             if(!response.data.success) {
                 throw new Error(response.data.message)
             }
-            console.log("------------------",response.data.comments)
             dispatch(setComments(response.data.comments))
-            toast.success("comments has been fetched succesfully")
-            result = response?.data?.comments
-
+            
         } catch (err) {
             console.log("GET_ALL_COMMENTS_API FAILED....", err)
-            toast.error("Could not get all comments")
+            toast.error("Some error occured while fetching the comments")
 
         } finally {
             toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
-
-        return result;
     }
 }
 
@@ -96,14 +77,11 @@ export function getUserComments (token, data) {
                 Authorization: `Bearer ${token}`
             })
 
-            console.log("GET_USER_COMMENTS RESPONSE....", response)
-
             if(!response.data.success) {
                 throw new Error(response.data.message)
             }
 
             dispatch(setComments(response.data.data))
-            toast.success("user comments has been fetched succesfully")
             result = response?.data?.data
 
         } catch (err) {
@@ -122,7 +100,6 @@ export function getUserComments (token, data) {
 
 export function deleteComment (token, data) {
     return async(dispatch) => {
-        let result = null
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
@@ -131,15 +108,13 @@ export function deleteComment (token, data) {
                 "Content-Type": "multipart/form-data",
             })
 
-            console.log("REMOVE_COMMENT RESPONSE....", response)
-
+            
             if(!response.data.success) {
                 throw new Error(response.data.message)
             }
 
             dispatch(setComments(response.data.comments))
             toast.success("comment has been deleted succesfully")
-            result = response?.data?.data
             
 
         } catch (err) {
@@ -151,6 +126,5 @@ export function deleteComment (token, data) {
             dispatch(setLoading(false))
         }
 
-        return result;
     }
 }

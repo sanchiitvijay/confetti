@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import Home from "./pages/Home";
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -26,7 +26,6 @@ import StatsPage from "./pages/StatsPage";
 
 function App() {
   const { token } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
   let location = useLocation();
   const darkMode = useSelector(state => state.theme.darkMode);
 

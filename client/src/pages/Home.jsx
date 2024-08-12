@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import logo from "../assets/confettiNoText.png" 
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {AiOutlineEye} from "react-icons/ai"
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
 import SubmitButton from '../components/common/SubmitButton';
@@ -12,7 +12,6 @@ import { motion } from "framer-motion"
 
 const Home = () => { 
   const {token}=useSelector((state)=>state.auth)
-  const {setLoading}=useSelector((state)=>state.auth);
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({
@@ -127,7 +126,7 @@ const Home = () => {
             {/* Login form here */}
             <div className='xl:py-12 py-7 min-h-[478px] text-white my-auto px-7 xl:px-12 md:w-[80%] xl:w-[600px] bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-400 '>
 
-            <img src={logo} className=' mx-auto w-[120px] 'alt="" />
+            <img src={logo} className=' mx-auto w-[120px] 'alt="Confetti logo" />
             <div className="dancing-script-font grid place-items-center mt-[-25px] mb-6 mx-auto text-2xl font-semibold">Confetti</div>
 
             <h2 className='text-white text-center font-semibold text-2xl'>Welcome to Confetti</h2>

@@ -12,9 +12,9 @@ const OurInfo = memo(function OurInfo(props){
                 <div>{props?.description}</div>
                 
                 <div className='flex m-3 flex-row place-content-center text-center text-2xl mt-3 gap-3'>
-                  <a target="_blank" href={props?.github} className='cursor-pointer'><FaGithub/></a>
-                  <a target="_blank" href={props?.linkedin} className='cursor-pointer'><FaLinkedin/></a>
-                  <a target="_blank" href={`mailto:${props.email}`} className='cursor-pointer'><TbMailFilled/></a>
+                  <a target="_blank" rel="noreferrer" href={props?.github} className='cursor-pointer'><FaGithub/></a>
+                  <a target="_blank" rel="noreferrer" href={props?.linkedin} className='cursor-pointer'><FaLinkedin/></a>
+                  <a target="_blank" rel="noreferrer" href={`mailto:${props.email}`} className='cursor-pointer'><TbMailFilled/></a>
                 </div>
       </div>
   )

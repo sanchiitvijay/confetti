@@ -26,7 +26,6 @@ const ChangeDp = () => {
   
     const handleFileChange = (e) => {
       const file = e.target.files[0]
-      console.log("COME TO CHANGE FILE")
       if (file) {
         setImageFile(file)
         previewFile(file)
@@ -34,7 +33,6 @@ const ChangeDp = () => {
     }
   
     const previewFile = (file) => {
-      console.log("PREVIEW FILE")
       const reader = new FileReader()
       reader.readAsDataURL(file)
       reader.onloadend = () => {
@@ -44,11 +42,9 @@ const ChangeDp = () => {
   
     const handleFileUpload = () => {
       try {
-        console.log("uploading...")
         setLoading(true)
         const formData = new FormData()
         formData.append("displayPicture", imageFile)
-        // console.log("formdata", formData)
         dispatch(updateDisplayPicture(token, formData)).then(() => {
           setLoading(false)
         })

@@ -22,7 +22,7 @@ const UserDetails = (props) => {
           >
             <span className="sr-only">Open user menu</span>
             {props?.displayPicture ? (
-          <img className="w-[32px] h-[32px] object-cover rounded-full" src={props?.displayPicture} alt="user photo" />
+          <img className="w-[32px] h-[32px] object-cover rounded-full" src={props?.displayPicture} alt={props?.username} />
         ) : (
           <RxAvatar className="rounded-full" fontSize={29} />
         )}

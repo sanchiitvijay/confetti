@@ -23,28 +23,28 @@ const Notification = () => {
         <div className=' px-2 py-2 flex flex-col rounded-md bg-confettiLightColor3 text-black dark:text-white dark:bg-confettiDarkColor3'>
 
             <div className='flex flex-row justify-center gap-4 p-3 '>
-                <img src={message} className='my-auto w-6'/>
+                <img src={message} className='my-auto w-6' alt="notif"/>
                 <Link to="/feed/settings" className="block cursor-pointer text-md hover:underline">
                     Someone commented on your post
                 </Link>
             </div>
 
             <div className='flex flex-row justify-center gap-4 p-3 '>
-                <img src={message} className='my-auto w-6'/>
+                <img src={message} className='my-auto w-6' alt="notif"/>
                 <Link to="/feed/settings" className="block cursor-pointer text-md hover:underline">
                     Someone replied to your comment
                 </Link>
             </div>
 
             <div className='flex flex-row justify-center gap-4 p-3 '>
-                <img src={confetti} className='my-auto w-6 text-yellow-400'/>
+                <img src={confetti} className='my-auto w-6 text-yellow-400' alt="notif"/>
                 <Link to="/feed/settings" className="block cursor-pointer text-md hover:underline">
                 Welcome to Confetti, where secrets sparkle and surprises unfold!
                 </Link>
             </div>
 
             <div className='flex flex-row justify-center gap-4 p-3 '>
-                <img src={confetti} className='my-auto w-6'/>
+                <img src={confetti} className='my-auto w-6' alt="notif"/>
                 <Link to="/feed/settings" className="block cursor-pointer text-md hover:underline">
                     Oh looks like someone posted a confession for you!
                 </Link>

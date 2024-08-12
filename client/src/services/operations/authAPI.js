@@ -22,14 +22,11 @@ const {
 
         
 
-        console.log("Send otp api:",SENDOTP_API)
         const response = await apiConnector("POST", SENDOTP_API, {
           email
         })
-        console.log("SENDOTP API RESPONSE............", response)
-  
-        console.log(response.data.success)
-  
+        
+        
         if (!response.data.success) {
           throw new Error(response.data.message)
         }
@@ -65,7 +62,7 @@ const {
     return async (dispatch) => {
       const toastId = toast.loading("Loading...")
       dispatch(setLoading(true));
-      console.log()
+   
       try {
         const formData=new FormData();
         formData.append('accountType',accountType);
@@ -90,8 +87,7 @@ const {
         })
        
         
-        console.log("SIGNUP API RESPONSE............", response)
-  
+        
         if (!response.data.success) {
           throw new Error(response.data.message)
         }
@@ -117,8 +113,7 @@ const {
           password,
         })
   
-        console.log("LOGIN API RESPONSE............", response)
-  
+        
         if (!response.data.success) {
           throw new Error(response.data.message)
         }
@@ -153,8 +148,7 @@ const {
           token,
         })
   
-        console.log("RESETPASSWORD RESPONSE............", response)
-  
+        
         if (!response.data.success) {
           throw new Error(response.data.message)
         }
@@ -192,7 +186,7 @@ export function getPasswordResetToken(email,setEmailSent){
       const response=await apiConnector("POST",RESETPASSTOKEN_API,{
         email
       });
-      console.log("RESET PASSWORD TOKEN RESPONSE....",response);
+      
       if(!response.data.success){
         throw new Error(response.data.message);
       }
