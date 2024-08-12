@@ -4,7 +4,7 @@ import { Hearts } from 'react-loader-spinner'
 
 const Loader = () => {
   return (
-    <div className='w-full h-full '>
+    <div className='w-full h-full grid place-items-center'>
         <Hearts
             height="80"
             width="80"
@@ -13,7 +13,6 @@ const Loader = () => {
             wrapperStyle={{}}
             wrapperClass=""
             visible={true}
-            className="mx-auto my-auto"
         />
     </div>
   )
