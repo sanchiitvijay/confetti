@@ -15,7 +15,7 @@ module.exports = {
         'newsmall':'400px'
       },
       backgroundImage: {
-        'ring': "url('/src/assets/hands.jpg')",
+        'ring': "url('/src/assets/hands.webp')",
         'card1': "url('/src/assets/card_wallpaper.jpg')",
         'dark_card1': "url('/src/assets/dark_card_wallpaper.jpg')",
         

@@ -2,6 +2,9 @@ import React from 'react'
 import "./Settings/Settings.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { getLeaderboard } from '../../../services/operations/userAPI';
+import gold from '../../../assets/gold.png'
+import silver from '../../../assets/silver.png'
+import bronze from '../../../assets/bronze.png'
 
 
 const Stats = () => {
@@ -27,16 +30,30 @@ const Stats = () => {
 
                     {/* map isme lgana hai */}
                     {
-                        topLikes?.map((post) => (
-                        <div className='flex place-content-center flex-row gap-4 mt-2'>
-                            <img src={post?.displayPicture} alt={post?.username} className='w-[32px] h-[32px] my-auto rounded-full border-black dark:border-white border'/>
-                            <div className='text-left my-auto'>
-                            <p >{post?.username}</p>
-                            <p className='text-xs'>Likes Count: {post?.likes?.length}</p>
+                        topLikes?.map((post, index) => (
+                            <div className='flex place-content-center gap-2 flex-row mt-2' key={index}>
+                                {
+                                    index === 0 ? (
+                                        <img src={gold} alt='gold' className='w-[18px] h-[18px]'/>
+                                    ) : index === 1 ? (
+                                        <img src={silver} alt='silver' className='w-[18px] h-[18px]'/>
+                                    ) : index === 2 ? (
+                                        <img src={bronze} alt='bronze' className='w-[18px] h-[18px] '/>
+                                    ) : (
+                                        <p>{index + 1}</p>
+                                    )
+                                }
+                                <div className='gap-4 flex flex-row'>
+                                    <img src={post?.displayPicture} alt={post?.username} className='w-[32px] h-[32px] my-auto rounded-full border-black dark:border-white border'/>
+                                    <div className='text-left my-auto'>
+                                        <p>{post?.username}</p>
+                                        <p className='text-xs'>Likes Count: {post?.likes?.length}</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
                         ))
                     }
+
                 </div>
             </div>
 
@@ -47,12 +64,25 @@ const Stats = () => {
 
                     {/* map isme lagana hai */}
                     {
-                        topPost?.map((post) => (
-                        <div className='flex place-content-center flex-row gap-4 mt-2'>
-                            <img src={post?.displayPicture} alt={post?.username} className='w-[32px] h-[32px] my-auto rounded-full border-black dark:border-white border'/>
-                            <div className='text-left my-auto'>
-                            <p>{post?.username}</p>
-                            <p className='text-xs'>Post Count: {post?.posts.length}</p>
+                        topPost?.map((post, index) => (
+                            <div className='flex place-content-center gap-2 flex-row mt-2' key={index}>
+                            {
+                                index === 0 ? (
+                                    <img src={gold} alt='gold' className='w-[18px] h-[18px]'/>
+                                ) : index === 1 ? (
+                                    <img src={silver} alt='silver' className='w-[18px] h-[18px]'/>
+                                ) : index === 2 ? (
+                                    <img src={bronze} alt='bronze' className='w-[18px] h-[18px] '/>
+                                ) : (
+                                    <p>{index + 1}</p>
+                                )
+                            }
+                            <div className='gap-4 flex flex-row'>
+                                <img src={post?.displayPicture} alt={post?.username} className='w-[32px] h-[32px] my-auto rounded-full border-black dark:border-white border'/>
+                                <div className='text-left my-auto'>
+                                    <p>{post?.username}</p>
+                                    <p className='text-xs'>Likes Count: {post?.likes?.length}</p>
+                                </div>
                             </div>
                         </div>
                         ))
