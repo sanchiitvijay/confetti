@@ -26,85 +26,94 @@ exports.getLikes = async(req, res)=> {
 
 exports.liked = async(req, res) => {
     try {
-        console.log(req.body)
         const authorId = req.user.id;
         const postId = req.body.postId;
-        const cachedpost=await client.get(`post${postId}`);
-        const cachedPost=JSON.parse(cachedpost);
-        let like = await Like.findOne({ author: authorId })
-    
-        if(like) {
+
+        // Fetch cached post
+        const cachedpost = await client.get(`post:${postId}`);
+        const cachedPost = JSON.parse(cachedpost);
+
+        let like = await Like.findOne({ author: authorId, post: postId });
+
+        if (like) {
+            // Unlike the post
             const updatedPost = await Post.findByIdAndUpdate(
                 postId,
                 { $pull: { likes: like._id } },
                 { new: true }
-            )
-            
-            const updatedUser=await User.findByIdAndUpdate(
+            );
+
+            const updatedUser = await User.findByIdAndUpdate(
                 authorId,
-                { $pull: {likes:like._id}},
-                {new:true}
+                { $pull: { likes: like._id } },
+                { new: true }
             );
 
             const deletedLike = await Like.findByIdAndDelete(like._id);
 
-            if(cachedPost){
-                await cachedPost?.likes?.filter((l)=>l._id!=like._id);
-                await client.set(`post:${postId}`,JSON.stringify(cachedPost));
-                const userLikes=await client.get(`user:${cachedPost?.author?._id}:totalLikes`) || 0;
-                await client.set(`user:${cachedPost?.author?._id}:totalLikes`,userLikes-1);
+            if (cachedPost) {
+                cachedPost.likes = cachedPost.likes.filter((l) => l._id != like._id);
+                await client.set(`post:${postId}`, JSON.stringify(cachedPost));
+                
+                const userLikes = await client.get(`user:${cachedPost.author._id}:totalLikes`) || 0;
+                await client.set(`user:${cachedPost.author._id}:totalLikes`, userLikes - 1);
             }
-            if(!updatedPost || !deletedLike || !updatedUser) {
+
+            if (!updatedPost || !deletedLike || !updatedUser) {
                 return res.status(400).json({
                     success: false,
                     message: "Error while removing the like"
-                })
+                });
             }
         } else {
+            // Like the post
             const newLike = await Like.create({
                 author: authorId,
                 post: postId,
-            })
+            });
+
             const updatedPost = await Post.findByIdAndUpdate(
                 postId,
-                {$push: {likes: newLike._id}},
-                {new: true}
-            )
-            const updatedUser= await User.findByIdAndUpdate(authorId,
-                {$push:{likes:newLike._id}},{new:true}
-           );
+                { $push: { likes: newLike._id } },
+                { new: true }
+            );
 
-           if(cachedPost){
-            await cachedPost?.likes?.push(newLike);
-            await client.set(`post:${postId}`,JSON.stringify(cachedPost));
-            const userLikes=await client.get(`user:${cachedPost?.author?._id}:totalLikes`) || 0;
-            await client.set(`user:${cachedPost?.author?._id}:totalLikes`,userLikes+1);
-           }
-            // console.log(updatedPost)
-            // console.log(newLike)
-            //console.log(updatedUser)
+            const updatedUser = await User.findByIdAndUpdate(
+                authorId,
+                { $push: { likes: newLike._id } },
+                { new: true }
+            );
 
-            //cache code 
-            if(!newLike || !updatedPost || !updatedUser) {
+            if (cachedPost) {
+                cachedPost.likes.push(newLike);
+                await client.set(`post:${postId}`, JSON.stringify(cachedPost));
+
+                const userLikes = await client.get(`user:${cachedPost.author._id}:totalLikes`) || 0;
+                await client.set(`user:${cachedPost.author._id}:totalLikes`, userLikes + 1);
+            }
+
+            if (!newLike || !updatedPost || !updatedUser) {
                 return res.status(400).json({
                     success: false,
                     message: "Error while adding the like"
-                })  
+                });
             }
-            like = newLike
+
+            like = newLike;
         }
-        console.log("like-----------", like)
+
         return res.status(200).json({
             success: true,
-            message: "Like unlike has been added",
+            message: "Like/unlike operation was successful",
             like
-        })
+        });
     } catch (error) {
         console.log(error);
         return res.status(404).json({
-            success:false,
-            message:"Error while liking a post"
-        })
+            success: false,
+            message: "Error while liking a post"
+        });
     }
 }
+
 
