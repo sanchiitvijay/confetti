@@ -78,10 +78,10 @@ const Stats = () => {
                                 )
                             }
                             <div className='gap-4 flex flex-row'>
-                                <img src={post?.displayPicture} alt={post?.username} className='w-[32px] h-[32px] my-auto rounded-full border-black dark:border-white border'/>
+                               <img src={post?.displayPicture} alt={post?.username} className='w-[32px] h-[32px] my-auto rounded-full border-black dark:border-white border'/>
                                 <div className='text-left my-auto'>
                                     <p>{post?.username}</p>
-                                    <p className='text-xs'>Likes Count: {post?.likes?.length}</p>
+                                    <p className='text-xs'>Posts Count: {post?.posts?.length}</p>
                                 </div>
                             </div>
                         </div>

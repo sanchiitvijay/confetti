@@ -103,6 +103,8 @@ exports.removeComment = async (req, res) => {
             postId,
         } = req.body;
 
+        const userId = req.user.id;
+
 
         const cachedpost=await client.get(`post:${postId}`);
         const cachedPost=await JSON.parse(cachedpost);

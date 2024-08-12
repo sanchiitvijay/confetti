@@ -1,9 +1,10 @@
 import { toast } from "react-hot-toast"
 
-import { setLoading, setToken } from "../../slices/authSlice"
+import { setLoading, setRedirection, setToken } from "../../slices/authSlice"
 import { setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiConnector"
 import { authEndpoints } from "../api"
+import { useSelector } from "react-redux"
 
 const {
     LOGIN_API,
@@ -126,6 +127,13 @@ const {
         dispatch(setUser({ ...response.data.user, image: userImage }))
         localStorage.setItem("token", JSON.stringify(response.data.token))
         localStorage.setItem("user", JSON.stringify(response.data.user));
+        
+        const redirection = useSelector((state) => state.auth.redirection)
+        
+        if(redirection){
+          dispatch(setRedirection(null))
+          navigate(redirection)
+        }
         navigate("/feed")
       } catch (error) {
         console.log("LOGIN API ERROR............", error)
@@ -152,7 +160,7 @@ const {
         if (!response.data.success) {
           throw new Error(response.data.message)
         }
-  
+
         toast.success("Password Reset Successfully")
         navigate("/")
       } catch (error) {

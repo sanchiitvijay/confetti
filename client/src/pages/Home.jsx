@@ -36,9 +36,7 @@ const Home = () => {
     dispatch(login(email, password, navigate))
   }
   
-  useEffect(()=>{
-   
-    
+  useEffect(()=>{ 
     if(token){
       navigate("/feed")
     }
