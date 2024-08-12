@@ -18,7 +18,7 @@ const Reply =memo(function Reply(props){
   return (
       <div className='flex flex-row ml-1 max-w-[500px] justify-between pt-2'>
           <div className='flex flex-row gap-3'>
-          <img src={props?.author?.displayPicture} alt="" className='w-[28px] border border-black rounded-full h-[28px] '/>
+          <img src={props?.author?.displayPicture} alt={props?.author?.username} className='w-[28px] border border-black rounded-full h-[28px] '/>
           <div className='text-[12px] font-light my-auto'><span className='text-sm font-semibold mr-2'> {props?.author?.username} </span>{ props?.description }</div>
           </div>
 

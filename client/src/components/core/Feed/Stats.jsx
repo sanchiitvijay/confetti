@@ -29,7 +29,7 @@ const Stats = () => {
                     {
                         topLikes?.map((post) => (
                         <div className='flex place-content-center flex-row gap-4 mt-2'>
-                            <img src={post?.displayPicture} alt="" className='w-[32px] h-[32px] my-auto rounded-full border-black dark:border-white border'/>
+                            <img src={post?.displayPicture} alt={post?.username} className='w-[32px] h-[32px] my-auto rounded-full border-black dark:border-white border'/>
                             <div className='text-left my-auto'>
                             <p >{post?.username}</p>
                             <p className='text-xs'>Likes Count: {post?.likes?.length}</p>
@@ -49,7 +49,7 @@ const Stats = () => {
                     {
                         topPost?.map((post) => (
                         <div className='flex place-content-center flex-row gap-4 mt-2'>
-                            <img src={post?.displayPicture} alt="" className='w-[32px] h-[32px] my-auto rounded-full border-black dark:border-white border'/>
+                            <img src={post?.displayPicture} alt={post?.username} className='w-[32px] h-[32px] my-auto rounded-full border-black dark:border-white border'/>
                             <div className='text-left my-auto'>
                             <p>{post?.username}</p>
                             <p className='text-xs'>Post Count: {post?.posts.length}</p>

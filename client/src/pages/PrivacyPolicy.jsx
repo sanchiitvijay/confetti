@@ -44,7 +44,7 @@ const PrivacyPolicy = () => {
             <div className='flex flex-col-reverse md:flex-row'>
 
             <div className='text-2xl md:text-4xl w-full text-normal text-center'>Privacy Policy for Confetti</div>
-            <img src={logo} className='relative mt-0.5 h-[100px] w-[100px] md:h-[60px] md:w-[60px] mx-auto right-3' alt=""/>
+            <img src={logo} className='relative mt-0.5 h-[100px] w-[100px] md:h-[60px] md:w-[60px] mx-auto right-3' alt="confetti logo"/>
             </div>
             <div className='text-xl md:text-2xl my-6 text-justify'>Welcome to Confetti! We take your privacy seriously. This privacy policy explains how we collect, use, and disclose information from and about you when you use our website.</div>
             <ul>
@@ -55,7 +55,7 @@ const PrivacyPolicy = () => {
                             <div className='text-lg md:text-xl'>{policy.heading}:</div>
                         </div>
                         <div className='flex flex-row ml-4'>
-                        <img src={downArrow} className='mt-0.5 h-[15px] w-[15px]' alt=""/>
+                        <img src={downArrow} className='mt-0.5 h-[15px] w-[15px]' alt="down arrow"/>
                         <p className=' text-justify text-md text-gray-200 ml-2 font-light'>{policy.description}</p>
                         </div>
                     </li>

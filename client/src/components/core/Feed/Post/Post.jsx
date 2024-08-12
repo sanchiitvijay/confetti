@@ -14,7 +14,7 @@ const Post = memo(function Post(props){
 
   const [showComments, setShowComments] = useState(false);
   const [allComments, setAllComments] = useState(false);
-  const [like, setLike] = useState(false);
+  let [like, setLike] = useState(false);
   const [commentForm, setCommentForm] = useState("");
 
   const token = useSelector((state) => state.auth.token);
@@ -47,7 +47,7 @@ const Post = memo(function Post(props){
       if (showComments) {
         const postId = props?._id;
         setAllComments(false);
-        const result=dispatch(getAllComments(token, postId))
+        dispatch(getAllComments(token, postId))
       
       }}
     commentHandler();
@@ -57,7 +57,7 @@ const Post = memo(function Post(props){
   const handleSubmitComment = async (event) => {
     event.preventDefault();
     event.stopPropagation();
-    const comments = await dispatch(createComments(token, { postId: props?._id, comment: commentForm }));
+    await dispatch(createComments(token, { postId: props?._id, comment: commentForm }));
     setCommentForm(" ");
   }
 

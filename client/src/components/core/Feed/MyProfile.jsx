@@ -116,7 +116,7 @@ const MyProfile = () => {
             <div className='w-fit relative  card flex flex-col md:flex-row md:gap-4 gap-2  shadow-lg dark:bg-card1 bg-dark_card1 bg-cover text-white border-spacing-4 border-4 h-max dark:border-slate-600 border-white p-6 md:p-7 rounded-lg  item-center'>
               <LiaEditSolid className='absolute right-2 top-2 text-[25px] cursor-pointer' onClick={() => navigate("/feed/settings")} />
               <div className='flex flex-col max-md:mb-3 max-md:mx-auto my-auto'>
-                <img src={user?.displayPicture} alt="" className='w-[80px] m-4 h-[80px] rounded-full  object-cover' />
+                <img src={user?.displayPicture} alt={user?.username} className='w-[80px] m-4 h-[80px] rounded-full  object-cover' />
                 <div>{"@" + user?.username}</div>
               </div>
               <div className='flex flex-col'>

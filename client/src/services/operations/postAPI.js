@@ -24,14 +24,11 @@ export function getUserPosts(userId,count,token){
                  userId:userId,
                  count:count,
              });
-             console.log("GET_POST_BY_USER RESPONSE....",response)
-
+             
              if(!response?.data?.success){
                 throw new Error(response?.data?.message)
              }
 
-             //result
-             console.log("RESPONSE CHECK:",response?.data?.slicedPost)
              dispatch(setUserPost(response?.data?.slicedPost))
              dispatch(setUserTotalPosts(response?.data?.totalLength))
         }
@@ -48,7 +45,6 @@ export function getUserStats(token){
                 Authorization: `Bearer ${token}`
             });
 
-            console.log("GET_USER_POSTS_STATS_API_RESPONSE",response)
 
             if(!response?.data?.success){
                 throw new Error(response?.data?.message)
@@ -64,7 +60,6 @@ export function getUserStats(token){
 }
 export function getPosts (count,token) {
     return async(dispatch) => {
-        let result = null
         dispatch(setLoading(true))
         try {
             const response = await apiConnector("GET",GET_POST_API,null, {
@@ -72,18 +67,13 @@ export function getPosts (count,token) {
                 Authorization: `Bearer ${token}`,
                 count:count,
             })
-            console.log("GET_POST RESPONSE....", response)
             
             if(!response.data.success) {
                 throw new Error(response.data.message)
             }
             
-
             dispatch(setPost(response.data.slicedPost))
-            dispatch(setTotalPosts(response.data.totalLength))
-            
-          
-         
+            dispatch(setTotalPosts(response.data.totalLength))         
 
         } catch (err) {
             console.log("GET_POST_API FAILED....", err)
@@ -94,13 +84,11 @@ export function getPosts (count,token) {
             dispatch(setLoading(false))
         }
 
-        return result;
     }
 }
 
 export function createPost (token, data) {
     return async(dispatch) => {
-        let result = null
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
@@ -109,8 +97,7 @@ export function createPost (token, data) {
                 "Content-Type": "multipart/form-data",
             })
 
-            console.log("CREATE_POST RESPONSE....", response)
-
+        
             if(!response.data.success) {
                 throw new Error(response.data.message)
             }
@@ -118,8 +105,7 @@ export function createPost (token, data) {
             dispatch(setPost(response.data.posts))
             dispatch(setTotalPosts(response.data.postLength))
             toast.success("post is created succesfully")
-            result = response?.data?.data
-
+        
         } catch (err) {
             console.log("CREATE_POST_API FAILED....", err)
             toast.error("Could not create post")
@@ -128,8 +114,6 @@ export function createPost (token, data) {
             toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
-
-        return result;
     }
 }
 
@@ -143,13 +127,10 @@ export function editPost (token, data) {
                 "Content-Type": "multipart/form-data",
             })
 
-            console.log("EDIT_POST RESPONSE....", response)
-
             if(!response.data.success) {
                 throw new Error(response.data.message)
             }
 
-            dispatch(setPost(response.data.posts))
             toast.success("post is edited succesfully")
 
         } catch (err) {
@@ -166,8 +147,6 @@ export function editPost (token, data) {
 
 export function deletePost (token, data) {
     return async(dispatch) => {
-        let result = null
-        console.log("DELETE_POST_API data-----------",data)
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
@@ -176,15 +155,13 @@ export function deletePost (token, data) {
                 "Content-Type": "multipart/form-data",
             })
 
-            console.log("DELETE_POST RESPONSE....", response)
-
+        
             if(!response.data.success) {
                 throw new Error(response.data.message)
             }
 
             dispatch(setPost(response.data.posts))
             toast.success("post is deleted succesfully")
-            result = response?.data?.data
             
 
         } catch (err) {
@@ -196,13 +173,11 @@ export function deletePost (token, data) {
             dispatch(setLoading(false))
         }
 
-        return result;
     }
 }
 
 export function reportPost (token, data) {
     return async(dispatch) => {
-        let result = null
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
@@ -211,15 +186,13 @@ export function reportPost (token, data) {
                 "Content-Type": "multipart/form-data",
             })
 
-            console.log("REPORT_POST RESPONSE....", response)
-
+        
             if(!response.data.success) {
                 throw new Error(response.data.message)
             }
 
             dispatch(setPost(response.data.posts))
             toast.success("post is reported succesfully")
-            result = response?.data?.data
             
 
         } catch (err) {
@@ -231,6 +204,5 @@ export function reportPost (token, data) {
             dispatch(setLoading(false))
         }
 
-        return result;
     }
 }

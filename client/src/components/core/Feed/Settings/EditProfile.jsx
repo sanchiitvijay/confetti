@@ -4,10 +4,8 @@ import { useNavigate } from "react-router-dom"
 import  "../../../../App.css";
 import SubmitButton from "../../../common/SubmitButton"
 import { editUser } from "../../../../services/operations/userAPI";
-import { setUser } from "../../../../slices/profileSlice";
 import "./Settings.css"
 
-const genders = ["Male", "Female","Other"]
 const years=["First","Second","Third","Fourth"]
 export default function EditProfile () {
   const { user } = useSelector((state) => state.profile)
@@ -23,7 +21,7 @@ export default function EditProfile () {
 
   const submitProfileForm = async (data) => {
     try {
-     const newUser=dispatch(editUser(data,token));
+     dispatch(editUser(data,token));
      
     } catch (error) {
       console.log("ERROR MESSAGE - ", error.message)

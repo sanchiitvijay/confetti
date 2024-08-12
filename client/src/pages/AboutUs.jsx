@@ -36,6 +36,7 @@ const BuyUsCoffee = () => {
             <a 
             href='https://github.com/sanchiitvijay/confetti'
             target='_blank'
+            rel="noreferrer"
             className='cursor-pointer'
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}

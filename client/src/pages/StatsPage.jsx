@@ -20,7 +20,7 @@ const Stats = () => {
                     {/* map isme lgana hai */}
                     {topLikes?.map((post) => (
                     <div className='flex place-content-center flex-row gap-4 mt-5'>
-                        <img src={post?.displayPicture} alt="" className='w-[50px] h-[50px] rounded-full border-white border'/>
+                        <img src={post?.displayPicture} alt={post?.username} className='w-[50px] h-[50px] rounded-full border-white border'/>
                         <div className='text-left'>
                         <p className='my-auto'>{post?.username}</p>
                         <p className='my-auto'>Likes Count: {post?.likes?.length}</p>
@@ -39,7 +39,7 @@ const Stats = () => {
                     {
                         topPost?.map((post) => (
                             <div className='flex place-content-center flex-row gap-4 mt-5'>
-                                <img src={post?.displayPicture} alt="" className='w-[50px] h-[50px] rounded-full border-white border'/>
+                                <img src={post?.displayPicture} alt={post?.username} className='w-[50px] h-[50px] rounded-full border-white border'/>
                                 <div className='text-left'>
                                 <p className='my-auto'>{post?.username}</p>
                                 <p className='my-auto'>Post Count: {post?.posts?.length}</p>

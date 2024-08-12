@@ -20,7 +20,6 @@ const themeSlice = createSlice({
         },
         setStats(state, action) {
             state.stats = action.payload;
-            console.log("in slice", action.payload);
             localStorage.setItem("stats", action.payload);
         }
 

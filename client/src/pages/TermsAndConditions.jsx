@@ -43,7 +43,7 @@ const TermsAndConditions = () => {
             <div className='flex flex-col-reverse md:flex-row'>
 
             <div className='text-2xl md:text-4xl w-full text-normal  text-center'>Terms and Conditions for Confetti</div>
-            <img src={logo} className='relative mt-0.5 h-[100px] w-[100px] md:h-[60px] md:w-[60px] mx-auto' alt=""/>
+            <img src={logo} className='relative mt-0.5 h-[100px] w-[100px] md:h-[60px] md:w-[60px] mx-auto' alt="confetti logo"/>
             </div>
             <div className='text-xl md:text-2xl my-6  text-justify'>Welcome to Confetti! This platform allows you to anonymously share confessions related to your college experience. By using our service, you agree to these terms and conditions.</div>
             <ul>
@@ -54,7 +54,7 @@ const TermsAndConditions = () => {
                             <div className='text-lg md:text-xl'>{data.heading}:</div>
                         </div>
                         <div className='flex flex-row ml-4'>
-                        <img src={downArrow} className='mt-0.5 h-[15px] w-[15px]' alt=""/>
+                        <img src={downArrow} className='mt-0.5 h-[15px] w-[15px]' alt="down arrow"/>
                         <p className=' text-justify text-md text-gray-200 ml-2 font-light'>{data.description}</p>
                         </div>
                     </li>
@@ -71,7 +71,7 @@ const TermsAndConditions = () => {
                     </span>
                 </p>
             <p className='m-3 font-light text-justify '>We appreciate your cooperation! By using Confetti, you agree to these terms and conditions.</p>
-            <Button nav={-1} child={<MdArrowBack/>} cc1='m-3 ' px={8} cc2='flex gap-1 pl-6 justify-between items-center' text={"Back"}/>
+            <Button onClick={() => navigate(-1)} child={<MdArrowBack/>} cc1='m-3 ' px={8} cc2='flex gap-1 pl-6 justify-between items-center' text={"Back"}/>
         </div>
     </div>
   )
