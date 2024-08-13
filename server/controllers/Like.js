@@ -55,7 +55,7 @@ exports.liked = async(req, res) => {
                 cachedPost.likes = cachedPost.likes.filter((l) => l._id != like._id);
                 await client.set(`post:${postId}`, JSON.stringify(cachedPost));
                 
-                const userLikes = await client.get(`user:${cachedPost.author._id}:totalLikes`) || 0;
+                const userLikes = Number.parseInt(await client.get(`user:${cachedPost.author._id}:totalLikes`)) || 0;
                 await client.set(`user:${cachedPost.author._id}:totalLikes`, userLikes - 1);
             }
 
@@ -88,7 +88,7 @@ exports.liked = async(req, res) => {
                 cachedPost.likes.push(newLike);
                 await client.set(`post:${postId}`, JSON.stringify(cachedPost));
 
-                const userLikes = await client.get(`user:${cachedPost.author._id}:totalLikes`) || 0;
+                const userLikes = Number.parseInt(await client.get(`user:${cachedPost.author._id}:totalLikes`)) || 0;
                 await client.set(`user:${cachedPost.author._id}:totalLikes`, userLikes + 1);
             }
 

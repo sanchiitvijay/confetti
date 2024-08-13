@@ -1,6 +1,17 @@
 const Reply=require("../models/Reply");
 const Comment=require("../models/Comment");
 const User = require("../models/User");
+var admin=require("firebase-admin");
+const Device = require("../models/Device");
+if (!admin.apps?.length) {
+    var serviceAccount = require("../configs/firebase-admin-config")
+  
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });
+  }
+  
+const messaging=admin.messaging();
 
 
 exports.createReply=async(req,res)=>{
@@ -30,6 +41,8 @@ exports.createReply=async(req,res)=>{
             description:description,
         });
 
+        console.log("REPLY",reply);
+
 
         if(!reply){
             return res.status(415).json({
@@ -39,7 +52,7 @@ exports.createReply=async(req,res)=>{
         }
 
         //push the reply in user
-        const updatedUser=User.findByIdAndUpdate(userId,{
+        const updatedUser=await User.findByIdAndUpdate(userId,{
             $push:{replies:reply._id}
         },{new:true})
 
@@ -54,6 +67,62 @@ exports.createReply=async(req,res)=>{
         comment.replies.push(reply._id);
         await comment.save();
 
+        //notifications firebase code
+        const newReply=await Reply.findOne({_id:reply._id}).populate({
+            path:"comment",
+            populate:{
+                path:"post",
+                populate:{
+                    path:"author"
+                }
+            }
+        }).exec();
+        const postId=newReply.comment.post._id;
+        const replyUser=newReply.author;
+        const commentUser=newReply.comment.author;
+
+        
+       
+        //messaging flow 
+        
+        const userDevice = await Device.findOne({ user: commentUser });
+        console.log("USER DEVICE", userDevice);
+        const userDevices = userDevice?.devices;
+        const userTokens = userDevices.map((device) => (
+            device = device.split("|")[2]
+        ))
+
+        console.log("USERTOKENS", userTokens);
+        if(commentUser.toString()!=replyUser.toString()){
+            const message = {
+                notification: {
+                    title: "Reply added",
+                    body: `${updatedUser?.username} replied to your comment on the Post of ${newReply.comment.post.author.username}`,
+                   
+                },
+                data:{
+                    url:`http://localhost:3000/feed/${postId}`
+                }
+            }
+    
+            console.log("MESSAGE", message);
+    
+            const sendPromises = userTokens?.map((token) => {
+                return messaging.send({
+                    ...message,
+                    token: token,
+                })
+            });
+    
+            Promise.all(sendPromises)
+                .then((response) => {
+                    console.log('Successfully sent messages:', response);
+                })
+                .catch((error) => {
+                    console.error('Error sending messages:', error);
+                });
+        }
+        //firebase notifs coded here
         const replies = await Reply.find({comment:commentId}).sort({createdAt:-1}).populate("author").exec();
         
         //send successful response

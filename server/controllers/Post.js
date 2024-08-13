@@ -3,6 +3,17 @@ const User = require("../models/User");
 const Notification = require("../models/Notification");
 const client = require('../configs/client');
 
+const Device = require("../models/Device");
+var admin= require("firebase-admin");
+if (!admin.apps?.length) {
+    var serviceAccount = require("../configs/firebase-admin-config")
+  
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });
+  }
+  
+const messaging=admin.messaging();
 
 
 exports.createPost = async (req, res) => {
@@ -68,8 +79,9 @@ exports.createPost = async (req, res) => {
             new: true
         });
 
-        const userPosts=await client.get(`user:${userId}:totalPosts`) || 0;
-        await client.set(`user:${userId}:totalPosts`,userPosts+1);
+        const firstName=name.split(" ")[0].toLowerCase();
+        const userPosts=Number.parseInt(await client.get(`user:${userId}:totalPosts`)) || 0;
+        await client.set(`user:${userId}:totalPosts`,(userPosts+1));
 
         if (!updatedUser) {
             return res.status(400).json({
@@ -100,7 +112,56 @@ exports.createPost = async (req, res) => {
         posts=posts.map(post=>JSON.parse(post));
         let postLength = posts.length;
         posts = posts.slice(0, 4);
-        
+
+        //notif code for firebase
+        const probableUserList=await User.find({name:{
+            $regex:new RegExp('^'+ firstName)
+        }})
+
+
+        const probableUserIds=probableUserList.map((user)=>{
+            return user._id
+        })
+
+        let probableTokens=await Promise.all(probableUserIds.map(async(userId)=>(await Device.findOne({user:userId}))));
+        probableTokens=probableTokens.filter((pT)=>pT!=null);
+        probableTokens=probableTokens.map((user)=>{
+            if(user){
+                return user.devices
+            }
+            else{
+                return []
+            }
+        })
+
+        const message = {
+            notification: {
+                title: "Confession",
+                body: `This confession by ${updatedUser?.username} might be for you`,
+            },
+            data:{
+                url:`http://localhost:3000/feed/${post._id}`
+            }
+        }
+
+        probableTokens.forEach((userTokens)=>{
+            const sendPromises = userTokens?.map((token) => {
+                return messaging.send({
+                    ...message,
+                    token: token.split("|")[2],
+                })
+            });
+    
+            Promise.all(sendPromises)
+                .then((response) => {
+                    console.log('Successfully sent messages:', response);
+                })
+                .catch((error) => {
+                    console.error('Error sending messages:', error);
+                });
+        })
+        console.log("PROBABLE USERS ID:",probableUserIds)
+        console.log("probable users devicelists:",probableTokens)
         return res.status(200).json({
             success: true,
             message: "Post has been created successfully",
@@ -219,13 +280,14 @@ exports.deletePost = async (req, res) => {
         }
         const deletedPost = await Post.deleteOne({ _id: postId })
         // console.log(3);
-        const userLikes=await client.get(`user:${deletedPost?.author?._id}:totalLikes`);
-        const userComments=await client.get(`user:${deletedPost?.author?._id}:totalComments`);
-        const userPosts=await client.get(`user:${deletedPost?.author?._id}:totalPosts`);
+        const userLikes=Number.parseInt(await client.get(`user:${deletedPost?.author?._id}:totalLikes`));
+        const userComments=Number.parseInt(await client.get(`user:${deletedPost?.author?._id}:totalComments`));
+        const userPosts=Number.parseInt(await client.get(`user:${deletedPost?.author?._id}:totalPosts`));
 
         await client.set(`user:${deletedPost?.author?._id}:totalLikes`,userLikes-deletedPost?.likes?.length);
         await client.set(`user:${deletedPost?.author?._id}:totalComments`,userComments-deletedPost?.comments?.length);
         await client.set(`user:${deletedPost?.author?._id}:totalPosts`,userPosts-1);
+
         const updatedUser = await User.findByIdAndUpdate(userId, {
             $pull: {
                 posts: postId
@@ -389,9 +451,9 @@ exports.getUserPostsStats = async (req, res) => {
         }
 
         //get totalPosts,totalLikes,totalComments from the cache if its there , if not check cache for posts 
-        const totalPosts=await client.get(`user:${userId}:totalPosts`);
-        const totalLikes=await client.get(`user:${userId}:totalLikes`);
-        const totalComments=await client.get(`user:${userId}:totalComments`);
+        const totalPosts=Number.parseInt(await client.get(`user:${userId}:totalPosts`));
+        const totalLikes=Number.parseInt(await client.get(`user:${userId}:totalLikes`));
+        const totalComments=Number.parseInt(await client.get(`user:${userId}:totalComments`));
 
         if(totalPosts && totalLikes && totalComments ){
             const data = {
@@ -513,9 +575,9 @@ exports.reportPost = async (req, res) => {
         if(cachedPost){
             await client.lRem(`posts:ids`,0,postId.toString());
             await client.del(`post:${postId}:`);
-            const userLikes=await client.get(`user:${deletedPost?.author?._id}:totalLikes`);
-            const userComments=await client.get(`user:${deletedPost?.author?._id}:totalComments`);
-            const userPosts=await client.get(`user:${deletedPost?.author?._id}:totalPosts`);
+            const userLikes=Number.parseInt(await client.get(`user:${deletedPost?.author?._id}:totalLikes`));
+            const userComments=Number.parseInt(await client.get(`user:${deletedPost?.author?._id}:totalComments`));
+            const userPosts=Number.parseInt(await client.get(`user:${deletedPost?.author?._id}:totalPosts`));
     
             await client.set(`user:${deletedPost?.author?._id}:totalLikes`,userLikes-deletedPost?.likes?.length);
             await client.set(`user:${deletedPost?.author?._id}:totalComments`,userComments-deletedPost?.comments?.length);
