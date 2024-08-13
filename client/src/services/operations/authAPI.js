@@ -5,6 +5,7 @@ import { setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiConnector"
 import { authEndpoints } from "../api"
 import { useSelector } from "react-redux"
+import { setDevice } from "../../slices/notificationSlice"
 
 const {
     LOGIN_API,
@@ -78,7 +79,7 @@ const {
         formData.append('instagram',instagram);
         formData.append('avatar',avatar);
         formData.append('otp',otp);
-
+        formData.append('usn',usn)
 
 
         const response = await apiConnector("POST", SIGNUP_API, formData,{
@@ -178,8 +179,11 @@ export function logout(navigate) {
     return (dispatch) => {
       dispatch(setToken(null))
       dispatch(setUser(null))
+      dispatch(setDevice(null))
       localStorage.removeItem("token")
       localStorage.removeItem("user")
+      localStorage.clear();
+      sessionStorage.clear();
       toast.success("Logged Out")
       navigate("/")
     }

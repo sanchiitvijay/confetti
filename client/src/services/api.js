@@ -9,6 +9,9 @@ export const authEndpoints = {
     RESETPASSWORD_API: BASE_URL + "/auth/resetPassword"
 }
 
+export const notificationEndpoints={
+ HANDLE_DEVICE_API: BASE_URL + "/notification/handle-device"
+}
 export const userEndpoints = {
     GET_ALL_USERS_API: BASE_URL + "/auth/get-all-user",
     REMOVE_USER_API: BASE_URL + "/auth/remove-user",
