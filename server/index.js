@@ -10,7 +10,7 @@ const likeRoutes=require("./routes/Like");
 const commentRoutes=require("./routes/Comment");
 const replyRoutes=require("./routes/Reply");
 const feedbackRoutes=require("./routes/Feedback");
-
+const notificationRoutes=require("./routes/Notification");
 //connection for databse
 const database=require("./configs/database");
 const cookieParser=require("cookie-parser");
@@ -55,6 +55,8 @@ app.use(
       tempFileDir:"/tmp",
     })
   );
+
+
   
 
   
@@ -65,7 +67,7 @@ app.use('/api/v1/like',likeRoutes);
 app.use('/api/v1/comment',commentRoutes);
 app.use('/api/v1/reply',replyRoutes);
 app.use('/api/v1/feedback',feedbackRoutes);
-
+app.use('/api/v1/notification',notificationRoutes);
 
 
 //default route

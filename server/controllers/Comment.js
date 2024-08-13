@@ -3,6 +3,21 @@ const Post = require("../models/Post");
 const Reply = require("../models/Reply");
 const User = require("../models/User");
 const client = require('../configs/client');
+const Device = require("../models/Device");
+
+
+var admin = require("firebase-admin");
+
+if (!admin.apps?.length) {
+    var serviceAccount = require("../configs/firebase-admin-config")
+  
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });
+  }
+  
+
+const messaging = admin.messaging();
 exports.createComment = async (req, res) => {
     try {
         console.log("Inside create comment----------", req.body);
@@ -13,8 +28,8 @@ exports.createComment = async (req, res) => {
         // console.log("USER ID", userId);
         // console.log("POST ID", postId);
         // console.log("DESCRIPTION", description);
-        const cachedpost=await client.get(`post:${postId}`);
-        const cachedPost=await JSON.parse(cachedpost);
+        const cachedpost = await client.get(`post:${postId}`);
+        const cachedPost = await JSON.parse(cachedpost);
         //Validation for user
         if (!userId || !description || !postId) {
             return res.status(404).json({
@@ -24,7 +39,8 @@ exports.createComment = async (req, res) => {
         }
 
         //find Post exists or not
-        const post = await Post.findById({ _id: postId });
+        const post = await Post.findOne({ _id: postId });
+        console.log(post)
         // console.log("after post--------------");
         if (!post) {
             return res.status(404).json({
@@ -32,6 +48,7 @@ exports.createComment = async (req, res) => {
                 message: "Post cant be found"
             })
         }
+
 
         // console.log("creating comment--------------");
         // console.log(typeof(post._id));
@@ -55,7 +72,7 @@ exports.createComment = async (req, res) => {
         post.comments.push(comment._id);
         await post.save();
 
-        const updatedUser = User.findByIdAndUpdate(userId, {
+        const updatedUser = await User.findByIdAndUpdate(userId, {
             $push: { comments: comment._id }
         }, { new: true })
 
@@ -65,15 +82,58 @@ exports.createComment = async (req, res) => {
                 message: "Could not update user comment"
             })
         }
+        console.log("UPDATED USER",updatedUser);
+        //messaging flow 
+        const postAuthor = post?.author;
+        const userDevice = await Device.findOne({ user: postAuthor });
+        console.log("USER DEVICE", userDevice);
+        const userDevices = userDevice?.devices;
+        const userTokens = userDevices.map((device) => (
+            device = device.split("|")[2]
+        ))
+
+        console.log("USERTOKENS", userTokens);
+        console.log("POST AUTHOR",postAuthor.toString());
+        console.log("UPDATED USER ID",updatedUser._id)
+        if(postAuthor.toString()!=updatedUser._id.toString()){
+            const message = {
+                notification: {
+                    title: "Comment added",
+                    body: `Comment added on your post by ${updatedUser?.username}`,
+                   
+                },
+                data:{
+                    url:`http://localhost:3000/feed/${postId}`
+                }
+            }
+    
+            console.log("MESSAGE", message);
+    
+            const sendPromises = userTokens?.map((token) => {
+                return messaging.send({
+                    ...message,
+                    token: token,
+                })
+            });
+    
+            Promise.all(sendPromises)
+                .then((response) => {
+                    console.log('Successfully sent messages:', response);
+                })
+                .catch((error) => {
+                    console.error('Error sending messages:', error);
+                });
+        }
+       
 
         const comments = await Comment.find({ post: postId }).sort({ createdAt: -1 }).populate('author').exec();
         // console.log("post saved--------------", post);
 
-        if(cachedPost){
+        if (cachedPost) {
             await cachedPost?.comments?.push(comment?._id);
-            await client.set(`post:${postId}`,JSON.stringify(cachedPost));
-            const userComments=await client.get(`user:${cachedPost?.author?._id}:totalComments`) || 0;
-            await client.set(`user:${cachedPost?.author?._id}:totalComments`,userComments+1);
+            await client.set(`post:${postId}`, JSON.stringify(cachedPost));
+            const userComments = Number.parseInt(await client.get(`user:${cachedPost?.author?._id}:totalComments`)) || 0;
+            await client.set(`user:${cachedPost?.author?._id}:totalComments`, userComments + 1);
         }
         //return successful response
         return res.status(200).json({
@@ -106,8 +166,8 @@ exports.removeComment = async (req, res) => {
         const userId = req.user.id;
 
 
-        const cachedpost=await client.get(`post:${postId}`);
-        const cachedPost=await JSON.parse(cachedpost);
+        const cachedpost = await client.get(`post:${postId}`);
+        const cachedPost = await JSON.parse(cachedpost);
         //validate
         if (!commentId || !postId) {
             return res.status(404).json({
@@ -178,11 +238,11 @@ exports.removeComment = async (req, res) => {
 
         const comments = await Comment.find({ post: postId }).sort({ createdAt: -1 }).populate('author').exec();
 
-        if(cachedPost){
-            await cachedPost?.comments?.filter((comment)=>comment!=commentId);
-            await client.set(`post:${postId}`,JSON.stringify(cachedPost));
-            const userComments=await client.get(`user:${cachedPost?.author?._id}:totalComments`) || 0;
-            await client.set(`user:${cachedPost?.author?._id}:totalComments`,userComments-1);
+        if (cachedPost) {
+            await cachedPost?.comments?.filter((comment) => comment != commentId);
+            await client.set(`post:${postId}`, JSON.stringify(cachedPost));
+            const userComments = Number.parseInt(await client.get(`user:${cachedPost?.author?._id}:totalComments`)) || 0;
+            await client.set(`user:${cachedPost?.author?._id}:totalComments`, userComments - 1);
         }
         if (!deletedComment) {
             return res.status(400).json({
