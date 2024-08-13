@@ -76,13 +76,13 @@ const MyProfile = () => {
                 <div className='flex  flex-col gap-4 '>
                   <div className='text-center'>
 
-                    <p id="postCount" className='order-1 text-4xl md:text-5xl font-extrabold leading-none text-indigo-600 dark:text-indigo-100'>{data?.postLength}</p>
+                    <p id="postCount" className='order-1 text-4xl md:text-5xl font-extrabold leading-none text-yellow-400 '>{data?.postLength}</p>
                     <h2 className='order-2 mt-2 text-md md:text-lg font-medium leading-6 text-gray-500 dark:text-gray-400'>Total Posts</h2>
                   </div>
 
                   <div className='text-center'>
 
-                    <p id="likeCount" className='order-1 text-4xl md:text-5xl font-extrabold leading-none text-indigo-600 dark:text-indigo-100'>{data?.likesLength}</p>
+                    <p id="likeCount" className='order-1 text-4xl md:text-5xl font-extrabold leading-none text-yellow-400'>{data?.likesLength}</p>
                     <h2 className='order-2 mt-2 text-md md:text-lg font-medium leading-6 text-gray-500 dark:text-gray-400'>Total Likes</h2>
                   </div>
                 </div>
@@ -90,13 +90,13 @@ const MyProfile = () => {
                 <div className='flex gap-4 flex-col '>
                   <div className='text-center'>
 
-                    <p id="commentCount" className='order-1 text-4xl md:text-5xl font-extrabold leading-none text-indigo-600 dark:text-indigo-100'>{data?.commentsLength}</p>
+                    <p id="commentCount" className='order-1 text-4xl md:text-5xl font-extrabold leading-none text-yellow-400'>{data?.commentsLength}</p>
                     <h2 className='order-2 mt-2 text-md md:text-lg font-medium leading-6 text-gray-500 dark:text-gray-400'>Total Comments</h2>
                   </div>
 
                   <div className='text-center'>
 
-                    <p id="reportCount" className='order-1 text-4xl md:text-5xl font-extrabold leading-none text-indigo-600 dark:text-indigo-100'>{user?.reports}</p>
+                    <p id="reportCount" className='order-1 text-4xl md:text-5xl font-extrabold leading-none text-yellow-400'>{user?.reports}</p>
                     <h2 className='order-2 mt-2 text-md md:text-lg font-medium leading-6 text-gray-500 dark:text-gray-400'>Total Reports</h2>
                   </div>
                 </div>
@@ -112,21 +112,21 @@ const MyProfile = () => {
         user &&
         (
           <Tilt
-            glareEnable={true} className="mt-10" scale={1.1} glareMaxOpacity={0.4} glareColor="lightblue" glarePosition="all" glareBorderRadius="20px" >
-            <div className='w-fit relative  card flex flex-col md:flex-row md:gap-4 gap-2  shadow-lg dark:bg-card1 bg-dark_card1 bg-cover text-white border-spacing-4 border-4 h-max dark:border-slate-600 border-white p-6 md:p-7 rounded-lg  item-center'>
+            glareEnable={true} className="mt-10 pb-10" scale={1.1} glareMaxOpacity={0.4} glareColor="lightblue" glarePosition="all" glareBorderRadius="20px" >
+            <div className='w-fit relative  card flex flex-col md:flex-row md:gap-4 gap-2  shadow-lg dark:bg-card1 bg-dark_card1 bg-cover text-yellow-950 dark:text-white border-spacing-4 border-4 h-max dark:border-slate-600 border-white p-6 md:p-7 rounded-lg  item-center'>
               <LiaEditSolid className='absolute right-2 top-2 text-[25px] cursor-pointer' onClick={() => navigate("/feed/settings")} />
               <div className='flex flex-col max-md:mb-3 max-md:mx-auto my-auto'>
-                <img src={user?.displayPicture} alt={user?.username} className='w-[80px] m-4 h-[80px] rounded-full  object-cover' />
+                <img src={user?.displayPicture} alt={user?.username} className='w-[80px] m-4 h-[80px] font-semibold rounded-full  object-cover' />
                 <div>{"@" + user?.username}</div>
               </div>
               <div className='flex flex-col'>
-                <div className='flex flex-row gap-4'><div className='font-light text-md'>Name:</div>{user?.name}</div>
-                <div className='flex flex-row gap-4'><div className='font-light text-md'>Email:</div>{user?.email}</div>
+                <div className='flex flex-row gap-4 font-semibold'><div className='font-normal text-md'>Name:</div>{user?.name}</div>
+                <div className='flex flex-row gap-4 font-semibold'><div className='font-normal text-md'>Email:</div>{user?.email}</div>
                 <hr className='my-3 border-white' />
-                <div className='flex flex-row gap-4'><div className='font-light text-md'>Branch:</div>{user?.branch}</div>
-                <div className='flex flex-row gap-4'> <div className='font-light text-md'>Year:</div>{user?.year}</div>
-                <div className='flex flex-row gap-4'><div className='font-light text-md'>Gender:</div>{user?.gender}</div>
-                <div className='flex flex-row gap-4'><div className='font-light text-md'>Instagram: </div> {user?.instagram || "Null"}</div>
+                <div className='flex flex-row gap-4 font-semibold'><div className='font-normal text-md'>Branch:</div>{user?.branch}</div>
+                <div className='flex flex-row gap-4 font-semibold'> <div className='font-normal text-md'>Year:</div>{user?.year}</div>
+                <div className='flex flex-row gap-4 font-semibold'><div className='font-normal text-md'>Gender:</div>{user?.gender}</div>
+                <div className='flex flex-row gap-4 font-semibold'><div className='font-normal text-md'>Instagram: </div> {user?.instagram || "Null"}</div>
                 <div className='glow' />
               </div>
             </div>

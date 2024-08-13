@@ -3,6 +3,7 @@ import { setLoading, setPost,setTotalPosts} from "../../slices/postSlice"
 import { setUserPost,setUserTotalPosts } from "../../slices/profileSlice"
 import { apiConnector } from "../apiConnector"
 import { postEndpoints } from "../api"
+import { useSelector } from "react-redux"
 
 const {
     CREATE_POST_API,
@@ -23,14 +24,17 @@ export function getUserPosts(userId,count,token){
                  Authorization: `Bearer ${token}`,
                  userId:userId,
                  count:count,
-             });
-             
-             if(!response?.data?.success){
-                throw new Error(response?.data?.message)
-             }
-
-             dispatch(setUserPost(response?.data?.slicedPost))
-             dispatch(setUserTotalPosts(response?.data?.totalLength))
+            });
+            
+            if(!response?.data?.success){
+               throw new Error(response?.data?.message)
+            }
+            const userTotalPosts = useSelector((state) => state.profile.userTotalPosts)
+            dispatch(setUserTotalPosts(response?.data?.slicedPost,...userTotalPosts))
+            
+            
+            dispatch(setUserPost(response?.data?.slicedPost))
+            dispatch(setUserTotalPosts(response?.data?.totalLength))
         }
         catch(err){
             console.log("GET_POST_BY_USER_API FAILED....", err)

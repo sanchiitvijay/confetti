@@ -3,6 +3,7 @@ const jwt=require("jsonwebtoken");
 const mailSender=require("../utils/mailSender");
 const bcrypt=require("bcrypt");
 const crypto=require("crypto");
+const { passwordChange } = require("../mail/templates/passwordChange");
 //reset Password Token -->send mail
 exports.resetPasswordToken=async(req,res)=>{
   try{
@@ -30,7 +31,7 @@ exports.resetPasswordToken=async(req,res)=>{
     //create url
     const url=`http://localhost:3000/update-password/${token}`;
     //send mail with url
-    await mailSender(email,"Password Reset Link",`Password Reset Link: ${url}`);
+    await mailSender(email,"Password Reset Link", passwordChange(url, user.name));
     //return response
     return res.json({
       success:true,
