@@ -10,6 +10,7 @@ import postReducer from "../slices/postSlice"
 import replyReducer from "../slices/replySlice"
 import likeReducer from "../slices/likeSlice"
 import commentReducer from "../slices/commentSlice"
+import notificationReducer from "../slices/notificationSlice"
 const rootReducer=combineReducers({
     auth:authReducer,
     profile:profileReducer,
@@ -17,7 +18,8 @@ const rootReducer=combineReducers({
     post:postReducer,
     reply:replyReducer,
     like:likeReducer,
-    comment:commentReducer
+    comment:commentReducer,
+    notification:notificationReducer
 })
 
 export default rootReducer;

@@ -24,6 +24,7 @@ import MetaData from "./services/MetaData";
 import StatsPage from "./pages/StatsPage";
 import BuyUsACoffee from "./pages/BuyUsACoffee";
 import AboutUs from "./pages/AboutUs";
+import useFirebaseMessaging from "./hooks/useFirebaseMessaging";
 
 function App() {
   const { token } = useSelector((state) => state.auth);
@@ -37,7 +38,9 @@ function App() {
       document.documentElement.classList.remove('dark');
     }
   }, [darkMode]);
-
+ 
+  useFirebaseMessaging();
+  
   return (
     <div className={`w-screen ${token ? "bg-white" : "bg-ring"} dark:bg-confettiDarkColor1 bg-cover bg-center min-h-screen flex flex-col`}>
       <MetaData />
