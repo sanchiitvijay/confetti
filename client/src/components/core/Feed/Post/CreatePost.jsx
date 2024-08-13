@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { createPost } from '../../../../services/operations/postAPI';
 import SubmitButton from '../../../common/SubmitButton';
-import "./post.css"
+// import "./post.css"
 import "../Settings/Settings.css"
 
 
@@ -19,18 +19,21 @@ const CreatePost = memo(function CreatePost(){
   ]
 
     const { register, 
-    handleSubmit, 
+    handleSubmit,
     formState: { errors }, 
     reset 
   } = useForm();
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    const gradientHandler = (index) => {
-      register("color", { value: index });
-    }
-    gradientHandler(gradient)
-  }, [gradient, setGradient])
+  //   const gradientHandler = (index) => {
+  //     console.log("index", index);
+  //     register("color", { value: index });
+  //     console.log("after index", register("color").value);
+  //     console.log(register);
+  //   }
+  //   gradientHandler(gradient)
+  // }, [gradient, setGradient])
     
   const onSubmitHandle = async (data) => {
     if (data.branch === "Do you know their branch?") {
@@ -39,6 +42,7 @@ const CreatePost = memo(function CreatePost(){
     if (data.year === "Do you know their year") {
       data.year = "";
     }
+    data.color = gradient;
     const result = await dispatch(createPost(token, data));
     if (result.fullfiled){
         reset();
@@ -133,18 +137,16 @@ const CreatePost = memo(function CreatePost(){
             <div className="my-auto md:gap-4 flex flex-row justify-around">
               {gradientColor.map((ele, i) => {
                  return (
-                  <div 
+                  <button 
                     key={i} 
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault();
                       setGradient(i);
-                      // Optionally, you can call a function to focus the div
-                      document.getElementById(`w-[20px]`).focus();
                     }} 
                     className={`rounded-full h-[25px] w-[25px] ${ele} border`} 
                     tabIndex="0" 
-                    id={`colorDiv-${i}`}
                   >
-                  </div>
+                  </button>
                 )
               })
             }

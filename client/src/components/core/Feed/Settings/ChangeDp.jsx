@@ -76,11 +76,17 @@ const ChangeDp = () => {
               onclick={handleFileUpload}
             />
             {isHovered && (
-              <LiaCloudUploadAltSolid 
-              className='absolute my-auto mx-auto top-2 left-2 opacity-25 text-white dark:text-black bg-black dark:bg-white rounded-full' 
-              fontSize={60}
+              <div 
               onClick={handleClick}
-               />)
+              className='absolute my-auto mx-auto place-content-center top-0 left-0 w-[78px] h-[78px] opacity-15  bg-black dark:bg-white rounded-full'
+              >
+                <LiaCloudUploadAltSolid 
+                className='my-auto mx-auto place-content-center text-white dark:text-black rounded-full' 
+                fontSize={40}
+                
+                />
+               </div>
+              )
           }
             </div>
 

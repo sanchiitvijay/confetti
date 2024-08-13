@@ -12,6 +12,7 @@ import DropDownModal from '../components/common/DropDownModal';
 import Modal from '../components/common/Modal';
 import toast from 'react-hot-toast';
 import Loader from '../components/common/Loader';
+import SignupInstruction from '../components/common/SignupInstruction';
 
 const Signup = () => {
   const { token } = useSelector((state) => state.auth);
@@ -113,7 +114,10 @@ const Signup = () => {
     <Suspense fallback={<Loader />}>
       <div className='w-full relative h-full mx-auto text-cFont'>
         <div className='min-h-screen relative p-4 md:p-8 item-center justify-between w-full'>
-          <div className='md:p-12 p-7 xs:w-[100%] md:w-fit bg-gray-400 rounded-md bg-clip-padding backdrop-filter mx-auto justify-center backdrop-blur-md bg-opacity-20 border border-gray-400'>
+          <div className='md:p-12 z-0 p-7 xs:w-[100%] md:w-fit bg-gray-400 rounded-md bg-clip-padding backdrop-filter mx-auto justify-center backdrop-blur-md bg-opacity-20 border border-gray-400'>
+          <div className='absolute z-10 right-3 top-3 w-[50%]'>
+            <SignupInstruction/>
+          </div>
             <h2 className='text-white text-4xl font-semibold text-center'>
               Sign Up
             </h2>

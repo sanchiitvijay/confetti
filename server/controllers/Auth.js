@@ -82,7 +82,6 @@ exports.sendotp=async(req,res)=>{
 exports.signup=async(req,res)=>{
     try{
         const {
-            name,
             usn,
             username,
             password,
@@ -95,6 +94,9 @@ exports.signup=async(req,res)=>{
             accountType,
             otp,
         }=req.body;
+
+        let name = req.body.name;
+        name = name.toLowerCase();
         
         const avatar=req.files.avatar;
        

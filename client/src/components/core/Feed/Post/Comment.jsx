@@ -6,6 +6,7 @@ import { VscSend } from "react-icons/vsc";
 import Reply from './Reply';
 import { createReply, getAllReplies } from '../../../../services/operations/replyAPI';
 import { useNavigate, useParams } from 'react-router-dom';
+import { setReplies } from '../../../../slices/replySlice';
 
 const Comment = memo(function Comment(props){
   const user = useSelector((state) => state.profile.user);
@@ -14,8 +15,9 @@ const Comment = memo(function Comment(props){
   const navigate = useNavigate();
   const reply = useSelector((state) => state.reply.reply);
 
-  let tempreplyidentifier = false
-  if (props?.tempcommentidentifer === true){
+  const param = useParams();
+  let tempreplyidentifier = false;
+  if (param?.postid) {
     tempreplyidentifier = true;
   }
 
@@ -48,6 +50,9 @@ const Comment = memo(function Comment(props){
         navigate(`/feed/:${props.post}`)
       }
     }
+    // else {
+    //   // dispatch(setReplies([]))
+    // }
     setShowReply(!showReply);
   }
 
@@ -79,7 +84,7 @@ const Comment = memo(function Comment(props){
             </form>
           }
           {
-            showReply && (reply? 
+            reply[0]?.comment === props?._id && (reply? 
             reply?.map((reply) => {
               return <Reply key={reply._id} {...reply} />
             }) : <div className='text-center'>No replies</div>)

@@ -1,9 +1,15 @@
 import React, { memo, useRef, useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import useOnClickOutside from "../../hooks/useOnClickOutside";
 import useEscape from '../../hooks/useEscape';
 
-const Modal = memo(function Modal({ data, name, value, error, register, required, setModal }){
+const modalVariants = {
+  hidden: { opacity: 0, scale: 1 },
+  visible: { opacity: 1, scale: 1 },
+  exit: { opacity: 0, scale: 1 },
+};
+
+const Modal = memo(function Modal({ data, name, value, error, register, required, setModal }) {
   const [chosen, setChosen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const modalRef = useRef();
@@ -17,12 +23,19 @@ const Modal = memo(function Modal({ data, name, value, error, register, required
   useEscape(modalRef, modalHandler);
 
   return (
-    <AnimatePresence >
+    <AnimatePresence>
       {isVisible && (
-        <div className="fixed  inset-0 backdrop-blur w-[100vw] h-[100vh] flex items-center justify-center z-50">
+        <motion.div
+          variants={modalVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          transition={{ duration: 0.3 }} // Adjust duration to match your animation timing
+          className="fixed text-white inset-0 backdrop-blur w-[100vw] h-[100vh] flex items-center justify-center z-50"
+        >
           <div
             ref={modalRef}
-            className="px-12 py-8 xs:w-[100%]  md:w-fit bg-gray-600 rounded-md bg-clip-padding backdrop-filter mx-auto justify-center backdrop-blur-md bg-opacity-20 border text-black border-gray-400"
+            className="px-12 py-8 xs:w-[100%] md:w-fit bg-gray-600 rounded-md bg-clip-padding backdrop-filter mx-auto justify-center backdrop-blur-md bg-opacity-20 border text-white border-gray-400"
           >
             <div className="mb-4">
               <h2 className="text-xl font-semibold">  {`Choose ${name}`}</h2>
@@ -53,10 +66,10 @@ const Modal = memo(function Modal({ data, name, value, error, register, required
               </div>
             </button>
           </div>
-        </div>
+        </motion.div>
       )}
     </AnimatePresence>
   );
-})
+});
 
 export default Modal;

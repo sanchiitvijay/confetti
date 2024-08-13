@@ -1,4 +1,4 @@
-const developerData = [
+export const developerData = [
     {
         name: 'Ashutosh Kumar',
         description: 'Description',
@@ -16,3 +16,4 @@ const developerData = [
         email: 'sanchiitvijay@gmail.com',
     }
 ]
+
