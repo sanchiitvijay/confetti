@@ -6,12 +6,12 @@ import useOnClickOutside from '../../../../hooks/useOnClickOutside';
 import useEscape from '../../../../hooks/useEscape';
 
 const ShareModal = (props) => {
+  // console.log(process.env)
   const [tooltipMessage, setTooltipMessage] = useState('Copy to clipboard');
   const [isCopied, setIsCopied] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
-
   const handleCopyClick = () => { 
-    navigator.clipboard.writeText("feed/:"+props?.id)
+    navigator.clipboard.writeText(`${process.env.REACT_APP_BACKEND_BASE_URL}feed/${props.props}`)
       .then(() => {
         setIsCopied(true);
         setTooltipMessage('Copied!');
@@ -35,20 +35,20 @@ const ShareModal = (props) => {
         <IoShareSocialOutline fontSize={'18px'}  className='relative my-auto' onClick={() => setShowShareModal(!showShareModal)}/>
       {
         showShareModal && (
-            <div ref={modalRef} className="absolute mx-auto bottom-10 w-full max-w-[16rem]">
+            <div ref={modalRef} className="absolute mx-auto bottom-10 w-full max-w-[15rem]">
       <div className="relative">
         <label className="sr-only">Label</label>
         <input
           id="copy-button"
           type="text"
           className="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-          value={"feed/:"+props?.id}
+          value={`${process.env.REACT_APP_BACKEND_BASE_URL}feed/${props.props}`}
           disabled
           readOnly
           />
         <button
           onClick={handleCopyClick}
-          className="absolute end-2 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg p-2 inline-flex items-center justify-center"
+          className="absolute end-2 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 bg-gray-800 rounded-lg p-2 inline-flex items-center justify-center"
           data-tooltip-target="tooltip-copy-copy-button"
           >
           <span id="default-icon">

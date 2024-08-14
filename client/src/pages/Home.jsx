@@ -8,6 +8,7 @@ import SubmitButton from '../components/common/SubmitButton';
 import { login } from '../services/operations/authAPI';
 import { motion } from "framer-motion"
 import Loader from '../components/common/Loader';
+import { setRedirection } from '../slices/authSlice';
 
 /* Wherever Possible make components */
 
@@ -35,8 +36,16 @@ const Home = () => {
     e.preventDefault()
     dispatch(login(email, password, navigate))
   }
+
+  const redirection = useSelector((state) => state.auth.redirection)
+        
   
   useEffect(()=>{ 
+    if(token && redirection){
+      dispatch(setRedirection(null))
+      navigate(redirection)
+    }
+
     if(token){
       navigate("/feed")
     }

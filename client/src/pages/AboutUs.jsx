@@ -1,6 +1,6 @@
 import React, { Suspense, useState } from 'react';
 import { VscCoffee } from "react-icons/vsc";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaDiscord } from "react-icons/fa";
 import "../components/core/Feed/Settings/Settings.css";
 import FeedbackForm from '../components/core/AboutUs/FeedbackForm';
 import OurInfo from '../components/core/AboutUs/OurInfo';
