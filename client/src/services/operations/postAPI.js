@@ -29,10 +29,6 @@ export function getUserPosts(userId,count,token){
             if(!response?.data?.success){
                throw new Error(response?.data?.message)
             }
-            const userTotalPosts = useSelector((state) => state.profile.userTotalPosts)
-            dispatch(setUserTotalPosts(response?.data?.slicedPost,...userTotalPosts))
-            
-            
             dispatch(setUserPost(response?.data?.slicedPost))
             dispatch(setUserTotalPosts(response?.data?.totalLength))
         }
