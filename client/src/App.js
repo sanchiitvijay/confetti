@@ -25,6 +25,7 @@ import StatsPage from "./pages/StatsPage";
 import BuyUsACoffee from "./pages/BuyUsACoffee";
 import AboutUs from "./pages/AboutUs";
 import useFirebaseMessaging from "./hooks/useFirebaseMessaging";
+import PostPage from "./pages/PostPage";
 
 function App() {
   const { token } = useSelector((state) => state.auth);
@@ -148,6 +149,7 @@ function App() {
             <Route path="/feed/about-us" element={<AboutUs/>} />
             <Route path="/feed/stats" element={<StatsPage/>} />
             <Route path="/feed/buy-us-coffee" element={<BuyUsACoffee/>} />
+            <Route path="/feed/userid" element = { <PostPage/> } />
           </Route>
           <Route
             path="*"

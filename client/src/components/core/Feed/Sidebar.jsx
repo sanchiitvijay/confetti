@@ -47,6 +47,14 @@ const Sidebar=()=>{
         link={{name:"Settings",path:"/feed/settings"}}
         iconName={"VscSettingsGear"}
         />
+
+        <div className="flex flex-col relative">
+
+        <SidebarLink
+        link={{name:"About us",path:"/feed/about-us"}}
+        iconName={"VscTerminalLinux"}
+        />
+          </div>
         <button onClick={()=>setConfirmationModal({
           text1:"Are You Sure?",
           text2:"You will be logged out of your Account",
@@ -57,13 +65,7 @@ const Sidebar=()=>{
         })}
         className="text-sm mt-2 font-medium "
         >
-        <div className="flex flex-col mb-3 relative">
-
-        <SidebarLink
-        link={{name:"About us",path:"/feed/about-us"}}
-        iconName={"VscTerminalLinux"}
-        />
-        </div>
+        
         <div className="flex dark:text-white ml-8 items-center gap-x-2">
           <VscSignOut className="text-lg" />
           <span>Logout</span>
