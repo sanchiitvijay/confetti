@@ -105,6 +105,7 @@ export function createPost (token, data) {
             dispatch(setPost(response.data.posts))
             dispatch(setTotalPosts(response.data.postLength))
             toast.success("post is created succesfully")
+            
         
         } catch (err) {
             console.log("CREATE_POST_API FAILED....", err)

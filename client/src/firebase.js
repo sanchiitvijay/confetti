@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 import { getMessaging } from "firebase/messaging";
 
 
@@ -14,6 +15,7 @@ const firebaseConfig = {
 
 export const app = initializeApp(firebaseConfig);
 export const messaging= getMessaging(app);
+export const auth=getAuth();
 
 document.addEventListener('DOMContentLoaded', function(){
   // Register service worker
