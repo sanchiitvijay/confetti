@@ -47,7 +47,7 @@ const Comment = memo(function Comment(props){
     if(!showReply) {
       dispatch(getAllReplies(token, {commentId: props._id}));
       if(!tempreplyidentifier) {
-        navigate(`/feed/:${props.post}`)
+        navigate(`/feed/${props.post}`)
       }
     }
     // else {

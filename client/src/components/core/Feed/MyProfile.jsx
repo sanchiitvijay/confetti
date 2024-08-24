@@ -5,7 +5,7 @@ import { LiaEditSolid } from "react-icons/lia";
 import Tilt from 'react-parallax-tilt';
 import { getUserStats } from '../../../services/operations/postAPI';
 import "./MyProfile.css"
-import useThrottle from '../../../hooks/useThrottle';
+// import useThrottle from '../../../hooks/useThrottle';
 const MyProfile = () => {
   const { user } = useSelector(state => state.profile)
   const navigate = useNavigate()
@@ -54,9 +54,8 @@ const MyProfile = () => {
       console.log("User Stats can't be fetched right now", err)
     }
   }
-  const handleFetchStats=useThrottle(fetchStats,5000,false);
   useEffect(() => {
-    handleFetchStats();
+    fetchStats();
   }, [dispatch]);
 
 

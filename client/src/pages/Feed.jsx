@@ -11,7 +11,7 @@ import Loader from '../components/common/Loader';
 import { messaging } from '../firebase';
 import { getToken } from 'firebase/messaging';
 import { handleDevice } from '../services/operations/notificationAPI';
-import useThrottle from '../hooks/useThrottle';
+// import useThrottle from '../hooks/useThrottle';
 
 
 
@@ -28,11 +28,10 @@ const Feed = () => {
   const showHandler = () => {
     setShow(false);
   }
-  const throttledPermission= useThrottle(requestPermission,5000,false);
   const dispatch=useDispatch();
   useEffect(() => {
     //req user for notification permission
-    throttledPermission();
+    requestPermission();
   }, [])
 
   useEffect(() => {
