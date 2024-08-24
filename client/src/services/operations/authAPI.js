@@ -5,6 +5,8 @@ import { setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiConnector"
 import { authEndpoints } from "../api"
 import { setDevice } from "../../slices/notificationSlice"
+import {auth} from "../../firebase";
+import {createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut} from "firebase/auth"
 
 const {
     LOGIN_API,
@@ -92,6 +94,8 @@ const {
         if (!response.data.success) {
           throw new Error(response.data.message)
         }
+
+       
         toast.success("Signup Successful")
         navigate("/")
       } catch (error) {
@@ -128,7 +132,12 @@ const {
         localStorage.setItem("token", JSON.stringify(response.data.token))
         localStorage.setItem("user", JSON.stringify(response.data.user));
         
-        
+        console.log("Log in krne jaa rhe h firebase me")
+        const loggedUser=await signInWithEmailAndPassword(auth,email,password);
+        console.log("Logged user to firebase",loggedUser);
+        if(!loggedUser){
+          throw new Error("Firebase ki fatgyi");
+        }
         navigate("/feed")
       } catch (error) {
         console.log("LOGIN API ERROR............", error)
@@ -170,14 +179,15 @@ const {
 
   
 export function logout(navigate) {
-    return (dispatch) => {
+    return async(dispatch) => {
       dispatch(setToken(null))
       dispatch(setUser(null))
       dispatch(setDevice(null))
-      localStorage.removeItem("token")
-      localStorage.removeItem("user")
       localStorage.clear();
       sessionStorage.clear();
+      console.log("firebase se pehle")
+      await signOut(auth);
+      console.log("firebase se out hone ke baad")
       toast.success("Logged Out")
       navigate("/")
     }
