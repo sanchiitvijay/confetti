@@ -84,7 +84,7 @@ const Comment = memo(function Comment(props){
             </form>
           }
           {
-            reply[0]?.comment === props?._id && (reply? 
+            (reply[0]?.comment === props?._id || reply.length === 0) && (reply? 
             reply?.map((reply) => {
               return <Reply key={reply._id} {...reply} />
             }) : <div className='text-center'>No replies</div>)

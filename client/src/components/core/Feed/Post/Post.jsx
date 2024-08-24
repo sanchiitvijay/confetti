@@ -29,7 +29,7 @@ const Post = memo(function Post(props){
   const token = useSelector((state) => state.auth.token);
   const { comment } = useSelector((state) => state.comment);
   const { user } = useSelector((state) => state.profile);
-  console.log("props", props);
+  // console.log("props", props);
   useEffect(() => {
     const posts = post.filter((p) => p?._id === props?._id);
     const likes = posts[0]?.likes || [];
@@ -61,7 +61,7 @@ const Post = memo(function Post(props){
   }, [showComments, dispatch, token, props?._id]);
 
   const redirectionHandler = () => {
-    navigate("/feed/:" + props?._id);
+    navigate("/feed/" + props?._id);
   };
 
   const handleSubmitComment = async (event) => {

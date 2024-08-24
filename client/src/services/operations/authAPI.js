@@ -1,10 +1,9 @@
 import { toast } from "react-hot-toast"
 
-import { setLoading, setRedirection, setToken } from "../../slices/authSlice"
+import { setLoading, setToken } from "../../slices/authSlice"
 import { setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiConnector"
 import { authEndpoints } from "../api"
-import { useSelector } from "react-redux"
 import { setDevice } from "../../slices/notificationSlice"
 import {auth} from "../../firebase";
 import {createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut} from "firebase/auth"
@@ -133,7 +132,6 @@ const {
         localStorage.setItem("token", JSON.stringify(response.data.token))
         localStorage.setItem("user", JSON.stringify(response.data.user));
         
-
         console.log("Log in krne jaa rhe h firebase me")
         const loggedUser=await signInWithEmailAndPassword(auth,email,password);
         console.log("Logged user to firebase",loggedUser);
@@ -143,7 +141,7 @@ const {
         navigate("/feed")
       } catch (error) {
         console.log("LOGIN API ERROR............", error)
-        toast.error("Login Failed")
+        toast.error(`Login Failed ${error.message}`)
       }
       dispatch(setLoading(false))
       toast.dismiss(toastId)

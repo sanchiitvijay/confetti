@@ -143,7 +143,7 @@ const CreatePost = memo(function CreatePost(){
                       e.preventDefault();
                       setGradient(i);
                     }} 
-                    className={`rounded-full h-[25px] w-[25px] ${ele} border`} 
+                    className={`rounded-full ${i === gradient && "border-2 border-slate-700 dark:border-white"} h-[25px] w-[25px] ${ele}`} 
                     tabIndex="0" 
                   >
                   </button>
