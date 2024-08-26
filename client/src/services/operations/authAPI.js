@@ -13,8 +13,44 @@ const {
     SENDOTP_API,
     SIGNUP_API,
     RESETPASSWORD_API,
-    RESETPASSTOKEN_API
+    RESETPASSTOKEN_API,
+    VALIDATE_SIGNUP
   } = authEndpoints;
+
+  export function validateSignup(email, username, usn) {
+    return async(dispatch) => {
+      let result = true;
+      // const toastId = toast.loading("Loading...")
+      try{
+        const formData = new FormData()
+        formData.append('email', email)
+        formData.append('username', username)
+        formData.append('usn', usn)
+        console.log("validateSignup............", email, username, usn)
+       
+        const response = await apiConnector("POST", VALIDATE_SIGNUP, formData,{
+          headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+        })
+
+
+        console.log("\n\n\nRESPONSE of validate............\n\n\n", response.data.flag)
+        result = response.data.flag;
+
+        toast.error(response.data.message)  
+  
+        if (!response.data.success) {
+          throw new Error(response.data.message)
+        }
+        
+      }catch(err){
+        console.log("validateSignup API ERROR............", err)
+        toast.error("Could Not Validate Signup")
+      }
+      return result
+    }
+  }
 
 
   export function sendOtp(email, navigate) {

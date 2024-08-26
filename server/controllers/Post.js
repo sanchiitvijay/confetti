@@ -182,6 +182,7 @@ exports.createPost = async (req, res) => {
             })
            
             Promise.all(probableUserIds?.map(async(userId)=>{
+                    if(userId.toString()!=updatedUser._id.toString()) return null;
                     const notfRef=db.collection("Notifications").doc(userId.toString()).collection("notifications");
                     console.log("MAI HU USER",notfRef);
                     return notfRef.add({

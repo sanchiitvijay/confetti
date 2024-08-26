@@ -6,7 +6,8 @@ export const authEndpoints = {
     SENDOTP_API: BASE_URL + "/auth/send-otp",
     SIGNUP_API: BASE_URL + "/auth/signup",
     RESETPASSTOKEN_API: BASE_URL + "/auth/resetPasswordToken",
-    RESETPASSWORD_API: BASE_URL + "/auth/resetPassword"
+    RESETPASSWORD_API: BASE_URL + "/auth/resetPassword",
+    VALIDATE_SIGNUP: BASE_URL + "/auth/validate-signup",
 }
 
 export const notificationEndpoints={
@@ -23,7 +24,7 @@ export const userEndpoints = {
     UPDATE_DP_API: BASE_URL + "/auth/update-dp",
     SEND_FEEDBACK_API: BASE_URL + "/feedback/write-feedback",
     GET_FEEDBACK_API: BASE_URL + "/feedback/get-feedback",
-    GET_LEADERBOARD_API: BASE_URL + "/auth/leaderboard",
+    
 }
 
 export const postEndpoints = {

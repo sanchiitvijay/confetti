@@ -127,11 +127,12 @@ exports.createReply=async(req,res)=>{
 
         /*******************************************Firestore reply notif code*******************************************************/
         const docRef=db.collection("Notifications").doc(commentUser._id.toString()).collection("notifications");
-        if(docRef){
+        if(docRef && commentUser._id.toString()!=replyUser.toString()){
             docRef.add({
                 createdAt:admin.firestore.FieldValue.serverTimestamp(),
-                description:`A reply was made by ${updatedUser?.username} to your comment on the post by ${newReply?.comment?.post?.author?.username}`,
-                type:`reply`
+                description:`A reply was made by ${updatedUser?.username} to your comment`,
+                type:`reply`,
+                postId:postId,
             })
         }
         /******************************************Firestore code ends here ********************************************************/
