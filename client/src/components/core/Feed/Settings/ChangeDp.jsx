@@ -62,7 +62,7 @@ const ChangeDp = () => {
     return (
       <div className='my-10 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 background-animate gradient-box p-1 rounded-md' >
        
-        <div className="flex  items-center justify-between rounded-md bg-white dark:bg-confettiDarkColor3 p-8 md:px-12 text-richblack-5">
+        <div className="flex items-center justify-between rounded-md bg-white dark:bg-confettiDarkColor3 p-8 md:px-12 text-richblack-5">
           <div className="flex items-center gap-x-8 sm:gap-x-4">
             <div className='relative'
               onMouseEnter={() => !isHovered && setIsHovered(true)}
@@ -112,7 +112,7 @@ const ChangeDp = () => {
                   onclick={handleFileUpload}
                 >
                   {!loading && (
-                    <FiUpload  fontSize={20} className="text-lg  text-richblack-900" />
+                    <FiUpload  fontSize={20} className="text-lg my-auto text-richblack-900" />
                   )}
                 </IconBtn>
               </div>

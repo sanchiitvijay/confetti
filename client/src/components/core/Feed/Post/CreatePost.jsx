@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { createPost } from '../../../../services/operations/postAPI';
 import SubmitButton from '../../../common/SubmitButton';
-// import "./post.css"
 import "../Settings/Settings.css"
 
 
@@ -59,13 +58,13 @@ const CreatePost = memo(function CreatePost(){
       <div className=" bg-white  dark:bg-confettiDarkColor3 my-[2px] h-max dark:text-white  w-[99%] md:w-[500px] mx-auto rounded-md  p-3 md:p-4 pb-3" >
         <form onSubmit={handleSubmit(onSubmitHandle)} className='flex flex-col'>
           <label htmlFor="description" className="text-sm mt-4 px-2">Write Confession</label>
-          <input
+          <textArea
             type="text"
             placeholder="What is in your mind"
             {...register('description', { required: true, maxLength:500 })}
             onChange={(e) => setMaxLen(e.target.value.length)}
             onClick={() => !openMoreInfo && setOpenMoreInfo(true)}
-            className={"w-full rounded-[0.5rem] mt-3 mb-4 focus:ring-0 dark:focus:border-white focus:border-black dark:bg-[#2C333F] p-[12px] pr-12 text-[16px] leading-[24px] font-[500] dark:text-[#999DAA]"}
+            className={"w-full rounded-[0.5rem] mt-3 mb-4 focus:ring-0 dark:focus:border-white focus:border-black dark:bg-[#2C333F] p-[12px] pr-6 text-[16px] leading-[24px] font-[500] dark:text-[#999DAA]"}
           />
           {errors.description && <div className="text-red-500 mb-3 text-xs">This field is required</div>}
           {maxLen > 500 && <div className="text-red-500 mb-3 text-xs">Reached maximum character limit</div>}

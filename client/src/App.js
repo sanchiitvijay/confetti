@@ -146,6 +146,7 @@ function App() {
             element={<Feed />}
           >
             <Route path="/feed/" element={<MyFeed/>} />
+            <Route path="/feed/:postid" element = { <PostPage/> } />
             <Route path="/feed/settings" element={<Settings/>} />
             <Route path="/feed/my-posts" element={<MyPosts/>} />
             <Route path="/feed/my-profile" element={<MyProfile/>} />

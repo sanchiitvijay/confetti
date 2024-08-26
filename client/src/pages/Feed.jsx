@@ -101,7 +101,7 @@ const Feed = () => {
           <Outlet />
         </div>
 
-        <div className="max-lg:hidden dark:border-slate-500 border-slate-400 border-l-2 min-h-[calc(100vh-3.5rem)] overflow-auto w-[300px] z-10">
+        <div className="max-lg:hidden min-h-[calc(100vh-3.5rem)] overflow-auto w-[300px] z-10">
           <Stats />
         </div>
 
