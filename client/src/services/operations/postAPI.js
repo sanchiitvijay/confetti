@@ -3,7 +3,6 @@ import { setLoading, setPost,setTotalPosts} from "../../slices/postSlice"
 import { setUserPost,setUserTotalPosts } from "../../slices/profileSlice"
 import { apiConnector } from "../apiConnector"
 import { postEndpoints } from "../api"
-import { useSelector } from "react-redux"
 
 const {
     CREATE_POST_API,

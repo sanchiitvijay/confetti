@@ -12,7 +12,7 @@ if (!admin.apps?.length) {
   }
   
 const messaging=admin.messaging();
-
+const db=admin.firestore();
 
 exports.createReply=async(req,res)=>{
     try{
@@ -22,7 +22,7 @@ exports.createReply=async(req,res)=>{
             description,
         }=req.body;
 
-
+        
         //validate
         if(!userId || !commentId || !description ){
             return res.status(404).json({
@@ -80,8 +80,7 @@ exports.createReply=async(req,res)=>{
         const postId=newReply.comment.post._id;
         const replyUser=newReply.author;
         const commentUser=newReply.comment.author;
-
-        
+   
        
         //messaging flow 
         
@@ -125,6 +124,17 @@ exports.createReply=async(req,res)=>{
         //firebase notifs coded here
         const replies = await Reply.find({comment:commentId}).sort({createdAt:-1}).populate("author").exec();
         
+
+        /*******************************************Firestore reply notif code*******************************************************/
+        const docRef=db.collection("Notifications").doc(commentUser._id.toString()).collection("notifications");
+        if(docRef){
+            docRef.add({
+                createdAt:admin.firestore.FieldValue.serverTimestamp(),
+                description:`A reply was made by ${updatedUser?.username} to your comment on the post by ${newReply?.comment?.post?.author?.username}`,
+                type:`reply`
+            })
+        }
+        /******************************************Firestore code ends here ********************************************************/
         //send successful response
         return res.status(200).json({
             success:true,
@@ -148,7 +158,8 @@ exports.createReply=async(req,res)=>{
 exports.deleteReply=async(req,res)=>{
     try{
         const {replyId}=req.body;
-
+        const userId=req.user.id;
+       
         //validate
         if(!replyId){
             return res.status(404).json({
@@ -156,20 +167,20 @@ exports.deleteReply=async(req,res)=>{
                 message:"Please provide reply id"
             })
         }
-
+    
         //find the reply from db and check if exists
         const reply=await Reply.findById(replyId);
-
+       
         if(!reply){
             return res.status(404).json({
                 success:false,
                 message:"Reply does not exist"
             })
         }
-
+      
         //get the comment id from this
         const commentId=reply?.comment;
-
+      
         //now find the comment to which you replied and
         // pull the reply from it
         const comment=await Comment.findByIdAndUpdate(commentId,{
@@ -179,7 +190,7 @@ exports.deleteReply=async(req,res)=>{
         },{
             new:true
         });
-
+        
         //pull the reply id from user model
         const updatedUser=User.findByIdAndUpdate(userId,{
             $pull:{replies:reply._id}
@@ -191,10 +202,10 @@ exports.deleteReply=async(req,res)=>{
                 message:"Reply couldnt be pulled to the User"
             })
         }
-
+        
         //now delete the reply
         const deletedReply=await Reply.findByIdAndDelete(replyId);
-
+        console.log("deleted it ")
         const replies = await Reply.find({comment:commentId}).sort({createdAt:-1}).populate("author").exec();
 
         if(!deletedReply){
@@ -203,7 +214,7 @@ exports.deleteReply=async(req,res)=>{
                 message:"Couldnt remove the reply"
             })
         }
-
+      
         //return successful respose
         return res.status(200).json({
             success:true,

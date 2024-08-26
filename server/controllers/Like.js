@@ -1,7 +1,17 @@
 const Like = require("../models/Like")
 const Post = require("../models/Post")
 const User= require("../models/User")
+var admin=require("firebase-admin");
 const client = require('../configs/client');
+if (!admin.apps?.length) {
+    var serviceAccount = require("../configs/firebase-admin-config")
+  
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });
+  }
+
+const db=admin.firestore();
 
 //It was never called 
 exports.getLikes = async(req, res)=> {
@@ -41,7 +51,7 @@ exports.liked = async(req, res) => {
                 postId,
                 { $pull: { likes: like._id } },
                 { new: true }
-            );
+            ).populate("author").exec();
 
             const updatedUser = await User.findByIdAndUpdate(
                 authorId,
@@ -57,6 +67,15 @@ exports.liked = async(req, res) => {
                 
                 const userLikes = Number.parseInt(await client.get(`user:${cachedPost.author._id}:totalLikes`)) || 0;
                 await client.set(`user:${cachedPost.author._id}:totalLikes`, userLikes - 1);
+            }
+
+            const docRef=db.collection("Post").doc(updatedPost._id.toString());
+            if(docRef){
+                docRef.set({
+                    author:updatedPost?.author?.username,
+                    dp:updatedPost?.author?.displayPicture,
+                    likes:updatedPost?.likes?.length,
+                })
             }
 
             if (!updatedPost || !deletedLike || !updatedUser) {
@@ -76,7 +95,7 @@ exports.liked = async(req, res) => {
                 postId,
                 { $push: { likes: newLike._id } },
                 { new: true }
-            );
+            ).populate("author").exec();
 
             const updatedUser = await User.findByIdAndUpdate(
                 authorId,
@@ -100,6 +119,16 @@ exports.liked = async(req, res) => {
             }
 
             like = newLike;
+
+
+            const docRef=db.collection("Post").doc(updatedPost._id.toString());
+            if(docRef){
+                docRef.set({
+                    author:updatedPost?.author?.username,
+                    dp:updatedPost?.author?.displayPicture,
+                    likes:updatedPost?.likes?.length,
+                })
+            }
         }
 
         return res.status(200).json({

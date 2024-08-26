@@ -10,6 +10,19 @@ const {uploadImageToCloudinary}=require("../utils/imageUploader");
 const {passwordUpdated}=require("../mail/templates/passwordUpdate");
 const { cloudinaryConnect } = require("../configs/cloudinary");
 const welcomeTemplate = require("../mail/templates/newJoining");
+// const {getAuth} =require("firebase-admin");
+
+var admin = require("firebase-admin");
+const getAuth=admin.auth;
+
+if (!admin.apps?.length) {
+    var serviceAccount = require("../configs/firebase-admin-config")
+  
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });
+  }
+  
 
 
 async function sendJoiningEmail(email,name){
@@ -186,7 +199,24 @@ exports.signup=async(req,res)=>{
             
             });
 
+            // const firebaseUser=await getAuth().createUser({
+            //     email,
+            //     password
+            // })
+
+            // if(!firebaseUser){
+            //     return res.status(400).json({
+            //         success:false,
+            //         message:"Firebase signup failed"
+            //     }
+
+            //     )
+            // }
+            
             sendJoiningEmail(email,user.name);
+
+
+            
         return res.status(200).json({
             success:true,
             message:"Sign up Successfull",
@@ -250,6 +280,8 @@ exports.login=async(req,res)=>{
           message:"Logged in successfully"
         })
       }
+
+      
   
       else{
         return res.status(415).json({

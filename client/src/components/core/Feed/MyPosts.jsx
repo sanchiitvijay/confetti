@@ -11,6 +11,8 @@ const MyPosts = () => {
   const { token } = useSelector((state) => state.auth);
   const { userPost, userTotalPosts } = useSelector((state) => state.profile);
   const [count, setCount] = useState(4);
+  console.log("User post length:",userPost.length);
+  console.log("User Total posts:",userTotalPosts);
   const fetchMoreData = async () => {
     try {
       await dispatch(getUserPosts(user?.id,count + 4, token));
@@ -29,6 +31,7 @@ const MyPosts = () => {
       }
     };
     fetchData();
+    
   }, []);
   return (
     <div className="w-full  overflow-auto over" id="scrollableDiv">

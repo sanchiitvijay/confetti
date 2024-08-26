@@ -18,6 +18,8 @@ if (!admin.apps?.length) {
   
 
 const messaging = admin.messaging();
+const db=admin.firestore();
+
 exports.createComment = async (req, res) => {
     try {
         console.log("Inside create comment----------", req.body);
@@ -82,7 +84,7 @@ exports.createComment = async (req, res) => {
                 message: "Could not update user comment"
             })
         }
-        console.log("UPDATED USER",updatedUser);
+      
         //messaging flow 
         const postAuthor = post?.author;
         const userDevice = await Device.findOne({ user: postAuthor });
@@ -92,9 +94,7 @@ exports.createComment = async (req, res) => {
             device = device.split("|")[2]
         ))
 
-        console.log("USERTOKENS", userTokens);
-        console.log("POST AUTHOR",postAuthor.toString());
-        console.log("UPDATED USER ID",updatedUser._id)
+   
         if(postAuthor.toString()!=updatedUser._id.toString()){
             const message = {
                 notification: {
@@ -135,6 +135,17 @@ exports.createComment = async (req, res) => {
             const userComments = Number.parseInt(await client.get(`user:${cachedPost?.author?._id}:totalComments`)) || 0;
             await client.set(`user:${cachedPost?.author?._id}:totalComments`, userComments + 1);
         }
+        /************************************************FireStore Code*********************************************************/
+        const docRef=db.collection("Notifications").doc(postAuthor._id.toString()).collection("notifications");
+        if(docRef){
+            docRef.add({
+                createdAt:admin.firestore.FieldValue.serverTimestamp(),
+                type:'comment',
+                description:`A comment was made on your post by ${updatedUser?.username}`,
+            })
+        }
+
+        /************************************************FireStore Code Ends Here***********************************************/
         //return successful response
         return res.status(200).json({
             success: true,

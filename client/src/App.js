@@ -1,6 +1,6 @@
 import "./App.css";
-import { lazy } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Home from "./pages/Home";
 import '@fontsource/roboto/300.css';
@@ -12,12 +12,12 @@ import MetaData from "./services/MetaData";
 import useFirebaseMessaging from "./hooks/useFirebaseMessaging";
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-const Signup = lazy(() => import("./pages/Signup"));
-const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
-const UpdatePassword = lazy(() => import("./pages/UpdatePassword"));
-const PrivacyPolicy = lazy(() => import( "./pages/PrivacyPolicy"));
-const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
-const OTP = lazy(() => import( "./pages/OTP"));
+import Signup from "./pages/Signup"
+import ForgotPassword from "./pages/ForgotPassword";
+import UpdatePassword from "./pages/UpdatePassword";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import OTP from "./pages/OTP"
 const Feed = lazy(() => import( "./pages/Feed"));
 const MyFeed = lazy(() => import( "./components/core/Feed/MyFeed"));
 const Settings = lazy(() => import( "./components/core/Feed/Settings"));
@@ -32,13 +32,14 @@ function App() {
   const { token } = useSelector((state) => state.auth);
   let location = useLocation();
   const darkMode = useSelector(state => state.theme.darkMode);
-
+  const navigate=useNavigate();
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
     }
+
   }, [darkMode]);
  
   useFirebaseMessaging();
@@ -139,6 +140,7 @@ function App() {
               </motion.div>
             }
           />
+        
           <Route
             path="/feed"
             element={<Feed />}
@@ -152,6 +154,7 @@ function App() {
             <Route path="/feed/buy-us-coffee" element={<BuyUsACoffee/>} />
             <Route path="/feed/userid" element = { <PostPage/> } />
           </Route>
+     
           <Route
             path="*"
             element={
