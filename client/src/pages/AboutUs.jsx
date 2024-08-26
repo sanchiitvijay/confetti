@@ -16,9 +16,9 @@ const AboutUs = () => {
     <Suspense fallback={<Loader />}>
       <div className='flex relative mb-10 flex-col mx-auto w-full text-black dark:text-white dark:bg-confettiDarkColor2 bg-confettiLightColor2 min-h-[100vh] items-center content-center'>
         
-        <div className='absolute top-5 z-10 bg-white dark:bg-confettiDarkColor2  rounded-3xl gap-4 right-5 flex flex-row items-center'>
+        <div className='absolute top-5 z-10 rounded-3xl gap-4 right-5 flex flex-row items-center'>
           <motion.div
-            className='w-[200px] h-auto text-sm text-right'
+            className='w-[200px] bg-white dark:bg-confettiDarkColor2 rounded-3xl h-auto text-sm text-right'
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : 20 }}
             transition={{ duration: 0.25, delay: 0.25, ease: "linear" }}
@@ -38,7 +38,7 @@ const AboutUs = () => {
         </div>
         
         <div className='text-3xl pb-5 font-semibold my-8 text-center'>About Us</div>
-        <div className='flex md:flex-row flex-col gap-9'>
+        <div className='flex md:flex-row flex-col justify-evenly gap-2 items-center'>
           {developerData?.map((d, i) => (
             <OurInfo key={i} {...d} />
           ))}

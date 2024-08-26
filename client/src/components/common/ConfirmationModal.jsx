@@ -1,10 +1,23 @@
-import { memo } from "react"
+import { memo, useRef, useState } from "react"
 import SubmitButton from "../common/SubmitButton"
+import useOnClickOutside from "../../hooks/useOnClickOutside";
+import useEscape from '../../hooks/useEscape';
 
-export default memo(function ConfirmationModal({ modalData }) {
+
+export default memo(function ConfirmationModal({ modalData, setModal }) {
+  // const [isVisible, setIsVisible] = useState(true);
+  const modalRef = useRef();
+
+  const modalHandler = () => {
+    // setIsVisible(false);
+    setTimeout(() => setModal(false), 300); // Delay to allow exit animation to complete
+  };
+
+  useOnClickOutside(modalRef, modalHandler);
+  useEscape(modalRef, modalHandler);
   return (
-    <div className="fixed inset-0 z-[1000] !mt-0 grid place-items-center overflow-auto bg-black bg-opacity-10 backdrop-blur-sm">
-      <div className="w-11/12 max-w-[350px] rounded-lg bg-[#fffcec] dark:bg-confettiDarkColor3 border border-black dark:border-white  p-6">
+    <div ref={modalRef} className="fixed inset-0 z-[1000] !mt-0 grid place-items-center overflow-auto shadow-lg bg-black bg-opacity-10 backdrop-blur-sm">
+      <div className="w-11/12 max-w-[350px] rounded-lg bg-[#fffcec] dark:bg-confettiDarkColor3 border border-black dark:border-yellow-200  p-6">
         <p className="text-2xl font-semibold text-richblack-5">
           {modalData?.text1}
         </p>

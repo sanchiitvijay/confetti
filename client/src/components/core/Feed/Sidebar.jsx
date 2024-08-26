@@ -8,6 +8,7 @@ import Spinner from "../../common/Spinner";
 import ConfirmationModal from "../../common/ConfirmationModal";
 import { logout } from "../../../services/operations/authAPI";
 import "./sidebar.css"
+// import { set } from "react-hook-form";
 
 const Sidebar=()=>{
   const {user,loading:profileLoading}=useSelector((state)=>state.profile);
@@ -60,6 +61,7 @@ const Sidebar=()=>{
           text2:"You will be logged out of your Account",
           btn1Text:"Logout",
           btn2Text:"Cancel",
+          
           btn1Handler:()=>dispatch(logout(navigate)),
           btn2Handler: ()=>setConfirmationModal(null),
         })}
@@ -73,7 +75,7 @@ const Sidebar=()=>{
         </button>    
       </div>
 
-      {confirmationModal && <ConfirmationModal modalData={confirmationModal}/>}
+      {confirmationModal && <ConfirmationModal modalData={confirmationModal} setModal={setConfirmationModal}/>}
     </div>
   );
 }

@@ -65,7 +65,7 @@ const MyProfile = () => {
       {
         user &&
         (
-          <div className='background-animate  mt-16 w-[90%] rounded-md bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-1'>
+          <div className='background-animate break-all mt-16 w-[90%] rounded-md bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-1'>
             <div className='bg-white dark:bg-confettiDarkColor2  rounded-md p-10 h-fit '>
               <h1 className='text-4xl text-center md:text-left md:text-5xl mb-4' ><span className='animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent text-4xl md:text-5xl font-black '>Hi {user?.name?.charAt(0).toUpperCase() + user?.name?.slice(1)}</span>{" "}👋</h1>
 
@@ -75,27 +75,27 @@ const MyProfile = () => {
                 <div className='flex  flex-col gap-4 '>
                   <div className='text-center'>
 
-                    <p id="postCount" className='order-1 text-4xl md:text-5xl font-extrabold leading-none text-yellow-400 '>{data?.postLength}</p>
+                    <p id="postCount" className='order-1 text-4xl md:text-5xl font-extrabold leading-none break-all text-yellow-400 '>{data?.postLength}</p>
                     <h2 className='order-2 mt-2 text-md md:text-lg font-medium leading-6 text-gray-500 dark:text-gray-400'>Total Posts</h2>
                   </div>
 
                   <div className='text-center'>
 
-                    <p id="likeCount" className='order-1 text-4xl md:text-5xl font-extrabold leading-none text-yellow-400'>{data?.likesLength}</p>
-                    <h2 className='order-2 mt-2 text-md md:text-lg font-medium leading-6 text-gray-500 dark:text-gray-400'>Total Likes</h2>
+                    <p id="likeCount" className='order-1 text-4xl md:text-5xl font-extrabold leading-none break-all text-yellow-400'>{data?.likesLength}</p>
+                    <h2 className='order-2 mt-2 text-md md:text-lg font-medium leading-6 text-gray-500  dark:text-gray-400'>Total Likes</h2>
                   </div>
                 </div>
 
                 <div className='flex gap-4 flex-col '>
                   <div className='text-center'>
 
-                    <p id="commentCount" className='order-1 text-4xl md:text-5xl font-extrabold leading-none text-yellow-400'>{data?.commentsLength}</p>
+                    <p id="commentCount" className='order-1 text-4xl md:text-5xl font-extrabold leading-none break-all text-yellow-400'>{data?.commentsLength}</p>
                     <h2 className='order-2 mt-2 text-md md:text-lg font-medium leading-6 text-gray-500 dark:text-gray-400'>Total Comments</h2>
                   </div>
 
                   <div className='text-center'>
 
-                    <p id="reportCount" className='order-1 text-4xl md:text-5xl font-extrabold leading-none text-yellow-400'>{user?.reports}</p>
+                    <p id="reportCount" className='order-1 text-4xl md:text-5xl font-extrabold leading-none break-all text-yellow-400'>{user?.reports}</p>
                     <h2 className='order-2 mt-2 text-md md:text-lg font-medium leading-6 text-gray-500 dark:text-gray-400'>Total Reports</h2>
                   </div>
                 </div>

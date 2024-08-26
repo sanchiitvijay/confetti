@@ -7,7 +7,7 @@ import { setRedirection } from '../slices/authSlice'
 
 const PostPage = () => {
   const dispatch = useDispatch()
-  const postid = useParams().postid.substring(1)
+  const postid = useParams().postid
   console.log("postid", postid)
   const {post} = useSelector((state) => state.post);
   const token = useSelector((state) => state.auth.token);  

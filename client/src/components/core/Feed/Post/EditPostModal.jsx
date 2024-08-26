@@ -31,7 +31,7 @@ const EditPostModal = memo(function EditPostModal(props){
     {
         isVisible &&
         (<div ref={modalRef}
-            className='absolute text-white border-b border-b-1 border-b-white w-full cursor-pointerfixed inset-0 z-[1000] !mt-0 grid place-items-center overflow-auto bg-black bg-opacity-10 backdrop-blur-sm'>
+            className='absolute text-black dark:text-white border-b border-b-1 border-b-white w-full cursor-pointerfixed inset-0 z-[1000] !mt-0 grid place-items-center overflow-auto bg-black bg-opacity-10 backdrop-blur-sm'>
         <div className='w-[80%] h-fit max-w-[500px] mx-auto items-center'>
         
         <p className='text-center'>Edit your description</p>
