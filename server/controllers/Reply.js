@@ -132,7 +132,7 @@ exports.createReply=async(req,res)=>{
                 createdAt:admin.firestore.FieldValue.serverTimestamp(),
                 description:`A reply was made by ${updatedUser?.username} to your comment`,
                 type:`reply`,
-                postId:postId,
+                postId:postId.toString(),
             })
         }
         /******************************************Firestore code ends here ********************************************************/

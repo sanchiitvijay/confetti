@@ -42,7 +42,7 @@ const Notification = () => {
           >
             <span className="sr-only">Open notification tab</span>
             < FaHeart className='hover:cursor-pointer object-fit' fontSize={25} />
-            <div className='absolute bg-yellow-300 rounded-full animate-bounce right-[-2px] top-[-1px] w-[10px] h-[10px] border border-yellow-600 z-10'></div>
+            <div className='absolute text-yellow-600 rounded-full animate-bounce right-[-2px] top-[-1px] w-[15px]  bg-yellow-300 font-semibold text-xs z-10'>{notifications.length > 8 ? "9+" : notifications.length+1}</div>
           </button>
         }
       >

@@ -51,7 +51,7 @@ const Stats = () => {
             {/* 1st component */}
             <div className='bg-gradient-to-r w-full mb-2 from-pink-500 via-red-500 to-yellow-500 background-animate gradient-box p-1 rounded-md'>
                 <div className='rounded-md p-1 bg-white dark:bg-confettiDarkColor3'>
-                    <p className=' mb-2 font-semibold text-lg'>Top confessor</p>
+                    <p className=' mb-2 text-lg'>Top confessor</p>
 
                     {/* map isme lgana hai */}
                     {
@@ -85,7 +85,7 @@ const Stats = () => {
             {/* 2nd component */}
             <div className='bg-gradient-to-r w-full mb-2 from-pink-500 via-red-500 to-yellow-500 background-animate gradient-box p-1 rounded-md'>
                 <div className='rounded-md p-1 bg-white dark:bg-confettiDarkColor3'>
-                    <p className='mb-2 text-lg font-semibold'>Top liked posts</p>
+                    <p className='mb-2 text-lg'>Top liked posts</p>
 
                     {/* map isme lagana hai */}
                     {
