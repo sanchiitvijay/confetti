@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Settings/Settings.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { getLeaderboard } from '../../../services/operations/userAPI';
 import gold from '../../../assets/gold.png'
 import silver from '../../../assets/silver.png'
 import bronze from '../../../assets/bronze.png'
+import { db } from '../../../firebase';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 
 
 const Stats = () => {
@@ -12,12 +14,44 @@ const Stats = () => {
   const topPost = useSelector((state) => state.profile.topPost);
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
-  
+  const [postCount,setPostCount]=useState([]);
+  const [likeCount,setLikeCount]=useState([]);
     if(topLikes.length === 0 && topPost.length === 0){
         dispatch(getLeaderboard(token));
       }
+  console.log("posts:",postCount)
+  console.log("likes:",likeCount)
+  /******************************************Firestore***********************************/ 
+  useEffect(()=>{
+    const postRef=collection(db,"userPosts");
+    const likeRef=collection(db,"Post");
 
+    const qPost=query(postRef,orderBy("posts","desc"));
+    const qLike=query(likeRef,orderBy("likes","desc"));
 
+    const unsubscribe1=onSnapshot(qPost,(snap)=>{
+        const posts=[]
+        snap.forEach((doc)=>{
+            posts.push({id:doc.id,...doc.data()});
+        })
+        setPostCount(posts);
+    },(err)=>{
+        console.log("Error while listening to real time updates for top posts",err)
+    });
+    const unsubscribe2=onSnapshot(qLike,(snap)=>{
+        const posts=[];
+        snap.forEach((doc)=>{
+            posts.push({id:doc.id,...doc.data()});
+        })
+        setLikeCount(posts);
+    },(err)=>{});
+
+    return ()=>{
+        unsubscribe1();
+        unsubscribe2();
+    }
+
+  },[])
   return (
     <div className='text-black dark:text-white text-center overflow-auto break-words mx-auto w-[90%]'>
         <p className='text-2xl mb-2 animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent  '>Leaderboard</p>

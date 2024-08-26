@@ -1,12 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import confetti from "../../../../assets/notifConfetti.svg"
 import message from "../../../../assets/notifMessage.svg"
 import { Link } from 'react-router-dom'
 import { Dropdown } from 'flowbite-react';
 import { FaHeart } from "react-icons/fa";
 import "./notification.css"
+import {useSelector} from "react-redux"
+import { db } from '../../../../firebase';
+import { collection, getDocs, onSnapshot, orderBy, query } from 'firebase/firestore';
 
 const Notification = () => {
+  const [notifications,setNotifications]=useState([]);
+  const {user}=useSelector((state)=>state.profile);
+  console.log("Notifications:",notifications);
+  useEffect(()=>{
+    const notfRef=collection(db,"Notifications",user?._id,"notifications");
+    const q=query(notfRef,orderBy("createdAt","desc"))
+    const unsubscribe=onSnapshot(q,(snap)=>{
+      const newNotif=snap.docs.map((doc)=>({id:doc.id,...doc.data()}))
+      setNotifications(newNotif)
+    },(err)=>{
+      console.log(err)
+    })
+
+    return ()=>{
+      unsubscribe();
+    }
+   
+  },[user?._id])
   return (
     <div className="relative ">
       <Dropdown className='dark:bg-confettiDarkColor1 max-h-[400px] w-[280px] rounded-md px-1 overflow-auto no-scrollbar' arrowIcon={false} inline={true}

@@ -258,9 +258,7 @@ exports.leaderboard = async (req, res) => {
         const topPost = await User.find({}).sort({ posts: -1 }).limit(5);
         const topLikes = await User.find({}).sort({ likes: -1 }).limit(5);
 
-        console.log("topost------------", topPost);
-        console.log("toplikes------------", topLikes);
-
+      
         if (!topPost || !topLikes) {
             return res.status(500).json({
                 success: false,

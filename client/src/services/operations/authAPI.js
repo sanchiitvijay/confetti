@@ -132,12 +132,12 @@ const {
         localStorage.setItem("token", JSON.stringify(response.data.token))
         localStorage.setItem("user", JSON.stringify(response.data.user));
         
-        console.log("Log in krne jaa rhe h firebase me")
-        const loggedUser=await signInWithEmailAndPassword(auth,email,password);
-        console.log("Logged user to firebase",loggedUser);
-        if(!loggedUser){
-          throw new Error("Firebase ki fatgyi");
-        }
+        // console.log("Log in krne jaa rhe h firebase me")
+        // const loggedUser=await signInWithEmailAndPassword(auth,email,password);
+        // console.log("Logged user to firebase",loggedUser);
+        // if(!loggedUser){
+        //   throw new Error("Firebase ki fatgyi");
+        // }
         navigate("/feed")
       } catch (error) {
         console.log("LOGIN API ERROR............", error)
@@ -185,9 +185,9 @@ export function logout(navigate) {
       dispatch(setDevice(null))
       localStorage.clear();
       sessionStorage.clear();
-      console.log("firebase se pehle")
-      await signOut(auth);
-      console.log("firebase se out hone ke baad")
+      // console.log("firebase se pehle")
+      // await signOut(auth);
+      // console.log("firebase se out hone ke baad")
       toast.success("Logged Out")
       navigate("/")
     }

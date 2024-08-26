@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getMessaging } from "firebase/messaging";
-
+import {getFirestore} from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -16,6 +16,8 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const messaging= getMessaging(app);
 export const auth=getAuth();
+export const db=getFirestore(app);
+
 
 document.addEventListener('DOMContentLoaded', function(){
   // Register service worker
@@ -29,3 +31,4 @@ document.addEventListener('DOMContentLoaded', function(){
       });
   }
 });
+
