@@ -8,6 +8,7 @@ import Loader from '../components/common/Loader';
 import { Link } from 'react-router-dom';
 import { developerData } from '../components/core/AboutUs/developerData';
 import { motion } from 'framer-motion';
+import coffeeCup from "../assets/coffeeCup.gif";
 
 const AboutUs = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -38,7 +39,7 @@ const AboutUs = () => {
         </div>
         
         <div className='text-3xl pb-5 font-semibold my-8 text-center'>About Us</div>
-        <div className='flex md:flex-row flex-col justify-evenly gap-2 items-center'>
+        <div className='flex md:flex-row flex-col justify-evenly gap-y-12 gap-2 items-center'>
           {developerData?.map((d, i) => (
             <OurInfo key={i} {...d} />
           ))}
@@ -50,7 +51,7 @@ const AboutUs = () => {
         <Link to="/feed/buy-us-coffee">
           <div className='flex pb-10 my-10 text-yellow-500 flex-row gap-4'>
             <div className='text-4xl font-bold'>Buy Us Coffee </div>
-            <VscCoffee fontSize={40} className='my-auto' />
+            <img src={coffeeCup} className='my-auto w-[50px]' />
           </div>
         </Link>
       </div>

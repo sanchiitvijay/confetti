@@ -369,3 +369,48 @@ exports.changePassword=async(req,res)=>{
         });
     }
 }
+
+exports.validateSignup = async (req, res) => {
+    try {
+        console.log("Validating the signup", req.body);
+        const { email, username, usn } = req.body;
+        const checkUserPresent = await User.findOne({ email });
+        if (checkUserPresent) {
+            return res.status(200).json({
+                success: true,
+                flag:false,
+                message: "User already registered with this email",
+            });
+        }
+        const checkUsername = await User.findOne({ username });
+        if (checkUsername) {
+            return res.status(200).json({
+                success: true,
+                flag:false,
+                message: "Username already taken",
+            });
+        }
+
+        const checkUsn = await User.findOne({ usn });
+        if (checkUsn) {
+            return res.status(200).json({
+                success: true,
+                flag:false,
+                message: "USN already registered",
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            flag:true,
+            message: "User can be registered",
+        });
+    }
+    catch (error) {
+        console.log("Error while validating the signup:", error);
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+}

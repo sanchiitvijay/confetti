@@ -6,7 +6,7 @@ import { RxAvatar } from "react-icons/rx";
 import SubmitButton from '../components/common/SubmitButton';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
-import { sendOtp } from '../services/operations/authAPI';
+import { sendOtp, validateSignup } from '../services/operations/authAPI';
 import { setSignupData } from '../slices/authSlice';
 import DropDownModal from '../components/common/DropDownModal';
 import Modal from '../components/common/Modal';
@@ -46,8 +46,14 @@ const Signup = () => {
         ...getValues(),
         accountType: "Student"
       };
-      dispatch(setSignupData(obj));
-      dispatch(sendOtp(obj.email, navigate));
+      //------------------------ work hereeeeeeeeeeeeeeeeeeee ------------------------
+
+      const verification =await dispatch(validateSignup(obj.email, obj.username, obj.usn));
+      console.log("verification----------------------", verification);
+      if(verification) {
+        dispatch(setSignupData(obj));
+        dispatch(sendOtp(obj.email, navigate));
+      }
     } catch (error) {
       toast.error("Signup failed. Please try again.");
       console.error("Error:", error.message);
@@ -177,7 +183,7 @@ const Signup = () => {
                     maxLength: 15,
                   })} />
                 <SignUpInput 
-                  name="USN" 
+                  name="usn" 
                   value="usn" 
                   type="text"
                   required={true}
@@ -245,7 +251,7 @@ const Signup = () => {
               </div>
               <SubmitButton
                 disabled={!isChecked || loading}
-                text="Sign Up"
+                text={isChecked ? "Sign Up" : "Accept T&C to proceed"}
                 type="submit" />
               <div className='text-white text-center'>
                 Already Have An Account, <span onClick={() => navigate("/")} className='hover:underline hover:cursor-pointer'>Log In Here</span>

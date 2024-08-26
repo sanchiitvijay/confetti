@@ -137,11 +137,12 @@ exports.createComment = async (req, res) => {
         }
         /************************************************FireStore Code*********************************************************/
         const docRef=db.collection("Notifications").doc(postAuthor._id.toString()).collection("notifications");
-        if(docRef){
+        if(docRef && postAuthor.toString()!=updatedUser._id.toString()){
             docRef.add({
                 createdAt:admin.firestore.FieldValue.serverTimestamp(),
                 type:'comment',
                 description:`A comment was made on your post by ${updatedUser?.username}`,
+                postId:postId
             })
         }
 

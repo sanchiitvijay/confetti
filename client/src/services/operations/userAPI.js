@@ -15,7 +15,6 @@ const {
     UPDATE_DP_API,
     SEND_FEEDBACK_API,
     GET_FEEDBACK_API,
-    GET_LEADERBOARD_API,
 } = userEndpoints;
 
 
@@ -279,34 +278,5 @@ export function getFeedback(token) {
         }
 
         return result;
-    }
-}
-
-export function getLeaderboard(token) {
-    return async(dispatch) => {
-        const toastId = toast.loading("Loading...");
-        dispatch(setLoading(true))
-
-        try{
-            const response = await (apiConnector("GET", GET_LEADERBOARD_API, null, {
-                Authorization: `Bearer ${token}`,
-            }))
-
-
-            if(!response.data.success) {
-                throw new Error(response.data.message)
-            }
-
-            dispatch(setTopLikes(response?.data?.topLikes))
-            dispatch(setTopPost(response?.data?.topPost))
-
-        } catch (err) {
-            console.log("GET LEADERBOARD API FAILED....", err)
-            toast.error("Could not get the leaderboard")
-
-        } finally {
-            toast.dismiss(toastId)
-            dispatch(setLoading(false))
-        }
     }
 }

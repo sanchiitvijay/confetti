@@ -71,7 +71,7 @@ const Post = memo(function Post(props){
   };
 
   return (
-    <div className='border drop-shadow-md dark:shadow-pink-50 dark:text-white mx-auto md:w-[500px] w-[95%] bg-confettiLightColor2 dark:bg-confettiDarkColor3 border-black dark:border-slate-500 rounded-md my-3 md:my-12 p-3 md:p-4 pb-3'>
+    <div className='border drop-shadow-md hover:cursor-pointer dark:shadow-pink-50 dark:text-white mx-auto md:w-[500px] w-[95%] bg-confettiLightColor2 dark:bg-confettiDarkColor3 border-black dark:border-slate-500 rounded-md my-3 md:my-12 p-3 md:p-4 pb-3'>
       {/* post header */}
       <PostHeader props={props} />
      
