@@ -122,7 +122,11 @@ exports.createReply=async(req,res)=>{
                 });
         }
         //firebase notifs coded here
-        const replies = await Reply.find({comment:commentId}).sort({createdAt:-1}).populate("author").exec();
+        const replies = await Reply.find({comment:commentId})
+        .select("-__v -updatedAt")
+        .sort({createdAt:-1})
+        .populate("author")
+        .exec();
         
 
         /*******************************************Firestore reply notif code*******************************************************/
@@ -207,7 +211,11 @@ exports.deleteReply=async(req,res)=>{
         //now delete the reply
         const deletedReply=await Reply.findByIdAndDelete(replyId);
         console.log("deleted it ")
-        const replies = await Reply.find({comment:commentId}).sort({createdAt:-1}).populate("author").exec();
+        const replies = await Reply.find({comment:commentId})
+        .select("-__v -updatedAt")
+        .sort({createdAt:-1})
+        .populate("author")
+        .exec();
 
         if(!deletedReply){
             return res.status(400).json({
@@ -264,7 +272,11 @@ exports.getAllReplies=async(req,res)=>{
         //now move ahead and fetch the replies
         const replies=await Reply.find({
             comment:commentId,
-        }).sort({createdAt:-1}).populate("author").exec();
+        })
+        .select("-__v -updatedAt")
+        .sort({createdAt:-1})
+        .populate("author")
+        .exec();
 
 
         if(!replies){

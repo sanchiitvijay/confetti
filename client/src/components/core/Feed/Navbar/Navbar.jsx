@@ -7,6 +7,7 @@ import { toggleDarkMode } from '../../../../slices/themeSlice';
 import { motion } from 'framer-motion';
 import UserDetails from './UserDetails';
 import Notification from './Notification';
+import { AiFillSun } from "react-icons/ai";
 
 
 const Navbar = () => {
@@ -41,7 +42,9 @@ const Navbar = () => {
       <Notification/> 
 
       {/* Dark Mode Icon */}
-      <MdDarkMode className='hover:cursor-pointer' fontSize={29} onClick={handleToggle}/> 
+      {
+        darkMode ? <MdDarkMode className='hover:cursor-pointer' fontSize={29} onClick={handleToggle}/> : <AiFillSun className='hover:cursor-pointer' fontSize={29} onClick={handleToggle}/>
+      }
 
       {/* user dropdown */}
       <UserDetails {...user}/>

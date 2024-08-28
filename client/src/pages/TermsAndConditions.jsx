@@ -73,7 +73,7 @@ const TermsAndConditions = () => {
                         </span>
                     </p>
                 <p className='m-3 font-light text-justify '>We appreciate your cooperation! By using Confetti, you agree to these terms and conditions.</p>
-                <Button onClick={() => navigate(-1)} child={<MdArrowBack/>} cc1='m-3 ' px={8} cc2='flex gap-1 pl-6 justify-between items-center' text={"Back"}/>
+                <Button nav="/signup" child={<MdArrowBack/>} cc1='m-3 ' px={8} cc2='flex gap-1 pl-6 justify-between items-center' text={"Back"}/>
             </div>
         </div>
     </Suspense>

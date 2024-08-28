@@ -55,7 +55,7 @@ export function liked (token, data) {
                 throw new Error(response.data.message)
             }
 
-            dispatch(setTotalLikes(response.data.like))
+            // dispatch(setTotalLikes(response.data.like))
 
         } catch (err) {
             console.log("LIKED_API FAILED....", err)

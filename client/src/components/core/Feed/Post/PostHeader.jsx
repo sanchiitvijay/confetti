@@ -8,11 +8,14 @@ import EditPostModal from './EditPostModal';
 import { TbMessageReport } from "react-icons/tb";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
+import { setPost } from '../../../../slices/postSlice';
+import { setUserPost } from '../../../../slices/profileSlice';
 
 const PostHeader = memo(function PostHeader({props}){
     const token = useSelector((state) => state.auth.token);
     const user = useSelector(state=>state.profile.user)
-
+    let post = useSelector(state=>state.post.post)
+    let {userPost} = useSelector(state=>state.profile)
     const dispatch = useDispatch();
     const [modal, setModal] = useState(false);
 
@@ -23,6 +26,10 @@ const PostHeader = memo(function PostHeader({props}){
     
       const deleteHandler = () => {
         dispatch(deletePost(token, {postId: props?._id}));
+        post = post.filter(p=>p._id!==props._id)
+        dispatch(setPost(post))
+        userPost = userPost.filter(p=>p._id!==props._id)
+        dispatch(setUserPost(userPost))
       }
 
   return (

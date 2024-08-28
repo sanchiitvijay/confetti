@@ -126,7 +126,12 @@ exports.createComment = async (req, res) => {
         }
        
 
-        const comments = await Comment.find({ post: postId }).sort({ createdAt: -1 }).populate('author').exec();
+        const comments = await Comment.find({ post: postId })
+        .sort({ createdAt: -1 })
+        .populate('author')
+        .select("-replies -__v -createdAt -updatedAt")
+        .exec();
+
         // console.log("post saved--------------", post);
 
         if (cachedPost) {
@@ -248,7 +253,11 @@ exports.removeComment = async (req, res) => {
 
         const deletedComment = await Comment.findByIdAndDelete({ _id: commentId });
 
-        const comments = await Comment.find({ post: postId }).sort({ createdAt: -1 }).populate('author').exec();
+        const comments = await Comment.find({ post: postId })
+        .sort({ createdAt: -1 })
+        .select("-replies -__v -createdAt -updatedAt")
+        .populate('author')
+        .exec();
 
         if (cachedPost) {
             await cachedPost?.comments?.filter((comment) => comment != commentId);
@@ -299,7 +308,11 @@ exports.getAllComments = async (req, res) => {
         }
 
         //db call to find the comments by post id
-        const comments = await Comment.find({ post: postId }).sort({ createdAt: -1 }).populate('author').exec();
+        const comments = await Comment.find({ post: postId })
+        .sort({ createdAt: -1 })
+        .select("-replies -__v -createdAt -updatedAt")
+        .populate('author')
+        .exec();
 
         // console.log("comments-----------------",comments);
 
@@ -339,7 +352,7 @@ exports.getUserComments = async (req, res) => {
         }
 
         //db call to find the comments by user id
-        const comments = await Comment.find({ author: userId });
+        const comments = await Comment.find({ author: userId }).select("-replies -__v -createdAt -updatedAt");
 
         //return response
         return res.status(200).json({

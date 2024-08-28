@@ -199,6 +199,8 @@ exports.signup=async(req,res)=>{
             
             });
 
+            const userWithoutUnuseData = await User.findById(user._id).select("-password -__v");
+
             // const firebaseUser=await getAuth().createUser({
             //     email,
             //     password
@@ -220,7 +222,7 @@ exports.signup=async(req,res)=>{
         return res.status(200).json({
             success:true,
             message:"Sign up Successfull",
-            user
+            userWithoutUnuseData
         })
     }
     catch(error){

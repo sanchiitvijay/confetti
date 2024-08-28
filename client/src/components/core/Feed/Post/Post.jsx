@@ -77,7 +77,7 @@ const Post = memo(function Post(props){
      
       {/* content */}
       <div onClick={redirectionHandler}
-      className={`p-3 md:p-4 min-h-[200px] hover:cursor-pointer text-center  md:text-md content-center ${gradientColor[props?.color]} rounded-md border border-black dark:border-white break-words`}>
+      className={`p-3 md:p-4 min-h-[200px] hover:cursor-pointer text-center text-white  md:text-md content-center ${gradientColor[props?.color]} rounded-md border border-black dark:border-white break-words`}>
         {props?.description}
       </div>
 
