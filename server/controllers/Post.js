@@ -229,9 +229,14 @@ exports.createPost = async (req, res) => {
         /**********************************************************Fallback code****************************************************************/
         
         
-        posts = await Post.find().populate('author').populate({
+        posts = await Post.find()
+        .select("-__v -reports -updatedAt")
+        .populate('author')
+        .populate({
             path: "likes"
-        }).sort({ createdAt: -1 }).exec();
+        })
+        .sort({ createdAt: -1 })
+        .exec();
 
         let postLength = posts.length;
 
@@ -292,9 +297,14 @@ exports.editPost = async (req, res) => {
                 posts
             })
         }
-        const posts = Post.find({}).populate("author").populate({
+        const posts = Post.find({})
+        .select("-__v -reports -updatedAt")
+        .populate("author")
+        .populate({
             path: "likes"
-        }).sort({ createdAt: -1 }).exec();
+        })
+        .sort({ createdAt: -1 })
+        .exec();
 
         return res.status(200).json({
             success: true,
@@ -490,7 +500,10 @@ exports.getUserPosts = async (req, res) => {
                 totalLength: posts.length
             })
         }
-        posts = await Post.find({ author:mongoose.Types.ObjectId(userId) }).populate("author").exec();
+        posts = await Post.find({ author:mongoose.Types.ObjectId(userId) })
+        .select("-__v -reports -updatedAt")
+        .populate("author")
+        .exec();
         const totalLength = posts?.length;
         slicedPost = posts.slice(0, req.headers.count)
        
@@ -754,6 +767,45 @@ exports.deleteAllPosts = async (req, res) => {
         return res.status(500).json({
             success: false,
             message: "Some error occured while deleting all the posts for this user"
+        })
+    }
+}
+
+
+exports.postExist = async (req, res) => {
+    try {
+        const postId = req.headers.postid || req.body.postId;
+        console.log("1----------------",postId);
+        if (!postId) {
+            return res.status(200).json({
+                success: false,
+                message: "PostId not found"
+            })
+        }
+        console.log("2---------------",postId);
+        const post = await Post.findById(postId)
+        .select("-__v -reports -updatedAt")
+        .populate("author")
+        .exec();
+        console.log("3---------------",post);
+
+        if (!post) {
+            return res.status(200).json({
+                success: false,
+                message: "Post not found"
+            })
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Post exists",
+            post
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Error while checking the post"
         })
     }
 }

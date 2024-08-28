@@ -1,5 +1,5 @@
 const { auth, isAdmin } = require("../middlewares/auth")
-const { createPost, editPost, deletePost, getPosts, getUserPosts, reportPost, getUserPostsStats } = require("../controllers/Post")
+const { createPost, editPost, deletePost, getPosts, getUserPosts, reportPost, getUserPostsStats, postExist } = require("../controllers/Post")
 const { Router } = require("express")
 
 const router = Router();
@@ -11,4 +11,6 @@ router.route("/get-post").get(auth, getPosts);
 router.route("/get-user-posts").get(auth, getUserPosts);
 router.route("/report-post").post(auth, reportPost);
 router.route("/get-user-stats").get(auth,getUserPostsStats);
+router.route("/post-exists").get(auth,getUserPostsStats);
+router.route("/post-exist").post(auth,postExist);
 module.exports = router;

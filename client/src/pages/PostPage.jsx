@@ -1,42 +1,49 @@
-import React from 'react'
-import Post from '../components/core/Feed/Post/Post'
-import {Navigate, useNavigate, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import Page404 from './Page404'
-import { setRedirection } from '../slices/authSlice'
+import React, { useEffect, useState } from 'react';
+import Post from '../components/core/Feed/Post/Post';
+import { Navigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setRedirection } from '../slices/authSlice';
+import { postExist } from '../services/operations/postAPI';
 
 const PostPage = () => {
-  const dispatch = useDispatch()
-  const postid = useParams().postid
-  console.log("postid", postid)
-  const {post} = useSelector((state) => state.post);
-  const token = useSelector((state) => state.auth.token);  
-  console.log("post", post)
-  if(!token){
-    
-    dispatch(setRedirection(`/feed/${postid}`))
-    return <Navigate to="/login"/>
+  const dispatch = useDispatch();
+  const { postid } = useParams();
+  const token = useSelector((state) => state.auth.token);
+  const [selectedPost, setSelectedPost] = useState(null);
+  
+  useEffect(() => {
+    if (!token) {
+      dispatch(setRedirection(`/feed/${postid}`));
+      return;
+    }
+
+    const fetchPost = async () => {
+      const response = await dispatch(postExist(token, postid));
+      setSelectedPost(response);
+    };
+
+    fetchPost();
+  }, [dispatch, postid, token]);
+
+  if (!token) {
+    return <Navigate to="/login" />;
   }
 
-  const selectedPostArr = post.filter((p) => p?._id === postid);
-  let selectedPost = selectedPostArr[0]
-
-  const newseletedpost = {...selectedPost}
-  newseletedpost.showAllComment = true
-
-  console.log("newseletedpost", newseletedpost)
-
-  if(selectedPost.length == 0) {
-    return<Navigate to="/qwerty"/>
+  if (selectedPost === false) {
+    return <Navigate to="/page404" />;
   }
 
-  else {  
-      return (
-        <div className='w-full h-max grid overflow-auto over'>
-          <Post {...newseletedpost}/>
-      </div>
-    )
+  if (selectedPost === null) {
+    return <div>Loading...</div>;
   }
-}
 
-export default PostPage
+  const newSelectedPost = { ...selectedPost, showAllComment: true };
+
+  return (
+    <div className='w-full h-max grid overflow-auto'>
+      <Post {...newSelectedPost} />
+    </div>
+  );
+};
+
+export default PostPage;

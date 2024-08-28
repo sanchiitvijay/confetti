@@ -11,7 +11,8 @@ const {
     GET_POST_API,
     GET_USER_POSTS_API,
     REPORT_POST_API,
-    GET_USER_POST_STATS_API
+    GET_USER_POST_STATS_API,
+    POST_EXIST_API
 } = postEndpoints
 
 export function getUserPosts(userId,count,token){
@@ -204,5 +205,30 @@ export function reportPost (token, data) {
             dispatch(setLoading(false))
         }
 
+    }
+}
+
+export function postExist(token, postid){
+    return async(dispatch)=>{
+        try{
+            const response=await apiConnector("POST",POST_EXIST_API,null,{
+                Authorization: `Bearer ${token}`,
+                postid:postid
+            });
+
+
+            console.log("response",response)
+
+            if(!response.data.success){
+                throw new Error(response.data.message)
+            }
+            
+            
+            return response.data.post
+        }
+        catch(err){
+            console.log("GET_POST_API FAILED....", err)
+            return false
+        }
     }
 }
