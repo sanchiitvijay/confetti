@@ -123,7 +123,6 @@ exports.createReply=async(req,res)=>{
         }
         //firebase notifs coded here
         const replies = await Reply.find({comment:commentId})
-        .select("-__v -updatedAt")
         .sort({createdAt:-1})
         .populate("author")
         .exec();
@@ -212,7 +211,6 @@ exports.deleteReply=async(req,res)=>{
         const deletedReply=await Reply.findByIdAndDelete(replyId);
         console.log("deleted it ")
         const replies = await Reply.find({comment:commentId})
-        .select("-__v -updatedAt")
         .sort({createdAt:-1})
         .populate("author")
         .exec();
@@ -273,7 +271,6 @@ exports.getAllReplies=async(req,res)=>{
         const replies=await Reply.find({
             comment:commentId,
         })
-        .select("-__v -updatedAt")
         .sort({createdAt:-1})
         .populate("author")
         .exec();

@@ -40,7 +40,6 @@ const Comment = memo(function Comment(props){
 
   }
 
-
   const showReplyHandle = (e) => {
     e.preventDefault();
     e.stopPropagation();

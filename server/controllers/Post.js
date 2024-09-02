@@ -230,7 +230,6 @@ exports.createPost = async (req, res) => {
         
         
         posts = await Post.find()
-        .select("-__v -reports -updatedAt")
         .populate('author')
         .populate({
             path: "likes"
@@ -298,7 +297,6 @@ exports.editPost = async (req, res) => {
             })
         }
         const posts = Post.find({})
-        .select("-__v -reports -updatedAt")
         .populate("author")
         .populate({
             path: "likes"
@@ -501,7 +499,6 @@ exports.getUserPosts = async (req, res) => {
             })
         }
         posts = await Post.find({ author:mongoose.Types.ObjectId(userId) })
-        .select("-__v -reports -updatedAt")
         .populate("author")
         .exec();
         const totalLength = posts?.length;
@@ -784,7 +781,6 @@ exports.postExist = async (req, res) => {
         }
         console.log("2---------------",postId);
         const post = await Post.findById(postId)
-        .select("-__v -reports -updatedAt")
         .populate("author")
         .exec();
         console.log("3---------------",post);

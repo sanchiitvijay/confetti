@@ -199,7 +199,7 @@ exports.signup=async(req,res)=>{
             
             });
 
-            const userWithoutUnuseData = await User.findById(user._id).select("-password -__v");
+            const userWithoutUnuseData = await User.findById(user._id)
 
             // const firebaseUser=await getAuth().createUser({
             //     email,
