@@ -18,6 +18,7 @@ import UpdatePassword from "./pages/UpdatePassword";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import OTP from "./pages/OTP"
+import PostNotFound from "./pages/PostNotFound";
 const Feed = lazy(() => import( "./pages/Feed"));
 const MyFeed = lazy(() => import( "./components/core/Feed/MyFeed"));
 const Settings = lazy(() => import( "./components/core/Feed/Settings"));
@@ -154,6 +155,7 @@ function App() {
             <Route path="/feed/stats" element={<StatsPage/>} />
             <Route path="/feed/buy-us-coffee" element={<BuyUsACoffee/>} />
             <Route path="/feed/userid" element = { <PostPage/> } />
+            <Route path="/feed/post-not-found" element = { <PostNotFound/> } />
           </Route>
      
           <Route

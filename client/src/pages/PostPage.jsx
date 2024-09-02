@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../components/core/Feed/Post/Post';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRedirection } from '../slices/authSlice';
 import { postExist } from '../services/operations/postAPI';
 
 const PostPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { postid } = useParams();
   const token = useSelector((state) => state.auth.token);
   const [selectedPost, setSelectedPost] = useState(null);
   
   useEffect(() => {
     if (!token) {
-      dispatch(setRedirection(`/feed/${postid}`));
+      navigate("/")
       return;
     }
 
@@ -30,7 +31,7 @@ const PostPage = () => {
   }
 
   if (selectedPost === false) {
-    return <Navigate to="/page404" />;
+    return <Navigate to="/feed/post-not-found" />;
   }
 
   if (selectedPost === null) {
