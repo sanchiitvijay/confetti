@@ -19,7 +19,6 @@ exports.resetPasswordToken=async(req,res)=>{
     }
     //token generate
     const token=crypto.randomUUID();
-    console.log(token);
     //update user by adding token and expiration time
     const updatedDetails=await User.findOneAndUpdate({email:email},{
       token:token,
@@ -27,7 +26,6 @@ exports.resetPasswordToken=async(req,res)=>{
     },{
       new:true
     });
-    console.log("DB ENTRY CREATED");
     //create url
     const url=`http://localhost:3000/update-password/${token}`;
     //send mail with url

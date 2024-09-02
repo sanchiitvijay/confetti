@@ -132,7 +132,6 @@ export function editPost (token, data) {
                 throw new Error(response.data.message)
             }
 
-            toast.success("post is edited succesfully")
 
         } catch (err) {
             console.log("EDIT_POST_API FAILED....", err)
@@ -215,9 +214,6 @@ export function postExist(token, postid){
                 Authorization: `Bearer ${token}`,
                 postid:postid
             });
-
-
-            console.log("response",response)
 
             if(!response.data.success){
                 throw new Error(response.data.message)

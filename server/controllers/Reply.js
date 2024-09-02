@@ -41,7 +41,6 @@ exports.createReply=async(req,res)=>{
             description:description,
         });
 
-        console.log("REPLY",reply);
 
 
         if(!reply){
@@ -85,13 +84,11 @@ exports.createReply=async(req,res)=>{
         //messaging flow 
         
         const userDevice = await Device.findOne({ user: commentUser });
-        console.log("USER DEVICE", userDevice);
         const userDevices = userDevice?.devices;
         const userTokens = userDevices.map((device) => (
             device = device.split("|")[2]
         ))
 
-        console.log("USERTOKENS", userTokens);
         if(commentUser.toString()!=replyUser.toString()){
             const message = {
                 notification: {
@@ -103,8 +100,6 @@ exports.createReply=async(req,res)=>{
                     url:`http://localhost:3000/feed/${postId}`
                 }
             }
-    
-            console.log("MESSAGE", message);
     
             const sendPromises = userTokens?.map((token) => {
                 return messaging.send({
@@ -209,7 +204,6 @@ exports.deleteReply=async(req,res)=>{
         
         //now delete the reply
         const deletedReply=await Reply.findByIdAndDelete(replyId);
-        console.log("deleted it ")
         const replies = await Reply.find({comment:commentId})
         .sort({createdAt:-1})
         .populate("author")

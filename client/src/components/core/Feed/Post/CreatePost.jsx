@@ -22,17 +22,6 @@ const CreatePost = memo(function CreatePost(){
     formState: { errors }, 
     reset 
   } = useForm();
-
-  // useEffect(() => {
-
-  //   const gradientHandler = (index) => {
-  //     console.log("index", index);
-  //     register("color", { value: index });
-  //     console.log("after index", register("color").value);
-  //     console.log(register);
-  //   }
-  //   gradientHandler(gradient)
-  // }, [gradient, setGradient])
     
   const onSubmitHandle = async (data) => {
     if (data.branch === "Do you know their branch?") {

@@ -49,7 +49,6 @@ const Signup = () => {
       //------------------------ work hereeeeeeeeeeeeeeeeeeee ------------------------
 
       const verification =await dispatch(validateSignup(obj.email, obj.username, obj.usn));
-      console.log("verification----------------------", verification);
       if(verification) {
         dispatch(setSignupData(obj));
         dispatch(sendOtp(obj.email, navigate));

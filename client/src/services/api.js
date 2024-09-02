@@ -11,7 +11,8 @@ export const authEndpoints = {
 }
 
 export const notificationEndpoints={
- HANDLE_DEVICE_API: BASE_URL + "/notification/handle-device"
+ HANDLE_DEVICE_API: BASE_URL + "/notification/handle-device",
+ GET_INSTAID_API: BASE_URL + "/notification/instagram"
 }
 export const userEndpoints = {
     GET_ALL_USERS_API: BASE_URL + "/auth/get-all-user",

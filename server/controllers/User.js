@@ -96,28 +96,26 @@ exports.editUser = async (req, res) => {
 exports.removeUser = async (req, res) => {
     try {
         const userId = req.body.userId || req.user.id;
-        console.log("HEY MAI BACKEND HU");
         if (!userId) {
             return res.status(404).json({
                 success: false,
                 message: "Need user id"
             })
         }
-        console.log("USER ID AAGYI")
 
 
         //fetch the user first
         const user = await User.findById(userId);
-        console.log("USER DADA FETCH HOGYE")
+    
         //delete his notfications to clear the db
         while (user?.notfications?.length) {
             const notificationId = user.notfications.pop();
             await Notification.findByIdAndDelete(notificationId);
         }
-        console.log("NOTIFICATION GYA")
+       
         //now remove the user 
         const deletedUser = await User.findByIdAndDelete(userId);
-        console.log("DELETE KRDIYA HAHHAHA")
+      
         //return response   
         await client.del(`user:${userId}`);
         return res.status(200).json({
@@ -203,7 +201,6 @@ exports.updateDisplayPicture = async (req, res) => {
             1000,
             1000
         )
-        console.log(image)
         const updatedProfile = await User.findByIdAndUpdate(
             { _id: userId },
             { displayPicture: image.secure_url },

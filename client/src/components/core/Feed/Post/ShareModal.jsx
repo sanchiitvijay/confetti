@@ -6,7 +6,6 @@ import useOnClickOutside from '../../../../hooks/useOnClickOutside';
 import useEscape from '../../../../hooks/useEscape';
 
 const ShareModal = (props) => {
-  // console.log(process.env)
   const [tooltipMessage, setTooltipMessage] = useState('Copy to clipboard');
   const [isCopied, setIsCopied] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);

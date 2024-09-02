@@ -22,7 +22,6 @@ const otpSchema=new mongoose.Schema({
 async function sendVerificationEmail(email,otp){
     try{
         const mailResponse=await mailSender(email,"Verification Email from Confetti",otpTemplate(otp));
-        console.log("Email sent successfully:",mailResponse);
     }
     catch(error){
         console.log("Error occured while sending mails:",error);

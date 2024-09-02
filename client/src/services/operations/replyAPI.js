@@ -45,7 +45,6 @@ export function deleteReply (token, data) {
     return async(dispatch) => {
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
-        console.log("Data",data)
         try {
             const response = await apiConnector("POST",DELETE_REPLY_API, data, {
                 Authorization: `Bearer ${token}`,

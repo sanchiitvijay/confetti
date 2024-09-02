@@ -2,7 +2,6 @@ const Feedback = require('../models/Feedback');
 
 exports.writeFeedback = async (req, res) => {
     try {
-        console.log("Inside write feedback----------", req.body);
         const message = req.body.message;
         const userId = req.user.id;
 

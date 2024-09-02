@@ -94,7 +94,6 @@ export function editUser(data, token) {
                 throw new Error(response.data.message)
             }
 
-            toast.success("User is edited succesfully")
             dispatch(setUser(response?.data?.updatedUser))
 
         } catch (err) {
