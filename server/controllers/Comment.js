@@ -90,41 +90,45 @@ exports.createComment = async (req, res) => {
         const userDevice = await Device.findOne({ user: postAuthor });
         console.log("USER DEVICE", userDevice);
         const userDevices = userDevice?.devices;
-        const userTokens = userDevices.map((device) => (
-            device = device.split("|")[2]
-        ))
-
-   
-        if(postAuthor.toString()!=updatedUser._id.toString()){
-            const message = {
-                notification: {
-                    title: "Comment added",
-                    body: `Comment added on your post by ${updatedUser?.username}`,
-                   
-                },
-                data:{
-                    url:`http://localhost:3000/feed/${postId}`
-                }
-            }
+        if(userDevices){
+            const userTokens = userDevices?.map((device) => (
+                device = device.split("|")[2]
+            ))
     
-            console.log("MESSAGE", message);
-    
-            const sendPromises = userTokens?.map((token) => {
-                return messaging.send({
-                    ...message,
-                    token: token,
-                })
-            });
-    
-            Promise.all(sendPromises)
-                .then((response) => {
-                    console.log('Successfully sent messages:', response);
-                })
-                .catch((error) => {
-                    console.error('Error sending messages:', error);
-                });
-        }
        
+            if(postAuthor.toString()!=updatedUser._id.toString()){
+                const message = {
+                    notification: {
+                        title: "Comment added",
+                        body: `Comment added on your post by ${updatedUser?.username}`,
+                       
+                    },
+                    data:{
+                        url:`http://localhost:3000/feed/${postId}`
+                    }
+                }
+        
+                console.log("MESSAGE", message);
+        
+                const sendPromises = userTokens?.map((token) => {
+                    return messaging.send({
+                        ...message,
+                        token: token,
+                    })
+                });
+        
+                Promise.all(sendPromises)
+                    .then((response) => {
+                        console.log('Successfully sent messages:', response);
+                    })
+                    .catch((error) => {
+                        console.error('Error sending messages:', error);
+                    });
+            }
+           
+    
+        }
+
 
         const comments = await Comment.find({ post: postId })
         .sort({ createdAt: -1 })
@@ -152,6 +156,7 @@ exports.createComment = async (req, res) => {
         }
 
         /************************************************FireStore Code Ends Here***********************************************/
+        
         //return successful response
         return res.status(200).json({
             success: true,
