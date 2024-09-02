@@ -16,7 +16,6 @@ import { handleDevice } from '../services/operations/notificationAPI';
 
 
 const Feed = () => {
-  // console.log(process.env)
   const { token } = useSelector((state) => state.auth)
   const { device } = useSelector((state) => state.notification);
   const navigate = useNavigate()
@@ -51,21 +50,16 @@ const Feed = () => {
       </div>
     )
   }
-  console.log("DEVICE",device)
-  console.log(" NOT DEVICE",!device);
   //firebase push notifs code
   async function requestPermission() {
     const permission = await Notification.requestPermission();
-    console.log("YAHA PE HU")
     //By Defualt three kind of permissions->granted,default,denied
     if (permission === 'granted') {
       //Generate the token
-      console.log("here")
       if (!device) {
         const deviceToken = await getToken(messaging, { vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY});
         const combinedString = navigator.userAgent + "|" + navigator.hardwareConcurrency + "|" + deviceToken;
         dispatch(handleDevice(user._id,token,combinedString));
-        console.log("We came here to rule")
       }
 
       else {

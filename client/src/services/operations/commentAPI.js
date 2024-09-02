@@ -126,7 +126,6 @@ export function deleteComment(token, data) {
             }
 
             dispatch(setComments(response.data.comments));
-            toast.success("Comment has been deleted successfully");
 
         } catch (err) {
             console.log("DELETE_COMMENT_API FAILED...", err);

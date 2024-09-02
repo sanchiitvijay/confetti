@@ -183,7 +183,6 @@ exports.createPost = async (req, res) => {
            
             Promise.all(probableUserIds?.map(async(userId)=>{
                     const notfRef=db.collection("Notifications").doc(userId.toString()).collection("notifications");
-                    console.log("MAI HU USER",notfRef);
                     return notfRef.add({
                         postId:post?._id.toString(),
                         postAuthor:post?.author?.username,
@@ -200,8 +199,6 @@ exports.createPost = async (req, res) => {
             const nPosts=updatedUser.posts.length;
             
             if(!userDoc){
-                console.log("UserDoc.exists:",userDoc.exists);
-                console.log("userDoc Object:",userDoc)
                 await userRef.set({
                     author:post?.author?.username,
                     dp:post?.author?.displayPicture,
@@ -209,13 +206,11 @@ exports.createPost = async (req, res) => {
                 })
             }
             else{
-                console.log("jai mata di",nPosts)
                 await userRef.set({
                     author:post?.author?.username,
                     dp:post?.author?.displayPicture,
                     posts:nPosts,
                 })
-                console.log("NO OF POSTS:",nPosts)
             }
          
            /***************************************************Firestore code ends here**********************************************************/
@@ -489,7 +484,6 @@ exports.getUserPosts = async (req, res) => {
 
         //slice posts based on count
         let slicedPost = posts.slice(0, req.headers.count);
-        console.log("TOTAL LENGTH:",slicedPost?.length);
         if (slicedPost?.length != 0) {
             return res.status(200).json({
                 success: true,
@@ -608,7 +602,6 @@ exports.getUserPostsStats = async (req, res) => {
             commentsLength
         }
 
-        console.log(data);
         return res.status(200).json({
             success: true,
             message: "User Posts Stats fetched successfully",
@@ -772,18 +765,15 @@ exports.deleteAllPosts = async (req, res) => {
 exports.postExist = async (req, res) => {
     try {
         const postId = req.headers.postid || req.body.postId;
-        console.log("1----------------",postId);
         if (!postId) {
             return res.status(200).json({
                 success: false,
                 message: "PostId not found"
             })
         }
-        console.log("2---------------",postId);
         const post = await Post.findById(postId)
         .populate("author")
         .exec();
-        console.log("3---------------",post);
 
         if (!post) {
             return res.status(200).json({

@@ -33,12 +33,7 @@ const {
             'Content-Type': 'multipart/form-data'
         }
         })
-
-
-        console.log("\n\n\nRESPONSE of validate............\n\n\n", response.data.flag)
-        result = response.data.flag;
-
-        toast.error(response.data.message)  
+        result = response.data.flag; 
   
         if (!response.data.success) {
           throw new Error(response.data.message)
@@ -238,7 +233,7 @@ export function getPasswordResetToken(email,setEmailSent){
       const response=await apiConnector("POST",RESETPASSTOKEN_API,{
         email
       });
-      
+
       if(!response.data.success){
         throw new Error(response.data.message);
       }

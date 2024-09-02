@@ -30,7 +30,6 @@ const Post = memo(function Post(props){
   const token = useSelector((state) => state.auth.token);
   const { comment } = useSelector((state) => state.comment);
   const { user } = useSelector((state) => state.profile);
-  // console.log("props", props);
   useEffect(() => {
     const posts = post.filter((p) => p?._id === props?._id);
     const likes = posts[0]?.likes || [];
@@ -45,14 +44,17 @@ const Post = memo(function Post(props){
     comment.length > 0 && comment[0]?.post !== props?._id && setShowComments(false);
   } , [comment])
 
-  const likeHandler = () => {
-    dispatch(liked(token, { postId: props?._id }));
+  const likeHandler = async () => {
+    await dispatch(liked(token, { postId: props?._id }));
     setLike(prevLike => {
       const newLikeState = !prevLike;
       setTotalLikes(prevLikes => newLikeState ? prevLikes + 1 : prevLikes - 1);
       return newLikeState;
     });
+  
+    
   };
+  
 
   useEffect(() => {
     const commentHandler = async () => {

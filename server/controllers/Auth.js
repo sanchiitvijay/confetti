@@ -28,7 +28,6 @@ if (!admin.apps?.length) {
 async function sendJoiningEmail(email,name){
     try{
         const mailResponse=await mailSender(email,"Verification Email from Confetti",welcomeTemplate(name));
-        console.log("Email sent successfully:",mailResponse);
     }
     catch(error){
         console.log("Error occured while sending mails:",error);
@@ -56,11 +55,7 @@ exports.sendotp=async(req,res)=>{
             specialChars:false,
         })
 
-        console.log("Otp generated successfully");
-
         let result=await OTP.findOne({otp:otp});
-
-        console.log("DB INTERACTION HO GYI H");
         
         while(result){
             otp=otpGenerator.generate(6,{
@@ -69,13 +64,10 @@ exports.sendotp=async(req,res)=>{
                 specialChars:false,
             })
             result=await OTP.findOne({otp:otp});
-            console.log("LOOP KE ANDAR HU MAI:")
         }
 
         const otpPayload={email,otp};
         const otpBody=await OTP.create(otpPayload);
-        console.log("DB Entry for otp Created");
-        console.log(otpBody);
 
         return res.status(200).json({
             success:true,
@@ -112,9 +104,6 @@ exports.signup=async(req,res)=>{
         name = name.toLowerCase();
         
         const avatar=req.files.avatar;
-       
-        console.log("REQ BODY:",req.body)
-        console.log("REQ FILE:",req.files);
 
         if(!name || !password || !confirmPassword || !email || !gender || !username){
             return res.status(403).json({
@@ -149,8 +138,6 @@ exports.signup=async(req,res)=>{
             })
         }
         const recentOtp=await OTP.find({email}).sort({createdAt:-1}).limit(1);
-        console.log(recentOtp[0].otp);
-        console.log(otp);
 
         if(recentOtp.length==0){
             return res.status(400).json({
@@ -346,7 +333,6 @@ exports.changePassword=async(req,res)=>{
                     `Password updated successfully for ${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`
                 )
             );
-            console.log("Email sent successfully:", emailResponse.response);
         } catch (error) {
             
             console.error("Error occurred while sending email:", error);
@@ -374,7 +360,6 @@ exports.changePassword=async(req,res)=>{
 
 exports.validateSignup = async (req, res) => {
     try {
-        console.log("Validating the signup", req.body);
         const { email, username, usn } = req.body;
         const checkUserPresent = await User.findOne({ email });
         if (checkUserPresent) {

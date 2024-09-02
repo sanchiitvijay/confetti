@@ -22,14 +22,10 @@ const db=admin.firestore();
 
 exports.createComment = async (req, res) => {
     try {
-        console.log("Inside create comment----------", req.body);
         const postId = req.body.postId;
         const description = req.body.comment;
 
         const userId = req.user.id;
-        // console.log("USER ID", userId);
-        // console.log("POST ID", postId);
-        // console.log("DESCRIPTION", description);
         const cachedpost = await client.get(`post:${postId}`);
         const cachedPost = await JSON.parse(cachedpost);
         //Validation for user
@@ -42,8 +38,6 @@ exports.createComment = async (req, res) => {
 
         //find Post exists or not
         const post = await Post.findOne({ _id: postId });
-        console.log(post)
-        // console.log("after post--------------");
         if (!post) {
             return res.status(404).json({
                 success: false,
@@ -51,10 +45,6 @@ exports.createComment = async (req, res) => {
             })
         }
 
-
-        // console.log("creating comment--------------");
-        // console.log(typeof(post._id));
-        // console.log(typeof(postId))
         //now post checked , create comment and push it in to the post 
         const comment = await Comment.create({
             author: userId,
@@ -69,7 +59,6 @@ exports.createComment = async (req, res) => {
                 message: "Comment cant be created"
             })
         }
-        // console.log("comment created--------------",comment);
         //now comment created now push it into the post 
         post.comments.push(comment._id);
         await post.save();
@@ -88,7 +77,6 @@ exports.createComment = async (req, res) => {
         //messaging flow 
         const postAuthor = post?.author;
         const userDevice = await Device.findOne({ user: postAuthor });
-        console.log("USER DEVICE", userDevice);
         const userDevices = userDevice?.devices;
         if(userDevices){
             const userTokens = userDevices?.map((device) => (
@@ -108,7 +96,6 @@ exports.createComment = async (req, res) => {
                     }
                 }
         
-                console.log("MESSAGE", message);
         
                 const sendPromises = userTokens?.map((token) => {
                     return messaging.send({
@@ -135,7 +122,6 @@ exports.createComment = async (req, res) => {
         .populate('author')
         .exec();
 
-        // console.log("post saved--------------", post);
 
         if (cachedPost) {
             await cachedPost?.comments?.push(comment?._id);
@@ -178,7 +164,6 @@ exports.createComment = async (req, res) => {
 exports.removeComment = async (req, res) => {
     try {
         //get the post and its comment id
-        console.log("Inside remove comment----------", req.body);
         const {
             commentId,
             postId,
@@ -274,7 +259,6 @@ exports.removeComment = async (req, res) => {
                 message: "Comment cant be deleted for some reason"
             })
         }
-        console.log("comments has been deleted-----------------");
         //return response
         return res.status(200).json({
             success: true,
@@ -316,7 +300,6 @@ exports.getAllComments = async (req, res) => {
         .populate('author')
         .exec();
 
-        // console.log("comments-----------------",comments);
 
         //return response
         return res.status(200).json({

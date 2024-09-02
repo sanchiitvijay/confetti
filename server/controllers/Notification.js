@@ -1,4 +1,6 @@
 const Device=require('../models/Device');
+const Post = require('../models/Post');
+const User = require('../models/User');
 
 exports.addUpdateDevice=async(req,res)=>{
     try{
@@ -16,26 +18,19 @@ exports.addUpdateDevice=async(req,res)=>{
                 message:"userid  not sent in request"
             })
         }
-        console.log("IDENTIFIER",identifier);
-        console.log("USERID",userId);
         const identifierArray=identifier.split("|");
         const userAgent=identifierArray[0];
         const userCores=identifierArray[1];
         const token=identifierArray[2];
 
         const userPresent=await Device.findOne({user:userId});
-        console.log(userPresent)
-        console.log("USER TRIED TO FIND");
         if(!userPresent){
-            console.log("CREATING USER")
             await Device.create({
                 user:userId,
                 devices:[identifier]
-            })          
-            console.log("CREATED IT")
+            })
         }
         else{
-            console.log("USER THERE")
             const devices=userPresent.devices;
             let index=-1;
             for(let i=0;i<devices.length;i++){
@@ -49,12 +44,10 @@ exports.addUpdateDevice=async(req,res)=>{
 
             if(index===-1){
                 //not there make a new entry
-                console.log("DEVICE not there")
                 userPresent.devices.push(identifier);
                 await userPresent.save();
             }
             else{
-                console.log("Device there")
                //device token was there,update the token
                userPresent.devices[index]=identifier;
                await userPresent.save();
@@ -69,6 +62,33 @@ exports.addUpdateDevice=async(req,res)=>{
         return res.status(500).json({
             success:false,
             message:"Error while handling device"
+        })
+    }
+}
+
+
+exports.getInstaId = async (req, res) => {
+    try {
+        const { postId } = req.body;
+        if (!postId) {
+            return res.status(404).json({
+                success: false,
+                message: "Postid not found"
+            })
+        }
+
+        const post = await Post.findById(postId);
+        const user = await User.findById(post.author);
+        return res.status(200).json({
+            success: true,
+            message: "Instagram Id fetched",
+            instagram: user.instagram
+        })
+    }
+    catch (err) {
+        return res.status(500).json({
+            success: false,
+            message: "Error while fetching Instagram Id"
         })
     }
 }
