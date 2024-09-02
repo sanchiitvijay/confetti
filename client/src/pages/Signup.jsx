@@ -180,7 +180,10 @@ const Signup = () => {
                   register={() => register("username", {
                     required: "Username is required",
                     pattern: namePattern,
-                    maxLength: 15,
+                    maxLength: {
+                      value:15,
+                      message:"Username should be less than 15 characters"
+                    },
                   })} />
                 <SignUpInput 
                   name="usn" 

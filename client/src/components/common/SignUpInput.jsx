@@ -14,8 +14,8 @@ const SignUpInput =memo(function SignUpInput({name,type,value,register,error,req
         />
         
         <div className='h-[1px] w-full bg-white'></div>
-        {error && <p className="ml-2 text-yellow-100 mt-1">{value.charAt(0).toUpperCase() + value.slice(1)} is required
-          <sup className="text-yellow-400">{" "}*</sup></p>}
+        {error && <span className="text-sm">{error.message?(error.message):(error.name)}</span>
+        }
       </label>
   )
 })

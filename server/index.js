@@ -1,7 +1,7 @@
 const express=require("express");
 const app=express();
 require('events').EventEmitter.defaultMaxListeners = 0
-
+const path = require('path');
 
 //importing routes here
 const userRoutes=require("./routes/User");
@@ -77,6 +77,15 @@ app.get("/",(req,res)=>{
         message:"Your server is up and running"
     })
 });
+
+// Serve static files from the React app's build directory
+app.use(express.static(path.join(__dirname, '../client/build'))); 
+
+// Default route for serving React's index.html for all non-API requests
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
+
 
 //Activate server
 

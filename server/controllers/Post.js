@@ -146,7 +146,7 @@ exports.createPost = async (req, res) => {
             const message = {
                 notification: {
                     title: "Confession",
-                    body: `This confession by ${updatedUser?.username} might be for you`,
+                    body: `This confession by ${updatedUser?.username} might be for you `,
                 },
                 data: {
                     url: `http://localhost:3000/feed/${post._id}`
