@@ -21,6 +21,12 @@ const MyFeed = () => {
     }
   };
 
+  const [activePostId, setActivePostId] = useState(null);
+
+  const handleToggleComments = (postId) => {
+    setActivePostId(prevId => (prevId === postId ? null : postId));
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -47,9 +53,14 @@ const MyFeed = () => {
         }
         scrollableTarget="scrollableDiv"
       >
-        {post?.map((p) => (
-          <Post key={p.id} {...p} />
-        ))}
+        {post.map(post => (
+        <Post 
+          key={post._id} 
+          props={post}
+          showComments={activePostId === post._id}
+          onToggleComments={() => handleToggleComments(post._id)}
+        />
+      ))}
       </InfiniteScroll>
     </div>
   );

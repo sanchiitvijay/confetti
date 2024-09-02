@@ -15,6 +15,7 @@ const Post = memo(function Post(props){
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+
   const [showComments, setShowComments] = useState(props?.showAllComment || false);
   const [allComments, setAllComments] = useState(props?.showAllComment || false);
   const [like, setLike] = useState(false);
@@ -39,6 +40,10 @@ const Post = memo(function Post(props){
     setTotalLikes(isLiked ? likes.length : likes.length - 1);
 
   }, [post, props?._id, user?._id]);
+
+  useEffect(() => { 
+    comment.length > 0 && comment[0]?.post !== props?._id && setShowComments(false);
+  } , [comment])
 
   const likeHandler = () => {
     dispatch(liked(token, { postId: props?._id }));

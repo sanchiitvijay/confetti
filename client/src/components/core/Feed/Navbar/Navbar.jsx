@@ -43,7 +43,7 @@ const Navbar = () => {
 
       {/* Dark Mode Icon */}
       {
-        darkMode ? <MdDarkMode className='hover:cursor-pointer' fontSize={29} onClick={handleToggle}/> : <AiFillSun className='hover:cursor-pointer' fontSize={29} onClick={handleToggle}/>
+        !darkMode ? <MdDarkMode className='hover:cursor-pointer' fontSize={29} onClick={handleToggle}/> : <AiFillSun className='hover:cursor-pointer' fontSize={29} onClick={handleToggle}/>
       }
 
       {/* user dropdown */}

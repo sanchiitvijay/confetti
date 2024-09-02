@@ -133,7 +133,6 @@ exports.createComment = async (req, res) => {
         const comments = await Comment.find({ post: postId })
         .sort({ createdAt: -1 })
         .populate('author')
-        .select("-replies -__v -createdAt -updatedAt")
         .exec();
 
         // console.log("post saved--------------", post);
@@ -260,7 +259,6 @@ exports.removeComment = async (req, res) => {
 
         const comments = await Comment.find({ post: postId })
         .sort({ createdAt: -1 })
-        .select("-replies -__v -createdAt -updatedAt")
         .populate('author')
         .exec();
 
@@ -315,7 +313,6 @@ exports.getAllComments = async (req, res) => {
         //db call to find the comments by post id
         const comments = await Comment.find({ post: postId })
         .sort({ createdAt: -1 })
-        .select("-replies -__v -createdAt -updatedAt")
         .populate('author')
         .exec();
 
@@ -357,7 +354,7 @@ exports.getUserComments = async (req, res) => {
         }
 
         //db call to find the comments by user id
-        const comments = await Comment.find({ author: userId }).select("-replies -__v -createdAt -updatedAt");
+        const comments = await Comment.find({ author: userId })
 
         //return response
         return res.status(200).json({
