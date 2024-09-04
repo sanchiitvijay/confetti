@@ -1,9 +1,9 @@
 {
     "short_name": "Confetti",
-    "name": "My Confetti",
+    "name": "Confetti",
     "icons": [
       {
-        "src": "/static/media/c192.png",
+        "src": "static/media/c192.png",
         "sizes": "192x192",
         "type": "image/png"
       },
