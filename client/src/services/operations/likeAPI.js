@@ -42,7 +42,6 @@ const {
 
 export function liked (token, data) {
     return async(dispatch) => {
-        const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
             const response = await apiConnector("POST",LIKED_API, data, {
@@ -62,7 +61,6 @@ export function liked (token, data) {
             toast.error("Could not set the like")
 
         } finally {
-            toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
 
