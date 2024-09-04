@@ -9,7 +9,7 @@ export const developerData = [
     },
     {
         name: 'Sanchit Vijay',
-        description: 'ore wa monkey d luffy, kaizoku ou ni naru otoko da !!',
+        description: "I'm trying to avoid running into unusual and unexpected errors while compiling the code. ore wa monkey d luffy, kaizoku ou ni naru otoko da !!",
         image: 'https://avatars.githubusercontent.com/u/71404343?v=4',
         github: 'https://github.com/sanchiitvijay',
         linkedin: 'https://www.linkedin.com/in/sanchiitvijay/',
