@@ -38,7 +38,7 @@ const AcceptReject = ({ postId }) => {
       </div>
 
       {clicked && (
-        <p className='text-center text-[#FFFF00] text-sm py-1'>
+        <p className='text-center text-[#bbbb15] dark:text-[#FFFF00] text-sm py-1'>
           Instagram: {instaid ? instaid : 'Made private by user'}
         </p>
       )}

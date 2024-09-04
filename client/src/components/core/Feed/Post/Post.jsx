@@ -36,7 +36,6 @@ const Post = memo(function Post(props){
     const isLiked = likes.some((like) => like?.author === user?._id);
 
     setLike(isLiked);
-    setTotalLikes(isLiked ? likes.length : likes.length - 1);
 
   }, [post, props?._id, user?._id]);
 
