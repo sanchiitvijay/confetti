@@ -80,7 +80,6 @@ export function getPosts (count,token) {
             toast.error("Could not get all posts")
 
         } finally {
-            
             dispatch(setLoading(false))
         }
 
@@ -89,7 +88,6 @@ export function getPosts (count,token) {
 
 export function createPost (token, data) {
     return async(dispatch) => {
-        const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
             const response = await apiConnector("POST",CREATE_POST_API, data, {
@@ -112,7 +110,6 @@ export function createPost (token, data) {
             toast.error("Could not create post")
 
         } finally {
-            toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
     }
@@ -120,7 +117,6 @@ export function createPost (token, data) {
 
 export function editPost (token, data) {
     return async(dispatch) => {
-        const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
             const response = await apiConnector("POST",EDIT_POST_API, data, {
@@ -138,7 +134,6 @@ export function editPost (token, data) {
             toast.error("Could not edit the post")
 
         } finally {
-            toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
 
@@ -147,7 +142,6 @@ export function editPost (token, data) {
 
 export function deletePost (token, data) {
     return async(dispatch) => {
-        const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
             const response = await apiConnector("POST",DELETE_POST_API, data, {
@@ -169,7 +163,6 @@ export function deletePost (token, data) {
             toast.error("Could not delete the post")
 
         } finally {
-            toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
 
@@ -178,7 +171,6 @@ export function deletePost (token, data) {
 
 export function reportPost (token, data) {
     return async(dispatch) => {
-        const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
             const response = await apiConnector("POST",REPORT_POST_API, data, {
@@ -200,7 +192,6 @@ export function reportPost (token, data) {
             toast.error("Could not report the post")
 
         } finally {
-            toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
 

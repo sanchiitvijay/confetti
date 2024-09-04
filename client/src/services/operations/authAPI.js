@@ -41,7 +41,7 @@ const {
         
       }catch(err){
         console.log("validateSignup API ERROR............", err)
-        toast.error("Could Not Validate Signup")
+        toast.error(err.response.data.message)
       }
       return result
     }
@@ -69,7 +69,7 @@ const {
         navigate("/otp")
       } catch (error) {
         console.log("SENDOTP API ERROR............", error)
-        toast.error("Could Not Send OTP")
+        toast.error(error.response.data.message)
       }
       dispatch(setLoading(false))
       toast.dismiss(toastId)
@@ -131,7 +131,7 @@ const {
         navigate("/")
       } catch (error) {
         console.log("SIGNUP API ERROR............", error)
-        toast.error("Signup Failed")
+        toast.error(error.response.data.message)
         navigate("/signup")
       }
       dispatch(setLoading(false))
@@ -156,9 +156,7 @@ const {
         
         toast.success("Login Successful")
         dispatch(setToken(response.data.token))
-        const userImage = response.data?.user?.image
-          ? response.data.user.image
-          : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.name}`
+        const userImage = response.data.user.image
         dispatch(setUser({ ...response.data.user, image: userImage }))
         localStorage.setItem("token", JSON.stringify(response.data.token))
         localStorage.setItem("user", JSON.stringify(response.data.user));
@@ -172,7 +170,7 @@ const {
         navigate("/feed")
       } catch (error) {
         console.log("LOGIN API ERROR............", error)
-        toast.error(`Login Failed ${error.message}`)
+        toast.error(`Login Failed ${error.response.data.message}`)
       }
       dispatch(setLoading(false))
       toast.dismiss(toastId)
@@ -200,7 +198,7 @@ const {
         navigate("/")
       } catch (error) {
         console.log("RESETPASSWORD ERROR............", error)
-        toast.error("Failed To Reset Password")
+        toast.error(error.response.data.message)
       }
       toast.dismiss(toastId)
       dispatch(setLoading(false))
@@ -242,8 +240,8 @@ export function getPasswordResetToken(email,setEmailSent){
       setEmailSent(true);
     }
     catch(error){
-      console.log("Reset password token error",error);
-      toast.error("Failed to send email for resetting password");
+      console.log("Reset password token error",error.response.data.message);
+      toast.error(error);
     }
     dispatch(setLoading(false));
   }

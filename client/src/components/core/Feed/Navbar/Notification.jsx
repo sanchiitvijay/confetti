@@ -48,7 +48,7 @@ const Notification = () => {
         <div className=' px-2 py-2 flex flex-col rounded-md bg-confettiLightColor3 text-black dark:text-white dark:bg-confettiDarkColor3'>
 
            { notifications?.map((notif, index)=>(
-            <>
+            <div key={index}>
               <div className='flex flex-row justify-center gap-4 p-3 '>
                 <img src={notif?.type === 'post' ? confetti : message} className='my-auto w-6' alt="notif"/>
                 <Link to={`/feed/${notif?.postId}`} className="block cursor-pointer text-md">
@@ -60,7 +60,7 @@ const Notification = () => {
                   notif?.type === 'post' && <AcceptReject postId={notif?.postId}/>
                 }
               </div>
-            </>
+            </div>
             ))}
 
             <div className='flex flex-row justify-center gap-4 p-3 '>

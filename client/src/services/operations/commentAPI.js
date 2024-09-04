@@ -13,7 +13,6 @@ const {
 
 export function createComments(token, data) {
     return async (dispatch, getState) => {
-        const toastId = toast.loading("Loading...");
         dispatch(setLoading(true));
         try {
             const response = await apiConnector("POST", CREATE_COMMENT_API, data, {
@@ -49,7 +48,6 @@ export function createComments(token, data) {
             console.log("CREATE_COMMENT_API FAILED...", err);
             toast.error("Could not create comment");
         } finally {
-            toast.dismiss(toastId);
             dispatch(setLoading(false));
         }
     };
@@ -57,7 +55,6 @@ export function createComments(token, data) {
 
 export function getAllComments(token, postId) {
     return async (dispatch) => {
-        const toastId = toast.loading("Loading...");
         dispatch(setLoading(true));
         try {
             const response = await apiConnector("GET", GET_ALL_COMMENTS_API, null, {
@@ -76,7 +73,6 @@ export function getAllComments(token, postId) {
             console.log("GET_ALL_COMMENTS_API FAILED...", err);
             toast.error("Some error occurred while fetching the comments");
         } finally {
-            toast.dismiss(toastId);
             dispatch(setLoading(false));
         }
     };
@@ -85,7 +81,6 @@ export function getAllComments(token, postId) {
 export function getUserComments(token, data) {
     return async (dispatch) => {
         let result = null;
-        const toastId = toast.loading("Loading...");
         dispatch(setLoading(true));
         try {
             const response = await apiConnector("GET", GET_USER_COMMENTS_API, data, {
@@ -103,7 +98,6 @@ export function getUserComments(token, data) {
             console.log("GET_USER_COMMENTS_API FAILED...", err);
             toast.error("Could not get user comments");
         } finally {
-            toast.dismiss(toastId);
             dispatch(setLoading(false));
         }
 
@@ -113,7 +107,6 @@ export function getUserComments(token, data) {
 
 export function deleteComment(token, data) {
     return async (dispatch) => {
-        const toastId = toast.loading("Loading...");
         dispatch(setLoading(true));
         try {
             const response = await apiConnector("POST", DELETE_COMMENT_API, data, {
@@ -131,7 +124,6 @@ export function deleteComment(token, data) {
             console.log("DELETE_COMMENT_API FAILED...", err);
             toast.error("Could not delete the comment");
         } finally {
-            toast.dismiss(toastId);
             dispatch(setLoading(false));
         }
     };

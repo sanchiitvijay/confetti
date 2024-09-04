@@ -20,7 +20,6 @@ const {
 
 export function getAllUsers (token, navigate) {
     return async(dispatch) => {
-        const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
             const response = await apiConnector("GET", GET_ALL_USERS_API, null, {
@@ -39,7 +38,6 @@ export function getAllUsers (token, navigate) {
             toast.error("Could not get all users")
 
         } finally {
-            toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
 
@@ -48,7 +46,6 @@ export function getAllUsers (token, navigate) {
 
 export function removeUser(data, token,navigate) {
     return async(dispatch) => {
-        const toastId = toast.loading("Loading...");
         dispatch(setLoading(true))
 
         try{
@@ -71,7 +68,6 @@ export function removeUser(data, token,navigate) {
             console.log("REMOVE USER API FAILED....", err)
             toast.error("Could not delete the user")
         } finally {
-            toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
 
@@ -80,7 +76,6 @@ export function removeUser(data, token,navigate) {
 
 export function editUser(data, token) {
     return async(dispatch) => {
-        const toastId = toast.loading("Loading...");
         dispatch(setLoading(true))
 
         try{
@@ -101,7 +96,6 @@ export function editUser(data, token) {
             toast.error("Could not edit the user")
 
         } finally {
-            toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
     }
@@ -109,7 +103,6 @@ export function editUser(data, token) {
 
 export function deleteGraduates(token) {
     return async(dispatch) => {
-        const toastId = toast.loading("Loading...");
         dispatch(setLoading(true))
 
         try{
@@ -129,7 +122,6 @@ export function deleteGraduates(token) {
             toast.error("Could not delete the graduates")
 
         } finally {
-            toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
 
@@ -138,7 +130,6 @@ export function deleteGraduates(token) {
 
 export function promoteStudents(data, token) {
     return async(dispatch) => {
-        const toastId = toast.loading("Loading...");
         dispatch(setLoading(true))
 
         try{
@@ -158,7 +149,6 @@ export function promoteStudents(data, token) {
             toast.error("Could not promote the students")
 
         } finally {
-            toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
     }
@@ -167,7 +157,6 @@ export function promoteStudents(data, token) {
 
 export function changePassword(data, token) {
     return async(dispatch) => {
-        const toastId = toast.loading("Loading...");
         dispatch(setLoading(true))
         try{
             const response = await (apiConnector("POST", CHANGEPASSWORD_API, data, {
@@ -186,7 +175,6 @@ export function changePassword(data, token) {
             toast.error("Could not change the password")
 
         } finally {
-            toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
     }
@@ -194,7 +182,6 @@ export function changePassword(data, token) {
 
 export function updateDisplayPicture(token,data){
     return async(dispatch)=>{
-        const toastId = toast.loading("Loading...");
         dispatch(setLoading(true))
         try{
            
@@ -214,7 +201,6 @@ export function updateDisplayPicture(token,data){
             toast.error("Display Picture couldnt be updated")
 
         } finally {
-            toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
     } 
@@ -222,7 +208,6 @@ export function updateDisplayPicture(token,data){
 
 export function sendFeedback(token, data) {
     return async(dispatch) => {
-        const toastId = toast.loading("Loading...");
         dispatch(setLoading(true))
         try{
             const response = await (apiConnector("POST", SEND_FEEDBACK_API, data, {
@@ -242,7 +227,6 @@ export function sendFeedback(token, data) {
             toast.error("Could not send the feedback")
 
         } finally {
-            toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
     }
@@ -251,7 +235,6 @@ export function sendFeedback(token, data) {
 export function getFeedback(token) {
     return async(dispatch) => {
         let result = null
-        const toastId = toast.loading("Loading...");
         dispatch(setLoading(true))
 
         try{
@@ -272,7 +255,6 @@ export function getFeedback(token) {
             toast.error("Could not get the feedback")
 
         } finally {
-            toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
 

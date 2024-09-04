@@ -13,7 +13,6 @@ const {
 
 export function createReply (token, data) {
     return async(dispatch) => {
-        const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
             const response = await apiConnector("POST",CREATE_REPLY_API, data, {
@@ -33,7 +32,6 @@ export function createReply (token, data) {
             toast.error("Could not create reply")
 
         } finally {
-            toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
 
@@ -43,7 +41,6 @@ export function createReply (token, data) {
 
 export function deleteReply (token, data) {
     return async(dispatch) => {
-        const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
             const response = await apiConnector("POST",DELETE_REPLY_API, data, {
@@ -61,7 +58,6 @@ export function deleteReply (token, data) {
             toast.error("Could not delete the reply")
 
         } finally {
-            toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
     }
@@ -69,7 +65,6 @@ export function deleteReply (token, data) {
 
 export function getAllReplies (token, data) {
     return async(dispatch) => {
-        const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
             const response = await apiConnector("POST",GET_ALL_REPLIES_API, data, {
@@ -90,7 +85,6 @@ export function getAllReplies (token, data) {
             toast.error("Could not get all reply")
 
         } finally {
-            toast.dismiss(toastId)
             dispatch(setLoading(false))
         }
 
