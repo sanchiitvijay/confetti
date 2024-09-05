@@ -99,6 +99,7 @@ const ChangeDp = () => {
                   onChange={handleFileChange}
                   className="hidden"
                   accept="image/png, image/gif, image/jpeg"
+                  disabled={user._id === "66d9f75d5950dde630be7c3c"} 
                 />
                 <button
                   onClick={handleClick}
@@ -110,6 +111,7 @@ const ChangeDp = () => {
                 <IconBtn
                   text={loading ? "Uploading..." : "Upload"}
                   onclick={handleFileUpload}
+                  
                 >
                   {!loading && (
                     <FiUpload  fontSize={20} className="text-lg my-auto text-richblack-900" />

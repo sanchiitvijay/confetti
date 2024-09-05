@@ -105,7 +105,6 @@ exports.signup=async(req,res)=>{
         
         const avatar=req?.files?.avatar;
 
-        console.log("-------12345678")
 
         if(!name || !password || !confirmPassword || !email || !gender || !username){
             return res.status(403).json({
@@ -156,7 +155,6 @@ exports.signup=async(req,res)=>{
         }
 
         const hashedPassword=await bcrypt.hash(password,10);
-        console.log("+++++++++12345678")
         //uploading file to cloudinary and generating url if they have provided
         let avatarUrl=''
         if(avatar){
@@ -172,7 +170,6 @@ exports.signup=async(req,res)=>{
         else{
             avatarUrl=`https://api.dicebear.com/7.x/initials/svg?seed=${name?.split(" ")[0]} ${name?.split(" ")[1]}`
         }
-        console.log("************   12345678")
 
         const user=await User.create({
             name,

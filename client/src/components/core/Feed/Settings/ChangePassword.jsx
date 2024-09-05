@@ -50,6 +50,7 @@ const ChangePassword = () => {
                 type={showOldPassword ? "text" : "password"}
                 name="oldPassword"
                 id="oldPassword"
+                disabled={user._id === "66d9f75d5950dde630be7c3c"} 
                 placeholder="Enter Current Password"
                 style={{
                   boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
@@ -81,6 +82,7 @@ const ChangePassword = () => {
                 type={showNewPassword ? "text" : "password"}
                 name="newPassword"
                 id="newPassword"
+                disabled={user._id === "66d9f75d5950dde630be7c3c"} 
                 placeholder="Enter New Password"
                 style={{
                   boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",

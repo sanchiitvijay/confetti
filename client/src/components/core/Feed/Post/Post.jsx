@@ -117,7 +117,7 @@ const Post = memo(function Post(props){
         <div className='max-md:px-2 p-4 border-t max-h-[200px] overflow-auto border-black mt-2'>
           <form onSubmit={handleSubmitComment}>
             <div className='flex flex-row gap-5 pb-4 pt-2 px-1'>
-              <input type='text' placeholder='Add a comment' value={commentForm} onChange={(e) => setCommentForm(e.target.value)} className='w-full h-9 border text-black border-black rounded-md p-2 focus:ring-0 focus:outline-none  focus:border-black focus:shadow-lg' />
+              <input type='text' placeholder='Add a comment' value={commentForm} disabled={user._id === "66d9f75d5950dde630be7c3c"}   onChange={(e) => setCommentForm(e.target.value)} className='w-full h-9 border text-black border-black rounded-md p-2 focus:ring-0 focus:outline-none  focus:border-black focus:shadow-lg' />
               <button type="submit"><VscSend fontSize={30} className='my-auto'/></button>
             </div>
           </form>

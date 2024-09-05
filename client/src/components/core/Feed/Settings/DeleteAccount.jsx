@@ -29,15 +29,21 @@ export default function DeleteAccount() {
 
         <div className="flex aspect-square h-14 w-14 items-center justify-center rounded-full bg-pink-500 dark:bg-pink-700">
         
-          <FiTrash2 className="text-3xl text-pink-950 cursor-pointer dark:text-pink-200" 
-          onClick={()=>setConfirmationModal({
-            text1:"Are You Sure?",
-            text2:"Your account will be deleted permanently.",
-            btn1Text:"Delete",
-            btn2Text:"Cancel",
-            btn1Handler:()=>handleDeleteAccount(),
-            btn2Handler: ()=>setConfirmationModal(null),
-          })}
+        <FiTrash2
+          className="text-3xl text-pink-950 cursor-pointer dark:text-pink-200"
+          onClick={
+            user._id !== "66d9f75d5950dde630be7c3c"
+              ? () =>
+                  setConfirmationModal({
+                    text1: "Are You Sure?",
+                    text2: "Your account will be deleted permanently.",
+                    btn1Text: "Delete",
+                    btn2Text: "Cancel",
+                    btn1Handler: () => handleDeleteAccount(),
+                    btn2Handler: () => setConfirmationModal(null),
+                  })
+              : undefined
+          }
         />
           
         </div>
@@ -59,7 +65,7 @@ export default function DeleteAccount() {
           <button
             type="button"
             className="w-fit cursor-pointer italic text-pink-900 hover:underline dark:text-pink-300"
-            onClick={()=>setConfirmationModal({
+            disabled={user._id === "66d9f75d5950dde630be7c3c"} onClick={()=>setConfirmationModal({
               text1:"Are You Sure?",
               text2:"Your account will be deleted permanently.",
               btn1Text:"Delete",
