@@ -12,7 +12,8 @@ const CreatePost = memo(function CreatePost(){
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const [gradient, setGradient] = useState(0);
-  
+
+  const {user}=useSelector((state)=>state.profile)
   const gradientColor = [
     "bg-1", "bg-2", "bg-3", "bg-4", "bg-5", "bg-6"
   ]
@@ -53,8 +54,10 @@ const CreatePost = memo(function CreatePost(){
             {...register('description', { required: true, maxLength:500 })}
             onChange={(e) => setMaxLen(e.target.value.length)}
             onClick={() => !openMoreInfo && setOpenMoreInfo(true)}
-            className={"w-full rounded-[0.5rem] mt-3 mb-4 focus:ring-0 dark:focus:border-white focus:border-black dark:bg-[#2C333F] p-[12px] pr-6 text-[16px] leading-[24px] font-[500] dark:text-[#999DAA]"}
-          />
+            className={`w-full rounded-[0.5rem] mt-3 mb-4 focus:ring-0 dark:focus:border-white focus:border-black dark:bg-[#2C333F] p-[12px] pr-6 text-[16px] leading-[24px] font-[500] dark:text-[#999DAA] ${user._id === "66d9f75d5950dde630be7c3c" ? "disabled" : ""}`}
+            disabled={user._id === "66d9f75d5950dde630be7c3c"} 
+            />
+
           {errors.description && <div className="text-red-500 mb-3 text-xs">This field is required</div>}
           {maxLen > 500 && <div className="text-red-500 mb-3 text-xs">Reached maximum character limit</div>}
 
@@ -65,6 +68,7 @@ const CreatePost = memo(function CreatePost(){
               placeholder="Do you know their name?"
               {...register('name')}
               className="w-full rounded-[0.5rem] mt-3 dark:bg-[#2C333F] focus:ring-0 dark:focus:border-white focus:border-black p-[12px] pr-12 text-[16px] leading-[24px] font-[500] dark:text-[#999DAA]"
+              disabled={user._id === "66d9f75d5950dde630be7c3c"} 
             />
 
             <div className='flex lg:flex-row flex-col max-md:gap-3 justify-between '>
@@ -83,6 +87,7 @@ const CreatePost = memo(function CreatePost(){
                 className="w-full rounded-[0.5rem] dark:bg-[#2C333F] mt-3 focus:ring-0 dark:focus:border-white focus:border-black p-[12px] pr-12 text-[16px] leading-[24px] font-[500] dark:text-[#999DAA]"
                 {...register("year")}
                 defaultValue="" 
+                disabled={user._id === "66d9f75d5950dde630be7c3c"} 
               >
                 {/* <option value="" className='hidden' disabled>Do you know their year?</option> */}
                 {years.map((ele, i) => 
@@ -108,6 +113,7 @@ const CreatePost = memo(function CreatePost(){
                 }}
                 className="w-full rounded-[0.5rem] dark:bg-[#2C333F] focus:ring-0 dark:focus:border-white focus:border-black mt-3 p-[12px] pr-12 text-[16px] leading-[24px] font-[500] dark:text-[#999DAA]"
                 {...register("branch")}
+                disabled={user._id === "66d9f75d5950dde630be7c3c"} 
                 
               >
                 {branches.map((ele, i) => {

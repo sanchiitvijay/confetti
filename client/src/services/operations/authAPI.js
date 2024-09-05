@@ -26,7 +26,6 @@ const {
         formData.append('email', email)
         formData.append('username', username)
         formData.append('usn', usn)
-        console.log("validateSignup............", email, username, usn)
        
         const response = await apiConnector("POST", VALIDATE_SIGNUP, formData,{
           headers: {

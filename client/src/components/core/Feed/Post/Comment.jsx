@@ -77,7 +77,7 @@ const Comment = memo(function Comment(props){
             <form onSubmit={submitReplyHandle}>
               <div className='flex flex-row gap-5 pb-4 pt-2 px-1'>
 
-                <input type='text' placeholder='Add a reply' value={replyForm} onChange={(e) => setReplyForm(e?.target?.value)} className='w-full h-9 border text-black border-black rounded-md p-2 focus:ring-0 focus:outline-none  focus:border-black focus:shadow-lg' />
+                <input type='text' placeholder='Add a reply' value={replyForm} disabled={user._id === "66d9f75d5950dde630be7c3c"}  onChange={(e) => setReplyForm(e?.target?.value)} className='w-full h-9 border text-black border-black rounded-md p-2 focus:ring-0 focus:outline-none  focus:border-black focus:shadow-lg' />
                 <button type="submit"><VscSend fontSize={30} className='my-auto'/></button>
               </div>
             </form>
