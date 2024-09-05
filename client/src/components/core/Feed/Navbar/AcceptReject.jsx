@@ -31,7 +31,7 @@ const AcceptReject = ({ postId }) => {
       <div className='mx-auto flex flex-row-reverse gap-10'>
         <button 
           onClick={() => (getinsta())} 
-          className='bg-green-500 px-3 py-1 rounded-md text-xs'
+          className='bg-green-500 px-3 py-1 text-white rounded-md text-xs'
         >
           {!clicked ? "Show Insta handle" : "Send them a message 😉"}
         </button>

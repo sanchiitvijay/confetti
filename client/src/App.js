@@ -46,99 +46,71 @@ function App() {
   useFirebaseMessaging();
   
   return (
-    <div className={`w-screen ${token ? "bg-white" : "bg-ring"} dark:bg-confettiDarkColor1 bg-cover bg-center min-h-screen flex flex-col`}>
+    <div className={`w-screen hind ${token ? "bg-white" : "bg-ring"} dark:bg-confettiDarkColor1 bg-cover bg-center min-h-screen flex flex-col`}>
       <MetaData />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route
             path="/"
             element={
-              <motion.div
-                initial={{ y: -50 }}
-                animate={{ y: 0 }}
-                exit={{ y: -50 }}
-                transition={{ duration: 0.5 }}
+              <div
               >
                 <Home />
-              </motion.div>
+              </div>
             }
           />
           <Route
             path="/signup"
             element={
-              <motion.div
-                initial={{ y: -50 }}
-                animate={{ y: 0 }}
-                exit={{ y: -50 }}
-                transition={{ duration: 0.5 }}
+              <div
               >
                 <Signup />
-              </motion.div>
+              </div>
             }
           />
           <Route
             path="/forgot-password"
             element={
-              <motion.div
-                initial={{ y: -50 }}
-                animate={{ y: 0 }}
-                exit={{ y: -50 }}
-                transition={{ duration: 0.5 }}
+              <div
               >
                 <ForgotPassword />
-              </motion.div>
+              </div>
             }
           />
           <Route
             path="/update-password/:uid"
             element={
-              <motion.div
-                initial={{ y: -50 }}
-                animate={{ y: 0 }}
-                exit={{ y: -50 }}
-                transition={{ duration: 0.5 }}
+              <div
               >
                 <UpdatePassword />
-              </motion.div>
+              </div>
             }
           />
           <Route
             path="/privacy-policy"
             element={
-              <motion.div
-                initial={{ y: -50 }}
-                animate={{ y: 0 }}
-                exit={{ y: -50 }}
-                transition={{ duration: 0.5 }}
+              <div
               >
                 <PrivacyPolicy />
-              </motion.div>
+              </div>
             }
           />
           <Route
             path="/terms-and-conditions"
             element={
-              <motion.div
-                initial={{ y: -50 }}
-                animate={{ y: 0 }}
-                exit={{ y: -50 }}
-                transition={{ duration: 0.5 }}
+              <div
               >
                 <TermsAndConditions />
-              </motion.div>
+              </div>
             }
           />
           <Route
             path="/otp"
             element={
-              <motion.div
-                initial={{ y: -50 }}
-                animate={{ y: 0 }}
-                exit={{ y: -50 }}
-                transition={{ duration: 0.5 }}
+              <div
               >
                 <OTP />
-              </motion.div>
+              </div>
             }
           />
         
@@ -161,14 +133,10 @@ function App() {
           <Route
             path="*"
             element={
-              <motion.div
-                initial={{ y: -50 }}
-                animate={{ y: 0 }}
-                exit={{ y: -50 }}
-                transition={{ duration: 0.5 }}
+              <div
               >
                 <Page404 />
-              </motion.div>
+              </div>
             }
           />
         </Routes>
