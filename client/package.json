@@ -48,8 +48,8 @@
     "url": "https://github.com/thepranaygupta/react-tailwind-css-starter-pack/issues"
   },
   "scripts": {
-   "start": "cra-append-sw --mode dev --env ./.env ./firebase-messaging-sw.js && react-scripts start",
-    "build": "cra-append-sw --env ./.env ./firebase-messaging-sw.js && react-scripts build",
+   "start": "react-scripts start && cra-append-sw --mode dev --env ./.env ./firebase-messaging-sw.js",
+    "build": "react-scripts build && cra-append-sw --env ./.env ./firebase-messaging-sw.js",
     "eject": "react-scripts eject",
     "server": "cd ../server && npm run dev",
     "dev": "concurrently -n \"client,server\" -c \"bgBlue,bgYellow\" \"npm start\" \"npm run server\""
