@@ -25,7 +25,7 @@ const Modal = memo(function Modal({ data, name, value, error, register, required
   return (
     <AnimatePresence>
       {isVisible && (
-        <motion.div
+        <div
           variants={modalVariants}
           initial="hidden"
           animate="visible"
@@ -66,7 +66,7 @@ const Modal = memo(function Modal({ data, name, value, error, register, required
               </div>
             </button>
           </div>
-        </motion.div>
+        </div>
       )}
     </AnimatePresence>
   );

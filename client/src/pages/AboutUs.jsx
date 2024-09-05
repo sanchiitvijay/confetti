@@ -18,14 +18,14 @@ const AboutUs = () => {
       <div className='flex relative mb-10 flex-col mx-auto w-full text-black dark:text-white dark:bg-confettiDarkColor2 bg-confettiLightColor2 min-h-[100vh] items-center content-center'>
         
         <div className='absolute top-5 z-10 rounded-3xl gap-4 right-5 flex flex-row items-center'>
-          <motion.div
+          <div
             className='w-[200px] bg-white dark:bg-confettiDarkColor2 rounded-3xl h-auto text-sm text-right'
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : 20 }}
             transition={{ duration: 0.25, delay: 0.25, ease: "linear" }}
           >
             If you have a moment, please star this repo ⭐. Thanks!
-          </motion.div>
+          </div>
           <a
             href='https://github.com/sanchiitvijay/confetti'
             target='_blank'

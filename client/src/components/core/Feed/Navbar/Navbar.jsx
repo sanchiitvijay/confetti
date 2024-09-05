@@ -29,12 +29,12 @@ const Navbar = () => {
   };
   return ( 
 
-<motion.div className="sticky top-0 z-50 bg-[#fff9d8] shadow-md dark:bg-confettiDarkColor3 dark:text-white text-black border-gray-200">
+<div className="sticky top-0 z-50 bg-[#fff9d8] shadow-md dark:bg-confettiDarkColor3 dark:text-white text-black border-gray-200">
   <div className="max-w-screen-xl flex  flex-wrap h-[3.5rem] items-center justify-between mx-auto py-1 md:px-5 px-3">
   <Link to="/feed" className="flex ml-4 items-center space-x-3 rtl:space-x-reverse">
       <img src={logo} className="h-[90px] mt-[-10px] mb-[-30px]" alt="Confetti Logo" />
   </Link>  
-  <div className='justify-between dancing-script-font max-md:hidden text-4xl'>
+  <div className='justify-between dancing max-md:hidden text-4xl'>
     Confetti
   </div>
   <div className="flex items-center md:order-2 md:gap-4 gap-1 space-x-3 md:space-x-0 mr-3 rtl:space-x-reverse">
@@ -50,7 +50,7 @@ const Navbar = () => {
       <UserDetails {...user}/>
   </div>
   </div>
-</motion.div>
+</div>
 
   )
 }
