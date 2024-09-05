@@ -20,6 +20,7 @@
     "flowbite-react": "^0.9.0",
     "framer-motion": "^11.3.8",
     "react": "^18.2.0",
+    "react-app-rewired": "^2.2.1",
     "react-dom": "^18.2.0",
     "react-fast-marquee": "^1.6.4",
     "react-helmet": "^6.1.0",
@@ -48,8 +49,8 @@
     "url": "https://github.com/thepranaygupta/react-tailwind-css-starter-pack/issues"
   },
   "scripts": {
-   "start": "react-scripts start && cra-append-sw --mode dev --env ./.env ./firebase-messaging-sw.js",
-    "build": "react-scripts build && cra-append-sw --env ./.env ./firebase-messaging-sw.js",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
     "eject": "react-scripts eject",
     "server": "cd ../server && npm run dev",
     "dev": "concurrently -n \"client,server\" -c \"bgBlue,bgYellow\" \"npm start\" \"npm run server\""
@@ -74,6 +75,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
+    "copy-webpack-plugin": "^12.0.2",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.4"
   }

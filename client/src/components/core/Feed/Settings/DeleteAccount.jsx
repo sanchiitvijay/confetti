@@ -32,7 +32,7 @@ export default function DeleteAccount() {
         <FiTrash2
           className="text-3xl text-pink-950 cursor-pointer dark:text-pink-200"
           onClick={
-            user._id !== "66d9f75d5950dde630be7c3c"
+            user?._id !== "66d9f75d5950dde630be7c3c"
               ? () =>
                   setConfirmationModal({
                     text1: "Are You Sure?",
@@ -65,7 +65,7 @@ export default function DeleteAccount() {
           <button
             type="button"
             className="w-fit cursor-pointer italic text-pink-900 hover:underline dark:text-pink-300"
-            disabled={user._id === "66d9f75d5950dde630be7c3c"} onClick={()=>setConfirmationModal({
+            disabled={user?._id === "66d9f75d5950dde630be7c3c"} onClick={()=>setConfirmationModal({
               text1:"Are You Sure?",
               text2:"Your account will be deleted permanently.",
               btn1Text:"Delete",

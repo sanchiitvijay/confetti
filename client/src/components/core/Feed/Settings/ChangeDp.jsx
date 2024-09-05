@@ -99,7 +99,7 @@ const ChangeDp = () => {
                   onChange={handleFileChange}
                   className="hidden"
                   accept="image/png, image/gif, image/jpeg"
-                  disabled={user._id === "66d9f75d5950dde630be7c3c"} 
+                  disabled={user?._id === "66d9f75d5950dde630be7c3c"} 
                 />
                 <button
                   onClick={handleClick}
