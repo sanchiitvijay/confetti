@@ -50,7 +50,7 @@ export default function EditProfile () {
                 style={{
                   boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                 }}
-                disabled={user._id === "66d9f75d5950dde630be7c3c"} 
+                disabled={user?._id === "66d9f75d5950dde630be7c3c"} 
                 className="w-full  text-[16px] leading-[24px] font-[500] dark:text-[#999DAA] rounded-[0.5rem] dark:bg-[#2C333F] p-[12px] pr-12 "
                 {...register("name", { required: true })}
                 defaultValue={user?.name}
@@ -70,7 +70,7 @@ export default function EditProfile () {
                 name="username"
                 id="username"
                 placeholder="Enter your username"
-                disabled={user._id === "66d9f75d5950dde630be7c3c"} 
+                disabled={user?._id === "66d9f75d5950dde630be7c3c"} 
                 style={{
                   boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                 }}
@@ -95,7 +95,7 @@ export default function EditProfile () {
                 type="text"
                 name="instagram"
                 id="instagram"
-                disabled={user._id === "66d9f75d5950dde630be7c3c"} 
+                disabled={user?._id === "66d9f75d5950dde630be7c3c"} 
                 placeholder="Enter your insta handle"
                 style={{
                   boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
@@ -119,7 +119,7 @@ export default function EditProfile () {
                 type="text"
                 name="year"
                 id="year"
-                disabled={user._id === "66d9f75d5950dde630be7c3c"} 
+                disabled={user?._id === "66d9f75d5950dde630be7c3c"} 
                 style={{
                   boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                 }}

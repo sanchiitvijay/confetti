@@ -59,7 +59,7 @@ const Feed = () => {
       if (!device) {
         const deviceToken = await getToken(messaging, { vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY});
         const combinedString = navigator.userAgent + "|" + navigator.hardwareConcurrency + "|" + deviceToken;
-        dispatch(handleDevice(user._id,token,combinedString));
+        dispatch(handleDevice(user?._id,token,combinedString));
       }
 
       else {
