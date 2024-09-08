@@ -168,7 +168,7 @@ exports.signup=async(req,res)=>{
             }
         }
         else{
-            avatarUrl=`https://api.dicebear.com/7.x/initials/svg?seed=${name?.split(" ")[0]} ${name?.split(" ")[1]}`
+            avatarUrl=`https://api.dicebear.com/7.x/initials/svg?seed=${name?.split(" ")[0]}}`
         }
 
         const user=await User.create({
