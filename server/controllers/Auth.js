@@ -12,7 +12,7 @@ const { cloudinaryConnect } = require("../configs/cloudinary");
 const welcomeTemplate = require("../mail/templates/newJoining");
 // const {getAuth} =require("firebase-admin");
 
-// var admin = require("firebase-admin");
+var admin = require("firebase-admin");
 // const getAuth=admin.auth;
 
 if (!admin.apps?.length) {

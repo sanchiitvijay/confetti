@@ -49,12 +49,13 @@ const Feed = () => {
     //By Defualt three kind of permissions->granted,default,denied
 
     console.log("Permission Type:",permission);
+    
     if (permission === 'granted') {
       //Generate the token
       if (!device) {
         try{
-          console.log("======0000========")
-        const deviceToken = await getToken(messaging, { vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY});
+        const vapidKey=process.env.REACT_APP_FIREBASE_VAPID_KEY;
+        const deviceToken = await getToken(messaging, { vapidKey});
         console.log("====11111=====", deviceToken)
         const combinedString = navigator.userAgent + "|" + navigator.hardwareConcurrency + "|" + deviceToken;
         console.log("====2222======", combinedString)
