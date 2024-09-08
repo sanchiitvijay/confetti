@@ -12,8 +12,8 @@ const { cloudinaryConnect } = require("../configs/cloudinary");
 const welcomeTemplate = require("../mail/templates/newJoining");
 // const {getAuth} =require("firebase-admin");
 
-var admin = require("firebase-admin");
-const getAuth=admin.auth;
+// var admin = require("firebase-admin");
+// const getAuth=admin.auth;
 
 if (!admin.apps?.length) {
     var serviceAccount = require("../configs/firebase-admin-config")
@@ -186,7 +186,7 @@ exports.signup=async(req,res)=>{
             
             });
 
-            const userWithoutUnuseData = await User.findById(user._id)
+            
 
             // const firebaseUser=await getAuth().createUser({
             //     email,
@@ -194,6 +194,9 @@ exports.signup=async(req,res)=>{
             // })
 
             // if(!firebaseUser){
+            //     if(user){
+            //         await User.findByIdAndDelete(user._id);
+            //     }
             //     return res.status(400).json({
             //         success:false,
             //         message:"Firebase signup failed"
@@ -202,6 +205,7 @@ exports.signup=async(req,res)=>{
             //     )
             // }
             
+
             sendJoiningEmail(email,user.name);
 
 
@@ -209,7 +213,7 @@ exports.signup=async(req,res)=>{
         return res.status(200).json({
             success:true,
             message:"Sign up Successfull",
-            userWithoutUnuseData
+            user
         })
     }
     catch(error){
