@@ -42,8 +42,7 @@ app.use(cookieParser());
 //establishing connection between frontend and backend through cors
 app.use(
     cors({
-        origin:"https://confetti-five.vercel.app/",
-        credentials:true
+        origin:"*",
     })
 );
 
