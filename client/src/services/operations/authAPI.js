@@ -5,8 +5,8 @@ import { setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiConnector"
 import { authEndpoints } from "../api"
 import { setDevice } from "../../slices/notificationSlice"
-import {auth} from "../../firebase";
-import {createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut} from "firebase/auth"
+// import {auth} from "../../firebase";
+// import {signInWithEmailAndPassword,signOut} from "firebase/auth"
 
 const {
     LOGIN_API,
@@ -213,9 +213,7 @@ export function logout(navigate) {
       dispatch(setDevice(null))
       localStorage.clear();
       sessionStorage.clear();
-      // console.log("firebase se pehle")
       // await signOut(auth);
-      // console.log("firebase se out hone ke baad")
       toast.success("Logged Out")
       navigate("/")
     }

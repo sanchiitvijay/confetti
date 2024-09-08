@@ -44,6 +44,8 @@ function App() {
   }, [darkMode]);
  
   useFirebaseMessaging();
+
+  
   
   return (
     <div className={`w-screen hind ${token ? "bg-white" : "bg-ring"} dark:bg-confettiDarkColor1 bg-cover bg-center min-h-screen flex flex-col`}>
