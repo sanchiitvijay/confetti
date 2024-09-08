@@ -19,7 +19,7 @@ const AboutUs = () => {
         
         <div className='absolute top-5 z-10 rounded-3xl gap-4 right-5 flex flex-row items-center'>
           <div
-            className='w-[200px] bg-white dark:bg-confettiDarkColor2 rounded-3xl h-auto text-sm text-right'
+            className='w-[200px] max-md:hidden bg-white dark:bg-confettiDarkColor2 rounded-3xl h-auto text-sm text-right'
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : 20 }}
             transition={{ duration: 0.25, delay: 0.25, ease: "linear" }}
