@@ -40,14 +40,12 @@ app.use(express.json());
 app.use(cookieParser());
 
 //establishing connection between frontend and backend through cors
-const corsOptions = {
-    origin: "https://confetti-five.vercel.app/",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true, // Add if your API requires credentials
-    optionsSuccessStatus: 204
-  };
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+app.use(
+    cors({
+        origin:"https://confetti-five.vercel.app",
+        credentials:true
+    })
+);
 
 
 //for file uploads
