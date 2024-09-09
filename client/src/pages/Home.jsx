@@ -32,6 +32,7 @@ const Home = () => {
     }))
   }
 
+  console.log(process.env)
   const handleOnSubmit = (e) => {
     e.preventDefault()
     dispatch(login(email, password, navigate))
