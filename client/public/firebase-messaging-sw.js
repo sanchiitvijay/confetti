@@ -5,13 +5,11 @@ let firebaseConfig={}
 
 self.addEventListener('message', (event) => {
   if (event.data) {
-    console.log("Received Firebase config in service worker:", event);
 
     if (event.data?.initializeFirebaseOnServiceWorker) {
       firebaseConfig = event.data;
     }
 
-    console.log("================", firebaseConfig)
     
 
     // Initialize Firebase with the received config
@@ -23,7 +21,6 @@ self.addEventListener('message', (event) => {
 
     // Handle background messages
     messaging.onBackgroundMessage((payload) => {
-      console.log("[firebase-messaging-sw.js] Received background message", payload);
       const notificationTitle = payload.notification.title;
       const notificationOptions = {
         body: payload.notification.body,
@@ -61,7 +58,6 @@ self.addEventListener('message', (event) => {
 
 // Handle notification click events
 self.addEventListener('notificationclick', (event) => {
-  console.log('Notification clicked:', event);
   event.notification.close();
   event.waitUntil(
     clients.openWindow(event.notification.data.url)
@@ -90,7 +86,6 @@ const STATIC_ASSETS = [
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log("Opened cache and caching static assets");
       return cache.addAll(STATIC_ASSETS);
     })
   );
@@ -126,7 +121,6 @@ self.addEventListener("fetch", (event) => {
           .catch(() => {
             return caches.match(event.request).then((cachedResponse) => {
               // Provide fallback response if cache match fails
-              console.log("POSTS CACHE SE AAYI")
               return cachedResponse || new Response('Offline', { status: 503 });
             });
           });

@@ -42,6 +42,7 @@ export function getUserStats(token){
     return async(dispatch)=>{
         try{
             const response=await apiConnector("GET",GET_USER_POST_STATS_API,null,{
+                "Content-Type": "multipart/form-data",
                 Authorization: `Bearer ${token}`
             });
 
