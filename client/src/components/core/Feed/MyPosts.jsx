@@ -9,6 +9,7 @@ const MyPosts = () => {
   const dispatch = useDispatch();
   const {user}=useSelector((state)=>state.profile)
   const { token } = useSelector((state) => state.auth);
+  
   const { userPost, userTotalPosts } = useSelector((state) => state.profile);
   const [count, setCount] = useState(4);
   const fetchMoreData = async () => {

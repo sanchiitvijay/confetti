@@ -10,6 +10,8 @@ const MyProfile = () => {
   const { user } = useSelector(state => state.profile)
   const navigate = useNavigate()
   const dispatch = useDispatch();
+
+  const {token} = useSelector(state => state.auth)
   
   const [data, setData] = useState({
     postLength: 0,
@@ -35,7 +37,7 @@ const MyProfile = () => {
   }
   async function fetchStats() {
     try {
-      const response = await dispatch(getUserStats());
+      const response = await dispatch(getUserStats(token));
       setData(response);
       console.log("response in my profile-----------", response)
       const targets = [
