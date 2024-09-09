@@ -1,4 +1,4 @@
-const BASE_URL = "https://confetti-cvwl.onrender.com/api/v1"
+const BASE_URL = "https://confetti-42b5.onrender.com/api/v1"
 
 
 export const authEndpoints = {
