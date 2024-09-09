@@ -37,7 +37,7 @@ const MyProfile = () => {
     try {
       const response = await dispatch(getUserStats());
       setData(response);
-
+      console.log("response in my profile-----------", response)
       const targets = [
         { element: document.getElementById('postCount'), count: response.postLength, suffix: '' },
         { element: document.getElementById('likeCount'), count: response.likesLength, suffix: '' },

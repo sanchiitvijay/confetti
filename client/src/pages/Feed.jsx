@@ -39,7 +39,6 @@ const Feed = () => {
  
   }, [token, navigate])
 
-  console.log("enviorenment",process.env)
   useOnClickOutsideProfile(showRef, stickRef, showHandler);
 
 
@@ -56,11 +55,8 @@ const Feed = () => {
         try{
         const vapidKey=process.env.REACT_APP_FIREBASE_VAPID_KEY;
         const deviceToken = await getToken(messaging, { vapidKey});
-        console.log("====11111=====", deviceToken)
         const combinedString = navigator.userAgent + "|" + navigator.hardwareConcurrency + "|" + deviceToken;
-        console.log("====2222======", combinedString)
         dispatch(handleDevice(user?._id,token,combinedString));
-        console.log("Device token:",deviceToken)
         }catch(err){
           console.log("registering device error:",err);
         }
@@ -77,8 +73,6 @@ const Feed = () => {
   }
 
    
-
-  console.log("Current Device:",device);
   useEffect(() => {
     //req user for notification permission
     requestPermission();
