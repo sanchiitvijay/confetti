@@ -538,7 +538,7 @@ exports.getUserPostsStats = async (req, res) => {
                 likesLength: totalLikes,
                 commentsLength: totalComments,
             }
-
+            console("1 mein data----------", data)
             return res.status(200).json({
                 success: true,
                 message: "User Posts Stats fetched successfully",
@@ -565,12 +565,14 @@ exports.getUserPostsStats = async (req, res) => {
                 likesLength,
                 commentsLength
             }
-
-            return res.status(200).json({
-                success: true,
-                message: "User Posts Stats fetched successfully",
-                data
-            })
+            console.log("2 mein data----------", data)
+            if(data) {
+                return res.status(200).json({
+                    success: true,
+                    message: "User Posts Stats fetched successfully",
+                    data
+                })
+            }
 
         }
 
@@ -601,7 +603,13 @@ exports.getUserPostsStats = async (req, res) => {
             likesLength,
             commentsLength
         }
-
+        console.log("3 mein data----------", data)
+        if(!data){
+            return res.status(404).json({
+                success: false,
+                message: "Couldnt fetch the user posts stats"
+            })
+        }
         return res.status(200).json({
             success: true,
             message: "User Posts Stats fetched successfully",
