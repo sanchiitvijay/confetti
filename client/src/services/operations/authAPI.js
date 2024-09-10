@@ -157,7 +157,7 @@ const {
         dispatch(setToken(response.data.token))
         const userImage = response.data.user.image
         dispatch(setUser({ ...response.data.user, image: userImage }))
-        localStorage.setItem("token", JSON.stringify(response.data.token))
+        localStorage.setItem("token", response.data.token)
         localStorage.setItem("user", JSON.stringify(response.data.user));
         
         // console.log("Log in krne jaa rhe h firebase me")
