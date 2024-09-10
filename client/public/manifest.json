@@ -13,7 +13,7 @@
         "type": "image/png"
       }
     ],
-    "start_url": "/",
+    "start_url": "https://confetti-five.vercel.app/",
     "background_color": "#ffffff",
     "display": "standalone",
     "theme_color": "#000000",
