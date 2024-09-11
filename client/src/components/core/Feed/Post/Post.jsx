@@ -45,11 +45,12 @@ const Post = memo(function Post(props){
   } , [comment])
 
   const likeHandler = async () => {
+    let toastId='';
        if(like){
-         const toastId=toast.loading("unliking..");
+         toastId=toast.loading("unliking..");
        }
         else{
-          const toastId=toast.loading("liking..");
+          toastId=toast.loading("liking..");
         }
     
       await dispatch(liked(token, { postId: props?._id }));
