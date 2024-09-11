@@ -81,7 +81,31 @@ const Feed = () => {
   console.log("Current Device:",device);
   useEffect(() => {
     //req user for notification permission
-    requestPermission();
+    if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.ready.then((registration) => {
+      console.log('Service Worker is ready and registered with scope:', registration.scope);
+      
+      // Check if the service worker is active
+      if (registration.active) {
+        console.log('Service Worker is active.');
+        requestPermission(); // Proceed with push subscription here
+      } else {
+        console.log('Service Worker is not yet active, waiting...');
+        
+        // Listen for state change if it's not active
+        registration.installing?.addEventListener('statechange', (event) => {
+          if (event.target.state === 'activated') {
+            console.log('Service Worker is now active.');
+            requestPermission(); // Now that the SW is active, request permission
+          }
+        });
+      }
+    }).catch((error) => {
+      console.error('Service Worker ready check failed:', error);
+    });
+  } else {
+    console.error("Service Workers are not supported in this browser.");
+  }
   }, [])
 
 
