@@ -88,8 +88,6 @@ const STATIC_ASSETS = [
 
 // Install event - Cache static assets
 self.addEventListener("install", (event) => {
-  console.log("Installing Service Worker...");
-  self.skipWaiting();  // Force activation of new worker
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log("Opened cache and caching static assets");
@@ -98,26 +96,6 @@ self.addEventListener("install", (event) => {
   );
 });
 
-//listening to the activate event and taking control immediately
-self.addEventListener("activate", (event) => {
-  console.log("Service Worker activating...");
-  event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          // Delete old cache versions
-          if (cacheName !== CACHE_NAME && cacheName !== API_CACHE_NAME) {
-            console.log(`Deleting old cache: ${cacheName}`);
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    }).then(() => {
-      console.log("Service Worker: Claiming clients for immediate control...");
-      return self.clients.claim();  // Force control of the page
-    })
-  );
-});
 
 
 self.addEventListener("fetch", (event) => {
