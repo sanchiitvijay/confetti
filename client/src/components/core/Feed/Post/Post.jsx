@@ -10,6 +10,7 @@ import Comment from './Comment';
 import PostHeader from './PostHeader';
 import { useNavigate } from 'react-router-dom';
 import ShareModal from './ShareModal';
+import toast from 'react-hot-toast';
 
 const Post = memo(function Post(props){
   const dispatch = useDispatch();
@@ -44,10 +45,13 @@ const Post = memo(function Post(props){
   } , [comment])
 
   const likeHandler = async () => {
+      const toastId=toast.loading("liking...");
       await dispatch(liked(token, { postId: props?._id }));
     setLike(prevLike => {
       const newLikeState = !prevLike;
       setTotalLikes(prevLikes => newLikeState ? prevLikes + 1 : prevLikes - 1);
+      toast.dismiss(toastId);
+      toast.success("liked");
       return newLikeState;
     });
     
