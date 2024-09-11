@@ -75,7 +75,23 @@ const Feed = () => {
    
   useEffect(() => {
     //req user for notification permission
-    requestPermission();
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.ready.then((registration) => {
+      console.log('Service Worker registered with scope:', registration.scope);
+      
+      // Check if the service worker is active
+      if (registration.active) {
+        console.log('Service Worker is active.');
+        requestPermission(); // Call your push notification permission function
+      } else {
+        console.log('Service Worker is not yet active.');
+      }
+    }).catch((error) => {
+      console.log('Service Worker registration failed:', error);
+    });
+  } else {
+    console.error("Service Workers are not supported in this browser.");
+  }
   }, [])
 
 
