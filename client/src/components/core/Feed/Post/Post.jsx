@@ -51,7 +51,7 @@ const Post = memo(function Post(props){
       const newLikeState = !prevLike;
       setTotalLikes(prevLikes => newLikeState ? prevLikes + 1 : prevLikes - 1);
       toast.dismiss(toastId);
-      toast.success("liked");
+    
       return newLikeState;
     });
     
