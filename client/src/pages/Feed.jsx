@@ -82,7 +82,7 @@ const Feed = () => {
   useEffect(() => {
     //req user for notification permission
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.ready.then((registration) => {
+    navigator.serviceWorker.ready().then((registration) => {
       console.log('Service Worker is ready and registered with scope:', registration.scope);
 
       if (registration.active) {
