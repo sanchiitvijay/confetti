@@ -88,6 +88,7 @@ const STATIC_ASSETS = [
 
 // Install event - Cache static assets
 self.addEventListener("install", (event) => {
+  console.log("installing...");
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log("Opened cache and caching static assets");
@@ -96,7 +97,9 @@ self.addEventListener("install", (event) => {
   );
 });
 
-
+self.addEventListener("activate",(event)=>{
+  console.log("activation phase,installing done...");
+});
 
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
