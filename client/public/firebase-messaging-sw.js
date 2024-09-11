@@ -89,56 +89,56 @@ const STATIC_ASSETS = [
 // Install event - Cache static assets
 self.addEventListener("install", (event) => {
   console.log("installing...");
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      console.log("Opened cache and caching static assets");
-      return cache.addAll(STATIC_ASSETS);
-    })
-  );
+  // event.waitUntil(
+  //   caches.open(CACHE_NAME).then((cache) => {
+  //     console.log("Opened cache and caching static assets");
+  //     return cache.addAll(STATIC_ASSETS);
+  //   })
+  // );
 });
 
 self.addEventListener("activate",(event)=>{
   console.log("activation phase,installing done...");
 });
 
-self.addEventListener("fetch", (event) => {
-  const url = new URL(event.request.url);
+// self.addEventListener("fetch", (event) => {
+//   const url = new URL(event.request.url);
 
-  // Use cache-first strategy for static assets
-  if (STATIC_ASSETS.includes(url.pathname)) {
-    event.respondWith(
-      caches.match(event.request).then((cachedResponse) => {
-        return cachedResponse || fetch(event.request).then((response) => {
-          return caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, response.clone());
-            return response;
-          });
-        });
-      }).catch(() => {
-        // Handle fetch error here
-        return new Response('Error fetching resource', { status: 500 });
-      })
-    );
-  } else if (url.pathname.startsWith("/api/")) {
-    // Use network-first strategy for API requests
-    event.respondWith(
-      caches.open(API_CACHE_NAME).then((cache) => {
-        return fetch(event.request)
-          .then((response) => {
-            cache.put(event.request, response.clone());
-            return response;
-          })
-          .catch(() => {
-            return caches.match(event.request).then((cachedResponse) => {
-              // Provide fallback response if cache match fails
-              console.log("POSTS CACHE SE AAYI")
-              return cachedResponse || new Response('Offline', { status: 503 });
-            });
-          });
-      })
-    );
-  }
-});
+//   // Use cache-first strategy for static assets
+//   if (STATIC_ASSETS.includes(url.pathname)) {
+//     event.respondWith(
+//       caches.match(event.request).then((cachedResponse) => {
+//         return cachedResponse || fetch(event.request).then((response) => {
+//           return caches.open(CACHE_NAME).then((cache) => {
+//             cache.put(event.request, response.clone());
+//             return response;
+//           });
+//         });
+//       }).catch(() => {
+//         // Handle fetch error here
+//         return new Response('Error fetching resource', { status: 500 });
+//       })
+//     );
+//   } else if (url.pathname.startsWith("/api/")) {
+//     // Use network-first strategy for API requests
+//     event.respondWith(
+//       caches.open(API_CACHE_NAME).then((cache) => {
+//         return fetch(event.request)
+//           .then((response) => {
+//             cache.put(event.request, response.clone());
+//             return response;
+//           })
+//           .catch(() => {
+//             return caches.match(event.request).then((cachedResponse) => {
+//               // Provide fallback response if cache match fails
+//               console.log("POSTS CACHE SE AAYI")
+//               return cachedResponse || new Response('Offline', { status: 503 });
+//             });
+//           });
+//       })
+//     );
+//   }
+// });
 
 //listening for redundant service workers
 self.addEventListener('redundant', () => {
