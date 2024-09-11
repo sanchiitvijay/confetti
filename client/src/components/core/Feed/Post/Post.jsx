@@ -44,12 +44,13 @@ const Post = memo(function Post(props){
   } , [comment])
 
   const likeHandler = async () => {
-    await dispatch(liked(token, { postId: props?._id }));
+   
     setLike(prevLike => {
       const newLikeState = !prevLike;
       setTotalLikes(prevLikes => newLikeState ? prevLikes + 1 : prevLikes - 1);
       return newLikeState;
     });
+     await dispatch(liked(token, { postId: props?._id }));
   
     
   };
