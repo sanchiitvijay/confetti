@@ -181,15 +181,16 @@ Here’s the revised description with the structure unchanged:
 
 You can preview the StudyNotion platform at [https://confetti-five.vercel.app/](https://confetti-five.vercel.app/)
 
-[![Profile Edit](https://i.ibb.co/419VCdR/editprofile.png)](https://confetti-five.vercel.app/)
-[![Home Dark](https://i.ibb.co/gJcwHzb/homedark.png)](https://confetti-five.vercel.app/)
-[![Home Light](https://i.ibb.co/TbXY285/homelight.png)](https://confetti-five.vercel.app/)
-[![Mobile Home](https://i.ibb.co/Pc4wVW5/mobile-Home.png)](https://confetti-five.vercel.app/)
-[![Notifications](https://i.ibb.co/kKLKGwf/notif.png)](https://confetti-five.vercel.app/)
+[![Login](https://i.ibb.co/m9Sb7R1/login.png)](https://confetti-five.vercel.app/)
 [![Signup Page](https://i.ibb.co/zn15587/signup-Page.png)](https://confetti-five.vercel.app/)
 [![Terms and Conditions](https://i.ibb.co/gVJ6QYG/tnc.png)](https://confetti-five.vercel.app/)
+[![Home Dark Full](https://i.ibb.co/j42hnh2/homedarkfull.png)](https://confetti-five.vercel.app/)
+[![Home Light](https://i.ibb.co/TbXY285/homelight.png)](https://confetti-five.vercel.app/)
+[![Mobile Home](https://i.ibb.co/Pc4wVW5/mobile-Home.png)](https://confetti-five.vercel.app/)
+[![My Profile](https://i.ibb.co/1fkrHLg/myprofile.png)](https://confetti-five.vercel.app/)
+[![Edit Profile](https://i.ibb.co/bKpJsD4/editprofile.png)](https://confetti-five.vercel.app/)
 [![User Card](https://i.ibb.co/HGpqtXT/userCard.png)](https://confetti-five.vercel.app/)
-[![User Stats](https://i.ibb.co/mbgVRrS/user-Stats.png)](https://confetti-five.vercel.app/)
+[![Notifications](https://i.ibb.co/kKLKGwf/notif.png)](https://confetti-five.vercel.app/)
 
 
 
