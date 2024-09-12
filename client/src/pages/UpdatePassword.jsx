@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react'
+import React, { Suspense } from 'react'
 import { useDispatch, useSelector } from "react-redux";
  import { resetPassword } from "../services/operations/authAPI";
 import { AiFillEyeInvisible,AiFillEye } from "react-icons/ai";
@@ -20,7 +20,6 @@ const UpdatePassword = () => {
       const [showPassword,setShowPassword]=useState(false);
       const [showConfirmPassword,setShowConfirmPassword]=useState(false);
       const dispatch=useDispatch();
-      const {token}=useSelector((state)=>state.auth)
       const navigate=useNavigate();
       
 

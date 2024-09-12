@@ -39,7 +39,7 @@ export function createComments(token, data) {
             };
             const newPostArray = [updatedPost, ...otherPosts];
 
-            console.log("newPostArray", newPostArray);
+           
 
             dispatch(setPost(newPostArray));
             dispatch(setComments(result));

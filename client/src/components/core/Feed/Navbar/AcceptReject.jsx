@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getInstaId } from '../../../../services/operations/notificationAPI';
-import { set } from 'react-hook-form';
 
 const AcceptReject = ({ postId }) => {
   const dispatch = useDispatch();

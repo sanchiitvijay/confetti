@@ -6,7 +6,6 @@ import { VscSend } from "react-icons/vsc";
 import Reply from './Reply';
 import { createReply, getAllReplies } from '../../../../services/operations/replyAPI';
 import { useNavigate, useParams } from 'react-router-dom';
-import { setReplies } from '../../../../slices/replySlice';
 
 const Comment = memo(function Comment(props){
   const user = useSelector((state) => state.profile.user);

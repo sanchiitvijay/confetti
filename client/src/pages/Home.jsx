@@ -6,7 +6,6 @@ import {AiOutlineEye} from "react-icons/ai"
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
 import SubmitButton from '../components/common/SubmitButton';
 import { login } from '../services/operations/authAPI';
-import { motion } from "framer-motion"
 import Loader from '../components/common/Loader';
 import { setRedirection } from '../slices/authSlice';
 
@@ -32,7 +31,6 @@ const Home = () => {
     }))
   }
 
-  console.log(process.env)
   const handleOnSubmit = (e) => {
     e.preventDefault()
     dispatch(login(email, password, navigate))
@@ -136,7 +134,7 @@ const Home = () => {
 
               <h2 className='text-white text-center font-semibold text-2xl'>Welcome to Confetti</h2>
               <div className='mt-5 leading-6 text-sm lg:text-[1rem] text-justify'>
-              Dive into the anonymous world of college life where secrets are shared, stories are told, and connections are made. Post your deepest confessions, comment on others, and engage in the most candid conversations on campus. Whether it’s a hilarious mishap, a heartfelt moment, or a daring secret, College Confessions is your go-to platform for sharing and discovering the untold tales of college life.
+              Dive into the anonymous world of college life where secrets are shared, stories are told, and connections are made. Post your deepest confessions, comment on others, and engage in the most candid conversations on campus. Whether it’s a hilarious mishap, a heartfelt moment, or a daring secret, Confetti is your go-to platform for sharing and discovering the untold tales of college life.
               <br/>
               Join the community. Share your story. Be a part of the conversation.
               </div>

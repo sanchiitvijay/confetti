@@ -1,13 +1,11 @@
 import React, { Suspense, useState } from 'react';
-import { VscCoffee } from "react-icons/vsc";
-import { FaGithub, FaDiscord } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 import "../components/core/Feed/Settings/Settings.css";
 import FeedbackForm from '../components/core/AboutUs/FeedbackForm';
 import OurInfo from '../components/core/AboutUs/OurInfo';
 import Loader from '../components/common/Loader';
 import { Link } from 'react-router-dom';
 import { developerData } from '../components/core/AboutUs/developerData';
-import { motion } from 'framer-motion';
 import coffeeCup from "../assets/coffeeCup.gif";
 
 const AboutUs = () => {
@@ -51,7 +49,7 @@ const AboutUs = () => {
         <Link to="/feed/buy-us-coffee">
           <div className='flex pb-10 my-10 text-yellow-500 flex-row gap-4'>
             <div className='text-4xl font-bold'>Buy Us Coffee </div>
-            <img src={coffeeCup} className='my-auto w-[50px]' />
+            <img src={coffeeCup} alt="coffecup" className='my-auto w-[50px]' />
           </div>
         </Link>
       </div>

@@ -11,6 +11,7 @@
 - Configuration
 - Folder Structure
 - Usage
+- Preview
 - Contributors
 - Contributing
 - License
@@ -172,8 +173,24 @@ Here’s the revised description with the structure unchanged:
 ## Usage
 
 - Open a new terminal 
-- Run the dev script: `npm run dev`
+- Run the dev script: `cd server/ && npm i && cd ../client/ &&  npm i && npm run dev`
 - Access the application in your browser at `http://localhost:3000`
+
+
+## Preview
+
+You can preview the StudyNotion platform at [https://confetti-five.vercel.app/](https://confetti-five.vercel.app/)
+
+[![Profile Edit](https://i.ibb.co/419VCdR/editprofile.png)](https://confetti-five.vercel.app/)
+[![Home Dark](https://i.ibb.co/gJcwHzb/homedark.png)](https://confetti-five.vercel.app/)
+[![Home Light](https://i.ibb.co/TbXY285/homelight.png)](https://confetti-five.vercel.app/)
+[![Mobile Home](https://i.ibb.co/Pc4wVW5/mobile-Home.png)](https://confetti-five.vercel.app/)
+[![Notifications](https://i.ibb.co/kKLKGwf/notif.png)](https://confetti-five.vercel.app/)
+[![Signup Page](https://i.ibb.co/zn15587/signup-Page.png)](https://confetti-five.vercel.app/)
+[![Terms and Conditions](https://i.ibb.co/gVJ6QYG/tnc.png)](https://confetti-five.vercel.app/)
+[![User Card](https://i.ibb.co/HGpqtXT/userCard.png)](https://confetti-five.vercel.app/)
+[![User Stats](https://i.ibb.co/mbgVRrS/user-Stats.png)](https://confetti-five.vercel.app/)
+
 
 
 ## Contributors

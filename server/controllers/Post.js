@@ -603,9 +603,9 @@ exports.getUserPostsStats = async (req, res) => {
         }
 
         //store in cache now to be fetched for the next time
-        await client.set(`user:${userId}:totalPosts`),postLength);
-        await client.set(`user:${userId}:totalLikes`),likesLength);
-        await client.set(`user:${userId}:totalComments`),commentsLength);
+        await client.set(`user:${userId}:totalPosts`,postLength);
+        await client.set(`user:${userId}:totalLikes`,likesLength);
+        await client.set(`user:${userId}:totalComments`,commentsLength);
 
         return res.status(200).json({
             success: true,

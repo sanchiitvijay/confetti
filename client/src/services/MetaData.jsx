@@ -16,7 +16,7 @@ const MetaData = () => {
       <meta property="og:title" content="College Confessions - Share and Discover Confessions" />
       <meta property="og:description" content="Post your anonymous college confessions, like, comment, share, and get notified about your confessions on College Confessions." />
       <meta property="og:image" content="https://res.cloudinary.com/dcnhb3jwv/image/upload/v1722706215/jasxmxzzygegj5ksvzrg.png" />
-      <meta property="og:url" content="https://www.collegeconfessions.com" />
+      <meta property="og:url" content="https://confetti-five.vercel.app/" />
       <meta property="og:site_name" content="Confetti" />
 
       {/* Twitter */}

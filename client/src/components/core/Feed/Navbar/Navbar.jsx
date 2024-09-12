@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { MdDarkMode } from "react-icons/md";
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleDarkMode } from '../../../../slices/themeSlice';
-import { motion } from 'framer-motion';
 import UserDetails from './UserDetails';
 import Notification from './Notification';
 import { AiFillSun } from "react-icons/ai";

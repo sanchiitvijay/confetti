@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import "./Settings/Settings.css"
-import { useDispatch, useSelector } from 'react-redux';
 import gold from '../../../assets/gold.png'
 import silver from '../../../assets/silver.png'
 import bronze from '../../../assets/bronze.png'

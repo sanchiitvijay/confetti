@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react'
-import Loader from '../components/common/Loader'
-import { VscCoffee } from "react-icons/vsc";
+import Loader from '../components/common/Loader';
 import qr_sanchit from '../assets/qr_sanchiitvijay.png'
 import qr_ashutosh from "../assets/qr_ashutoshkumar.png"
 import coffeeCup from "../assets/coffeeCup.gif"
@@ -11,7 +10,7 @@ const BuyUsACoffee = () => {
       <div className='text-black max-lg:w-[90%]  dark:text-white'>
         <div className='flex my-10 text-yellow-500 place-items-center justify-center mx-auto flex-row gap-4 '>
             <div className='text-3xl font-bold'>Buy Us Coffee </div>
-            <img src={coffeeCup} className='my-auto w-[44px]'/>
+            <img src={coffeeCup} alt="coffeecup" className='my-auto w-[44px]'/>
           </div>
           <div className='flex flex-col-reverse'>
 

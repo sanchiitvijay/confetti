@@ -11,7 +11,7 @@ self.addEventListener('message', (event) => {
       firebaseConfig = event.data;
     }
 
-    console.log("================", firebaseConfig)
+    
     
 
     // Initialize Firebase with the received config
