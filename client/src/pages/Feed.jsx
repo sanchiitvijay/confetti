@@ -65,9 +65,9 @@ const Feed = () => {
       }
     }
 
-    else if (permission === 'denied') {
-      alert("You denied for notification");
-    }
+    // else if (permission === 'denied') {
+    //   alert("You denied for notification");
+    // }
   }
 
    
