@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT}:${PORT}"
+    env_file:
+      - ./server/.env
+    environment:
+      - MONGODB_URL=${MONGODB_URL}
+      - REDIS_HOST=redis
+    depends_on:
+      - mongodb
+      - redis
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./client/.env
+    environment:
+      - REACT_APP_BACKEND_BASE_URL=http://server:${PORT}  
+    depends_on:
+      - server
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  redis:
+    image: redis:latest
+    ports:
+      - "${REDIS_PORT}:6379"
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+
+volumes:
+  mongodb_data:
