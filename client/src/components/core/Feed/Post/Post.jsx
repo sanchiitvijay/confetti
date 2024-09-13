@@ -69,7 +69,7 @@ const Post = memo(function Post(props){
         if (p._id === props?._id) {
             return {
                 ...p,
-                likes: !newLikeState
+                likes: newLikeState
                     ? [...p.likes, {
                         post: p._id,
                         author: user?._id,
