@@ -20,14 +20,10 @@ const Comment = memo(function Comment(props){
     tempreplyidentifier = true;
   }
 
-  
   const [showReply, setShowReply] = useState(false);
   const [writeReply, setWriteReply] = useState(false);
   const [replyForm, setReplyForm] = useState("");
   
-  const deleteCommentHandler = async () => {
-    dispatch(deleteComment(token, {postId: props.post, commentId: props._id}));
-  }
 
   const submitReplyHandle = (e) => {
     e.preventDefault();
@@ -65,7 +61,7 @@ const Comment = memo(function Comment(props){
           {
             user ?(
               user?._id === props?.author?._id &&
-              <MdOutlineDelete fontSize={'25px'}  className='my-auto mr-1' onClick={deleteCommentHandler}/>):(<></>)
+              <MdOutlineDelete fontSize={'25px'}  className='my-auto mr-1' onClick={() => props?.onDelete()}/>):(<></>)
             }
         </div>
         <div className='ml-10 my-3'>

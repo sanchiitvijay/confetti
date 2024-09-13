@@ -247,9 +247,17 @@ exports.removeComment = async (req, res) => {
         .populate('author')
         .exec();
 
+        const newpost = await Post.findById(postId)
+        .populate('author')
+        .populate({
+            path: "likes"
+        })
+        .exec();
+
+
         if (cachedPost) {
             await cachedPost?.comments?.filter((comment) => comment != commentId);
-            await client.set(`post:${postId}`, JSON.stringify(cachedPost));
+            await client.set(`post:${postId}`, JSON.stringify(newpost));
             const userComments = Number.parseInt(await client.get(`user:${cachedPost?.author?._id}:totalComments`)) || 0;
             await client.set(`user:${cachedPost?.author?._id}:totalComments`, userComments - 1);
         }

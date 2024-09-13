@@ -44,6 +44,8 @@ export function createComments(token, data) {
             dispatch(setPost(newPostArray));
             dispatch(setComments(result));
 
+            return result;
+
         } catch (err) {
             console.log("CREATE_COMMENT_API FAILED...", err);
             toast.error("Could not create comment");
@@ -68,6 +70,8 @@ export function getAllComments(token, postId) {
             }
 
             dispatch(setComments(response.data.comments));
+
+            return response.data.comments
 
         } catch (err) {
             console.log("GET_ALL_COMMENTS_API FAILED...", err);
@@ -119,6 +123,7 @@ export function deleteComment(token, data) {
             }
 
             dispatch(setComments(response.data.comments));
+            return response.data.comments;
 
         } catch (err) {
             console.log("DELETE_COMMENT_API FAILED...", err);

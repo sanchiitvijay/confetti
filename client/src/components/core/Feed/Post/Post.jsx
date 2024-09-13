@@ -4,7 +4,7 @@ import { IoChatbubbleOutline } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
 import { liked } from '../../../../services/operations/likeAPI';
-import { createComments, getAllComments } from '../../../../services/operations/commentAPI';
+import { createComments, deleteComment, getAllComments } from '../../../../services/operations/commentAPI';
 import { FaHeart } from "react-icons/fa";
 import Comment from './Comment';
 import PostHeader from './PostHeader';
@@ -23,6 +23,8 @@ const Post = memo(function Post(props){
   const [like, setLike] = useState(false);
   const [commentForm, setCommentForm] = useState("");
   const [totalLikes, setTotalLikes] = useState(props?.likes.length || 0);
+  const [comment, setComment] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const gradientColor = [
     "bg-1", "bg-2", "bg-3", "bg-4", "bg-5", "bg-6"
@@ -30,7 +32,7 @@ const Post = memo(function Post(props){
 
   const { post } = useSelector((state) => state.post);
   const token = useSelector((state) => state.auth.token);
-  const { comment } = useSelector((state) => state.comment);
+  // const { comment } = useSelector((state) => state.comment);
   const { user } = useSelector((state) => state.profile);
 
 
@@ -92,13 +94,15 @@ const Post = memo(function Post(props){
   useEffect(() => {
     const commentHandler = async () => {
       if (showComments) {
+        setLoading(true);
         const postId = props?._id;
         setAllComments(false);
-        dispatch(getAllComments(token, postId));
+        setComment(await dispatch(getAllComments(token, postId)));
+        setLoading(false);
       }
     };
     commentHandler();
-  }, [showComments, dispatch, token, props?._id]);
+  }, [showComments, props?._id]);
 
   const redirectionHandler = () => {
     navigate("/feed/" + props?._id);
@@ -108,6 +112,35 @@ const Post = memo(function Post(props){
     event.preventDefault();
     await dispatch(createComments(token, { postId: props?._id, comment: commentForm }));
     setCommentForm("");
+  };
+
+
+  const deleteCommentHandler = async (commentId) => {
+    await dispatch(deleteComment(token, { postId: props?._id, commentId }));
+    
+    // Update localStorage
+    const storedPosts = localStorage.getItem("post");
+    if (storedPosts) {
+      const posts = JSON.parse(storedPosts);
+      
+      // Find the specific post and remove the comment
+      const updatedPosts = posts.map(post => {
+        if (post._id === props?._id) {
+          return {
+            ...post,
+            comments: post.comments.filter(id => id !== commentId)
+          };
+        }
+        return post;
+      });
+      
+      // Save the updated posts back to localStorage
+      localStorage.setItem("post", JSON.stringify(updatedPosts));
+    }
+    
+    // Update the component state if needed
+    setComment(prevComments => prevComments.filter(id => id !== commentId));
+
   };
 
   return (
@@ -149,7 +182,12 @@ const Post = memo(function Post(props){
 
       {/* showComments */}
       {
-        showComments &&
+        showComments && loading &&
+        <div className='text-center'>Loading...</div>
+      }
+      {
+        showComments && !loading &&
+
         <div className='max-md:px-2 p-4 border-t max-h-[200px] overflow-auto border-black mt-2'>
           <form onSubmit={handleSubmitComment}>
             <div className='flex flex-row gap-5 pb-4 pt-2 px-1'>
@@ -160,7 +198,7 @@ const Post = memo(function Post(props){
           {comment?.length > 0 ? 
             comment.slice(0, Math.min(4, comment.length)).map((com) => (
               <div key={com?.id}>
-              <Comment key={com?._id} {...com} />
+              <Comment key={com?._id} {...com} onDelete={() => deleteCommentHandler(com?._id)} />
               </div>
             )) : 
             <div className='text-center'>No comments</div>
@@ -172,7 +210,7 @@ const Post = memo(function Post(props){
               </div> : 
               comment.slice(4).map((com) => (
                 <div key={com?.id}>
-                  <Comment {...com} />
+                  <Comment {...com} onDelete={() => deleteCommentHandler(com?._id)}/>
                 </div>
               ))
           )}

@@ -41,7 +41,7 @@ const ShareModal = (props) => {
           id="copy-button"
           type="text"
           className="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-          value={`${process.env.REACT_APP_BACKEND_BASE_URL}feed/${props.props}`}
+          value={`https://confetti-five.vercel.app/feed/${props.props}`}
           disabled
           readOnly
           />
