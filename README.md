@@ -28,7 +28,6 @@ Feeling competitive? Check out our leaderboard to see the top-liked confessions 
 ## System Architecture
 
 The Confetti platform consists of three main components: the front-end, the back-end, and the database. The platform follows a client-server architecture, with the front-end serving as the client and the back-end and database serving as the server.
-Here’s the revised version with typos fixed and improved language:
 
 ### Front-end
 
@@ -74,7 +73,7 @@ To install the Confetti website, follow these steps:
 
 ## Dependencies
 
-The StudyNotion platform relies on the following dependencies:
+The Confetti platform relies on the following dependencies:
 
 - ReactJS
 - NodeJS
@@ -179,7 +178,7 @@ Here’s the revised description with the structure unchanged:
 
 ## Preview
 
-You can preview the StudyNotion platform at [https://confetti-five.vercel.app/](https://confetti-five.vercel.app/)
+You can preview the Confetti platform at [https://confetti-five.vercel.app/](https://confetti-five.vercel.app/)
 
 [![Login](https://i.ibb.co/m9Sb7R1/login.png)](https://confetti-five.vercel.app/)
 [![Signup Page](https://i.ibb.co/zn15587/signup-Page.png)](https://confetti-five.vercel.app/)

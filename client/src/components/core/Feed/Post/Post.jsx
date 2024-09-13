@@ -11,6 +11,7 @@ import PostHeader from './PostHeader';
 import { useNavigate } from 'react-router-dom';
 import ShareModal from './ShareModal';
 import toast from 'react-hot-toast';
+import { setPost } from '../../../../slices/postSlice';
 
 const Post = memo(function Post(props){
   const dispatch = useDispatch();
@@ -31,6 +32,8 @@ const Post = memo(function Post(props){
   const token = useSelector((state) => state.auth.token);
   const { comment } = useSelector((state) => state.comment);
   const { user } = useSelector((state) => state.profile);
+
+
   useEffect(() => {
     const posts = post.filter((p) => p?._id === props?._id);
     const likes = posts[0]?.likes || [];
@@ -44,6 +47,7 @@ const Post = memo(function Post(props){
     comment.length > 0 && comment[0]?.post !== props?._id && setShowComments(false);
   } , [comment])
 
+
   const likeHandler = async () => {
     let toastId='';
        if(like){
@@ -54,18 +58,36 @@ const Post = memo(function Post(props){
         }
     
       await dispatch(liked(token, { postId: props?._id }));
-    setLike(prevLike => {
-      const newLikeState = !prevLike;
-      setTotalLikes(prevLikes => newLikeState ? prevLikes + 1 : prevLikes - 1);
+      const newLikeState = !like;
+      setLike(newLikeState);
+      await setTotalLikes((prevLikes) => newLikeState ? prevLikes + 1 : prevLikes - 1);
+    
+
+      const updatedPosts = post.map((p) => {
+        if (p._id === props?._id) {
+            return {
+                ...p,
+                likes: !newLikeState
+                    ? [...p.likes, {
+                        post: p._id,
+                        author: user?._id,
+                        _id: new Date().toISOString(), 
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString(),
+                        __v: 0
+                    }]
+                    : p.likes.filter((like) => like.author !== user?._id),
+            };
+        }
+        return p;
+      })
+
+
+      localStorage.setItem('posts', JSON.stringify(updatedPosts));
       toast.dismiss(toastId);
-    
-      return newLikeState;
-    });
-    
-  
-    
   };
   
+
 
   useEffect(() => {
     const commentHandler = async () => {
@@ -102,12 +124,14 @@ const Post = memo(function Post(props){
       {/* footer */}
       <div className='flex pt-2 justify-between px-5 flex-row'>
         <div className='flex gap-3 content-center flex-row'>
+          <button onClick={likeHandler}>
           {
             like ?
-              <FaHeart color={"#DE3163"} fontSize={'23px'} onClick={likeHandler} />
-              :
-              <IoMdHeartEmpty fontSize={'23px'} onClick={likeHandler} />
+            <FaHeart color={"#DE3163"} fontSize={'23px'} />
+            :
+            <IoMdHeartEmpty fontSize={'23px'}/>
           }
+          </button>
 
           {
             totalLikes > 0 && <div className=' ml-[-4px] content-center my-auto'>{totalLikes}</div>
@@ -135,7 +159,9 @@ const Post = memo(function Post(props){
           </form>
           {comment?.length > 0 ? 
             comment.slice(0, Math.min(4, comment.length)).map((com) => (
+              <div key={com?.id}>
               <Comment key={com?._id} {...com} />
+              </div>
             )) : 
             <div className='text-center'>No comments</div>
           }
@@ -145,7 +171,9 @@ const Post = memo(function Post(props){
                 View all comments
               </div> : 
               comment.slice(4).map((com) => (
-                <Comment key={com?._id} {...com} />
+                <div key={com?.id}>
+                  <Comment {...com} />
+                </div>
               ))
           )}
 

@@ -43,6 +43,7 @@ app.use(cookieParser());
 app.use(
     cors({
         origin:"https://confetti-five.vercel.app",
+        // origin:"http://localhost:3000",
         credentials:true
     })
 );
