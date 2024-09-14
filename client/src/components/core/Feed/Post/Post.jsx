@@ -177,7 +177,7 @@ const Post = memo(function Post(props){
 
           <ShareModal props={props?._id} />
         </div>
-        <div className='content-center text-xs'>{props?.createdAt.substring(0,10)}</div>
+        <div className='content-center text-xs'>{props?.createdAt?.substring(0,10)}</div>
       </div>
 
       {/* showComments */}
