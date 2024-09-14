@@ -22,7 +22,7 @@ const Post = memo(function Post(props){
   const [allComments, setAllComments] = useState(props?.showAllComment || false);
   const [like, setLike] = useState(false);
   const [commentForm, setCommentForm] = useState("");
-  const [totalLikes, setTotalLikes] = useState(props?.likes.length || 0);
+  const [totalLikes, setTotalLikes] = useState(props?.likes?.length || 0);
   const [comment, setComment] = useState([]);
   const [loading, setLoading] = useState(false);
 
