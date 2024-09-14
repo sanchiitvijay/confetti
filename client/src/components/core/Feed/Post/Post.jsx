@@ -177,7 +177,7 @@ const Post = memo(function Post(props){
 
           <ShareModal props={props?._id} />
         </div>
-        <div className='content-center text-xs'>{props.createdAt.substring(0,10)}</div>
+        <div className='content-center text-xs'>{props?.createdAt.substring(0,10)}</div>
       </div>
 
       {/* showComments */}
@@ -196,7 +196,7 @@ const Post = memo(function Post(props){
             </div>
           </form>
           {comment?.length > 0 ? 
-            comment.slice(0, Math.min(4, comment.length)).map((com) => (
+            comment.slice(0, Math.min(4, comment?.length)).map((com) => (
               <div key={com?.id}>
               <Comment key={com?._id} {...com} onDelete={() => deleteCommentHandler(com?._id)} />
               </div>
@@ -208,7 +208,7 @@ const Post = memo(function Post(props){
               <div className='text-center text-xs cursor-pointer' onClick={() => setAllComments(true)}>
                 View all comments
               </div> : 
-              comment.slice(4).map((com) => (
+              comment?.slice(4).map((com) => (
                 <div key={com?.id}>
                   <Comment {...com} onDelete={() => deleteCommentHandler(com?._id)}/>
                 </div>
