@@ -5,7 +5,7 @@ let firebaseConfig={}
 
 self.addEventListener('message', (event) => {
   if (event.data) {
-    console.log("Received Firebase config in service worker:", event);
+    console.log("Received Firebase config in service worker:");
 
     if (event.data?.initializeFirebaseOnServiceWorker) {
       firebaseConfig = event.data;
