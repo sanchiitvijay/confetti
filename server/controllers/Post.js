@@ -439,10 +439,10 @@ exports.getPosts = async (req, res) => {
         }).sort({ createdAt: -1 }).exec();
 
         //store in redis for future gets
-        posts?.map((post)=>{
+        Promise.all(posts?.map(async(post)=>{
             await client.lpush('posts:ids',post?._id?.toString());
             await client.set(`post:${post?._id}`,JSON.stringify(post));
-        });
+        }));
 
         const totalLength = posts.length;
         if (count > totalLength) {
