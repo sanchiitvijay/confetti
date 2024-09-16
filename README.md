@@ -209,4 +209,4 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ## Support
 
-For support, email [confetti.site.01@gmail.com](mailto:confetti.site.01@gmail.com) or write the feedback in the website [Confetti](write the link).
+For support, email [confetti.site.01@gmail.com](mailto:confetti.site.01@gmail.com) or write the feedback in the website [Confetti](https://confetti-five.vercel.app/).
