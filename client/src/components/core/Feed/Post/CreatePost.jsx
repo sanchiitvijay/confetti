@@ -12,6 +12,7 @@ const CreatePost = memo(function CreatePost(){
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const [gradient, setGradient] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const {user}=useSelector((state)=>state.profile)
   const gradientColor = [
@@ -32,11 +33,13 @@ const CreatePost = memo(function CreatePost(){
       data.year = "";
     }
     data.color = gradient;
-    const result = await dispatch(createPost(token, data));
-    if (result.fullfiled){
-        reset();
-        setOpenMoreInfo(false);
-    }
+    setLoading(true);
+    await dispatch(createPost(token, data));
+    // if (result.fullfiled){
+    // }
+    setLoading(false);
+    reset();
+    setOpenMoreInfo(false);
   };
 
     const years=["Do you know their year","First","Second","Third","Fourth"]
@@ -74,7 +77,7 @@ const CreatePost = memo(function CreatePost(){
             <div className='flex lg:flex-row flex-col max-md:gap-3 justify-between '>
 
 
-            <div className="flex flex-col gap-2 lg:w-[48%] w-full">
+            <div className="flex flex-col gap-2 lg:w-[48%] hidden w-full">
               <label htmlFor="year" className="text-[14px] mt-4 leading-[22px] font-[400] dark:text-white">
                 Year
               </label>
@@ -99,7 +102,7 @@ const CreatePost = memo(function CreatePost(){
             </div>
 
 
-            <div className="flex flex-col gap-2 lg:w-[48%] w-full">
+            <div className="flex flex-col gap-2 lg:w-[48%] hidden w-full">
               <label htmlFor="branch" className="text-[14px] mt-4 leading-[22px] font-[400] dark:text-white">
                 Branch
               </label>
@@ -146,7 +149,7 @@ const CreatePost = memo(function CreatePost(){
             }
             </div>
             <div className="grid place-items-end mt-5 mb-3">
-              <SubmitButton type="submit" text="Post" on/>
+              <SubmitButton type="submit" text={loading? "Posting..." : "Post"} on/>
             </div>
             </div>
 

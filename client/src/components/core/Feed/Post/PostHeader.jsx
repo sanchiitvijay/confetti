@@ -11,7 +11,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { setPost } from '../../../../slices/postSlice';
 import { setUserPost } from '../../../../slices/profileSlice';
 
-const PostHeader = memo(function PostHeader({props}){
+const PostHeader = memo(function PostHeader(props){
     const token = useSelector((state) => state.auth.token);
     const user = useSelector(state=>state.profile.user)
     let post = useSelector(state=>state.post.post)
@@ -31,7 +31,6 @@ const PostHeader = memo(function PostHeader({props}){
         userPost = userPost.filter(p=>p._id!==props._id)
         dispatch(setUserPost(userPost))
       }
-
   return (
     <div className='flex flex-row pb-3 justify-between'>
         <div className='flex flex-row gap-3'>
@@ -42,7 +41,7 @@ const PostHeader = memo(function PostHeader({props}){
           />
           <div className='flex flex-col'>
             <h1 className='font-semibold text-sm'>{props?.author?.username ||"Anonymous"}</h1>
-            <p className='text-xs'>{props.createdAt.substring(11,19) || "Time"}</p>
+            <p className='text-xs'>{props?.createdAt.substring(11,19) || "Time"}</p>
           </div>
         </div>
 

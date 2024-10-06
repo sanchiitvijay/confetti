@@ -1,4 +1,4 @@
-const BASE_URL = "https://confetti-42b5.onrender.com/api/v1"
+const BASE_URL = "https://confetti-4a8q.onrender.com/api/v1"
 // const BASE_URL = "http://localhost:4000/api/v1"
 
 

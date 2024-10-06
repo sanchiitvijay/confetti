@@ -100,8 +100,8 @@ export function createPost (token, data) {
                 throw new Error(response.data.message)
             }
 
-            dispatch(setPost(response.data.posts))
-            dispatch(setTotalPosts(response.data.postLength))
+            await dispatch(setPost(response.data.posts))
+            await dispatch(setTotalPosts(response.data.postLength))
             toast.success("post is created succesfully")
             
         

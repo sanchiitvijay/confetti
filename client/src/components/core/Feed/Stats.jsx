@@ -55,7 +55,7 @@ const Stats = () => {
                     {/* map isme lgana hai */}
                     {
                         postCount?.slice(0,5)?.map((post, index) => (
-                            <div className='flex place-content-center gap-2 flex-row mt-2' key={index}>
+                            <div className='flex gap-2 flex-row mt-2' key={index}>
                                 {
                                     index === 0 ? (
                                         <img src={gold} alt='gold' className='w-[18px] h-[18px]'/>
@@ -89,7 +89,7 @@ const Stats = () => {
                     {/* map isme lagana hai */}
                     {
                         likeCount?.slice(0,5)?.map((post, index) => (
-                            <div className='flex place-content-center gap-2 flex-row mt-2' key={index}>
+                            <div className='flex gap-2 flex-row mt-2' key={index}>
                             {
                                 index === 0 ? (
                                     <img src={gold} alt='gold' className='w-[18px] h-[18px]'/>

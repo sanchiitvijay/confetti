@@ -26,24 +26,6 @@ export function createComments(token, data) {
 
             const result = response.data.comments;
 
-            // Access the Redux state
-            const state = getState();
-            const post = state.post.post;
-
-            const postToUpdate = post.find((p) => p._id === result[0].post);
-            const otherPosts = post.filter((p) => p._id !== result[0].post);
-
-            const updatedPost = {
-                ...postToUpdate,
-                comments: [...postToUpdate.comments, Date.now()] // Add actual comment data
-            };
-            const newPostArray = [updatedPost, ...otherPosts];
-
-           
-
-            dispatch(setPost(newPostArray));
-            dispatch(setComments(result));
-
             return result;
 
         } catch (err) {

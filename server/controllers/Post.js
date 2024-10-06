@@ -275,9 +275,12 @@ exports.editPost = async (req, res) => {
             })
         }
 
+        const setPost = await Post.findById(postId).populate("author").populate({
+            path: "likes"
+        }).exec();
         //update the post in redis
         const cacheKey = `post:${postId}`;
-        const updatedPostString = JSON.stringify(updatedPost);
+        const updatedPostString = JSON.stringify(setPost);
         const updatedPostCache = await client.set(cacheKey, updatedPostString);
 
         if (updatedPostCache) {
@@ -291,18 +294,18 @@ exports.editPost = async (req, res) => {
                 posts
             })
         }
-        const posts = Post.find({})
-        .populate("author")
-        .populate({
-            path: "likes"
-        })
-        .sort({ createdAt: -1 })
-        .exec();
+        // const posts = Post.find({})
+        // .populate("author")
+        // .populate({
+        //     path: "likes"
+        // })
+        // .sort({ createdAt: -1 })
+        // .exec();
 
         return res.status(200).json({
             success: true,
             message: "Posts has been updated successfully",
-            posts
+            setPost
         })
     } catch (error) {
         return res.status(500).json({

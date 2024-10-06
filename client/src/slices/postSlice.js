@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit"
 
 const initialState={
-    post:localStorage.getItem("post")?(JSON.parse(localStorage.getItem("post"))):[],
+    post:[],
     totalPosts:localStorage.getItem("totalPosts")?(Number.parseInt(localStorage.getItem("totalPosts"))):0,
     comments:[],
     totalLikes:localStorage.getItem("totalLikes")?(Number.parseInt(localStorage.getItem("Likes"))):[],
@@ -16,7 +16,6 @@ const postSlice=createSlice({
     reducers:{
         setPost(state,value){
             state.post=value.payload
-            localStorage.setItem("post",JSON.stringify(state.post))
         },
         setComments(state,value){
             state.comments=value.payload

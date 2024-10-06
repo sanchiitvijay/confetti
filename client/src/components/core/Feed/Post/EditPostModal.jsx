@@ -23,6 +23,8 @@ const EditPostModal = memo(function EditPostModal(props){
     const editPostHandler = () => {
         if(newDesc !== props?.description){
             dispatch(editPost(token, {postId: props?._id, description: newDesc}));
+            props?.setDesc(newDesc);
+            
         }
         modalHandler();
     }

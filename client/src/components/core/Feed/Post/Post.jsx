@@ -11,7 +11,6 @@ import PostHeader from './PostHeader';
 import { useNavigate } from 'react-router-dom';
 import ShareModal from './ShareModal';
 import toast from 'react-hot-toast';
-import { setPost } from '../../../../slices/postSlice';
 
 const Post = memo(function Post(props){
   const dispatch = useDispatch();
@@ -25,6 +24,9 @@ const Post = memo(function Post(props){
   const [totalLikes, setTotalLikes] = useState(props?.likes?.length || 0);
   const [comment, setComment] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [desc, setDesc] = useState(props?.description || "");
+
+  const [totalComment, setTotalComment] = useState(props?.comments?.length || 0);
 
   const gradientColor = [
     "bg-1", "bg-2", "bg-3", "bg-4", "bg-5", "bg-6"
@@ -110,13 +112,21 @@ const Post = memo(function Post(props){
 
   const handleSubmitComment = async (event) => {
     event.preventDefault();
-    await dispatch(createComments(token, { postId: props?._id, comment: commentForm }));
+    event.stopPropagation();
+    const commentResult = await dispatch(createComments(token, { postId: props?._id, comment: commentForm }));
+    setTotalComment((prevComment) => prevComment + 1);
+    setComment(commentResult)
+
     setCommentForm("");
   };
 
 
   const deleteCommentHandler = async (commentId) => {
     await dispatch(deleteComment(token, { postId: props?._id, commentId }));
+    let oldcmts = comment;
+    setComment(oldcmts.filter((cmt) => cmt._id !== commentId));    
+
+    setTotalComment((prevComment) => prevComment - 1);
     
     // Update localStorage
     const storedPosts = localStorage.getItem("post");
@@ -146,7 +156,7 @@ const Post = memo(function Post(props){
   return (
     <div className='border drop-shadow-md dark:shadow-pink-50 dark:text-white mx-auto md:w-[500px] w-[95%] bg-confettiLightColor2 dark:bg-confettiDarkColor3 border-black dark:border-slate-500 rounded-md my-3 md:my-12 p-3 md:p-4 pb-3'>
       {/* post header */}
-      <PostHeader props={props} />
+      <PostHeader setDesc={setDesc} {...props}/>
      
       {/* content */}
       <div onClick={redirectionHandler}
@@ -172,7 +182,7 @@ const Post = memo(function Post(props){
 
           <IoChatbubbleOutline fontSize={'20px'} className='my-auto' onClick={() => setShowComments(!showComments)} />
           {
-            props?.comments?.length > 0 && <div className='ml-[-3px] content-center my-auto'>{props?.comments.length}</div>
+            totalComment > 0 && <div className='ml-[-3px] content-center my-auto'>{totalComment}</div>
           }
 
           <ShareModal props={props?._id} />
