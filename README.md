@@ -141,7 +141,6 @@ The Confetti platform relies on the following dependencies:
 
 ## Folder Structure
 
-Here’s the revised description with the structure unchanged:
 
 - `Server`: Contains the Node.js backend code.
     - `routes/`: Route definitions.
